@@ -45,7 +45,7 @@ public enum ValueType
 	/** The value is a boolean */
 	BOOLEAN(Boolean.class,'?'),
 	/** The value is a data set */
-	DATA_SET(DataSet.class, '#'),
+	DATA_SET(SimpleDataSet.class, '#'),
 	/** The value is a date */
 	DATE(Date.class,'@'),
 	/** The value is a double */

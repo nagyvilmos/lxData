@@ -35,7 +35,7 @@ class DataSetIterator
 	private int index;
 
 	/**
-	 * Create am iterator for a {@link DataSet}.
+	 * Create am iterator for a {@link SimpleDataSet}.
 	 *
 	 * @param   data
 	 *          the data to iterate.

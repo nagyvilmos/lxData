@@ -18,13 +18,13 @@
 package lexa.core.data;
 
 /**
- * A read only {@link DataSet}.
+ * A read only {@link SimpleDataSet}.
  *
  * @author  William
  * @since   2009-08
  */
 public class SealedDataSet
-		extends DataSet
+		extends SimpleDataSet
 {
 
 	/**
@@ -34,43 +34,44 @@ public class SealedDataSet
 	 * <p>The cloned data set can be modified.
 	 *
 	 * @param   data
-	 *          a {@link DataSet} to be sealed.
+	 *          a {@link SimpleDataSet} to be sealed.
 	 */
 	public SealedDataSet(DataSet data)
 	{
 		super(data);
 	}
 
+	
 	/**
-	 * Get a DataItem from the list for the supplied key.
+	 * Get a SimpleDataItem from the list for the supplied key.
 	 *
-	 * <p>If the value is a {@link DataSet} it is wrapped in a {@link SealedDataSet}.
+	 * <p>If the value is a {@link SimpleDataSet} it is wrapped in a {@link SealedDataSet}.
 	 *
 	 * @param   key
-	 *          the key for the {@link DataItem}.
+	 *          the key for the {@link SimpleDataItem}.
 	 *
 	 * @return  the item represented by {@code key}.
 	 */
 	@Override
 	public synchronized DataItem get(String key)
 	{
-		DataItem item = super.get(key);
-		if (item != null && item.getType()
-				.equals(ValueType.DATA_SET))
-		{
-			return new DataItem(item.getKey(), new SealedDataSet(item.getDataSet()));
-		}
-		return item;
+		return sealed(super.get(key));
+	}
+
+	@Override
+	public synchronized DataItem get(int index)
+	{
+		return sealed(super.get(index));
 	}
 
 	/**
-	 * Put the supplied item into the {@link DataSet}.
+	 * Put the supplied item into the {@link SimpleDataSet}.
 	 *
 	 * <p>Throws an {@link UnsupportedOperationException} if called.
 	 *
 	 * @param   item
-	 *          a {@link DataItem} to add.
-	 * @return  the {@link DataSet} the item was added to.
+	 *          a {@link SimpleDataItem} to add.
+	 * @return  the {@link SimpleDataSet} the item was added to.
 	 */
 	@Override
 	public synchronized DataSet put(DataItem item)
@@ -80,7 +81,7 @@ public class SealedDataSet
 	}
 
 	/**
-	 * Removes the specified element from this {@link DataSet}.
+	 * Removes the specified element from this {@link SimpleDataSet}.
 	 *
 	 * <p>Throws an {@link UnsupportedOperationException} if called.
 	 *
@@ -94,5 +95,20 @@ public class SealedDataSet
 	{
 		throw new UnsupportedOperationException(
 				"Cannot change the content of a sealed data list");
+	}
+
+	/**
+	Ensure any datasets are sealed
+	@param item
+	@return 
+	*/
+	private DataItem sealed(DataItem item)
+	{
+		if (item != null && item.getType()
+				.equals(ValueType.DATA_SET))
+		{
+			return new SimpleDataItem(item.getKey(), new SealedDataSet(item.getDataSet()));
+		}
+		return item;
 	}
 }

@@ -26,16 +26,16 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import lexa.core.data.DataItem;
-import lexa.core.data.DataSet;
+import lexa.core.data.SimpleDataItem;
+import lexa.core.data.SimpleDataSet;
 import lexa.core.data.ValueArray;
 import lexa.core.data.ValueType;
 import lexa.core.data.formatting.FormatCombined;
 
 /**
- * Read {@link DataItem} and {@link DataSet} objects from an input stream.
- * <p>A {@code DataSet} is read as a series of {@code DataItem} objects.
- * <p>A {@code DataItem} is read as the name followed by the formatted value;
+ * Read {@link SimpleDataItem} and {@link SimpleDataSet} objects from an input stream.
+ * <p>A {@code SimpleDataSet} is read as a series of {@code SimpleDataItem} objects.
+ * <p>A {@code SimpleDataItem} is read as the name followed by the formatted value;
  * with the toString depends on the data type.
  * <p>See {@link DataWriter} for the toString used.
  *
@@ -109,39 +109,39 @@ public class DataReader
 	}
 
 	/**
-	 * Read the input into a {@link DataSet}.
+	 * Read the input into a {@link SimpleDataSet}.
 	 *
 	 * @return
-	 *       A {@link DataSet} read from the input, null if empty.
+	 *       A {@link SimpleDataSet} read from the input, null if empty.
 	 * @throws  IOException
 	 *       When an IO error occurs closing the input.
 	 */
-	public DataSet read()
+	public SimpleDataSet read()
 			throws IOException
 	{
 		return this.read(false);
 	}
 
 	/**
-	 * Read a {@link DataSet} from the input.
+	 * Read a {@link SimpleDataSet} from the input.
 	 *
 	 * @param   isNested
-	 *       Indicate that the read is inside a {@link DataSet}
+	 *       Indicate that the read is inside a {@link SimpleDataSet}
 	 *       and so should not reach EOF.
 	 * @return
-	 *       A {@link DataSet} read from the input, null if empty
+	 *       A {@link SimpleDataSet} read from the input, null if empty
 	 *       and {@code isNested == true}.
 	 * @throws  IOException
 	 *       When an IO error occurs reading the input.
 	 */
-	private DataSet read(boolean isNested)
+	private SimpleDataSet read(boolean isNested)
 			throws IOException
 	{
-		DataSet data = new DataSet();
+		SimpleDataSet data = new SimpleDataSet();
 
 		while (true)
 		{
-			DataItem item = this.readItem(isNested);
+			SimpleDataItem item = this.readItem(isNested);
 			if (item == null)
 			{
 				break;
@@ -156,18 +156,18 @@ public class DataReader
 	}
 
 	/**
-	 * Read a {@link DataItem} from the input.
+	 * Read a {@link SimpleDataItem} from the input.
 	 *
 	 * @param   isNested
-	 *       Indicate that the read is inside a {@link DataSet}
+	 *       Indicate that the read is inside a {@link SimpleDataSet}
 	 *       and so should not reach EOF.
 	 * @return
-	 *       A {see DataItem} read from the input or {@code null} if
-	 *       The current {@link DataSet} has all been read.
+	 *       A {see SimpleDataItem} read from the input or {@code null} if
+	 *       The current {@link SimpleDataSet} has all been read.
 	 * @throws  IOException
 	 *       When an IO error occurs reading the input.
 	 */
-	private DataItem readItem(boolean isNested)
+	private SimpleDataItem readItem(boolean isNested)
 			throws IOException
 	{
 		String line;
@@ -217,7 +217,7 @@ public class DataReader
 			key = line;
 			value = "";
 		}
-		return new DataItem(key, this.decodeValue(value));
+		return new SimpleDataItem(key, this.decodeValue(value));
 	}
 	private Object decodeValue(String value)
 			throws IOException
@@ -241,7 +241,7 @@ public class DataReader
 						System.getProperty("user.dir") + "\\data\\" + value);
 			}
 			DataReader include = new DataReader(includeFile);
-			DataSet data = include.read();
+			SimpleDataSet data = include.read();
 			include.close();
 			return data;
 		}

@@ -29,11 +29,11 @@ public class DataInput
 		this.stream = stream;
 	}
 	
-	public DataSet read()
+	public SimpleDataSet read()
 			throws IOException, DataException
 	{
 		int items = this.stream.readInt();
-		DataSet data = new DataSet();
+		SimpleDataSet data = new SimpleDataSet();
 		for (int i = 0;
 				i < items;
 				i++)
@@ -43,7 +43,7 @@ public class DataInput
 		return data;
 	}
 
-	private DataItem readItem()
+	private SimpleDataItem readItem()
 			throws IOException, DataException
 	{
 		String key = this.stream.readUTF();
@@ -91,7 +91,7 @@ public class DataInput
 				throw new DataException ("Cannot decode object " + key + vt.getTypeChar());
 			}
 		}
-		return new DataItem(key, value);
+		return new SimpleDataItem(key, value);
 	}
 	public void close() throws IOException
 	{

@@ -30,49 +30,49 @@ import lexa.core.data.ValueArray;
 import lexa.core.data.formatting.FormatCombined;
 
 /**
- * Write {@link DataItem} and {@link DataSet} objects to an output stream.
- * <p>A {@code DataSet} is written as a series of {@code DataItem} objects.
- * <p>A {@code DataItem} is written as the name followed by the formatted value;
+ * Write {@link SimpleDataItem} and {@link SimpleDataSet} objects to an output stream.
+ * <p>A {@code SimpleDataSet} is written as a series of {@code SimpleDataItem} objects.
+ * <p>A {@code SimpleDataItem} is written as the name followed by the formatted value;
  * with the toString depends on the data type.
  * <p>The toString of the output is:
  * <pre>
- * # comments can be added at any point and each
- * # item is written thus:
- * # name t value
- * example {
- * # Boolean -
- *    isMale ? true
- * # DataSet -
+ # comments can be added at any point and each
+ # item is written thus:
+ # name t value
+ example {
+ # Boolean -
+    isMale ? true
+ # SimpleDataSet -
  ` *    subBlock {
- *       item - simple text.
- *    }
- * # Date -
- *    dateWriten @ 2013-02-27 12:00:25.3789Z
- * # Double -
- *    weight $ 75.3
- * # Integer -
- *    age % 42
- * # String [without reserved characters] -
- *    name - William Norman-Walker
- * # String [with reserved chracters] -
- *    longText \
- * \# this will all be read as\
- * it \@ contains all the special chracters \\ escaped\
- * \{ so the parser can read them \}.\
- * all for \$15.00 \@ \-50\% discount
- * }
- * # String [quote delimited]
- *    quotedText "
- *      The writer will not produce this output,
- *      but data files created externally can use this.
- *      To include a quote use "" and this toString allows
- *
- *      blank lines too.
- *      NB Indentation and new lines are preserved.
- *    "
- *
- * # [example ended]
- * </pre>
+       item - simple text.
+    }
+ # Date -
+    dateWriten @ 2013-02-27 12:00:25.3789Z
+ # Double -
+    weight $ 75.3
+ # Integer -
+    age % 42
+ # String [without reserved characters] -
+    name - William Norman-Walker
+ # String [with reserved chracters] -
+    longText \
+ \# this will all be read as\
+ it \@ contains all the special chracters \\ escaped\
+ \{ so the parser can read them \}.\
+ all for \$15.00 \@ \-50\% discount
+ }
+ # String [quote delimited]
+    quotedText "
+      The writer will not produce this output,
+      but data files created externally can use this.
+      To include a quote use "" and this toString allows
+
+      blank lines too.
+      NB Indentation and new lines are preserved.
+    "
+
+ # [example ended]
+ </pre>
  *
  * @author William
  * @since 2013-02
@@ -148,12 +148,12 @@ public class DataWriter
 	}
 
 	/**
-	 * Write a {@link DataSet} to the file.
+	 * Write a {@link SimpleDataSet} to the file.
 	 * <p>
-	 * Each {@link DataItem} is written to the output using {@link write(DataItem)}.
+	 * Each {@link SimpleDataItem} is written to the output using {@link write(DataItem)}.
 	 *
 	 * @param   data
-	 *       The {@link DataSet} to be written to the output.
+	 *       The {@link SimpleDataSet} to be written to the output.
 	 * @throws  IOException
 	 *       When an IO error occurs writing to the output.
 	 */
@@ -171,7 +171,7 @@ public class DataWriter
 	 * is also called from {@link write(DataItem, Indent)}.
 	 *
 	 * @param   data
-	 *       The {@link DataSet} to be written to the output.
+	 *       The {@link SimpleDataSet} to be written to the output.
 	 * @param   indent
 	 *       The {@link DataWriter.Indent} to prefix the output.
 	 * @throws  IOException
@@ -188,10 +188,10 @@ public class DataWriter
 	}
 
 	/**
-	 * Write a {@link DataItem} to the output.
+	 * Write a {@link SimpleDataItem} to the output.
 	 *
 	 * @param   item
-	 *       The {@link DataItem} to be written to the output.
+	 *       The {@link SimpleDataItem} to be written to the output.
 	 * @throws  IOException
 	 *       When an IO error occurs writing to the output.
 	 */
@@ -206,7 +206,7 @@ public class DataWriter
 	 * This private method includes the indentation.
 	 *
 	 * @param   item
-	 *       The {@link DataItem} to be written to the output.
+	 *       The {@link SimpleDataItem} to be written to the output.
 	 * @param   indent
 	 *       The {@link Indent} to prefix the output.
 	 * @throws  IOException
@@ -226,7 +226,7 @@ public class DataWriter
 	 * This private method includes the indentation.
 	 *
 	 * @param   value
-	 *       The {@link Value} to be written to the output.
+	 *       The {@link SimpleValue} to be written to the output.
 	 * @param   indent
 	 *       The {@link Indent} to prefix the output.
 	 * @throws  IOException

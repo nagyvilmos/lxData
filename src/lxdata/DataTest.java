@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import lexa.core.data.DataSet;
+import lexa.core.data.SimpleDataSet;
 import lexa.core.data.ValueArray;
 import lexa.core.data.io.DataReader;
 import lexa.core.data.io.DataWriter;
@@ -27,7 +28,7 @@ public class DataTest
 	public static void main(String[] args)
 			throws FileNotFoundException, IOException
 	{
-		DataSet data = new DataSet()
+		DataSet data = new SimpleDataSet()
 			.put("A", 1)
 			.put("B", new ValueArray()
 				.add("One")
@@ -36,10 +37,10 @@ public class DataTest
 				.add(3.4)
 				.add(false)
 				.add(new ValueArray(1,2))
-				.add(new DataSet().put("key","value"))
+				.add(new SimpleDataSet().put("key","value"))
 				.add(new java.util.Date())
 			)
-			.put("C", new DataSet()
+			.put("C", new SimpleDataSet()
 				.put("D", null)
 				.put("E", "1\\2#3-4\"5{6}7?8$9@a%b\nc")
 				.put("F", "So-long, farewell Adure!")
@@ -51,10 +52,13 @@ public class DataTest
 		dw.write(data);
 		dw.close();
 		DataReader dr = new DataReader(test);
-		DataSet read = dr.read();
+		SimpleDataSet read = dr.read();
 		System.out.println(read);
 		if (!data.equals(read))
+		{
 			System.err.println("Data sets do not match");
-		
+		} else {
+			System.out.println("Tested okay!");
+		}
 	}
 }

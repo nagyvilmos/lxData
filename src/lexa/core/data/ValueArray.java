@@ -69,16 +69,16 @@ public class ValueArray
 	The value is added added to the end of the array.  The following are equivalent:
 	<pre>{@code
 	va.add(obj);
-	va.add(new Value(obj));
+	va.add(new SimpleValue(obj));
 	va.add(obj, va.size);
-	va.add(new Value(obj), va.size);
+	va.add(new SimpleValue(obj), va.size);
 	}</pre>
 	@param object the object to add
 	@return this {@link ValueArray}
 	*/
 	public ValueArray add(Object object)
 	{
-		return this.add(new Value(object));
+		return this.add(new SimpleValue(object));
 	}
 	/**
 	Add a value to the array.
@@ -102,7 +102,7 @@ public class ValueArray
 	The value is added added to the array at the given position.  The following are equivalent:
 	<pre>{@code
 	va.add(obj, pos);
-	va.add(new Value(obj), pos);
+	va.add(new SimpleValue(obj), pos);
 	}</pre>
 	@param index the position for the object
 	@param object the value to add
@@ -110,7 +110,7 @@ public class ValueArray
 	*/
 	public ValueArray add(long index, Object object)
 	{
-		return this.add(index, new Value(object));
+		return this.add(index, new SimpleValue(object));
 	}
 
 	/**
@@ -158,10 +158,24 @@ public class ValueArray
 		return this;
 	}
 
+	public ValueArray clone()
+	{
+		ValueArray clone = new ValueArray();
+		for (Value v : this)
+		{
+			clone.add(v.clone());
+		}
+		return clone;
+	}
+
 	@Override
 	public int hashCode()
 	{
-		int hash = 5;
+		int hash = 7;
+		for (Value v : this)
+		{
+			hash = hash * 13 + v.hashCode();
+		}
 		return hash;
 	}
 

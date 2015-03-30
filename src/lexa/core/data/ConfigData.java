@@ -25,7 +25,7 @@ import java.util.Set;
 import lexa.core.data.exception.DataException;
 
 /**
- * A container for a {@link DataSet} as configuration.
+ * A container for a {@link SimpleDataSet} as configuration.
  * <p> This is used for loading and parsing configuration items. Once read, the object should be closed to ensure that
  * all items have been read.
  *
@@ -130,8 +130,8 @@ public class ConfigData
 			this.path = this.parent.path + "." + this.block;
 		}
 		// clone the data to prevent
-		this.data = new DataSet(data);
-		this.read = new HashSet<String>();
+		this.data = data.clone();
+		this.read = new HashSet();
 		this.isOpen = true;
 	}
 
@@ -184,9 +184,9 @@ public class ConfigData
 	/**
 	 * Checks if the {@link ConfigData} contains a named key.
 	 * <p>
-	 * Checks each {@link DataItem} and sees if its key is the same as the named key.
-	 * @param key A key for a {@link DataItem}.
-	 * @return {@code true} if a {@link DataItem} exists with the named key, otherwise {@code false}.
+	 * Checks each {@link SimpleDataItem} and sees if its key is the same as the named key.
+	 * @param key A key for a {@link SimpleDataItem}.
+	 * @return {@code true} if a {@link SimpleDataItem} exists with the named key, otherwise {@code false}.
 	 */
 	public boolean contains(String key)
 	{
@@ -206,7 +206,7 @@ public class ConfigData
 			throws DataException
 	{
 		// can't just send it back as we need to make sure everything is marked as read.
-		DataSet out = new DataSet();
+		DataSet out = new SimpleDataSet();
 		for (DataItem item
 				: this.data)
 		{
@@ -249,7 +249,7 @@ public class ConfigData
 	/**
 	 * Get a configuration item from the configuration.
 	 * <p>
-	 * Gets the {@link DataItem} for the named key.
+	 * Gets the {@link SimpleDataItem} for the named key.
 	 *
 	 * @param key The key that identifies the item.
 	 *
