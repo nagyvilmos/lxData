@@ -2,7 +2,7 @@
  * ================================================================================
  * Lexa - Property of William Norman-Walker
  * --------------------------------------------------------------------------------
- * FormatDateTime.java
+ * DateTimeFormat.java
  *--------------------------------------------------------------------------------
  * Author:  William Norman-Walker
  * Created: August 2013
@@ -10,7 +10,7 @@
  * Change Log
  * Date:        By: Ref:        Description:
  * ---------    --- ----------  --------------------------------------------------
- * DD-MON-YY    ??
+ * 30-03-2015	WNW	2015-03		Refactor FormatDateTime -> DateTimeFormat
  *================================================================================
  */
 package lexa.core.data.formatting;
@@ -25,7 +25,7 @@ import java.util.Locale;
  * @author  William
  * @since   2013-08
  */
-public class FormatDateTime
+public class DateTimeFormat
 		implements Format<Date>
 {
 
@@ -36,7 +36,7 @@ public class FormatDateTime
 	 * Default constructor using a format of {@code "yyyy-MM-dd HH:mm:ss.SSS Z"}.
 	 * <p>This is the format used by the {@link FormatCombined}
 	 */
-	public FormatDateTime()
+	public DateTimeFormat()
 	{
 		this("yyyy-MM-dd HH:mm:ss.SSS Z");
 	}
@@ -47,22 +47,37 @@ public class FormatDateTime
 	 * @param   format
 	 *          a valid format as described in {@link SimpleDateFormat}.
 	 */
-	public FormatDateTime(String format)
+	public DateTimeFormat(String format)
 	{
 		this(new SimpleDateFormat(format));
 	}
 
-	public FormatDateTime(int dateStyle, int timeStyle)
+	/**
+	Create a formatter for dates using the given styles
+	@param dateStyle the data style
+	@param timeStyle the time style
+	*/
+	public DateTimeFormat(int dateStyle, int timeStyle)
 	{
 		this(DateFormat.getDateTimeInstance(dateStyle, timeStyle));
 	}
 
-	public FormatDateTime(int dateStyle, int timeStyle, Locale locale)
+	/**
+	Create a formatter for dates using the given styles
+	@param dateStyle the data style
+	@param timeStyle the time style
+	@param locale the locale for the format
+	*/
+	public DateTimeFormat(int dateStyle, int timeStyle, Locale locale)
 	{
 		this(DateFormat.getDateTimeInstance(dateStyle, timeStyle, locale));
 	}
 
-	private FormatDateTime(DateFormat format)
+	/**
+	Create a formatter for dates using the java format
+	@param format a core format object
+	*/
+	private DateTimeFormat(DateFormat format)
 	{
 		this.dateFormat = format;
 	}

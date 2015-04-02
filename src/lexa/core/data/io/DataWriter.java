@@ -27,7 +27,7 @@ import lexa.core.data.DataItem;
 import lexa.core.data.DataSet;
 import lexa.core.data.Value;
 import lexa.core.data.ValueArray;
-import lexa.core.data.formatting.FormatCombined;
+import lexa.core.data.formatting.CombinedFormat;
 
 /**
  * Write {@link SimpleDataItem} and {@link SimpleDataSet} objects to an output stream.
@@ -82,7 +82,7 @@ public class DataWriter
 
 	/** The writer used to output the content */
 	private final BufferedWriter bufferedWriter;
-	private final FormatCombined formatter;
+	private final CombinedFormat formatter;
 
 	/**
 	 * Create a new writer to output directly to a file.
@@ -110,7 +110,7 @@ public class DataWriter
 	public DataWriter(BufferedWriter writer)
 	{
 		this.bufferedWriter = writer;
-		this.formatter = new FormatCombined();
+		this.formatter = new CombinedFormat();
 	}
 
 	/**
@@ -188,10 +188,10 @@ public class DataWriter
 	}
 
 	/**
-	 * Write a {@link SimpleDataItem} to the output.
+	 * Write a {@link DataItem} to the output.
 	 *
 	 * @param   item
-	 *       The {@link SimpleDataItem} to be written to the output.
+	 *       The {@link DataItem} to be written to the output.
 	 * @throws  IOException
 	 *       When an IO error occurs writing to the output.
 	 */

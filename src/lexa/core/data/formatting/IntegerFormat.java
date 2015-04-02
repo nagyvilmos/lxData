@@ -2,7 +2,7 @@
  * ================================================================================
  * Lexa - Property of William Norman-Walker
  * --------------------------------------------------------------------------------
- * FormatInteger.java
+ * IntegerFormat.java
  *--------------------------------------------------------------------------------
  * Author:  William Norman-Walker
  * Created: August 2013
@@ -10,7 +10,7 @@
  * Change Log
  * Date:        By: Ref:        Description:
  * ---------    --- ----------  --------------------------------------------------
- * DD-MON-YY    ??
+ * 30-03-2015	WNW	2015-03		Refactor FormatInteger -> IntegerFormat
  *================================================================================
  */
 package lexa.core.data.formatting;
@@ -23,18 +23,26 @@ import java.util.Locale;
  * @author William
  * @since 2013-08
  */
-public class FormatInteger
+public class IntegerFormat
 		implements Format<Integer>
 {
-
+	/** number formatter to use */
 	private final NumberFormat numberFormat;
 
-	public FormatInteger()
+	/**
+	Create an integer formatter using the default ENGLISH local
+	@see Locale#ENGLISH
+	*/
+	public IntegerFormat()
 	{
 		this(Locale.ENGLISH);
 	}
 
-	public FormatInteger(Locale locale)
+	/**
+	Create an integer formatter for a locale.
+	@param locale the local to provide formatting for.
+	*/
+	public IntegerFormat(Locale locale)
 	{
 		this.numberFormat = NumberFormat.getIntegerInstance(locale);
 	}

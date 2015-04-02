@@ -2,7 +2,7 @@
  * ================================================================================
  * Lexa - Property of William Norman-Walker
  * --------------------------------------------------------------------------------
- * FormatCombined.java
+ * CombinedFormat.java
  *--------------------------------------------------------------------------------
  * Author:  William Norman-Walker
  * Created: August 2013
@@ -10,7 +10,7 @@
  * Change Log
  * Date:        By: Ref:        Description:
  * ---------    --- ----------  --------------------------------------------------
- * DD-MON-YY    ??
+ * 30-03-2015	WNW	2015-03		Refactor FormatCombined -> CombinedFormat
  *================================================================================
  */
 package lexa.core.data.formatting;
@@ -23,19 +23,19 @@ package lexa.core.data.formatting;
  * @author William
  * @since 2013-08
  */
-public class FormatCombined
+public class CombinedFormat
 {
 
 	/** formatting for a {@link Boolean} object */
-	public final FormatBoolean booleanFormat = new FormatBoolean();
+	public final BooleanFormat booleanFormat = new BooleanFormat();
 	/** formatting for a {@link java.util.Date} object */
-	public final FormatCombinedDateTime dateFormat = new FormatCombinedDateTime();
+	public final CombinedDateTimeFormat dateFormat = new CombinedDateTimeFormat();
 	/** formatting for a {@link Double} object */
 	public final DoubleFormat doubleFormat = new DoubleFormat();
 	/** formatting for an {@link Integer} object */
-	public final FormatInteger integerFormat = new FormatInteger();
+	public final IntegerFormat integerFormat = new IntegerFormat();
 	/** formatting for a {@link Long} object */
-	public final FormatLong longFormat = new FormatLong();
+	public final LongFormat longFormat = new LongFormat();
 	/** formatting for a {@link String} object */
-	public final FormatString stringFormat = new FormatString();
+	public final StringFormat stringFormat = new StringFormat();
 }

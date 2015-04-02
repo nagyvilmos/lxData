@@ -2,7 +2,7 @@
  * ================================================================================
  * Lexa - Property of William Norman-Walker
  * --------------------------------------------------------------------------------
- * FormatBoolean.java
+ * BooleanFormat.java
  *--------------------------------------------------------------------------------
  * Author:  William Norman-Walker
  * Created: August 2013
@@ -10,7 +10,7 @@
  * Change Log
  * Date:        By: Ref:        Description:
  * ---------    --- ----------  --------------------------------------------------
- * DD-MON-YY    ??
+ * 30-03-2015	WNW	2015-03		Refactor FormatBoolean -> BooleanFormat
  *================================================================================
  */
 package lexa.core.data.formatting;
@@ -20,7 +20,7 @@ package lexa.core.data.formatting;
  * @author William
  * @since 2013-08
  */
-public class FormatBoolean
+public class BooleanFormat
 		implements Format<Boolean>
 {
 

@@ -2,7 +2,7 @@
  * ================================================================================
  * Lexa - Property of William Norman-Walker
  * --------------------------------------------------------------------------------
- * FormatBoolean.java
+ * CombinedDateTimeFormat.java
  *--------------------------------------------------------------------------------
  * Author:  William Norman-Walker
  * Created: August 2013
@@ -10,7 +10,7 @@
  * Change Log
  * Date:        By: Ref:        Description:
  * ---------    --- ----------  --------------------------------------------------
- * DD-MON-YY    ??
+ * 30-03-2015	WNW	2015-03		Refactor FormatCombinedDateTime -> CombinedDateTimeFormat
  *================================================================================
  */
 package lexa.core.data.formatting;
@@ -22,13 +22,15 @@ import java.util.Date;
  * @author William
  * @since 2013-08
  */
-public class FormatCombinedDateTime
+public class CombinedDateTimeFormat
 		implements Format<Date>
 {
-
-	public final FormatDateTime dateTime = new FormatDateTime();
-	public final FormatDateTime date = new FormatDateTime("yyyy-MM-dd");
-	public final FormatDateTime time = new FormatDateTime("HH:mm:ss.SSS Z");
+	/** formatting for a date and time */
+	public final DateTimeFormat dateTime = new DateTimeFormat();
+	/** formatting for a date only */
+	public final DateTimeFormat date = new DateTimeFormat("yyyy-MM-dd");
+	/** formatting for a time only */
+	public final DateTimeFormat time = new DateTimeFormat("HH:mm:ss.SSS Z");
 
 	@Override
 	public String toString(Date value)

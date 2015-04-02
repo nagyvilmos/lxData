@@ -21,7 +21,7 @@ import java.util.Date;
 /**
  * An enumeration that defines the set of supported value types for a {@link DataItem}
  * The acceptable type are:
- * <ll>
+ * <ul>
  * <li>NULL</li>
  * <li>ARRAY</li>
  * <li>BOOLEAN</li>
@@ -32,7 +32,7 @@ import java.util.Date;
  * <li>LONG</li>
  * <li>STRING</li>
  * <li>OBJECT</li>
- * </ll>
+ * </ul>
  * @author William
  */
 public enum ValueType

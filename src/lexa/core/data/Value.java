@@ -13,7 +13,10 @@ import java.util.Date;
  */
 public interface Value
 {
-
+	/**
+	Create a clone of the value
+	@return a clone of the value
+	*/
 	Value clone();
 	
 	/**
@@ -32,7 +35,7 @@ public interface Value
 	 * Gets the value as a data set.
 	 * @return The value as a data set.
 	 */
-	SimpleDataSet getDataSet();
+	DataSet getDataSet();
 
 	/**
 	 * Gets the value as a data.

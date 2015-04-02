@@ -2,19 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/william/Documents/source/Lexa/lxData/src/lexa/core/data/ValueArray.java</file>
-            <file>file:/C:/Users/william/Documents/source/Lexa/lxData/src/lexa/core/data/io/DataOutput.java</file>
-            <file>file:/C:/Users/william/Documents/source/Lexa/lxData/src/lexa/core/data/SealedDataSet.java</file>
-            <file>file:/C:/Users/william/Documents/source/Lexa/lxData/src/lexa/core/data/DataSetIterator.java</file>
-            <file>file:/C:/Users/william/Documents/source/Lexa/lxData/src/lexa/core/data/io/DataWriter.java</file>
-            <file>file:/C:/Users/william/Documents/source/Lexa/lxData/src/lexa/core/data/ConfigData.java</file>
-            <file>file:/C:/Users/william/Documents/source/Lexa/lxData/src/lexa/core/data/DataItem.java</file>
-            <file>file:/C:/Users/william/Documents/source/Lexa/lxData/src/lexa/core/data/SimpleDataItem.java</file>
-            <file>file:/C:/Users/william/Documents/source/Lexa/lxData/src/lexa/core/data/DataSet.java</file>
-            <file>file:/C:/Users/william/Documents/source/Lexa/lxData/src/lexa/core/data/SimpleValue.java</file>
-            <file>file:/C:/Users/william/Documents/source/Lexa/lxData/src/lxdata/DataTest.java</file>
-            <file>file:/C:/Users/william/Documents/source/Lexa/lxData/src/lexa/core/data/SimpleDataSet.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

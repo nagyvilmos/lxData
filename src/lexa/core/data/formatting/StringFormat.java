@@ -1,9 +1,22 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * ================================================================================
+ * Lexa - Property of William Norman-Walker
+ * --------------------------------------------------------------------------------
+ * StringFormat.java
+ *--------------------------------------------------------------------------------
+ * Author:  William Norman-Walker
+ * Created: August 2013
+ *--------------------------------------------------------------------------------
+ * Change Log
+ * Date:        By: Ref:        Description:
+ * ---------    --- ----------  --------------------------------------------------
+ * 30-03-2015	WNW	2015-03		Refactor FormatString -> StringFormat
+ *================================================================================
  */
 package lexa.core.data.formatting;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,7 +25,7 @@ import java.util.regex.Pattern;
  * @author William
  * @since 2013-08
  */
-public class FormatString
+public class StringFormat
 		implements Format<String>
 {
 	@Override
@@ -52,6 +65,26 @@ public class FormatString
 		return string;
 	}
 	
+	/**
+	Perform a multiple search and replace on a string.
+	<p>The search and replace is done on paired values in an array, the search string
+	then the string to replace with.
+	The terms are located in order, so a substring will never be found if after the 
+	main string and vica-versa.
+	{@code <pre>
+	String [][] terms = {
+			{"sat", "stood"},
+			{"at", "art"},
+			{"on", "in"}
+			{"the", "thy"}
+	};
+	String replaced = StringFormat.multiReplace("The cat sat on the mat", terms);
+	// replaced = "The cart stood in thy mart"
+	</pre>}
+	@param input
+	@param replacements
+	@return 
+	*/
 	public static String multiReplace(
 		final String input, String[] ... replacements) {
 
@@ -59,22 +92,17 @@ public class FormatString
 			return input;
 		}
 		StringBuilder regexBuilder = new StringBuilder();
+		Map<String,String> pairings = new HashMap();
 		for (String[] pair : replacements)
 		{
 			regexBuilder.append('|').append(Pattern.quote(pair[0]));
+			pairings.put(pair[0],pair[1]);
 		}
 		Matcher matcher = Pattern.compile(regexBuilder.toString()).matcher(input);
 		StringBuffer out = new StringBuffer(input.length() + (input.length() / 10));
 		while (matcher.find()) {
 			String match = matcher.group();
-			for (String[] pair : replacements)
-			{
-				if (match.equals(pair[0]))
-				{
-					matcher.appendReplacement(out, pair[1]);
-					break;
-				}
-			}
+			matcher.appendReplacement(out, pairings.get(match));
 		}
 		matcher.appendTail(out);
 		return out.toString();

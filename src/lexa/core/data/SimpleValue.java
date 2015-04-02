@@ -85,7 +85,7 @@ public class SimpleValue implements Value
 	 * @return The value as a data set.
 	 */
 	@Override
-	public SimpleDataSet getDataSet()
+	public DataSet getDataSet()
 	{
 		return (SimpleDataSet) ValueType.DATA_SET.getValueIfType(this.value);
 	}

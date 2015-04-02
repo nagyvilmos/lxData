@@ -30,12 +30,12 @@ import lexa.core.data.SimpleDataItem;
 import lexa.core.data.SimpleDataSet;
 import lexa.core.data.ValueArray;
 import lexa.core.data.ValueType;
-import lexa.core.data.formatting.FormatCombined;
+import lexa.core.data.formatting.CombinedFormat;
 
 /**
- * Read {@link SimpleDataItem} and {@link SimpleDataSet} objects from an input stream.
- * <p>A {@code SimpleDataSet} is read as a series of {@code SimpleDataItem} objects.
- * <p>A {@code SimpleDataItem} is read as the name followed by the formatted value;
+ * Read {@link DataItem} and {@link DataSet} objects from an input stream.
+ * <p>A {@code DataSet} is read as a series of {@code DataItem} objects.
+ * <p>A {@code DataItem} is read as the name followed by the formatted value;
  * with the toString depends on the data type.
  * <p>See {@link DataWriter} for the toString used.
  *
@@ -48,7 +48,7 @@ public class DataReader
 	/** The reader used to input the content */
 	private final BufferedReader bufferedReader;
 	private final boolean fromFile;
-	private final FormatCombined formatter;
+	private final CombinedFormat formatter;
 
 	/**
 	 * Create a new reader to input directly from a file.
@@ -91,7 +91,7 @@ public class DataReader
 	{
 		this.bufferedReader = bufferedReader;
 		this.fromFile = fromFile;
-		this.formatter = new FormatCombined();
+		this.formatter = new CombinedFormat();
 	}
 
 	/**

@@ -1,9 +1,18 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * ================================================================================
+ * Lexa - Property of William Norman-Walker
+ * --------------------------------------------------------------------------------
+ * DataInput.java
+ *--------------------------------------------------------------------------------
+ * Author:  William Norman-Walker
+ * Created: February 2013
+ *--------------------------------------------------------------------------------
+ * Change Log
+ * Date:        By: Ref:        Description:
+ * ---------    --- ----------  --------------------------------------------------
+ * 2015-03-30	WNW 2015-03		Add the concept of an array.
+ *================================================================================
  */
-
 package lexa.core.data.io;
 
 import java.io.*;
@@ -12,28 +21,38 @@ import lexa.core.data.*;
 import lexa.core.data.exception.DataException;
 
 /**
+ * Read {@link DataItem} and {@link DataSet} objects from an input stream.
+ * <p>A {@code DataSet} is read as a series of {@code DataItem} objects.
+ * <p>A {@code DataItem} is read as the name followed by the value.
  *
- * @author william
+ * @author William
+ * @since 2013-02
  */
 public class DataInput
 {
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
+	/** an input stream to read the data from */
 	private final DataInputStream stream;
+	
+	/**
+	Create an input reader
+	@param stream the stream to read the data from
+	*/
 	public DataInput(DataInputStream stream)
 	{
 		this.stream = stream;
 	}
 	
-	public SimpleDataSet read()
+	/**
+	Read a data set from the input stream
+	@return a data set
+	@throws IOException  when an IO problem occurs
+	@throws DataException when the data cannot be decoded.
+	*/
+	public DataSet read()
 			throws IOException, DataException
 	{
 		int items = this.stream.readInt();
-		SimpleDataSet data = new SimpleDataSet();
+		DataSet data = new SimpleDataSet();
 		for (int i = 0;
 				i < items;
 				i++)
@@ -43,56 +62,68 @@ public class DataInput
 		return data;
 	}
 
-	private SimpleDataItem readItem()
+	private DataItem readItem()
 			throws IOException, DataException
 	{
 		String key = this.stream.readUTF();
+		Object value = this.readValue();
+		
+		return new SimpleDataItem(key, value);
+	}		
+	private Object readValue()
+			throws IOException, DataException
+	{
 		ValueType vt = ValueType.toType(this.stream.readChar());
-		Object value = null;
 		switch (vt)
 		{
+			case ARRAY :
+			{
+				ValueArray va = new ValueArray();
+				long count = this.stream.readLong();
+				for (int i = 0; i < count; i++)
+				{
+					va.add(this.readValue());
+				}
+				return va;
+			}
 			case BOOLEAN :
 			{
-				value = this.stream.readBoolean();
-				break;
+				return this.stream.readBoolean();
 			}
 			case DATA_SET :
 			{
-				value = this.read();
-				break;
+				return this.read();
 			}
 			case DATE :
 			{
-				value = new Date(this.stream.readLong());
-				break;
+				return new Date(this.stream.readLong());
 			}
 			case DOUBLE :
 			{
-				value = this.stream.readDouble();
-				break;
+				return this.stream.readDouble();
 			}
 			case INTEGER :
 			{
-				value = this.stream.readInt();
-				break;
+				return this.stream.readInt();
 			}
 			case NULL :
 			{
-				// nothing doing
-				break;
+				return null;
 			}
 			case STRING :
 			{
-				value = this.stream.readUTF();
-				break;
+				return this.stream.readUTF();
 			}
 			default :
 			{
-				throw new DataException ("Cannot decode object " + key + vt.getTypeChar());
+				throw new DataException ("Cannot decode object " + vt.getTypeChar());
 			}
 		}
-		return new SimpleDataItem(key, value);
 	}
+	/**
+	Close the stream
+	@throws IOException 
+	*/
 	public void close() throws IOException
 	{
 		this.stream.close();

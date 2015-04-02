@@ -20,19 +20,27 @@ import java.util.Locale;
 /**
  * Helper for serialising {@link Double} values.
  * @author William
- * @since 2013-08
+ * @since 2015-03
  */
 public class DoubleFormat
 		implements Format<Double>
 {
-
+	/** number formatter to use */
 	private NumberFormat numberFormat;
 
+	/**
+	Create a double formatter using the default ENGLISH local
+	@see Locale#ENGLISH
+	*/
 	public DoubleFormat()
 	{
 		this(Locale.ENGLISH);
 	}
 
+	/**
+	Create a double formatter for a locale.
+	@param locale the local to provide formatting for.
+	*/
 	public DoubleFormat(Locale locale)
 	{
 		this.numberFormat = NumberFormat.getNumberInstance(locale);

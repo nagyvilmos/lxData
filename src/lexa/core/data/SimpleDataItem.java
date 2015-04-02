@@ -121,7 +121,7 @@ public class SimpleDataItem
 	 * @return The value as a data set.
 	 */
 	@Override
-	public SimpleDataSet getDataSet()
+	public DataSet getDataSet()
 	{
 		return this.value.getDataSet();
 	}
