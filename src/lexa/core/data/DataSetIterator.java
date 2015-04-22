@@ -10,7 +10,7 @@
  * Change Log
  * Date:        By: Ref:        Description:
  * ----------   --- ----------  --------------------------------------------------
- * -            -
+ * 2015-04-22	WNW				More refactoring
  *================================================================================
  */
 package lexa.core.data;
@@ -25,7 +25,7 @@ import java.util.Iterator;
  * @author  William
  * @since   2013-08
  */
-class DataSetIterator
+public class DataSetIterator
 		implements Iterator<DataItem>
 {
 

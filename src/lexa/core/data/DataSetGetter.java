@@ -1,14 +1,28 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * ================================================================================
+ * Lexa - Property of William Norman-Walker
+ * --------------------------------------------------------------------------------
+ * SimpleDataSet.java
+ *--------------------------------------------------------------------------------
+ * Author:  William Norman-Walker
+ * Created: April 2015
+ *--------------------------------------------------------------------------------
+ * Change Log
+ * Date:        By: Ref:        Description:
+ * ----------   --- ----------  --------------------------------------------------
+ * 2015-04-22	WNW				More refactoring
+ *================================================================================
  */
 package lexa.core.data;
 
 import java.util.Date;
+import java.util.Iterator;
 
 /**
- *
+ * Provide the type safe getters for a data set.
+ * <p>
+ * This provides the getters for the specific types supported.
+ * It does not implement the basic {@link DataSet#get(java.lang.String) get} method
  * @author william
  */
 public abstract class DataSetGetter
@@ -154,6 +168,12 @@ public abstract class DataSetGetter
 			return null;
 		}
 		return item.getValue();
+	}
+
+	@Override
+	public Iterator<DataItem> iterator()
+	{
+		return new DataSetIterator(this);
 	}
 
 }

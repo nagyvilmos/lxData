@@ -21,13 +21,12 @@
  *								The .put methods return the DataSet to allow chaining
  *								Add ARRAY and LONG types.
  * 2015-03-25	WNW 15-03		The great refactoring.
+ * 2015-04-22	WNW				More refactoring
  *================================================================================
  */
 package lexa.core.data;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
 
 /**
  * Provide a polymorphic map containing disparate data types as values.
@@ -369,11 +368,5 @@ public class SimpleDataSet
 		}
 		return sb.deleteCharAt(sb.length()-1).append("}")
 				.toString();
-	}
-
-	@Override
-	public Iterator<DataItem> iterator()
-	{
-		return new DataSetIterator(this);
 	}
 }
