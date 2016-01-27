@@ -11,6 +11,7 @@
  * Date:        By: Ref:        Description:
  * ----------   --- ----------  --------------------------------------------------
  * 2015-04-22	WNW				More refactoring
+ * 2016-01-27	WNW	16-01       Remove the superfluose clone() method.
  *================================================================================
  */
 package lexa.core.data;
@@ -28,10 +29,6 @@ import java.util.Iterator;
 public abstract class DataSetGetter
 		implements DataSet
 {
-		// I really do not know why we need this, but.
-		@Override
-		public abstract DataSet clone();
-
 	/**
 	 * Get a {@link ValueArray} from the list for the supplied key.
 	 * @param key The key for the {@link SimpleDataItem}.

@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import lexa.core.data.DataSet;
 import lexa.core.data.SimpleDataSet;
+import lexa.core.data.SimpleValueArray;
 import lexa.core.data.ValueArray;
 import lexa.core.data.io.DataReader;
 import lexa.core.data.io.DataWriter;
@@ -30,13 +31,13 @@ public class DataTest
 	{
 		DataSet data = new SimpleDataSet()
 			.put("A", 1)
-			.put("B", new ValueArray()
+			.put("B", new SimpleValueArray()
 				.add("One")
 				.add(2)
 				.add(9876543210L)
 				.add(3.4)
 				.add(false)
-				.add(new ValueArray(1,2))
+				.add(new SimpleValueArray(1,2))
 				.add(new SimpleDataSet().put("key","value"))
 				.add(new java.util.Date())
 			)

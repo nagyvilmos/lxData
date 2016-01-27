@@ -13,6 +13,7 @@
  * 2015-03-19	WNW	15-03		Extract interfaces.
  *								DataItem becomes and interface and SimpleDataItem 
  *								the default implimentation.
+ * 2016-01-27	WNW	16-01       Remove the superfluose clone() method.
  *================================================================================
  */
 package lexa.core.data;
@@ -26,12 +27,6 @@ import java.util.Date;
  */
 public interface DataItem
 {
-
-	/**
-	Create a clone of the item
-	@return a clone of the item
-	*/
-	public DataItem clone();
 
 	/**
 	 * Gets the value as an array.

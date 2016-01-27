@@ -11,6 +11,7 @@
  * Date:        By: Ref:        Description:
  * ---------    --- ----------  --------------------------------------------------
  * 2015-03-30	WNW 2015-03		Add the concept of an array.
+ * 2016-01-27	WNW	16-01       Remove the superfluose clone() method.
  *================================================================================
  */
 package lexa.core.data.io;
@@ -78,7 +79,7 @@ public class DataInput
 		{
 			case ARRAY :
 			{
-				ValueArray va = new ValueArray();
+				ValueArray va = new SimpleValueArray();
 				long count = this.stream.readLong();
 				for (int i = 0; i < count; i++)
 				{

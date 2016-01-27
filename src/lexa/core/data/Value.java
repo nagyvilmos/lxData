@@ -1,24 +1,29 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * ================================================================================
+ * Lexa - Property of William Norman-Walker
+ * --------------------------------------------------------------------------------
+ * Value.java
+ *--------------------------------------------------------------------------------
+ * Author:  William Norman-Walker
+ * Created: March 2015
+ *--------------------------------------------------------------------------------
+ * Change Log
+ * Date:        By: Ref:        Description:
+ * ---------    --- ----------  --------------------------------------------------
+ * 2016-01-27	WNW	16-01       Remove the superfluose clone() method.
+ *                              Add in a cloning constructor.
+ *================================================================================
  */
 package lexa.core.data;
 
 import java.util.Date;
 
 /**
- *
+ * Interface for a value within a {@link DataItem}
  * @author william
  */
 public interface Value
 {
-	/**
-	Create a clone of the value
-	@return a clone of the value
-	*/
-	Value clone();
-	
 	/**
 	 * Gets the value as a {@link ValueArray}.
 	 * @return The value as am array.

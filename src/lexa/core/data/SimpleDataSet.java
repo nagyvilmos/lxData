@@ -15,13 +15,14 @@
  * 2013-08-10   WNW             Added support fot iterating the DataSet.
  * 2013-08-11   WNW             Added support fot getting double directly.
  * 2013-08-14   WNW             put(DataSet) handles null value.
- * 2014-06-04	WNW				Remove extra braces from toString()
- * 2014-10-10	WNW -			Redo the equals and hash code for DataSet
- * 2015-03-05	WNW 15-03		Add the concept of an array.
- *								The .put methods return the DataSet to allow chaining
- *								Add ARRAY and LONG types.
- * 2015-03-25	WNW 15-03		The great refactoring.
- * 2015-04-22	WNW				More refactoring
+ * 2014-06-04	WNW             Remove extra braces from toString()
+ * 2014-10-10	WNW -           Redo the equals and hash code for DataSet
+ * 2015-03-05	WNW 15-03       Add the concept of an array.
+ *                              The .put methods return the DataSet to allow chaining.
+ *                              Add ARRAY and LONG types.
+ * 2015-03-25	WNW 15-03       The great refactoring.
+ * 2015-04-22	WNW             More refactoring
+ * 2016-01-27	WNW	16-01       Remove the superfluose clone() method.
  *================================================================================
  */
 package lexa.core.data;
@@ -61,18 +62,8 @@ public class SimpleDataSet
 		this();
 		for (DataItem item : clone)
 		{
-			this._put(item.clone());
+			this._put(new SimpleDataItem(item));
 		}
-	}
-
-	/**
-	Create a clone of the {@link SimpleDataSet@return an item by item copy of this.
-	*/
-	@Override
-	@SuppressWarnings({"CloneDoesntCallSuperClone", "CloneDeclaresCloneNotSupported"})
-	public DataSet clone()
-	{
-		return new SimpleDataSet(this);
 	}
 
 	/**

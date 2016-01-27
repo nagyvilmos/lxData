@@ -13,13 +13,14 @@
  * 13-MAR-13    WNW 2013-03-13  Fix bug in toString() when item name is null.
  * 2013-08-11   WNW -           Kill the integer type.
  *                              I hope that using the long instead will work.
- * 2014-10-10	WNW -			Redo the equals and hash code for SimpleDataItem
- * 2015-03-05	WNW 15-03		Refactor to move values into their own class and 
- *								add the concept of an array.
- *								Add ARRAY and LONG types.
- * 2015-03-19	WNW	15-03		Extract interfaces.
- *								DataItem becomes and interface and SimpleDataItem 
- *								the default implimentation.
+ * 2014-10-10	WNW -           Redo the equals and hash code for SimpleDataItem
+ * 2015-03-05	WNW 15-03       Refactor to move values into their own class and 
+ *                              add the concept of an array.
+ *                              Add ARRAY and LONG types.
+ * 2015-03-19	WNW	15-03       Extract interfaces.
+ *                              DataItem becomes and interface and SimpleDataItem 
+ *                              the default implimentation.
+ * 2016-01-27	WNW	16-01       Remove the superfluose clone() method.
  *================================================================================
  */
 package lexa.core.data;
@@ -60,8 +61,7 @@ public class SimpleDataItem
 	public SimpleDataItem(String key, Value value)
 	{
 		this.key = key;
-		this.value = value != null ? value
-				: new SimpleValue(null);
+		this.value = new SimpleValue(value);
 	}
 
 	/**
@@ -74,8 +74,7 @@ public class SimpleDataItem
 	 */
 	public SimpleDataItem(DataItem clone)
 	{
-		this.key = clone.getKey();
-		this.value = clone.getValueObject().clone();
+            this(clone.getKey(), clone.getValueObject());
 	}
 
 	/**
@@ -237,11 +236,5 @@ public class SimpleDataItem
 	public String toString()
 	{
 		return "{" + this.key + " " + this.value.toString() + "}";
-	}
-
-	@Override
-	public DataItem clone()
-	{
-		return new SimpleDataItem(this);
 	}
 }

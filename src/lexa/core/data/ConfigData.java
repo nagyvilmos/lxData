@@ -16,6 +16,7 @@
  *                              This allows data to be loaded via config.
  * 2013-08-20   WNW             If all config isn't read return a list of unread 
  *                              items.
+ * 2016-01-27	WNW	16-01       Remove the superfluose clone() method.
  *================================================================================
  */
 package lexa.core.data;
@@ -130,7 +131,7 @@ public class ConfigData
 			this.path = this.parent.path + "." + this.block;
 		}
 		// clone the data to prevent
-		this.data = data.clone();
+		this.data = new SimpleDataSet(data);
 		this.read = new HashSet();
 		this.isOpen = true;
 	}

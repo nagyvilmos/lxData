@@ -15,6 +15,7 @@
  *                              easier to produce.
  * 2015-03-05	WNW 2015-03		Add the concept of an array.
  *								Add ARRAY and LONG types.
+ * 2016-01-27	WNW	16-01       Remove the superfluose clone() method.
  *================================================================================
  */
 package lexa.core.data.io;
@@ -28,6 +29,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import lexa.core.data.SimpleDataItem;
 import lexa.core.data.SimpleDataSet;
+import lexa.core.data.SimpleValueArray;
 import lexa.core.data.ValueArray;
 import lexa.core.data.ValueType;
 import lexa.core.data.formatting.CombinedFormat;
@@ -303,7 +305,7 @@ public class DataReader
 
 	private ValueArray readArray() throws IOException
 	{
-		ValueArray array = new ValueArray();
+		ValueArray array = new SimpleValueArray();
 		while (true)
 		{
 			String value = this.bufferedReader.readLine();

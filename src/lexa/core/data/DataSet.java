@@ -14,13 +14,6 @@ import java.util.Date;
 public interface DataSet
 		extends Iterable<DataItem>
 {
-
-	/**
-	Create a clone of the {@link DataSet@return an item by item copy of this.
-	 * @return a clone of this data set
-	 */
-	public DataSet clone();
-
 	/**
 	 * Checks if the {@link DataSet} contains a named key.
 	 * <p>

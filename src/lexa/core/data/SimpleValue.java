@@ -10,6 +10,8 @@
  * Change Log
  * Date:        By: Ref:        Description:
  * ---------    --- ----------  --------------------------------------------------
+ * 2016-01-27	WNW	16-01       Remove the superfluose clone() method.
+ *                              Add in a cloning constructor.
  *================================================================================
  */
 package lexa.core.data;
@@ -42,6 +44,24 @@ public class SimpleValue implements Value
 		this.value = value;
 	}
 	
+	/**
+	Create a value as a clone of another value
+	@param clone a Value to clone
+	*/
+	SimpleValue(Value clone)
+	{
+            ValueType type = (clone != null) ?
+                    clone.getType() :
+                    ValueType.NULL;
+            this.value =
+                    type.equals(ValueType.NULL) ? 
+                        null :
+                    type.equals(ValueType.ARRAY) ? 
+                        new SimpleValueArray(clone.getArray()) :
+                    type.equals(ValueType.DATA_SET) ?
+                        new SimpleDataSet(clone.getDataSet()) :
+                    clone.getValue();
+	}
 	/**
 	 * Compares this to another object.
 	 * If the other object is a {@code DataItem}, compare the name and value for equality.
@@ -185,19 +205,5 @@ public class SimpleValue implements Value
 					.append(this.value);
 		}
 		return sb.toString();
-	}
-
-	@Override
-	public Value clone()
-	{
-		if (ValueType.DATA_SET.equals(this.getType()))
-		{
-			return new SimpleValue(this.getDataSet().clone());
-		}
-		if (ValueType.ARRAY.equals(this.getType()))
-		{
-			return new SimpleValue(this.getArray().clone());
-		}
-		return new SimpleValue(this.getValue());
 	}
 }
