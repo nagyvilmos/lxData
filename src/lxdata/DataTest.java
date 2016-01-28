@@ -40,7 +40,12 @@ public class DataTest
 	public static void main(String[] args)
 			throws FileNotFoundException, IOException
 	{
-		DataSet data = new SimpleDataSet()
+        DataSet print = new SimpleDataSet();
+        System.out.println(print);
+        print.put("1",2);
+        System.out.println(print);
+
+        DataSet data = new SimpleDataSet()
 			.put("A", 1)
 			.put("B", new SimpleValueArray()
 				.add("One")

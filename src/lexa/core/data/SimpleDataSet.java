@@ -14,6 +14,7 @@
  * 2015-04-22	WNW             More refactoring
  * 2016-01-27	WNW	16-01       Remove the superfluose clone() method.
  * 2016-01-28   WNW 16-01       Update javadoc.
+ * 2016-01-28   WNW 16-01       Move toString() from SimpleDataSet to DataSetGetter
  *================================================================================
  */
 package lexa.core.data;
@@ -329,28 +330,5 @@ public class SimpleDataSet
 	public synchronized int size()
 	{
 		return this.items.size();
-	}
-
-	/**
-	 * Return a string representation of a {@link SimpleDataSet}.
-	 * Formatted as a list of all the {@link SimpleDataItem}'s:
-	 * <blockquote>
-	 * <pre>
-	 * {{key}{value} {key}{{key}{value} {key}{value}}}
-	 * </pre></blockquote>
-	 *
-	 * @return A string representation of the object.
-	 */
-	@Override
-	public synchronized String toString()
-	{
-		StringBuilder sb = new StringBuilder("{");
-		for (DataItem item
-				: this.items)
-		{
-			sb.append(item.toString()).append(" ");			
-		}
-		return sb.deleteCharAt(sb.length()-1).append("}")
-				.toString();
 	}
 }
