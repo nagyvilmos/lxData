@@ -12,6 +12,7 @@
  * ---------    --- ----------  --------------------------------------------------
  * 2015-03-30	WNW 2015-03		Add the concept of an array.
  * 2016-01-27	WNW	16-01       Remove the superfluose clone() method.
+ * 2016-01-28   WNW 16-01       Update javadoc.
  *================================================================================
  */
 package lexa.core.data.io;
@@ -123,7 +124,7 @@ public class DataInput
 	}
 	/**
 	Close the stream
-	@throws IOException 
+	@throws IOException when unable to close the stream
 	*/
 	public void close() throws IOException
 	{

@@ -12,6 +12,7 @@
  * ----------   --- ----------  --------------------------------------------------
  * 2015-04-22	WNW				More refactoring
  * 2016-01-27	WNW	16-01       Remove the superfluose clone() method.
+ * 2016-01-28   WNW 16-01       Add method getType(String)
  *================================================================================
  */
 package lexa.core.data;
@@ -151,6 +152,23 @@ public abstract class DataSetGetter
 	}
 
 	/**
+	 * Get the type of an item from the list for the supplied key.
+	 * @param key The key for the {@link Object}.
+	 * @return If the item exists then the
+	 * item's type, otherwise {@link ValueType#NULL}.
+	 */
+	@Override
+	public synchronized ValueType getType(String key)
+	{
+		DataItem item = this.get(key);
+		if (item == null)
+		{
+			return ValueType.NULL;
+		}
+		return item.getType();
+	}
+
+    /**
 	 * Get an {@link Object} from the list for the supplied key.
 	 * @param key The key for the {@link Object}.
 	 * @return If the item exists then the

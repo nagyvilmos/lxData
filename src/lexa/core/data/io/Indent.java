@@ -1,17 +1,28 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * ================================================================================
+ * Lexa - Property of William Norman-Walker
+ * --------------------------------------------------------------------------------
+ * DataWriter.java
+ *--------------------------------------------------------------------------------
+ * Author:  Indent.java
+ * Created: October 2014
+ *--------------------------------------------------------------------------------
+ * Change Log
+ * Date:        By: Ref:        Description:
+ * ---------    --- ----------  --------------------------------------------------
+ * 2016-01-28   WNW 16-01       Update javadoc.
+ *================================================================================
  */
 package lexa.core.data.io;
 
 /**
- * Provide indentation or the witter.
- * An indent of {@link INDENT_SIZE} characters per level.
+ * Provide indentation for the writer; the indent is formatted as tabs.
  */
 class Indent
 {
-
+    /** level of the indent */
 	private final int level;
+    /** the indent characters as tabs*/
 	private final char[] prefix;
 
 	/**
@@ -40,6 +51,11 @@ class Indent
 		}
 	}
 
+    /**
+     * get the indent prefix.
+     * <p>The prefix is a stream of tab characters equal to the indent level.
+     * @return the indent prefix
+     */
 	char[] getPrefix()
 	{
 		return this.prefix;

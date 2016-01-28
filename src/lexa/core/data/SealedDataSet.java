@@ -13,6 +13,7 @@
  * 2013-03-07   WNW 13-03       Tidy up for initial publication to Code project.
  * 2013-07-11   WNW 13-07       Add a null check to stop exceptions in get{key)
  * 2013-07-11   WNW 13-07       Tidy up some appalling JavaDoc.
+ * 2016-01-28   WNW 16-01       Update javadoc.
  *================================================================================
  */
 package lexa.core.data;
@@ -98,9 +99,9 @@ public class SealedDataSet
 	}
 
 	/**
-	Ensure any datasets are sealed
-	@param item
-	@return 
+	Ensure a {@link DataItem} is sealed
+	@param item the item to seal
+	@return the sealed item
 	*/
 	private DataItem sealed(DataItem item)
 	{

@@ -1,7 +1,27 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * ================================================================================
+ * Lexa - Property of William Norman-Walker
+ * --------------------------------------------------------------------------------
+ * DataSet.java
+ *--------------------------------------------------------------------------------
+ * Author:  William Norman-Walker
+ * Created: July 2009
+ *--------------------------------------------------------------------------------
+ * 2013-04-14   WNW 2013-04     Add a contains method to check if a key exists.
+ *                              Changed find to only be private; should be okay.
+ * 2013-08-10   WNW             Added support fot iterating the DataSet.
+ * 2013-08-11   WNW             Added support fot getting double directly.
+ * 2013-08-14   WNW             put(DataSet) handles null value.
+ * 2014-06-04	WNW             Remove extra braces from toString()
+ * 2014-10-10	WNW -           Redo the equals and hash code for DataSet
+ * 2015-03-05	WNW 15-03       Add the concept of an array.
+ *                              The .put methods return the DataSet to allow chaining.
+ *                              Add ARRAY and LONG types.
+ * 2015-03-25	WNW 15-03       The great refactoring.
+ * 2015-04-22	WNW             More refactoring
+ * 2016-01-27	WNW	16-01       Remove the superfluose clone() method.
+ * 2016-01-28   WNW 16-01       Add method getType(String)
+ *================================================================================
  */
 package lexa.core.data;
 
@@ -108,6 +128,14 @@ public interface DataSet
 	public String getString(String key);
 
 	/**
+	 * Get the type of an item from the list for the supplied key.
+	 * @param key The key for the {@link Object}.
+	 * @return If the item exists then the
+	 * item's type, otherwise {@link ValueType#NULL}.
+	 */
+	public ValueType getType(String key);
+
+    /**
 	 * Get an {@link Object} from the list for the supplied key.
 	 * @param key The key for the {@link Object}.
 	 * @return If the item exists then the

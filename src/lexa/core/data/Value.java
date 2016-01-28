@@ -12,6 +12,7 @@
  * ---------    --- ----------  --------------------------------------------------
  * 2016-01-27	WNW	16-01       Remove the superfluose clone() method.
  *                              Add in a cloning constructor.
+ * 2016-01-28   WNW 16-01       Update javadoc.
  *================================================================================
  */
 package lexa.core.data;
@@ -19,8 +20,14 @@ package lexa.core.data;
 import java.util.Date;
 
 /**
- * Interface for a value within a {@link DataItem}
- * @author william
+ * Interface for a value within a {@link DataSet}
+ <p>
+ This is a type safe representation of an object used by a {@link DataSet},
+ {@link DataItem} or {@link ValueArray}.
+ Even if a {@code null} is added, internally it is represented by an object, this 
+ makes certain operations easier internally.
+ @author william
+ @since 2015-03
  */
 public interface Value
 {

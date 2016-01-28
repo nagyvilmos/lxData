@@ -16,6 +16,7 @@
  * 2015-03-05	WNW 2015-03		Add the concept of an array.
  *								Add ARRAY and LONG types.
  * 2016-01-27	WNW	16-01       Remove the superfluose clone() method.
+ * 2016-01-28   WNW 16-01       Update javadoc.
  *================================================================================
  */
 package lexa.core.data.io;
@@ -35,10 +36,12 @@ import lexa.core.data.ValueType;
 import lexa.core.data.formatting.CombinedFormat;
 
 /**
- * Read {@link DataItem} and {@link DataSet} objects from an input stream.
- * <p>A {@code DataSet} is read as a series of {@code DataItem} objects.
- * <p>A {@code DataItem} is read as the name followed by the formatted value;
- * with the toString depends on the data type.
+ * Read {@link lexa.core.data.DataItem} and {@link lexa.core.data.DataSet} objects
+ * from an input stream.
+ * <p>A {@code lexa.core.data.DataSet} is read as a series of
+ * {@code lexa.core.data.DataItem} objects.
+ * <p>A {@code lexa.core.data.DataItem} is read as the name followed by the
+ * formatted value; with the toString depends on the data type.
  * <p>See {@link DataWriter} for the toString used.
  *
  * @author William

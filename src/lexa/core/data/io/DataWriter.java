@@ -12,6 +12,7 @@
  * ---------    --- ----------  --------------------------------------------------
  * 2015-03-05	WNW 2015-03		Add the concept of an array.
  *								Add ARRAY and LONG types.
+ * 2016-01-28   WNW 16-01       Update javadoc.
  *================================================================================
  */
 package lexa.core.data.io;
@@ -30,10 +31,12 @@ import lexa.core.data.ValueArray;
 import lexa.core.data.formatting.CombinedFormat;
 
 /**
- * Write {@link SimpleDataItem} and {@link SimpleDataSet} objects to an output stream.
- * <p>A {@code SimpleDataSet} is written as a series of {@code SimpleDataItem} objects.
- * <p>A {@code SimpleDataItem} is written as the name followed by the formatted value;
- * with the toString depends on the data type.
+ * Write {@link lexa.core.data.DataItem} and {@link lexa.core.data.DataSet}
+ * objects to an output stream.
+ * <p>A {@code lexa.core.data.DataSet} is written as a series of
+ * {@code lexa.core.data.DataItem} objects.
+ * <p>A {@code lexa.core.data.DataItem} is written as the name followed by the 
+ * formatted value; with the toString depends on the data type.
  * <p>The toString of the output is:
  * <pre>
  # comments can be added at any point and each
@@ -148,12 +151,13 @@ public class DataWriter
 	}
 
 	/**
-	 * Write a {@link SimpleDataSet} to the file.
+	 * Write a {@link lexa.core.data.DataSet} to the file.
 	 * <p>
-	 * Each {@link SimpleDataItem} is written to the output using {@link write(DataItem)}.
+	 * Each {@link lexa.core.data.DataSet} is written to the output 
+     * using {@link #write(lexa.core.data.DataItem)}.
 	 *
 	 * @param   data
-	 *       The {@link SimpleDataSet} to be written to the output.
+	 *       The {@link lexa.core.data.DataSet} to be written to the output.
 	 * @throws  IOException
 	 *       When an IO error occurs writing to the output.
 	 */
@@ -168,12 +172,12 @@ public class DataWriter
 	/**
 	 * Performs the actual writing.
 	 * This private method includes the indentation and
-	 * is also called from {@link write(DataItem, Indent)}.
+	 * is also called from {@link DataWriter#write(lexa.core.data.DataItem, lexa.core.data.io.Indent) }.
 	 *
 	 * @param   data
-	 *       The {@link SimpleDataSet} to be written to the output.
+	 *       The {@link lexa.core.data.DataSet} to be written to the output.
 	 * @param   indent
-	 *       The {@link DataWriter.Indent} to prefix the output.
+	 *       The {@link Indent} to prefix the output.
 	 * @throws  IOException
 	 *       When an IO error occurs writing to the output.
 	 */
@@ -206,7 +210,7 @@ public class DataWriter
 	 * This private method includes the indentation.
 	 *
 	 * @param   item
-	 *       The {@link SimpleDataItem} to be written to the output.
+	 *       The {@link lexa.core.data.DataItem} to be written to the output.
 	 * @param   indent
 	 *       The {@link Indent} to prefix the output.
 	 * @throws  IOException
@@ -226,7 +230,7 @@ public class DataWriter
 	 * This private method includes the indentation.
 	 *
 	 * @param   value
-	 *       The {@link SimpleValue} to be written to the output.
+	 *       The {@link lexa.core.data.Value} to be written to the output.
 	 * @param   indent
 	 *       The {@link Indent} to prefix the output.
 	 * @throws  IOException

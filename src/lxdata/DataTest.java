@@ -1,6 +1,17 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * ================================================================================
+ * Lexa - Property of William Norman-Walker
+ * --------------------------------------------------------------------------------
+ * DataTest.java
+ *--------------------------------------------------------------------------------
+ * Author:  William Norman-Walker
+ * Created: April 2009
+ *--------------------------------------------------------------------------------
+ * Change Log
+ * Date:        By: Ref:        Description:
+ * ---------    --- ----------  --------------------------------------------------
+ * 2016-01-28   WNW 16-01       Update javadoc.
+ *================================================================================
  */
 package lxdata;
 
@@ -23,8 +34,8 @@ public class DataTest
 
 	/**
 	 * @param args the command line arguments
-	 * @throws java.io.FileNotFoundException
-	 * @throws java.io.IOException
+	 * @throws java.io.FileNotFoundException when the file is not found
+	 * @throws java.io.IOException when an IO exception occurs
 	 */
 	public static void main(String[] args)
 			throws FileNotFoundException, IOException

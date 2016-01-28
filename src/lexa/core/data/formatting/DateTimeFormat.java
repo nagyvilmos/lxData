@@ -11,7 +11,8 @@
  * Date:        By: Ref:        Description:
  * ---------    --- ----------  --------------------------------------------------
  * 30-03-2015	WNW	2015-03		Refactor FormatDateTime -> DateTimeFormat
- *================================================================================
+ * 2016-01-28   WNW 16-01       Update javadoc.
+*================================================================================
  */
 package lexa.core.data.formatting;
 
@@ -34,7 +35,6 @@ public class DateTimeFormat
 
 	/**
 	 * Default constructor using a format of {@code "yyyy-MM-dd HH:mm:ss.SSS Z"}.
-	 * <p>This is the format used by the {@link FormatCombined}
 	 */
 	public DateTimeFormat()
 	{

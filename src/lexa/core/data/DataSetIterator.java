@@ -11,6 +11,7 @@
  * Date:        By: Ref:        Description:
  * ----------   --- ----------  --------------------------------------------------
  * 2015-04-22	WNW				More refactoring
+ * 2016-01-28   WNW 16-01       Update javadoc.
  *================================================================================
  */
 package lexa.core.data;
@@ -18,7 +19,7 @@ package lexa.core.data;
 import java.util.Iterator;
 
 /**
- * Iterate over a {@DataSet}.
+ * Iterate over a {@link DataSet}.
  * <p>This iterator is not thread safe.
  * It should not be used in cases where the data can be changed externally.  In those cases it is
  * better to retrieve the keys and then loop through them.

@@ -21,6 +21,8 @@
  *                              DataItem becomes and interface and SimpleDataItem 
  *                              the default implimentation.
  * 2016-01-27	WNW	16-01       Remove the superfluose clone() method.
+ * 2016-01-28   WNW 16-01       Remove the generic getter methods from SimpleDataItem
+ *                              into DataItemGetter.
  *================================================================================
  */
 package lexa.core.data;
@@ -36,7 +38,7 @@ import java.util.Date;
  * @see SimpleDataSet
  */
 public class SimpleDataItem
-		implements DataItem
+		extends DataItemGetter
 {
 
 	/** The key for the item */
@@ -93,76 +95,6 @@ public class SimpleDataItem
 		final SimpleDataItem other = (SimpleDataItem)obj;
 		return (this.key == null) ? (other.key == null) : this.key.equals(other.key) &&
 				(this.value == null) ? (other.value == null) : this.value.equals(other.value);
-	}
-
-	/**
-	 * Gets the value as an array.
-	 * @return The value as an array.
-	 */
-	@Override
-	public ValueArray getArray()
-	{
-		return this.value.getArray();
-	}
-
-	/**
-	 * Gets the value as a boolean.
-	 * @return The value as a boolean.
-	 */
-	@Override
-	public Boolean getBoolean()
-	{
-		return this.value.getBoolean();
-	}
-
-	/**
-	 * Gets the value as a data set.
-	 * @return The value as a data set.
-	 */
-	@Override
-	public DataSet getDataSet()
-	{
-		return this.value.getDataSet();
-	}
-
-	/**
-	 * Gets the value as a data.
-	 * @return The value as a date.
-	 */
-	@Override
-	public Date getDate()
-	{
-		return this.value.getDate();
-	}
-
-	/**
-	 * Gets the value as a double.
-	 * @return The value as a double.
-	 */
-	@Override
-	public Double getDouble()
-	{
-		return this.value.getDouble();
-	}
-
-	/**
-	 * Gets the value as an integer.
-	 * @return The value as an integer.
-	 */
-	@Override
-	public Integer getInteger()
-	{
-		return this.value.getInteger();
-	}
-
-	/**
-	 * Gets the value as a long.
-	 * @return The value as a long.
-	 */
-	@Override
-	public Long getLong()
-	{
-		return this.value.getLong();
 	}
 
 	/**

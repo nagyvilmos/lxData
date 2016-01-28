@@ -5,24 +5,15 @@
  * SimpleDataSet.java
  *--------------------------------------------------------------------------------
  * Author:  William Norman-Walker
- * Created: July 2009
+ * Created: March 2015
  *--------------------------------------------------------------------------------
  * Change Log
  * Date:        By: Ref:        Description:
  * ----------   --- ----------  --------------------------------------------------
- * 2013-04-14   WNW 2013-04     Add a contains method to check if a key exists.
- *                              Changed find to only be private; should be okay.
- * 2013-08-10   WNW             Added support fot iterating the DataSet.
- * 2013-08-11   WNW             Added support fot getting double directly.
- * 2013-08-14   WNW             put(DataSet) handles null value.
- * 2014-06-04	WNW             Remove extra braces from toString()
- * 2014-10-10	WNW -           Redo the equals and hash code for DataSet
- * 2015-03-05	WNW 15-03       Add the concept of an array.
- *                              The .put methods return the DataSet to allow chaining.
- *                              Add ARRAY and LONG types.
  * 2015-03-25	WNW 15-03       The great refactoring.
  * 2015-04-22	WNW             More refactoring
  * 2016-01-27	WNW	16-01       Remove the superfluose clone() method.
+ * 2016-01-28   WNW 16-01       Update javadoc.
  *================================================================================
  */
 package lexa.core.data;
@@ -82,8 +73,8 @@ public class SimpleDataSet
 
 	/**
 	 * Compares an object
-	 * @param obj
-	 * @return
+	 * @param obj object to compare to
+	 * @return {@code true} if the objects are equal, otherwise {@code false}
 	 */
 	@Override
 	public boolean equals(Object obj)
@@ -233,8 +224,10 @@ public class SimpleDataSet
 	 * Implementation for {@link #put(DataItem)}.
 	 * <p>
 	 * This is {@code private} to stop any overrides and is to be called only
-	 * from this and the constructor {@link #DataSet(DataSet)}.
-	 * @param item A {@link SimpleDataItem} to add.
+	 * from this {@link #put(lexa.core.data.DataItem) put(DataItem)} and the
+     * clone constructor
+     * {@link #SimpleDataSet(lexa.core.data.DataSet) SimpleDataSet(DataSet)}.
+	 * @param item A {@link DataItem} to add.
 	 */
 	private synchronized void _put(DataItem item)
 	{

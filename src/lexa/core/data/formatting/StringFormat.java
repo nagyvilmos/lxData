@@ -11,6 +11,7 @@
  * Date:        By: Ref:        Description:
  * ---------    --- ----------  --------------------------------------------------
  * 30-03-2015	WNW	2015-03		Refactor FormatString -> StringFormat
+ * 2016-01-28   WNW 16-01       Update javadoc.
  *================================================================================
  */
 package lexa.core.data.formatting;
@@ -71,7 +72,7 @@ public class StringFormat
 	then the string to replace with.
 	The terms are located in order, so a substring will never be found if after the 
 	main string and vica-versa.
-	{@code <pre>
+	<pre>
 	String [][] terms = {
 			{"sat", "stood"},
 			{"at", "art"},
@@ -80,10 +81,11 @@ public class StringFormat
 	};
 	String replaced = StringFormat.multiReplace("The cat sat on the mat", terms);
 	// replaced = "The cart stood in thy mart"
-	</pre>}
-	@param input
-	@param replacements
-	@return 
+	</pre>
+    * 
+	@param input input string to be parsed
+	@param replacements two dimensional array of replacement terms.
+	@return the parsed string
 	*/
 	public static String multiReplace(
 		final String input, String[] ... replacements) {

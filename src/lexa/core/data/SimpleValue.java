@@ -12,6 +12,7 @@
  * ---------    --- ----------  --------------------------------------------------
  * 2016-01-27	WNW	16-01       Remove the superfluose clone() method.
  *                              Add in a cloning constructor.
+ * 2016-01-28   WNW 16-01       Update javadoc.
  *================================================================================
  */
 package lexa.core.data;
@@ -19,18 +20,13 @@ package lexa.core.data;
 import java.util.Date;
 
 /**
- A single value for a {@link SimpleDataSet}
- <p>
- This is a type safe representation of an object used by a {@link SimpleDataSet},
- {@link DataValue} or {@link ValueArray}.
- Even if a {@code null} is added, internally it is represented by an object, this 
- makes certain operations easier internally.
+ Implementation of {@link Value} for use in a {@link SimpleDataSet}
  <p>
  This class manages the type conversion and keels it type safe.
  @author william
  @since 2015-03
  */
-public class SimpleValue implements Value
+public class SimpleValue extends ValueGetter implements Value
 {
     /** the value being represented */
 	private final Object value;
@@ -79,94 +75,6 @@ public class SimpleValue implements Value
 		return (this.value == null) ?
 				(other.value == null) :
 				this.value.equals(other.value);
-	}
-	
-	/**
-	 * Gets the value as a {@link ValueArray}.
-	 * @return The value as am array.
-	 */
-	@Override
-	public ValueArray getArray()
-	{
-		return (ValueArray) ValueType.ARRAY.getValueIfType(this.value);
-	}
-	/**
-	 * Gets the value as a boolean.
-	 * @return The value as a boolean.
-	 */
-	@Override
-	public Boolean getBoolean()
-	{
-		return (Boolean) ValueType.BOOLEAN.getValueIfType(this.value);
-	}
-
-	/**
-	 * Gets the value as a data set.
-	 * @return The value as a data set.
-	 */
-	@Override
-	public DataSet getDataSet()
-	{
-		return (SimpleDataSet) ValueType.DATA_SET.getValueIfType(this.value);
-	}
-
-	/**
-	 * Gets the value as a data.
-	 * @return The value as a date.
-	 */
-	@Override
-	public Date getDate()
-	{
-		return (Date) ValueType.DATE.getValueIfType(this.value);
-	}
-
-	/**
-	 * Gets the value as a double.
-	 * @return The value as a double.
-	 */
-	@Override
-	public Double getDouble()
-	{
-		return (Double) ValueType.DOUBLE.getValueIfType(this.value);
-	}
-
-	/**
-	 * Gets the value as an integer.
-	 * @return The value as an integer.
-	 */
-	@Override
-	public Integer getInteger()
-	{
-		return (Integer) ValueType.INTEGER.getValueIfType(this.value);
-	}
-	/**
-	 * Gets the value as an integer.
-	 * @return The value as an integer.
-	 */
-	@Override
-	public Long getLong()
-	{
-		return (Long) ValueType.LONG.getValueIfType(this.value);
-	}
-
-	/**
-	 * Gets the value as a string.
-	 * @return The value as a string.
-	 */
-	@Override
-	public String getString()
-	{
-		return (String) ValueType.STRING.getValueIfType(this.value);
-	}
-
-	/**
-	 * Gets the type of the value.
-	 * @return The type of the value.
-	 */
-	@Override
-	public ValueType getType()
-	{
-		return ValueType.getType(this.value);
 	}
 
 	/**
