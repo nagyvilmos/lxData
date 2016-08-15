@@ -12,6 +12,7 @@
  * ---------    --- ----------  --------------------------------------------------
  * 02 Jul 14	WNW	LexaDialog	Make isType() public for external use.
  * 2015.03.06	WNW	2015.03		Add ARRAY and LONG types.
+ * 2016.02.05   WNW 2016.08     Change DATA_SET class from SimpleDataSet to DataSet.
  *================================================================================
  */
 package lexa.core.data;
@@ -45,7 +46,7 @@ public enum ValueType
 	/** The value is a boolean */
 	BOOLEAN(Boolean.class,'?'),
 	/** The value is a data set */
-	DATA_SET(SimpleDataSet.class, '#'),
+	DATA_SET(DataSet.class, '#'),
 	/** The value is a date */
 	DATE(Date.class,'@'),
 	/** The value is a double */

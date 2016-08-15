@@ -2,7 +2,7 @@
  * ================================================================================
  * Lexa - Property of William Norman-Walker
  * --------------------------------------------------------------------------------
- * SimpleDataSet.java
+ * DataSetGetter.java
  *--------------------------------------------------------------------------------
  * Author:  William Norman-Walker
  * Created: April 2015
@@ -15,6 +15,7 @@
  * 2016-01-28   WNW 16-01       Add method getType(String)
  * 2016-01-28   WNW 16-01       Move toString() from SimpleDataSet to DataSetGetter
  *                              Fix a bug in toString() for 0 item set
+ * 2016-02-09   WNW             Change base abstract classes from *Getter to *Base
  *================================================================================
  */
 package lexa.core.data;
@@ -23,13 +24,13 @@ import java.util.Date;
 import java.util.Iterator;
 
 /**
- * Provide the type safe getters for a data set.
+ * Provide the base methods for a data set.
  * <p>
  * This provides the getters for the specific types supported.
  * It does not implement the basic {@link DataSet#get(java.lang.String) get} method
  * @author william
  */
-public abstract class DataSetGetter
+public abstract class DataSetBase
 		implements DataSet
 {
 	/**
@@ -46,7 +47,8 @@ public abstract class DataSetGetter
 				null :
 				item.getArray();
 	}
-	/**
+
+    /**
 	 * Get a {@link Boolean} from the list for the supplied key.
 	 * @param key The key for the {@link SimpleDataItem}.
 	 * @return If the item exists and is a {@link String} then the
@@ -184,7 +186,7 @@ public abstract class DataSetGetter
 		{
 			return null;
 		}
-		return item.getValue();
+		return item.getObject();
 	}
 
 	/**
@@ -213,6 +215,51 @@ public abstract class DataSetGetter
         }
 		return sb.append("}")
 				.toString();
+	}
+
+	/**
+	 * Compares an object
+	 * @param obj object to compare to
+	 * @return {@code true} if the objects are equal, otherwise {@code false}
+	 */
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (obj == null || !DataSet.class.isAssignableFrom(obj.getClass()))
+		{
+			return false;
+		}
+		final DataSet other = (DataSet) obj;
+
+		// trivial case of different sizes
+		if (this.size() != other.size())
+		{
+			return false;
+		}
+
+		// the items could be loaded in a different order but if the content
+		// is the same, the two sets are equal.
+		for (DataItem item
+				: this)
+		{
+			if (!item.equals(other.get(item.getKey())))
+			{
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	@Override
+	public int hashCode()
+	{
+		int hash = 7;
+		for (DataItem item : this)
+		{
+			hash += (17 * item.hashCode());
+		}
+		return hash;
 	}
 
     @Override

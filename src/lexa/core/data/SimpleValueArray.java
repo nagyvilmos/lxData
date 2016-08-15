@@ -12,6 +12,8 @@
  * ---------    --- ----------  --------------------------------------------------
  * 2016-01-27	WNW	16-01       Extracted the interface
  *                              Remove the superfluose clone() method.
+ * 2016-02-08   WNW 16-01       Add new addAll methods.
+ *                              Change size to an int
  *================================================================================
  */
 package lexa.core.data;
@@ -27,8 +29,7 @@ import java.util.Iterator;
  * @author william
  * @since 2016-01
  */
-public class SimpleValueArray
-		implements ValueArray
+public class SimpleValueArray extends ValueArrayBase
 {
 	/** the first item in the list */
 	private Index start;
@@ -39,7 +40,7 @@ public class SimpleValueArray
 	/** the position of the most recent item */
 	private long pos;
 	/* the size of the array */
-	private long size;
+	private int size;
 	
 	/**
 	Create a new {@link ValueArray}
@@ -75,38 +76,6 @@ public class SimpleValueArray
 		}
 	}
 
-	/**
-	Add an object to the array.
-	<p>
-	The value is added added to the end of the array.  The following are equivalent:
-	<pre>{@code
-	va.add(obj);
-	va.add(new SimpleValue(obj));
-	va.add(obj, va.size);
-	va.add(new SimpleValue(obj), va.size);
-	}</pre>
-	@param object the object to add
-	@return this {@link ValueArray}
-	*/
-	public ValueArray add(Object object)
-	{
-		return this.add(new SimpleValue(object));
-	}
-	/**
-	Add a value to the array.
-	<p>
-	The value is added added to the end of the array.  The following are equivalent:
-	<pre>{@code
-	va.add(val);
-	va.add(val, va.size);
-	}</pre>
-	@param value the value to add
-	@return this {@link ValueArray}
-	*/
-	public ValueArray add(Value value)
-	{
-		return this.add(size, value);
-	}
 
 	/**
 	Add an object to the array at a given position.
@@ -120,7 +89,7 @@ public class SimpleValueArray
 	@param object the value to add
 	@return this {@link ValueArray}
 	*/
-	public ValueArray add(long index, Object object)
+	public ValueArray add(int index, Object object)
 	{
 		return this.add(index, new SimpleValue(object));
 	}
@@ -135,7 +104,7 @@ public class SimpleValueArray
 	@param value the value to add
 	@return this {@link ValueArray}
 	*/
-	public ValueArray add(long index, Value value)
+	public ValueArray add(int index, Value value)
 	{
 		if (value.getType().equals(ValueType.NULL))
 		{
@@ -170,43 +139,6 @@ public class SimpleValueArray
 		return this;
 	}
 
-	public ValueArray clone()
-	{
-            return new SimpleValueArray(this);
-	}
-
-	@Override
-	public int hashCode()
-	{
-		int hash = 7;
-		for (Value v : this)
-		{
-			hash = hash * 13 + v.hashCode();
-		}
-		return hash;
-	}
-
-	@Override
-	public boolean equals(Object obj)
-	{
-		if (obj == null)
-		{
-			return false;
-		}
-		if (getClass() != obj.getClass())
-		{
-			return false;
-		}
-		final ValueArray other = (ValueArray) obj;
-		if (this.size() != other.size())
-			return false;
-		for (int i = 0; i<this.size(); i++)
-		{
-			if (!this.get(i).equals(other.get(i)))
-				return false;
-		}
-		return true;
-	}
 
 	
 	/**
@@ -214,7 +146,7 @@ public class SimpleValueArray
 	@param index position of required value
 	@return the value corresponding to the position
 	*/
-	public Value get(long index)
+	public Value get(int index)
 	{
 		if (index < 0 || index >= size)
 			throw new IndexOutOfBoundsException();
@@ -249,18 +181,13 @@ public class SimpleValueArray
 		return this.recent.value;
 	}
 
-	@Override
-	public Iterator<Value> iterator()
-	{
-		return new ValueArrayIterator(this);
-	}
 
 	/**
 	Remove the value at a position.
 	@param index position of value to be removed
 	@return the value that has been removed
 	*/
-	public Value remove(long index)
+	public Value remove(int index)
 	{
 		Value remove = this.get(index);
 		
@@ -299,28 +226,11 @@ public class SimpleValueArray
 	Get the size of the array.
 	@return the number of elements in the array
 	*/
-	public long size()
+	public int size()
 	{
 		return this.size;
 	}
 
-	@Override
-	public String toString()
-	{
-		StringBuilder sb = new StringBuilder();
-		sb.append('[');
-		Index i = this.start;
-		while (i != null)
-		{
-			sb.append(i.value);
-			i = i.next;
-			if (i != null)
-			{
-				sb.append(", ");
-			}
-		}
-		return sb.append(']').toString();
-	}
 
 	/**
 	An index item

@@ -69,7 +69,7 @@ public class DataTest
 		dw.write(data);
 		dw.close();
 		DataReader dr = new DataReader(test);
-		SimpleDataSet read = dr.read();
+		DataSet read = dr.read();
 		System.out.println(read);
 		if (!data.equals(read))
 		{

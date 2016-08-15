@@ -17,6 +17,7 @@
  *								Add ARRAY and LONG types.
  * 2016-01-27	WNW	16-01       Remove the superfluose clone() method.
  * 2016-01-28   WNW 16-01       Update javadoc.
+ * 2016-08-13   WNW 2016-08     Fix use of DatatException path and key.
  *================================================================================
  */
 package lexa.core.data.io;
@@ -28,6 +29,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import lexa.core.data.DataItem;
+import lexa.core.data.DataSet;
 import lexa.core.data.SimpleDataItem;
 import lexa.core.data.SimpleDataSet;
 import lexa.core.data.SimpleValueArray;
@@ -121,7 +124,7 @@ public class DataReader
 	 * @throws  IOException
 	 *       When an IO error occurs closing the input.
 	 */
-	public SimpleDataSet read()
+	public DataSet read()
 			throws IOException
 	{
 		return this.read(false);
@@ -139,14 +142,14 @@ public class DataReader
 	 * @throws  IOException
 	 *       When an IO error occurs reading the input.
 	 */
-	private SimpleDataSet read(boolean isNested)
+	private DataSet read(boolean isNested)
 			throws IOException
 	{
-		SimpleDataSet data = new SimpleDataSet();
+		DataSet data = new SimpleDataSet();
 
 		while (true)
 		{
-			SimpleDataItem item = this.readItem(isNested);
+			DataItem item = this.readItem(isNested);
 			if (item == null)
 			{
 				break;
@@ -172,7 +175,7 @@ public class DataReader
 	 * @throws  IOException
 	 *       When an IO error occurs reading the input.
 	 */
-	private SimpleDataItem readItem(boolean isNested)
+	private DataItem readItem(boolean isNested)
 			throws IOException
 	{
 		String line;
@@ -246,7 +249,7 @@ public class DataReader
 						System.getProperty("user.dir") + "\\data\\" + value);
 			}
 			DataReader include = new DataReader(includeFile);
-			SimpleDataSet data = include.read();
+			DataSet data = include.read();
 			include.close();
 			return data;
 		}

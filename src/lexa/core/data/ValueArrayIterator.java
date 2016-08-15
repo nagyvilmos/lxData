@@ -10,7 +10,7 @@
  * Change Log
  * Date:        By: Ref:        Description:
  * ----------   --- ----------  --------------------------------------------------
- * -            -
+ * 2016-02-09   WNW 16-01       Make ValueArrayIterator public
  *================================================================================
  */
 package lexa.core.data;
@@ -25,7 +25,7 @@ import java.util.Iterator;
  * @author  William
  * @since   2015-03
  */
-class ValueArrayIterator
+public class ValueArrayIterator
 		implements Iterator<Value>
 {
 

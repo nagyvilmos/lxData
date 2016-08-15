@@ -30,7 +30,7 @@ import java.util.ArrayList;
  * @see DataItem
  */
 public class SimpleDataSet
-		extends DataSetGetter
+		extends DataSetBase
 {
 
 	private final ArrayList<DataItem> items;
@@ -70,55 +70,6 @@ public class SimpleDataSet
 	public boolean contains(String key)
 	{
 		return (this.find(key) != -1);
-	}
-
-	/**
-	 * Compares an object
-	 * @param obj object to compare to
-	 * @return {@code true} if the objects are equal, otherwise {@code false}
-	 */
-	@Override
-	public boolean equals(Object obj)
-	{
-		if (obj == null)
-		{
-			return false;
-		}
-		if (getClass() != obj.getClass())
-		{
-			return false;
-		}
-		final SimpleDataSet other = (SimpleDataSet) obj;
-
-		// trivial case of different sizes
-		if (this.size() != other.size())
-		{
-			return false;
-		}
-
-		// the items could be loaded in a different order but if the content
-		// is the same, the two sets are equal.
-		for (DataItem item
-				: this)
-		{
-			if (!item.equals(other.get(item.getKey())))
-			{
-				return false;
-			}
-		}
-
-		return true;
-	}
-
-	@Override
-	public int hashCode()
-	{
-		int hash = 7;
-		for (DataItem item : this)
-		{
-			hash += (17 * item.hashCode());
-		}
-		return hash;
 	}
 
 	/**

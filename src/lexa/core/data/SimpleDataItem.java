@@ -23,11 +23,10 @@
  * 2016-01-27	WNW	16-01       Remove the superfluose clone() method.
  * 2016-01-28   WNW 16-01       Remove the generic getter methods from SimpleDataItem
  *                              into DataItemGetter.
+ * 2016-02-09   WNW             Change base abstract classes from *Getter to *Base
  *================================================================================
  */
 package lexa.core.data;
-
-import java.util.Date;
 
 /**
  * A single item in a data set.
@@ -38,7 +37,7 @@ import java.util.Date;
  * @see SimpleDataSet
  */
 public class SimpleDataItem
-		extends DataItemGetter
+		extends DataItemBase
 {
 
 	/** The key for the item */
@@ -76,25 +75,7 @@ public class SimpleDataItem
 	 */
 	public SimpleDataItem(DataItem clone)
 	{
-            this(clone.getKey(), clone.getValueObject());
-	}
-
-	/**
-	 * Compares this to another object.
-	 * If the other object is a {@code SimpleDataItem}, compare the name and value for equality.
-	 * @param obj Another object to compare
-	 * @return True if the object is a {@code SimpleDataItem} with the same name and value.
-	 */
-	@Override
-	public boolean equals(Object obj)
-	{
-		if (obj == null || this.getClass() != obj.getClass())
-		{
-			return false;
-		}
-		final SimpleDataItem other = (SimpleDataItem)obj;
-		return (this.key == null) ? (other.key == null) : this.key.equals(other.key) &&
-				(this.value == null) ? (other.value == null) : this.value.equals(other.value);
+            this(clone.getKey(), clone.getValue());
 	}
 
 	/**
@@ -132,41 +113,8 @@ public class SimpleDataItem
 	 * @return The value of the item.
 	 */
 	@Override
-	public Object getValue()
-	{
-		return this.value.getValue();
-	}
-
-	/**
-	 * Gets the value of a <tt>SimpleDataItem</tt>.
-	 * @return The value of the item.
-	 */
-	@Override
-	public Value getValueObject()
+	public Value getValue()
 	{
 		return this.value;
-	}
-	/**
-	 * Get the hash code of the data item.
-	 *
-	 * @return The hash code of the data item.
-	 */
-	@Override
-	public int hashCode()
-	{
-		return (this.key == null ? 3 : (this.key.hashCode() * 3)) +
-				(this.value.hashCode());
-	}
-
-	/***
-	 * Get the <tt>SimpleDataItem</tt> as a string description.
-	 * <tt>toString</tt> is in the format of:
-	 * <pre>key {value}</pre>
-	 * @return The item's string representation.
-	 */
-	@Override
-	public String toString()
-	{
-		return "{" + this.key + " " + this.value.toString() + "}";
 	}
 }

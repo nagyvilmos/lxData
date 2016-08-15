@@ -12,6 +12,7 @@
  * ---------    --- ----------  --------------------------------------------------
  * 2016-01-28   WNW 16-01       Remove the generic getter methods from SimpleDataItem
  *                              into DataItemGetter.
+ * 2016-02-09   WNW             Change base abstract classes from *Getter to *Base
  *================================================================================
  */
 package lexa.core.data;
@@ -22,15 +23,37 @@ import java.util.Date;
  * Provide the type safe getters for a data item.
  * <p>
  * This provides the getters for the specific types supported.
- * It does not implement the basic {@link DataItem#getValueObject() getValueObject} method.
+ * It does not implement the basic {@link DataItem#getValue() getValueObject} method.
  * @author william
  * @since 2016-01
  */
 @SuppressWarnings("EqualsAndHashcode")
-public abstract class DataItemGetter
+public abstract class DataItemBase
         implements DataItem 
 {
 
+	/**
+	 * Compares this to another object.
+	 * If the other object is a {@code DataItem}, compare the name and value for equality.
+	 * @param obj Another object to compare
+	 * @return True if the object is a {@code DataItem} with the same name and value.
+	 */
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (obj == null || !DataItem.class.isAssignableFrom(obj.getClass()))
+		{
+			return false;
+		}
+		final DataItem other = (DataItem)obj;
+		return (this.getKey() == null) ?
+                        (other.getKey() == null) :
+                        this.getKey().equals(other.getKey()) &&
+				(this.getObject() == null) ?
+                        (other.getObject() == null) :
+                        this.getObject().equals(other.getObject());
+	}
+    
 	/**
 	 * Gets the value as an array.
 	 * @return The value as an array.
@@ -38,7 +61,7 @@ public abstract class DataItemGetter
 	@Override
 	public ValueArray getArray()
 	{
-		return this.getValueObject().getArray();
+		return this.getValue().getArray();
 	}
 
 	/**
@@ -48,7 +71,7 @@ public abstract class DataItemGetter
 	@Override
 	public Boolean getBoolean()
 	{
-		return this.getValueObject().getBoolean();
+		return this.getValue().getBoolean();
 	}
 
 	/**
@@ -58,7 +81,7 @@ public abstract class DataItemGetter
 	@Override
 	public DataSet getDataSet()
 	{
-		return this.getValueObject().getDataSet();
+		return this.getValue().getDataSet();
 	}
 
 	/**
@@ -68,7 +91,7 @@ public abstract class DataItemGetter
 	@Override
 	public Date getDate()
 	{
-		return this.getValueObject().getDate();
+		return this.getValue().getDate();
 	}
 
 	/**
@@ -78,7 +101,7 @@ public abstract class DataItemGetter
 	@Override
 	public Double getDouble()
 	{
-		return this.getValueObject().getDouble();
+		return this.getValue().getDouble();
 	}
 
 	/**
@@ -88,7 +111,7 @@ public abstract class DataItemGetter
 	@Override
 	public Integer getInteger()
 	{
-		return this.getValueObject().getInteger();
+		return this.getValue().getInteger();
 	}
 
 	/**
@@ -98,7 +121,7 @@ public abstract class DataItemGetter
 	@Override
 	public Long getLong()
 	{
-		return this.getValueObject().getLong();
+		return this.getValue().getLong();
 	}
 
 	/**
@@ -108,7 +131,7 @@ public abstract class DataItemGetter
 	@Override
 	public String getString()
 	{
-		return this.getValueObject().getString();
+		return this.getValue().getString();
 	}
 
 	/**
@@ -118,17 +141,17 @@ public abstract class DataItemGetter
 	@Override
 	public ValueType getType()
 	{
-		return this.getValueObject().getType();
+		return this.getValue().getType();
 	}
 
 	/**
-	 * Gets the value of a <tt>SimpleDataItem</tt>.
-	 * @return The value of the item.
+	 * Gets the underlying object of a {@see DataItem}.
+	 * @return The underlying object of the item.
 	 */
 	@Override
-	public Object getValue()
+	public Object getObject()
 	{
-		return this.getValueObject().getValue();
+		return this.getValue().getObject();
 	}
 
 	/**
@@ -140,7 +163,7 @@ public abstract class DataItemGetter
 	public int hashCode()
 	{
 		return (this.getKey() == null ? 3 : (this.getKey().hashCode() * 3)) +
-				(this.getValueObject().hashCode());
+				(this.getValue().hashCode());
 	}
 
 	/***
@@ -152,8 +175,6 @@ public abstract class DataItemGetter
 	@Override
 	public String toString()
 	{
-		return "{" + this.getKey() + " " + this.getValueObject().toString() + "}";
+		return "{" + this.getKey() + " " + this.getValue().toString() + "}";
 	}
-
-    
 }

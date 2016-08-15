@@ -13,6 +13,7 @@
  * 2015-03-05	WNW 2015-03		Add the concept of an array.
  *								Add ARRAY and LONG types.
  * 2016-01-28   WNW 16-01       Update javadoc.
+ * 2016-08-13   WNW 2016-08     Fix use of DatatException path and key.
  *================================================================================
  */
 package lexa.core.data.io;
@@ -221,7 +222,7 @@ public class DataWriter
 	{
 		this.bufferedWriter.write(indent.getPrefix());
 		this.bufferedWriter.write(item.getKey());
-		write(item.getValueObject(), indent);
+		write(item.getValue(), indent);
 		this.bufferedWriter.newLine();
 	}
 	
@@ -258,7 +259,7 @@ public class DataWriter
 				this.bufferedWriter.write(" [");
 				this.bufferedWriter.newLine();
 				ValueArray arr = value.getArray();
-				long i;
+				int i;
 				Indent ai = indent.next();
 				for (i = 0; i < arr.size(); i++)
 				{
@@ -302,7 +303,7 @@ public class DataWriter
 			default:
 			{
 				// escape special characters such as - \" { } ? $ @ % \\ \n
-				String str = value.getValue()
+				String str = value.getObject()
 						.toString();
 				String out = this.formatter.stringFormat.toString(value.getString());
 				if (out.equals(str))

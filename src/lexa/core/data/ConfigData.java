@@ -17,6 +17,9 @@
  * 2013-08-20   WNW             If all config isn't read return a list of unread 
  *                              items.
  * 2016-01-27	WNW	16-01       Remove the superfluose clone() method.
+ * 2016-08-13   WNW 16-08       Provide a method to read the current path. 
+ * 2016-08-13   WNW 2016-08     Fix use of DatatException path and key.
+ * 2016-08-14   WNW 2016-08     Add getOptionalItem(String,Object).
  *================================================================================
  */
 package lexa.core.data;
@@ -35,7 +38,7 @@ import lexa.core.data.exception.DataException;
  */
 public class ConfigData
 {
-
+    private final static String ROOT_NAME = "[root]";
 	/** Data containing all the configuration items. */
 	private final DataSet data;
 	/** The set of processed keys */
@@ -62,7 +65,7 @@ public class ConfigData
 	public ConfigData(DataSet data)
 			throws DataException
 	{
-		this(data, "root");
+		this(data, ConfigData.ROOT_NAME);
 	}
 
 	/**
@@ -122,7 +125,8 @@ public class ConfigData
 		// populate the config
 		this.parent = parent;
 		this.block = block;
-		if (this.parent == null)
+		if (this.parent == null ||
+                ConfigData.ROOT_NAME.equals(this.parent.path))
 		{
 			this.path = block;
 		}
@@ -177,7 +181,7 @@ public class ConfigData
 	{
 		if (this.data.getDataSet(key) == null)
 		{
-			throw new DataException("Cannot close block", key, this.path);
+			throw new DataException("Cannot close block", this.path, key);
 		}
 		this.read.add(key);
 	}
@@ -242,7 +246,7 @@ public class ConfigData
 		DataSet item = this.data.getDataSet(key);
 		if (item == null)
 		{
-			throw new DataException("Missing config block", key, path);
+			throw new DataException("Missing config block", this.path, key);
 		}
 		return new ConfigData(item, this, key);
 	}
@@ -264,12 +268,52 @@ public class ConfigData
 		DataItem item = this.data.get(key);
 		if (item == null)
 		{
-			throw new DataException("Missing item", key, path);
+			throw new DataException("Missing item", this.path, key);
 		}
 		this.read.add(key);
 		return item;
 	}
 
+	/**
+	 * Get an optional item from the configuration.
+	 * <p>
+	 * Gets the item for the named key, if the item does not exist then 
+     * a new {@see DataItem} with {@code null} is returned.
+	 *
+	 * @param key The key that identifies the item.
+	 *
+	 * @return The item represented by {@code key} if it exists,
+     * otherwise a new {@see DataItem} {@code null}.
+	 */
+	public DataItem getOptionalItem(String key)
+    {
+        return getOptionalItem(key, null);
+    }
+	/**
+	 * Get an optional item from the configuration.
+	 * <p>
+	 * Gets the item for the named key, if the item does not exist then 
+     * a new {@see DataItem} with the {@code defaultValue} is returned.
+	 *
+	 * @param key The key that identifies the item.
+	 * @param defaultValue The default value if the item does not exist.
+	 *
+	 * @return The item represented by {@code key} if it exists,
+     * otherwise a new {@see DataItem} with the {@code defaultValue}.
+	 */
+	public DataItem getOptionalItem(String key, Object defaultValue)
+    {
+        try
+		{
+			return this.getItem(key);
+		}
+		catch (DataException ex)
+		{
+			// no need as this is an optional item.
+			// as it's missing, we just return the default.
+			return new SimpleDataItem(key, defaultValue);
+		}
+    }
 	/**
 	 * Get an optional string value from the configuration.
 	 * <p>
@@ -281,10 +325,9 @@ public class ConfigData
 	 */
 	public String getOptionalSetting(String key)
 	{
-		String item;
 		try
 		{
-			item = this.getSetting(key);
+			return this.getSetting(key);
 		}
 		catch (DataException ex)
 		{
@@ -292,8 +335,6 @@ public class ConfigData
 			// as it's missing, we just return null.
 			return null;
 		}
-
-		return item;
 	}
 
 	/**
@@ -318,6 +359,18 @@ public class ConfigData
 	}
 
 	/**
+	 * Get the path of the configuration block
+	 * <p>
+	 * Gets the value for path based on the root from the parent.
+	 *
+	 * @return the path of the configuration block
+	 */
+	public String getPath()
+	{
+		return this.path;
+	}
+
+    /**
 	 * Get a string value from the configuration.
 	 * <p>
 	 * Gets the value for the named key.
@@ -334,7 +387,7 @@ public class ConfigData
 		String item = this.data.getString(key);
 		if (item == null)
 		{
-			throw new DataException("Missing setting", key, path);
+			throw new DataException("Missing setting", this.path, key);
 		}
 		this.read.add(key);
 

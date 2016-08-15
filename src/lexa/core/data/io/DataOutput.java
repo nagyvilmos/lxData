@@ -1,9 +1,18 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * ================================================================================
+ * Lexa - Property of William Norman-Walker
+ * --------------------------------------------------------------------------------
+ * DataOutput.java
+ *--------------------------------------------------------------------------------
+ * Author:  William Norman-Walker
+ * Created: February 2013
+ *--------------------------------------------------------------------------------
+ * Change Log
+ * Date:        By: Ref:        Description:
+ * ---------    --- ----------  --------------------------------------------------
+ * 2016-08-13   WNW 2016-08     Fix use of DatatException path and key.
+ *================================================================================
  */
-
 package lexa.core.data.io;
 
 import java.io.DataOutputStream;
@@ -15,6 +24,7 @@ import lexa.core.data.exception.DataException;
 /**
  * This writes things in a binary form rather than text
  * @author william
+ * @TODO Check this still works!
  */
 public class DataOutput
 {
@@ -85,7 +95,7 @@ public class DataOutput
 
 			default :
 			{
-				throw new DataException ("Cannot encode object " + item.toString());
+				throw new DataException ("Cannot encode object " + item.toString(), null, item.getKey());
 			}
 		}
 	}

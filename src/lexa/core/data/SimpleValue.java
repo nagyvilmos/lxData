@@ -13,11 +13,10 @@
  * 2016-01-27	WNW	16-01       Remove the superfluose clone() method.
  *                              Add in a cloning constructor.
  * 2016-01-28   WNW 16-01       Update javadoc.
+ * 2016-02-08   WNW 16-01       Constructors are public
  *================================================================================
  */
 package lexa.core.data;
-
-import java.util.Date;
 
 /**
  Implementation of {@link Value} for use in a {@link SimpleDataSet}
@@ -26,7 +25,7 @@ import java.util.Date;
  @author william
  @since 2015-03
  */
-public class SimpleValue extends ValueGetter implements Value
+public class SimpleValue extends ValueBase implements Value
 {
     /** the value being represented */
 	private final Object value;
@@ -35,7 +34,7 @@ public class SimpleValue extends ValueGetter implements Value
 	Create a value to represent an object
 	@param value the contained value
 	*/
-	SimpleValue(Object value)
+	public SimpleValue(Object value)
 	{
 		this.value = value;
 	}
@@ -44,7 +43,7 @@ public class SimpleValue extends ValueGetter implements Value
 	Create a value as a clone of another value
 	@param clone a Value to clone
 	*/
-	SimpleValue(Value clone)
+	public SimpleValue(Value clone)
 	{
             ValueType type = (clone != null) ?
                     clone.getType() :
@@ -56,62 +55,16 @@ public class SimpleValue extends ValueGetter implements Value
                         new SimpleValueArray(clone.getArray()) :
                     type.equals(ValueType.DATA_SET) ?
                         new SimpleDataSet(clone.getDataSet()) :
-                    clone.getValue();
-	}
-	/**
-	 * Compares this to another object.
-	 * If the other object is a {@code DataItem}, compare the name and value for equality.
-	 * @param obj Another object to compare
-	 * @return True if the object is a {@code DataItem} with the same name and value.
-	 */
-	@Override
-	public boolean equals(Object obj)
-	{
-		if (obj == null || this.getClass() != obj.getClass())
-		{
-			return false;
-		}
-		final SimpleValue other = (SimpleValue)obj;
-		return (this.value == null) ?
-				(other.value == null) :
-				this.value.equals(other.value);
+                    clone.getObject();
 	}
 
-	/**
+    /**
 	 * Gets the internal value.
 	 * @return The value of the item.
 	 */
 	@Override
-	public Object getValue()
+	public Object getObject()
 	{
 		return this.value;
-	}
-
-	/**
-	 * Get the hash code of the value.
-	 *
-	 * @return The hash code of the value.
-	 */
-	@Override
-	public int hashCode()
-	{
-		return (this.value == null ? 0 : this.value.hashCode());
-	}
-	
-	@Override
-	public String toString()
-	{
-		StringBuilder sb = new StringBuilder();
-		if (this.value == null)
-		{
-			sb.append("[null]");
-		}
-		else
-		{
-			sb.append(this.getType().getTypeChar())
-					.append(' ')
-					.append(this.value);
-		}
-		return sb.toString();
 	}
 }

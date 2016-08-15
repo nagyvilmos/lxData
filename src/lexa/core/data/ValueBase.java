@@ -12,6 +12,7 @@
  * ---------    --- ----------  --------------------------------------------------
  * 2016-01-28   WNW 16-01       Remove the generic getter methods from SimpleValue
  *                              into ValueGetter.
+ * 2016-02-09   WNW             Change base abstract classes from *Getter to *Base
  *================================================================================
  */
 package lexa.core.data;
@@ -22,22 +23,40 @@ import java.util.Date;
  * Provide the type safe getters for a value.
  * <p>
  * This provides the getters for the specific types supported.
- * It does not implement the basic {@link Value#getValue() getValue} method
+ * It does not implement the basic {@link Value#getObject() getValue} method
  * @author william
  * @since 2016-01
  */
-@SuppressWarnings("EqualsAndHashcode")
-public abstract class ValueGetter
+public abstract class ValueBase
         implements Value
 {
     
+	/**
+	 * Compares this to another object.
+	 * If the other object is a {@code DataItem}, compare the name and value for equality.
+	 * @param obj Another object to compare
+	 * @return True if the object is a {@code DataItem} with the same name and value.
+	 */
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (obj == null || !Value.class.isAssignableFrom(obj.getClass()))
+		{
+			return false;
+		}
+		final Value other = (Value)obj;
+		return (this.getObject() == null) ?
+				(other.getObject() == null) :
+				this.getObject().equals(other.getObject());
+	}
+
     /**
      * Gets the value as a {@link ValueArray}.
      * @return The value as am array.
      */
     @Override
     public ValueArray getArray() {
-        return (ValueArray) ValueType.ARRAY.getValueIfType(this.getValue());
+        return (ValueArray) ValueType.ARRAY.getValueIfType(this.getObject());
     }
 
     /**
@@ -46,7 +65,7 @@ public abstract class ValueGetter
      */
     @Override
     public Boolean getBoolean() {
-        return (Boolean) ValueType.BOOLEAN.getValueIfType(this.getValue());
+        return (Boolean) ValueType.BOOLEAN.getValueIfType(this.getObject());
     }
 
     /**
@@ -55,7 +74,7 @@ public abstract class ValueGetter
      */
     @Override
     public DataSet getDataSet() {
-        return (SimpleDataSet) ValueType.DATA_SET.getValueIfType(this.getValue());
+        return (DataSet) ValueType.DATA_SET.getValueIfType(this.getObject());
     }
 
     /**
@@ -64,7 +83,7 @@ public abstract class ValueGetter
      */
     @Override
     public Date getDate() {
-        return (Date) ValueType.DATE.getValueIfType(this.getValue());
+        return (Date) ValueType.DATE.getValueIfType(this.getObject());
     }
 
     /**
@@ -73,7 +92,7 @@ public abstract class ValueGetter
      */
     @Override
     public Double getDouble() {
-        return (Double) ValueType.DOUBLE.getValueIfType(this.getValue());
+        return (Double) ValueType.DOUBLE.getValueIfType(this.getObject());
     }
 
     /**
@@ -82,7 +101,7 @@ public abstract class ValueGetter
      */
     @Override
     public Integer getInteger() {
-        return (Integer) ValueType.INTEGER.getValueIfType(this.getValue());
+        return (Integer) ValueType.INTEGER.getValueIfType(this.getObject());
     }
 
     /**
@@ -91,7 +110,7 @@ public abstract class ValueGetter
      */
     @Override
     public Long getLong() {
-        return (Long) ValueType.LONG.getValueIfType(this.getValue());
+        return (Long) ValueType.LONG.getValueIfType(this.getObject());
     }
 
     /**
@@ -100,7 +119,7 @@ public abstract class ValueGetter
      */
     @Override
     public String getString() {
-        return (String) ValueType.STRING.getValueIfType(this.getValue());
+        return (String) ValueType.STRING.getValueIfType(this.getObject());
     }
     
 	
@@ -112,7 +131,7 @@ public abstract class ValueGetter
 	@Override
 	public ValueType getType()
 	{
-		return ValueType.getType(this.getValue());
+		return ValueType.getType(this.getObject());
 	}
 
 	/**
@@ -123,14 +142,14 @@ public abstract class ValueGetter
 	@Override
 	public int hashCode()
 	{
-		return (this.getValue() == null ? 0 : this.getValue().hashCode());
+		return (this.getObject() == null ? 0 : this.getObject().hashCode());
 	}
 	
 	@Override
 	public String toString()
 	{
 		StringBuilder sb = new StringBuilder();
-		if (this.getValue() == null)
+		if (this.getObject() == null)
 		{
 			sb.append("[null]");
 		}
@@ -138,7 +157,7 @@ public abstract class ValueGetter
 		{
 			sb.append(this.getType().getTypeChar())
 					.append(' ')
-					.append(this.getValue());
+					.append(this.getObject());
 		}
 		return sb.toString();
 	}

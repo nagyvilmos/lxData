@@ -92,12 +92,12 @@ public interface DataItem
 	 * Gets the underlying object.
 	 * @return The underlying object of the item.
 	 */
-	Object getValue();
+	Object getObject();
 
 	/**
 	 * Gets the {@link Value} of the item.
 	 * @return The {@link Value} of the item.
 	 */
-	Value getValueObject();
+	Value getValue();
 	
 }

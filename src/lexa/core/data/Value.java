@@ -86,9 +86,9 @@ public interface Value
 	ValueType getType();
 
 	/**
-	 * Gets the internal value.
-	 * @return The value of the item.
+	 * Gets the internal object.
+	 * @return The object of the value.
 	 */
-	Object getValue();
+	Object getObject();
 	
 }

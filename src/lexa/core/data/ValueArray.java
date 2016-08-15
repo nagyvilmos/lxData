@@ -12,6 +12,8 @@
  * ---------    --- ----------  --------------------------------------------------
  * 2016-01-27	WNW	16-01       Extracted the interface
  *                              Remove the superfluose clone() method.
+ * 2016-02-08   WNW 16-01       Add new addAll methods.
+ *                              Change size to an int
  *================================================================================
  */
 package lexa.core.data;
@@ -70,7 +72,7 @@ public interface ValueArray
 	@param object the value to add
 	@return this {@link ValueArray}
 	*/
-	public ValueArray add(long index, Object object);
+	public ValueArray add(int index, Object object);
 
 	/**
 	Add a value to the array at a given position.
@@ -82,14 +84,32 @@ public interface ValueArray
 	@param value the value to add
 	@return this {@link ValueArray}
 	*/
-	public ValueArray add(long index, Value value);
+	public ValueArray add(int index, Value value);
 
-        /**
+	/**
+	Add all the values to the array.
+	<p>
+	The values are added to the array at the end.
+	@param array a {@link ValueArray} to add
+	@return this {@link ValueArray}
+	*/
+	public ValueArray addAll(ValueArray array);
+
+	/**
+	Add all the values to the array.
+	<p>
+	The values are added to the array at the end.
+	@param array an array to add
+	@return this {@link ValueArray}
+	*/
+	public ValueArray addAll(Object[] array);
+
+    /**
 	Get the value at a position.
 	@param index position of required value
 	@return the value corresponding to the position
 	*/
-	public Value get(long index);
+	public Value get(int index);
 
 	@Override
 	public Iterator<Value> iterator();
@@ -99,11 +119,11 @@ public interface ValueArray
 	@param index position of value to be removed
 	@return the value that has been removed
 	*/
-	public Value remove(long index);
+	public Value remove(int index);
 
 	/**
 	Get the size of the array.
 	@return the number of elements in the array
 	*/
-	public long size();
+	public int size();
 }
