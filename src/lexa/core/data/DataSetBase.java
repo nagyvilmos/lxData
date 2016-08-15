@@ -16,6 +16,8 @@
  * 2016-01-28   WNW 16-01       Move toString() from SimpleDataSet to DataSetGetter
  *                              Fix a bug in toString() for 0 item set
  * 2016-02-09   WNW             Change base abstract classes from *Getter to *Base
+ * 2016-08-15   WNW 16-08       Change getObject to getObject
+ *                              and getValueObject to getObject
  *================================================================================
  */
 package lexa.core.data;
@@ -179,7 +181,7 @@ public abstract class DataSetBase
 	 * item's value, otherwise {@code null}.
 	 */
 	@Override
-	public synchronized Object getValue(String key)
+	public synchronized Object getObject(String key)
 	{
 		DataItem item = this.get(key);
 		if (item == null)
@@ -189,7 +191,24 @@ public abstract class DataSetBase
 		return item.getObject();
 	}
 
-	/**
+    /**
+	 * Get an {@link Value} from the list for the supplied key.
+	 * @param key The key for the {@link Value}.
+	 * @return If the item exists then the
+	 * item's value, otherwise {@code null}.
+	 */
+	@Override
+	public synchronized Value getValue(String key)
+	{
+		DataItem item = this.get(key);
+		if (item == null)
+		{
+			return null;
+		}
+		return item.getValue();
+	}
+
+    /**
 	 * Return a string representation of a {@link SimpleDataSet}.
 	 * Formatted as a list of all the {@link SimpleDataItem}'s:
 	 * <blockquote>

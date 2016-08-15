@@ -21,6 +21,8 @@
  * 2015-04-22	WNW             More refactoring
  * 2016-01-27	WNW	16-01       Remove the superfluose clone() method.
  * 2016-01-28   WNW 16-01       Add method getType(String)
+ * 2016-08-15   WNW 16-08       Change getObject to getObject
+ *                              and getValueObject to getObject
  *================================================================================
  */
 package lexa.core.data;
@@ -141,9 +143,17 @@ public interface DataSet
 	 * @return If the item exists then the
 	 * item's value, otherwise {@code null}.
 	 */
-	public Object getValue(String key);
+	public Object getObject(String key);
 
-	/**
+    /**
+	 * Get an {@link Object} from the list for the supplied key.
+	 * @param key The key for the {@link Object}.
+	 * @return If the item exists then the
+	 * item's value, otherwise {@code null}.
+	 */
+	public Value getValue(String key);
+
+    /**
 	 * Returns true if this contains no elements.
 	 * @return true if this contains no elements
 	 */
