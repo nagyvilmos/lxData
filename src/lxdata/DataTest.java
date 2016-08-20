@@ -11,6 +11,7 @@
  * Date:        By: Ref:        Description:
  * ---------    --- ----------  --------------------------------------------------
  * 2016-01-28   WNW 16-01       Update javadoc.
+ * 2016-08-20   WNW 16-08       add printFormatted method to DataSet
  *================================================================================
  */
 package lxdata;
@@ -63,14 +64,16 @@ public class DataTest
 				.put("F", "So-long, farewell Adure!")
 			);
 
-		System.out.println(data);
+		//System.out.println(data);
+        data.printFormatted(System.out);
 		File test = new File("test.lexa");
 		DataWriter dw = new DataWriter(test);
 		dw.write(data);
 		dw.close();
 		DataReader dr = new DataReader(test);
 		DataSet read = dr.read();
-		System.out.println(read);
+		//System.out.println(data);
+        data.printFormatted(System.out);
 		if (!data.equals(read))
 		{
 			System.err.println("Data sets do not match");

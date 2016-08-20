@@ -23,10 +23,13 @@
  * 2016-01-28   WNW 16-01       Add method getType(String)
  * 2016-08-15   WNW 16-08       Change getObject to getObject
  *                              and getValueObject to getObject
+ * 2016-08-20   WNW 16-08       add printFormatted method to DataSet
  *================================================================================
  */
 package lexa.core.data;
 
+import java.io.IOException;
+import java.io.PrintStream;
 import java.util.Date;
 
 /**
@@ -166,6 +169,14 @@ public interface DataSet
 	 */
 	public String[] keys();
 
+    /**
+     * Output the dataset to a stream in a readable form.
+     * @param out 
+     * @throws java.io.IOException 
+     */
+    public void printFormatted(PrintStream out)
+            throws IOException;
+    
 	/**
 	 * Put the supplied item into the {@link DataSet}.
 	 * <p>

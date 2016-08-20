@@ -18,12 +18,16 @@
  * 2016-02-09   WNW             Change base abstract classes from *Getter to *Base
  * 2016-08-15   WNW 16-08       Change getObject to getObject
  *                              and getValueObject to getObject
+ * 2016-08-20   WNW 16-08       add printFormatted method to DataSet
  *================================================================================
  */
 package lexa.core.data;
 
+import java.io.IOException;
+import java.io.PrintStream;
 import java.util.Date;
 import java.util.Iterator;
+import lexa.core.data.io.DataWriter;
 
 /**
  * Provide the base methods for a data set.
@@ -287,4 +291,11 @@ public abstract class DataSetBase
 		return new DataSetIterator(this);
 	}
 
+    @Override
+    public void printFormatted(PrintStream out) throws IOException
+    {
+        new DataWriter(out).write(this);
+    }
+
+    
 }

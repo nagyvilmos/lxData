@@ -14,6 +14,7 @@
  *								Add ARRAY and LONG types.
  * 2016-01-28   WNW 16-01       Update javadoc.
  * 2016-08-13   WNW 2016-08     Fix use of DatatException path and key.
+ * 2016-08-20   WNW 16-08       add printFormatted method to DataSet via DataWriter
  *================================================================================
  */
 package lexa.core.data.io;
@@ -24,7 +25,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.PrintStream;
 import lexa.core.data.DataItem;
 import lexa.core.data.DataSet;
 import lexa.core.data.Value;
@@ -99,10 +102,7 @@ public class DataWriter
 	public DataWriter(File file)
 			throws FileNotFoundException
 	{
-		this(new BufferedWriter(
-				new OutputStreamWriter(
-				new DataOutputStream(
-				new FileOutputStream(file)))));
+		this(new FileOutputStream(file));
 	}
 
 	/**
@@ -116,6 +116,23 @@ public class DataWriter
 		this.bufferedWriter = writer;
 		this.formatter = new CombinedFormat();
 	}
+
+    /**
+     * Create a writer around an output stream
+     * @param stream output stream to receive the data
+     */
+    public DataWriter(OutputStream stream)
+    {
+		this(
+                new BufferedWriter(
+                    new OutputStreamWriter(
+                        new DataOutputStream(
+                            stream
+                        )
+                    )
+                )
+        );
+    }
 
 	/**
 	 * Close the output.
@@ -222,7 +239,8 @@ public class DataWriter
 	{
 		this.bufferedWriter.write(indent.getPrefix());
 		this.bufferedWriter.write(item.getKey());
-		write(item.getValue(), indent);
+		this.bufferedWriter.write(' ');
+		this.write(item.getValue(), indent);
 		this.bufferedWriter.newLine();
 	}
 	
@@ -248,7 +266,7 @@ public class DataWriter
 			}
 			case DATA_SET:
 			{
-				this.bufferedWriter.write(" {");
+				this.bufferedWriter.write('{');
 				this.bufferedWriter.newLine();
 				this.write(value.getDataSet(), indent.next());
 				this.bufferedWriter.write(indent.getPrefix());
@@ -256,7 +274,7 @@ public class DataWriter
 				break;
 			}
 			case ARRAY:
-				this.bufferedWriter.write(" [");
+				this.bufferedWriter.write('[');
 				this.bufferedWriter.newLine();
 				ValueArray arr = value.getArray();
 				int i;
@@ -268,35 +286,35 @@ public class DataWriter
 					this.bufferedWriter.newLine();
 				}
 				this.bufferedWriter.write(indent.getPrefix());
-				this.bufferedWriter.write("]");
+				this.bufferedWriter.write(']');
 				break;
 			case BOOLEAN:
 			{
-				this.bufferedWriter.write(" ? ");
+				this.bufferedWriter.write("? ");
 				this.bufferedWriter.write(this.formatter.booleanFormat.toString(value.getBoolean()));
 				break;
 			}
 			case DOUBLE:
 			{
-				this.bufferedWriter.write(" $ ");
+				this.bufferedWriter.write("$ ");
 				this.bufferedWriter.write(this.formatter.doubleFormat.toString(value.getDouble()));
 				break;
 			}
 			case DATE:
 			{
-				this.bufferedWriter.write(" @ ");
+				this.bufferedWriter.write("@ ");
 				this.bufferedWriter.write(this.formatter.dateFormat.toString(value.getDate()));
 				break;
 			}
 			case INTEGER:
 			{
-				this.bufferedWriter.write(" % ");
+				this.bufferedWriter.write("% ");
 				this.bufferedWriter.write(this.formatter.integerFormat.toString(value.getInteger()));
 				break;
 			}
 			case LONG:
 			{
-				this.bufferedWriter.write(" = ");
+				this.bufferedWriter.write("= ");
 				this.bufferedWriter.write(this.formatter.longFormat.toString(value.getLong()));
 				break;
 			}
@@ -308,12 +326,12 @@ public class DataWriter
 				String out = this.formatter.stringFormat.toString(value.getString());
 				if (out.equals(str))
 				{
-					this.bufferedWriter.write(" - ");
+					this.bufferedWriter.write("- ");
 					this.bufferedWriter.write(str);
 				}
 				else
 				{
-					this.bufferedWriter.write(" \\");
+					this.bufferedWriter.write("\\");
 					this.bufferedWriter.newLine();
 					this.bufferedWriter.write(out);
 				}
