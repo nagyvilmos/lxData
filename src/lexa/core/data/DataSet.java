@@ -28,7 +28,6 @@
  */
 package lexa.core.data;
 
-import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Date;
 
@@ -174,8 +173,7 @@ public interface DataSet
      * @param out 
      * @throws java.io.IOException 
      */
-    public void printFormatted(PrintStream out)
-            throws IOException;
+    public void printFormatted(PrintStream out);
     
 	/**
 	 * Put the supplied item into the {@link DataSet}.

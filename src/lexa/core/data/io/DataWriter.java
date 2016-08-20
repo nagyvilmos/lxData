@@ -27,7 +27,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.PrintStream;
 import lexa.core.data.DataItem;
 import lexa.core.data.DataSet;
 import lexa.core.data.Value;

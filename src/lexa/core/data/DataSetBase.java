@@ -27,6 +27,8 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import lexa.core.data.io.DataWriter;
 
 /**
@@ -292,9 +294,15 @@ public abstract class DataSetBase
 	}
 
     @Override
-    public void printFormatted(PrintStream out) throws IOException
+    public void printFormatted(PrintStream out)
     {
-        new DataWriter(out).write(this);
+        try
+        {
+            new DataWriter(out).write(this);
+        } catch (IOException ex)
+        {
+            ex.printStackTrace(out);
+        }
     }
 
     
