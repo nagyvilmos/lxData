@@ -20,6 +20,8 @@
  * 2016-08-13   WNW 16-08       Provide a method to read the current path. 
  * 2016-08-13   WNW 2016-08     Fix use of DatatException path and key.
  * 2016-08-14   WNW 2016-08     Add getOptionalItem(String,Object).
+ * 2016-09-01   WNW 2016-09     Class deprecated in favour of 
+ *                              lexa.core.data.config package.
  *================================================================================
  */
 package lexa.core.data;
@@ -30,12 +32,16 @@ import lexa.core.data.exception.DataException;
 
 /**
  * A container for a {@link SimpleDataSet} as configuration.
- * <p> This is used for loading and parsing configuration items. Once read, the object should be closed to ensure that
- * all items have been read.
- *
+ * <br>
+ * This is used for loading and parsing configuration items. Once read, the 
+ * object should be closed to ensure that all items have been read.
+ * <br>
+ * This class is <b>deprecated</b> and developers should use
+ * {@link lexa.core.data.config.ConfigDataSet} instead.
  * @author William
  * @since 2012-07
  */
+@Deprecated
 public class ConfigData
 {
     private final static String ROOT_NAME = "[root]";
