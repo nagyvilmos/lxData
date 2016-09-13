@@ -2,7 +2,7 @@
  * ================================================================================
  * Lexa - Property of William Norman-Walker
  * --------------------------------------------------------------------------------
- * DataItemGetter.java
+ * BaseDataItem.java
  *--------------------------------------------------------------------------------
  * Author:  William Norman-Walker
  * Created: January 2016
@@ -13,6 +13,8 @@
  * 2016-01-28   WNW 16-01       Remove the generic getter methods from SimpleDataItem
  *                              into DataItemGetter.
  * 2016-02-09   WNW             Change base abstract classes from *Getter to *Base
+ * 2016-09-09   WNW 16-09       Change base abstract classes from *Base to Base*
+ * 2016-09-12   WNW 16-09       Move key into BaseDataItem
  *================================================================================
  */
 package lexa.core.data;
@@ -28,11 +30,24 @@ import java.util.Date;
  * @since 2016-01
  */
 @SuppressWarnings("EqualsAndHashcode")
-public abstract class DataItemBase
+public abstract class BaseDataItem
         implements DataItem 
 {
 
-	/**
+	/** The key for the item */
+	private final String key;
+
+    /**
+     * Base for new data item
+     * <br>
+     * This handles only the key, the concrete classes need to handle the value
+     * @param key the key for the item
+     */
+    protected BaseDataItem(String key)
+    {
+        this.key = key;
+    }
+    /**
 	 * Compares this to another object.
 	 * If the other object is a {@code DataItem}, compare the name and value for equality.
 	 * @param obj Another object to compare
@@ -104,7 +119,7 @@ public abstract class DataItemBase
 		return this.getValue().getDouble();
 	}
 
-	/**
+    /**
 	 * Gets the value as an integer.
 	 * @return The value as an integer.
 	 */
@@ -114,7 +129,13 @@ public abstract class DataItemBase
 		return this.getValue().getInteger();
 	}
 
-	/**
+	@Override
+	public String getKey()
+	{
+		return this.key;
+	}
+    
+    /**
 	 * Gets the value as a long.
 	 * @return The value as a long.
 	 */

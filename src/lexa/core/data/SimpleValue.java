@@ -14,6 +14,7 @@
  *                              Add in a cloning constructor.
  * 2016-01-28   WNW 16-01       Update javadoc.
  * 2016-02-08   WNW 16-01       Constructors are public
+ * 2016-09-09   WNW 16-09       Change base abstract classes from *Base to Base*
  *================================================================================
  */
 package lexa.core.data;
@@ -25,7 +26,8 @@ package lexa.core.data;
  @author william
  @since 2015-03
  */
-public class SimpleValue extends ValueBase implements Value
+public class SimpleValue
+        extends BaseValue
 {
     /** the value being represented */
 	private final Object value;

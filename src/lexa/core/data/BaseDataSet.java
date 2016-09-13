@@ -2,7 +2,7 @@
  * ================================================================================
  * Lexa - Property of William Norman-Walker
  * --------------------------------------------------------------------------------
- * DataSetGetter.java
+ * BaseDataSet.java
  *--------------------------------------------------------------------------------
  * Author:  William Norman-Walker
  * Created: April 2015
@@ -19,6 +19,7 @@
  * 2016-08-15   WNW 16-08       Change getObject to getObject
  *                              and getValueObject to getObject
  * 2016-08-20   WNW 16-08       add printFormatted method to DataSet
+ * 2016-09-09   WNW 16-09       Change base abstract classes from *Base to Base*
  *================================================================================
  */
 package lexa.core.data;
@@ -27,8 +28,6 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import lexa.core.data.io.DataWriter;
 
 /**
@@ -38,10 +37,10 @@ import lexa.core.data.io.DataWriter;
  * It does not implement the basic {@link DataSet#get(java.lang.String) get} method
  * @author william
  */
-public abstract class DataSetBase
+public abstract class BaseDataSet
 		implements DataSet
 {
-	/**
+    /**
 	 * Get a {@link ValueArray} from the list for the supplied key.
 	 * @param key The key for the {@link SimpleDataItem}.
 	 * @return If the item exists and is a {@link ValueArray} then the
@@ -304,6 +303,4 @@ public abstract class DataSetBase
             ex.printStackTrace(out);
         }
     }
-
-    
 }

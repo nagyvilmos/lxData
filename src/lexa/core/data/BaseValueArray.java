@@ -2,7 +2,7 @@
  * ================================================================================
  * Lexa - Property of William Norman-Walker
  * --------------------------------------------------------------------------------
- * ValueArrayBase.java
+ * BaseValueArray.java
  *--------------------------------------------------------------------------------
  * Author:  William Norman-Walker
  * Created: February 2016
@@ -10,6 +10,7 @@
  * Change Log
  * Date:        By: Ref:        Description:
  * ---------    --- ----------  --------------------------------------------------
+ * 2016-09-09   WNW 16-09       Change base abstract classes from *Base to Base*
  *================================================================================
  */
 package lexa.core.data;
@@ -21,7 +22,7 @@ import java.util.Iterator;
  * @author william
  * @since 2016-02
  */
-public abstract class ValueArrayBase
+public abstract class BaseValueArray
         implements ValueArray {
     
     /**

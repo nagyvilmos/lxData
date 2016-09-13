@@ -14,11 +14,10 @@
  *                              Remove the superfluose clone() method.
  * 2016-02-08   WNW 16-01       Add new addAll methods.
  *                              Change size to an int
+ * 2016-09-09   WNW 16-09       Change base abstract classes from *Base to Base*
  *================================================================================
  */
 package lexa.core.data;
-
-import java.util.Iterator;
 
 /**
  * An array of values
@@ -29,7 +28,7 @@ import java.util.Iterator;
  * @author william
  * @since 2016-01
  */
-public class SimpleValueArray extends ValueArrayBase
+public class SimpleValueArray extends BaseValueArray
 {
 	/** the first item in the list */
 	private Index start;

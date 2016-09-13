@@ -15,7 +15,8 @@
  * 2016-01-27	WNW	16-01       Remove the superfluose clone() method.
  * 2016-01-28   WNW 16-01       Update javadoc.
  * 2016-01-28   WNW 16-01       Move toString() from SimpleDataSet to DataSetGetter
- *================================================================================
+ * 2016-09-09   WNW 16-09       Change base abstract classes from *Base to Base*
+ * ================================================================================
  */
 package lexa.core.data;
 
@@ -30,7 +31,7 @@ import java.util.ArrayList;
  * @see DataItem
  */
 public class SimpleDataSet
-		extends DataSetBase
+		extends BaseDataSet
 {
 
 	private final ArrayList<DataItem> items;

@@ -24,6 +24,8 @@
  * 2016-01-28   WNW 16-01       Remove the generic getter methods from SimpleDataItem
  *                              into DataItemGetter.
  * 2016-02-09   WNW             Change base abstract classes from *Getter to *Base
+ * 2016-09-09   WNW 16-09       Change base abstract classes from *Base to Base*
+ * 2016-09-12   WNW 16-09       Move key into BaseDataItem
  *================================================================================
  */
 package lexa.core.data;
@@ -37,11 +39,8 @@ package lexa.core.data;
  * @see SimpleDataSet
  */
 public class SimpleDataItem
-		extends DataItemBase
+		extends BaseDataItem
 {
-
-	/** The key for the item */
-	private final String key;
 	/** The value for the item */
 	private final Value value;
 
@@ -61,7 +60,7 @@ public class SimpleDataItem
 	 */
 	public SimpleDataItem(String key, Value value)
 	{
-		this.key = key;
+		super(key);
 		this.value = new SimpleValue(value);
 	}
 
@@ -76,16 +75,6 @@ public class SimpleDataItem
 	public SimpleDataItem(DataItem clone)
 	{
             this(clone.getKey(), clone.getValue());
-	}
-
-	/**
-	 * Gets the key of a <tt>SimpleDataItem</tt>.
-	 * @return The item's key
-	 */
-	@Override
-	public String getKey()
-	{
-		return this.key;
 	}
 
 	/**

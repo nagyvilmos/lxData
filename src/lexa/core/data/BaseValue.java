@@ -2,7 +2,7 @@
  * ================================================================================
  * Lexa - Property of William Norman-Walker
  * --------------------------------------------------------------------------------
- * ValueGetter.java
+ * BaseValue.java
  *--------------------------------------------------------------------------------
  * Author:  William Norman-Walker
  * Created: January 2016
@@ -13,6 +13,7 @@
  * 2016-01-28   WNW 16-01       Remove the generic getter methods from SimpleValue
  *                              into ValueGetter.
  * 2016-02-09   WNW             Change base abstract classes from *Getter to *Base
+ * 2016-09-09   WNW 16-09       Change base abstract classes from *Base to Base*
  *================================================================================
  */
 package lexa.core.data;
@@ -27,7 +28,7 @@ import java.util.Date;
  * @author william
  * @since 2016-01
  */
-public abstract class ValueBase
+public abstract class BaseValue
         implements Value
 {
     
