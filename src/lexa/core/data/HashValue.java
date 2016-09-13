@@ -30,7 +30,7 @@ public class HashValue
 	
 	/**
 	Create a value to represent an object
-	@param value the contained value
+	@param object the contained value
 	*/
 	public HashValue(Object object)
 	{

@@ -33,8 +33,8 @@ package lexa.core.data;
 
 /**
  * A single item in a data set.
- * A single <tt>SimpleDataItem</tt> in a <tt>SimpleDataSet</tt> represented by a
- * <tt>String</tt> key and an <tt>Object</tt> value.
+ * A single {@link SimpleDataItem} in a {@link SimpleDataSet} represented by a
+ * {@link String} key and an {@link Object} value.
  * @author William
  * @since 2009-07
  * @see SimpleDataSet
@@ -46,7 +46,7 @@ public class SimpleDataItem
 	private final Value value;
 
 	/**
-	 * Create a new <tt>DataItem</tt>.
+	 * Create a new {@link DataItem}.
 	 * @param key The key for the item
 	 * @param value The value
 	 */
@@ -55,7 +55,7 @@ public class SimpleDataItem
 		this(key, new SimpleValue(value));
 	}
 	/**
-	 * Create a new <tt>DataItem</tt>.
+	 * Create a new {@link DataItem}.
 	 * @param key The key for the item
 	 * @param value The value
 	 */
@@ -66,11 +66,11 @@ public class SimpleDataItem
 	}
 
 	/**
-	 * Create a new <tt>DataItem</tt>.
+	 * Create a new {@link DataItem}.
 	 * This clones an existing data item.
-	 * If the intrinsic object is a <tt>SimpleDataSet</tt> then that is cloned as well.
+	 * If the intrinsic object is a {@link SimpleDataSet} then that is cloned as well.
 	 *
-	 * @param clone A <tt>DataItem</tt> to clone.
+	 * @param clone A {@link DataItem} to clone.
 	 * @see SimpleDataSet
 	 */
 	public SimpleDataItem(DataItem clone)
@@ -89,7 +89,7 @@ public class SimpleDataItem
 	}
 
 	/**
-	 * Gets the value of a <tt>SimpleDataItem</tt>.
+	 * Gets the value of a {@link SimpleDataItem}.
 	 * @return The value of the item.
 	 */
 	@Override

@@ -284,12 +284,12 @@ public class ConfigData
 	 * Get an optional item from the configuration.
 	 * <p>
 	 * Gets the item for the named key, if the item does not exist then 
-     * a new {@see DataItem} with {@code null} is returned.
+     * a new {@link DataItem} with {@code null} is returned.
 	 *
 	 * @param key The key that identifies the item.
 	 *
 	 * @return The item represented by {@code key} if it exists,
-     * otherwise a new {@see DataItem} {@code null}.
+     * otherwise a new {@link DataItem} {@code null}.
 	 */
 	public DataItem getOptionalItem(String key)
     {
@@ -299,13 +299,13 @@ public class ConfigData
 	 * Get an optional item from the configuration.
 	 * <p>
 	 * Gets the item for the named key, if the item does not exist then 
-     * a new {@see DataItem} with the {@code defaultValue} is returned.
+     * a new {@link DataItem} with the {@code defaultValue} is returned.
 	 *
 	 * @param key The key that identifies the item.
 	 * @param defaultValue The default value if the item does not exist.
 	 *
 	 * @return The item represented by {@code key} if it exists,
-     * otherwise a new {@see DataItem} with the {@code defaultValue}.
+     * otherwise a new {@link DataItem} with the {@code defaultValue}.
 	 */
 	public DataItem getOptionalItem(String key, Object defaultValue)
     {

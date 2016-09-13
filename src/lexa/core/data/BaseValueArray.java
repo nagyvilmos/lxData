@@ -18,7 +18,7 @@ package lexa.core.data;
 import java.util.Iterator;
 
 /**
- * Base implementation of a {@see ValueArray}
+ * Base implementation of a {@link ValueArray}
  * @author william
  * @since 2016-02
  */

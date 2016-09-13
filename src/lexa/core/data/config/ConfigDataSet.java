@@ -33,8 +33,7 @@ import lexa.core.data.exception.DataException;
  * respects like a data set with the added trace of path within the whole set
  * and checking that all the data has been read when closing.
  * <br>
- * This class superceded the {@link Depricated} 
- * class {@link lexa.core.data.ConfigData).
+ * This class superceded the {@link Deprecated} class {@link lexa.core.data.ConfigData}.
  *
  * @author  William
  * @since   2016-09

@@ -166,7 +166,7 @@ public abstract class BaseDataItem
 	}
 
 	/**
-	 * Gets the underlying object of a {@see DataItem}.
+	 * Gets the underlying object of a {@link DataItem}.
 	 * @return The underlying object of the item.
 	 */
 	@Override
@@ -188,8 +188,8 @@ public abstract class BaseDataItem
 	}
 
 	/***
-	 * Get the <tt>SimpleDataItem</tt> as a string description.
-	 * <tt>toString</tt> is in the format of:
+	 * Get the {@link SimpleDataItem} as a string description.
+	 * {@link toString} is in the format of:
 	 * <pre>key {value}</pre>
 	 * @return The item's string representation.
 	 */

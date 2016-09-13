@@ -16,8 +16,8 @@ package lexa.core.data;
 
 /**
  * A single item in a data set.
- * A single <tt>HashDataItem</tt> in a <tt>HashDataSet</tt> represented by a
- * <tt>String</tt> key and an <tt>Object</tt> value.
+ * A single {@link HashDataItem} in a {@link HashDataSet} represented by a
+ * {@link String} key and an {@link Object} value.
  * @author William
  * @since 2016-09
  */
@@ -48,9 +48,9 @@ public class HashDataItem
 	}
 
 	/**
-	 * Create a new ite,
+	 * Create a new item.
 	 * This clones an existing data item.
-	 * If the intrinsic object is a {@link DataSe} or {@link ValueArray} then
+	 * If the intrinsic object is a {@link DataSet} or {@link ValueArray} then
      * that is cloned as well.
 	 *
 	 * @param clone An item to clone.

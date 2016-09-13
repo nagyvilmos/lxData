@@ -18,7 +18,7 @@ import java.util.*;
 
 /**
  * A data set using hashed keys to access the content
- * A {@link DataSet} that utilises a {@link HashMAp} for storing the items.
+ * A {@link DataSet} that utilises a {@link HashMap} for storing the items.
  * This class should be used in favour of the {@link SimpleDataSet} when there
  * are a large number of entries or the entries will be accessed randomly and by 
  * key.

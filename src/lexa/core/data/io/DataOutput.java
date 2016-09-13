@@ -24,7 +24,7 @@ import lexa.core.data.exception.DataException;
 /**
  * This writes things in a binary form rather than text
  * @author william
- * @TODO Check this still works!
+ * @todo Check this still works!
  */
 public class DataOutput
 {

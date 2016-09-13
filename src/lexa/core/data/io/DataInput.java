@@ -29,7 +29,7 @@ import lexa.core.data.exception.DataException;
  *
  * @author William
  * @since 2013-02
- * @TODO Check this still works!
+ * @todo Check this still works!
  */
 public class DataInput
 {
