@@ -42,33 +42,33 @@ public interface DataSet
 	/**
 	 * Checks if the {@link DataSet} contains a named key.
 	 * <p>
-	 * Checks each {@link SimpleDataItem} and sees if its key is the same as the named key.
-	 * @param key   A key for a {@link SimpleDataItem}.
-	 * @return      {@code true} if a {@link SimpleDataItem} exists with the named key,
+	 * Checks each {@link DataItem} and sees if its key is the same as the named key.
+	 * @param key   A key for a {@link DataItem}.
+	 * @return      {@code true} if a {@link DataItem} exists with the named key,
 	 *              otherwise {@code false}.
 	 */
 	public boolean contains(String key);
 
 	/**
-	 * Get a {@link SimpleDataItem} from the list for the supplied key.
-	 * @param key The key for the {@link SimpleDataItem}.
-	 * @return A {@link SimpleDataItem} if it exists, otherwise {@code null}.
+	 * Get a {@link DataItem} from the list for the supplied key.
+	 * @param key The key for the {@link DataItem}.
+	 * @return A {@link DataItem} if it exists, otherwise {@code null}.
 	 */
 	public DataItem get(String key);
 
 	/**
-	 * Get a {@link SimpleDataItem} from the list for the supplied index.
+	 * Get a {@link DataItem} from the list for the supplied index.
 	 *
 	 * @param   index
-	 *          the index for the {@link SimpleDataItem}.
-	 * @return  A {@link SimpleDataItem} if it exists,
+	 *          the index for the {@link DataItem}.
+	 * @return  A {@link DataItem} if it exists,
 	 *          otherwise {@code null}.
 	 */
 	public DataItem get(int index);
 
 	/**
 	 * Get a {@link ValueArray} from the list for the supplied key.
-	 * @param key The key for the {@link SimpleDataItem}.
+	 * @param key The key for the {@link DataItem}.
 	 * @return If the item exists and is a {@link ValueArray} then the
 	 * item's value, otherwise {@code null}.
 	 */
@@ -76,7 +76,7 @@ public interface DataSet
 
 	/**
 	 * Get a {@link Boolean} from the list for the supplied key.
-	 * @param key The key for the {@link SimpleDataItem}.
+	 * @param key The key for the {@link DataItem}.
 	 * @return If the item exists and is a {@link String} then the
 	 * item's value, otherwise {@code null}.
 	 */
@@ -84,7 +84,7 @@ public interface DataSet
 
 	/**
 	 * Get a {@link DataSet} from the list for the supplied key.
-	 * @param key The key for the {@link SimpleDataItem}.
+	 * @param key The key for the {@link DataItem}.
 	 * @return If the item exists and is a {@link DataSet} then the
 	 * item's value, otherwise {@code null}.
 	 */
@@ -110,7 +110,7 @@ public interface DataSet
 
 	/**
 	 * Get an {@link Integer} from the list for the supplied key.
-	 * @param key The key for the {@link SimpleDataItem}.
+	 * @param key The key for the {@link DataItem}.
 	 * @return If the item exists and is an {@link Integer} then the
 	 * item's value, otherwise {@code null}.
 	 */
@@ -118,7 +118,7 @@ public interface DataSet
 
 	/**
 	 * Get a {@link Long} from the list for the supplied key.
-	 * @param key The key for the {@link SimpleDataItem}.
+	 * @param key The key for the {@link DataItem}.
 	 * @return If the item exists and is a {@link Long} then the
 	 * item's value, otherwise {@code null}.
 	 */
@@ -126,7 +126,7 @@ public interface DataSet
 
 	/**
 	 * Get a {@link String} from the list for the supplied key.
-	 * @param key The key for the {@link SimpleDataItem}.
+	 * @param key The key for the {@link DataItem}.
 	 * @return If the item exists and is a {@link String} then the
 	 * item's value, otherwise {@code null}.
 	 */
@@ -180,7 +180,7 @@ public interface DataSet
 	 * <p>
 	 * If the item already exists it is overwritten.
 	 *
-	 * @param item A {@link SimpleDataItem} to add.
+	 * @param item A {@link DataItem} to add.
 	 * @return  the {@link DataSet} the item was added to.
 	 */
 	public DataSet put(DataItem item);
