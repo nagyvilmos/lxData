@@ -26,6 +26,7 @@
  * 2016-02-09   WNW             Change base abstract classes from *Getter to *Base
  * 2016-09-09   WNW 16-09       Change base abstract classes from *Base to Base*
  * 2016-09-12   WNW 16-09       Move key into BaseDataItem
+ * 2016-09-13   WNW 16-09       Remove getString as it duplicates BaseDataItem
  *================================================================================
  */
 package lexa.core.data;
@@ -75,16 +76,6 @@ public class SimpleDataItem
 	public SimpleDataItem(DataItem clone)
 	{
             this(clone.getKey(), clone.getValue());
-	}
-
-	/**
-	 * Gets the value as a string.
-	 * @return The value as a string.
-	 */
-	@Override
-	public String getString()
-	{
-		return this.value.getString();
 	}
 
 	/**
