@@ -11,6 +11,7 @@
  * Date:        By: Ref:        Description:
  * ---------    --- ----------  --------------------------------------------------
  * 2016-09-01   WNW 16-01       Create seperate package and classes for config
+ * 2016-09-14   WNW 16-09       Add path to all config objects
  *================================================================================
  */
 package lexa.core.data.config;
@@ -45,4 +46,10 @@ public interface ConfigObject
      * returns {@code false}
      */
     void reset();
+    
+    /**
+     * get the path in the configuration to the object
+     * @return the object's path
+     */
+    String getPath(); 
 }

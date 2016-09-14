@@ -11,6 +11,7 @@
  * Date:        By: Ref:        Description:
  * ---------    --- ----------  --------------------------------------------------
  * 2016-09-01   WNW 16-01       Create seperate package and classes for config
+ * 2016-09-14   WNW 16-09       Add path to all config objects
  *================================================================================
  */
 package lexa.core.data.config;
@@ -139,6 +140,7 @@ public class ConfigDataSet
         this.read = false;
     }
     
+    @Override
     public String getPath()
     {
         if (this.path == null)

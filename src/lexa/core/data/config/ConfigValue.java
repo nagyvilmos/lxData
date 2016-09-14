@@ -1,7 +1,18 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * ================================================================================
+ * Lexa - Property of William Norman-Walker
+ * --------------------------------------------------------------------------------
+ * ConfigValue.java
+ *--------------------------------------------------------------------------------
+ * Author:  William Norman-Walker
+ * Created: September 2016
+ *--------------------------------------------------------------------------------
+ * Change Log
+ * Date:        By: Ref:        Description:
+ * ---------    --- ----------  --------------------------------------------------
+ * 2016-09-01   WNW 16-01       Create seperate package and classes for config
+ * 2016-09-14   WNW 16-09       Add path to all config objects
+ *================================================================================
  */
 package lexa.core.data.config;
 
@@ -18,7 +29,8 @@ public class ConfigValue
         extends BaseValue
         implements ConfigObject
 {
-    private Object object;
+    private final String path;
+    private final Object object;
     private boolean read;
 
     ConfigValue(String path, String key, Value value)
@@ -31,6 +43,7 @@ public class ConfigValue
     }
     private ConfigValue(String path, Value value)
     {
+        this.path = path;
             ValueType type = (value != null) ?
                     value.getType() :
                     ValueType.NULL;
@@ -102,5 +115,11 @@ public class ConfigValue
         return this.read;
     }
     
+    
+    @Override
+    public String getPath()
+    {
+        return this.path;
+    }
     
 }
