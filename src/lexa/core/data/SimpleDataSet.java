@@ -16,6 +16,7 @@
  * 2016-01-28   WNW 16-01       Update javadoc.
  * 2016-01-28   WNW 16-01       Move toString() from SimpleDataSet to DataSetGetter
  * 2016-09-09   WNW 16-09       Change base abstract classes from *Base to Base*
+ * 2016-10-24   WNW 16-11       Add constructor for a map;
  * ================================================================================
  */
 package lexa.core.data;
@@ -46,6 +47,30 @@ public class SimpleDataSet
 		this.last = 0;
 	}
 
+	/**
+	 * Create a new {@link DataSet} with entries from a map
+     * @param map a map of objects to convert to a data set.
+	 */
+	public SimpleDataSet(java.util.Map<String, Object> map)
+	{
+		this();
+        if (map != null)
+        {
+            map.keySet().stream().forEach((key) ->
+            {
+                Object object = map.get(key);
+                if (object != null && map.getClass().isAssignableFrom(
+                        object.getClass()))
+                {
+                    object = new SimpleDataSet(map.getClass().cast(object));
+                }
+                this._put(new SimpleDataItem(
+                        key, object
+                ));
+            });
+        }
+	}
+    
 	/**
 	 * Create a new {@link DataSet} containing a cloned list of entries.
 	 * @param clone The {@link DataSet} to clone.
