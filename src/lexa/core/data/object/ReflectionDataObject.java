@@ -49,7 +49,7 @@ public class ReflectionDataObject
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    private class DataObjectLoader
+    private static class DataObjectLoader
     {
 
         private DataObjectLoader(String className)
