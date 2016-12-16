@@ -9,7 +9,6 @@ import java.util.Objects;
 import lexa.core.data.DataSet;
 import lexa.core.data.SimpleDataSet;
 import lexa.core.data.object.DataObject;
-import lexa.test.TestException;
 import lexa.test.TestMethod;
 
 /**
@@ -22,19 +21,8 @@ public class TestDataObject
 
     private TestImpl testImpl;
     private DataSet data;
-    @Override
-    public Boolean setUpClass() throws TestException
-    {
-        return true;
-    }
 
-    @Override
-    public Boolean tearDownClass() throws TestException
-    {
-        return true;
-    }
-    
-    @TestMethod
+    @TestMethod(order = 0)
     public Boolean create()
     {
         this.testImpl = new TestImpl();
@@ -44,7 +32,7 @@ public class TestDataObject
         return true;
     }   
 
-    @TestMethod
+    @TestMethod(order = 100)
     public Boolean toData()
     {
         this.data = testImpl.toData();
@@ -52,7 +40,7 @@ public class TestDataObject
         return true;
     }   
 
-    @TestMethod
+    @TestMethod(order = 200)
     public Boolean fromData()
     {
         TestImpl reload = new TestImpl();

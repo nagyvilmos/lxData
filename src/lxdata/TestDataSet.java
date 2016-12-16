@@ -12,15 +12,20 @@ import lexa.core.data.DataSet;
 import lexa.core.data.HashDataSet;
 import lexa.core.data.SimpleDataSet;
 import lexa.core.data.SimpleValueArray;
+import lexa.core.data.ValueType;
 import lexa.core.data.io.DataReader;
 import lexa.core.data.io.DataWriter;
-import lexa.test.TestException;
+import lexa.test.TestClassMethod;
 import lexa.test.TestMethod;
 
 /**
  *
  * @author william
  */
+@TestClassMethod(
+        arguments = "dataSetTypes", 
+        setUp = "setUpDataSet", 
+        tearDown = "tearDownClass")
 public class TestDataSet
         extends lexa.test.TestClass
 {
@@ -30,8 +35,9 @@ public class TestDataSet
         data
                 .put("boolean", true)
                 .put("integer", 1)
+                .put("long", 2L)
                 .put("double",(Double)3.14)
-                .put("date",new Date(2012, 10, 14, 9, 50, 42))
+                .put("date",new Date(8945094))
                 .put("array", new SimpleValueArray()
                         .add("One")
                         .add(2)
@@ -40,7 +46,7 @@ public class TestDataSet
                         .add(false)
                         .add(new SimpleValueArray(1,2))
                         .add(new SimpleDataSet().put("key","value"))
-                        .add(new java.util.Date())
+                        .add(new Date(6984564))
                 )
                 .put("dataset", new SimpleDataSet()
                         .put("null", null)
@@ -52,14 +58,8 @@ public class TestDataSet
     }
     private DataSet data;
     private File file;
-    @Override
-    public Boolean setUpClass() throws TestException
-    {
-        return true;
-    }
 
-    @Override
-    public Boolean tearDownClass() throws TestException
+    public Boolean tearDownClass(Object arg)
     {
         this.data = null;
         if (this.file == null || !this.file.exists())
@@ -72,7 +72,7 @@ public class TestDataSet
         return new Object[]{"simple","hash"};
     }
     
-    public Boolean setUpDataSet(Object arg) throws TestException
+    public Boolean setUpDataSet(Object arg)
     {
         String type = (String)arg;
         switch (type)
@@ -96,31 +96,28 @@ public class TestDataSet
         return TestDataSet.populate(this.data);
     }
     
-    public Boolean tearDownDataSet(Object arg) throws TestException
+    @TestMethod(order = 0)
+    public Boolean populated(Object arg) throws IOException
     {
-        this.data=null;
-        return true;
-    }
-    public Boolean tearDownDataSetAndFile(Object arg) throws TestException
-    {
-        this.data=null;
-        return this.file.delete();
-    }
-
-    @TestMethod(order = 0, arguments = "dataSetTypes", setUp = "setUpDataSet", tearDown = "tearDownDataSet")
-    public Boolean populated(Object arg) throws TestException, IOException
-    {
-        return this.data.size() == 3;
+        return (this.data.size() == 8 &&
+                this.data.get("boolean").getType().equals(ValueType.BOOLEAN) &&
+                this.data.get("integer").getType().equals(ValueType.INTEGER) &&
+                this.data.get("long").getType().equals(ValueType.LONG) &&
+                this.data.get("double").getType().equals(ValueType.DOUBLE) &&
+                this.data.get("date").getType().equals(ValueType.DATE) &&
+                this.data.get("array").getType().equals(ValueType.ARRAY) &&
+                this.data.get("dataset").getType().equals(ValueType.DATA_SET) &&
+                this.data.get("string").getType().equals(ValueType.STRING));
     }
 
-    @TestMethod(order = 1, arguments = "dataSetTypes", setUp = "setUpDataSet", tearDown = "tearDownDataSet")
+    @TestMethod(order = 1)
     public Boolean printFormatted(Object arg)
     {
         this.data.printFormatted(System.out);
         return true;
     }
 
-    @TestMethod(order = 2, arguments = "dataSetTypes", setUp = "setUpDataSet", tearDown = "tearDownDataSet")
+    @TestMethod(order = 2)
     public Boolean writeToFile(Object arg)
             throws IOException
     {
@@ -130,13 +127,13 @@ public class TestDataSet
         return true;
     }
 
-    @TestMethod(order = 3, arguments = "dataSetTypes", setUp = "setUpDataSet", tearDown = "tearDownDataSetAndFile")
+    @TestMethod(order = 3)
     public Boolean readFromFile(Object arg)
             throws IOException
     {
         DataReader dr = new DataReader(this.file);
         DataSet read = dr.read();
-
+        dr.close();
         return this.data.equals(read);
     }
 //        DataSet data = test(new SimpleDataSet());

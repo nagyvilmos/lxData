@@ -5,70 +5,84 @@
  */
 package lxdata;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import lexa.core.data.DataSet;
+import lexa.core.data.SealedDataSet;
 import lexa.core.data.SimpleDataSet;
 import lexa.core.data.config.ConfigDataSet;
-import lexa.core.data.io.DataReader;
-import lexa.core.data.io.DataWriter;
+import lexa.core.data.exception.DataException;
 import lexa.test.TestClass;
-import lexa.test.TestException;
+import lexa.test.TestClassMethod;
 import lexa.test.TestMethod;
 
 /**
  *
  * @author william
  */
+@TestClassMethod(setUp = "setUpClass",tearDown = "tearDownClass")
 public class TestConfig
         extends TestClass
 {
-    private File file;
     private DataSet data;
     private ConfigDataSet config;
 
-    @Override
-    public Boolean setUpClass() throws TestException
+    public Boolean setUpClass()
     {
         DataSet d = new SimpleDataSet();
         if (!TestDataSet.populate(d))
+        {
             return false;
-        try
-        {
-            this.file = new File("test.lexa");
-            new DataWriter(this.file).write(d);
-        } catch (IOException ex)
-        {
-            throw new TestException("Cannot create test file", ex);
         }
+        this.data = new SealedDataSet(d); // can't change it now
         return true;
     }
 
-    @Override
-    public Boolean tearDownClass() throws TestException
+    public Boolean tearDownClass()
     {
-        if (!this.file.exists())
-        {
-            return true;
-        }
-        return this.file.delete();
+        this.data = null;
+        this.config = null;
+        return true;
     }
     
-    @TestMethod
-    public Boolean createConfig() throws TestException
+    @TestMethod(order = 0)
+    public Boolean createConfig() 
+    {
+        this.config = new ConfigDataSet(this.data);
+        return true;
+    }
+    @TestMethod(order = 100)
+    public Boolean configEqualsData() 
+    {
+        return this.config.equals(this.data);
+    }
+    @TestMethod(order = 150)
+    public Boolean isRead() 
+    {
+        return this.config.isRead();
+    }
+
+    @TestMethod(order = 200)
+    public Boolean closeConfig() throws DataException
+    {
+        this.config.close();
+        return true;
+    }
+    @TestMethod(order = 300)
+    public Boolean resetConfig() throws DataException
+    {
+        this.config.reset();
+        return !this.config.isRead();
+    }
+    @TestMethod(order = 400)
+    public Boolean closeException()
     {
         try
         {
-            this.config = new ConfigDataSet(
-                    new DataReader(this.file).read()
-            );
-        } catch (IOException ex)
-        {
-            throw new TestException("Cannot load test file", ex);
+            this.config.close();
         }
-        return true;
+        catch (DataException ex)
+        {
+            return true;
+        }
+        return false;
     }
 }
