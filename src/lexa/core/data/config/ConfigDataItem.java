@@ -21,8 +21,10 @@ import lexa.core.data.DataItem;
 import lexa.core.data.exception.DataException;
 
 /**
- *
+ * A Data Item in a config data set.
+ * 
  * @author william
+ * @since 2016-09
  */
 public class ConfigDataItem
         extends BaseDataItem
@@ -30,7 +32,13 @@ public class ConfigDataItem
 {
     private final String path;
     private final ConfigValue value;
-    public ConfigDataItem(String path, DataItem item)
+
+    /**
+     * Create a configuration data item.
+     * @param path
+     * @param item
+     */
+    ConfigDataItem(String path, DataItem item)
     {
         super(item.getKey());
         this.path = path;

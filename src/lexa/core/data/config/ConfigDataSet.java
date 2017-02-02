@@ -72,7 +72,7 @@ public class ConfigDataSet
 	}
 
 	/**
-	 * Put the supplied item into the {@link SimpleDataSet}.
+	 * Put the supplied item into the {@link ConfigDataSet}.
 	 *
 	 * <p>Throws an {@link UnsupportedOperationException} if called.
 	 *
@@ -167,9 +167,18 @@ public class ConfigDataSet
         {
             this.invalidGets.add(key);
         }
-        return item; //To change body of generated methods, choose Tools | Templates.
+        return item;
     }
 
+    /**
+     * Get a {@link ConfigDataItem} from the list for the supplied key.
+     * Either get the configured setting or the default value if missing.
+     * 
+     * @param key The key for the SimpleDataItem. 
+     * @param defaultValue the default value
+     * @return The corresponding {@link ConfigDataItem} if it exists,
+     * otherwise a new item containing with the given default.
+     */
     public synchronized ConfigDataItem get(String key, Object defaultValue)
     {
         // avoid the error later:
