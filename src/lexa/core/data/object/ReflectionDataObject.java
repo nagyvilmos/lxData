@@ -31,18 +31,28 @@ public class ReflectionDataObject
 
     private final DataObjectLoader loader;
 
+    /**
+     * ReflectionDataObject
+     */
     public ReflectionDataObject()
     {
         this.loader = ReflectionDataObject.loader(this.getClass().getCanonicalName());
     }
 
-    
+    /**
+     *
+     * @return
+     */
     @Override
     public DataSet toData()
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     *
+     * @param data
+     */
     @Override
     public void fromData(DataSet data)
     {

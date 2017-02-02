@@ -22,7 +22,16 @@ import lexa.core.data.DataSet;
 public interface DataObject
 {
     
+    /**
+     *
+     * @return
+     */
     DataSet toData();
+
+    /**
+     *
+     * @param data
+     */
     void fromData(DataSet data);
     
 }

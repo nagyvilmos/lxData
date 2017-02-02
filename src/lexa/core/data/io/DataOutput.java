@@ -24,17 +24,28 @@ import lexa.core.data.exception.DataException;
 /**
  * This writes things in a binary form rather than text
  * @author william
- * @todo Check this still works!
+ * #TODO Check this still works!
  */
 public class DataOutput
 {
 	private final DataOutputStream stream;
-	public DataOutput(DataOutputStream stream)
+
+    /**
+     *
+     * @param stream
+     */
+    public DataOutput(DataOutputStream stream)
 	{
 		this.stream = stream;
 	}
 	
-	public void write(DataSet data)
+    /**
+     *
+     * @param data
+     * @throws IOException
+     * @throws DataException
+     */
+    public void write(DataSet data)
 			throws IOException, DataException
 	{
 		this.writeSet(data);
@@ -99,11 +110,21 @@ public class DataOutput
 			}
 		}
 	}
-	public void flush() throws IOException
+
+    /**
+     *
+     * @throws IOException
+     */
+    public void flush() throws IOException
 	{
 		this.stream.flush();
 	}
-	public void close() throws IOException
+
+    /**
+     *
+     * @throws IOException
+     */
+    public void close() throws IOException
 	{
 		this.stream.close();
 	}
