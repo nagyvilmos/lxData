@@ -22,6 +22,10 @@ public class TestDataObject
     private TestImpl testImpl;
     private DataSet data;
 
+    /**
+     *
+     * @return
+     */
     @TestMethod(order = 0)
     public Boolean create()
     {
@@ -32,6 +36,10 @@ public class TestDataObject
         return true;
     }   
 
+    /**
+     *
+     * @return
+     */
     @TestMethod(order = 100)
     public Boolean toData()
     {
@@ -40,6 +48,10 @@ public class TestDataObject
         return true;
     }   
 
+    /**
+     *
+     * @return
+     */
     @TestMethod(order = 200)
     public Boolean fromData()
     {

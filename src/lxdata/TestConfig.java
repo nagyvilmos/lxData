@@ -25,6 +25,10 @@ public class TestConfig
     private DataSet data;
     private ConfigDataSet config;
 
+    /**
+     *
+     * @return
+     */
     public Boolean setUpClass()
     {
         DataSet d = new SimpleDataSet();
@@ -36,6 +40,10 @@ public class TestConfig
         return true;
     }
 
+    /**
+     *
+     * @return
+     */
     public Boolean tearDownClass()
     {
         this.data = null;
@@ -43,35 +51,65 @@ public class TestConfig
         return true;
     }
     
+    /**
+     *
+     * @return
+     */
     @TestMethod(order = 0)
     public Boolean createConfig() 
     {
         this.config = new ConfigDataSet(this.data);
         return true;
     }
+
+    /**
+     *
+     * @return
+     */
     @TestMethod(order = 100)
     public Boolean configEqualsData() 
     {
         return this.config.equals(this.data);
     }
+
+    /**
+     *
+     * @return
+     */
     @TestMethod(order = 150)
     public Boolean isRead() 
     {
         return this.config.isRead();
     }
 
+    /**
+     *
+     * @return
+     * @throws DataException
+     */
     @TestMethod(order = 200)
     public Boolean closeConfig() throws DataException
     {
         this.config.close();
         return true;
     }
+
+    /**
+     *
+     * @return
+     * @throws DataException
+     */
     @TestMethod(order = 300)
     public Boolean resetConfig() throws DataException
     {
         this.config.reset();
         return !this.config.isRead();
     }
+
+    /**
+     *
+     * @return
+     */
     @TestMethod(order = 400)
     public Boolean closeException()
     {

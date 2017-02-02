@@ -59,6 +59,11 @@ public class TestDataSet
     private DataSet data;
     private File file;
 
+    /**
+     *
+     * @param arg
+     * @return
+     */
     public Boolean tearDownClass(Object arg)
     {
         this.data = null;
@@ -67,11 +72,20 @@ public class TestDataSet
         return this.file.delete();
     }
 
+    /**
+     *
+     * @return
+     */
     public Object[] dataSetTypes()
     {
         return new Object[]{"simple","hash"};
     }
     
+    /**
+     *
+     * @param arg
+     * @return
+     */
     public Boolean setUpDataSet(Object arg)
     {
         String type = (String)arg;
@@ -96,6 +110,12 @@ public class TestDataSet
         return TestDataSet.populate(this.data);
     }
     
+    /**
+     *
+     * @param arg
+     * @return
+     * @throws IOException
+     */
     @TestMethod(order = 0)
     public Boolean populated(Object arg) throws IOException
     {
@@ -110,6 +130,11 @@ public class TestDataSet
                 this.data.get("string").getType().equals(ValueType.STRING));
     }
 
+    /**
+     *
+     * @param arg
+     * @return
+     */
     @TestMethod(order = 1)
     public Boolean printFormatted(Object arg)
     {
@@ -117,6 +142,12 @@ public class TestDataSet
         return true;
     }
 
+    /**
+     *
+     * @param arg
+     * @return
+     * @throws IOException
+     */
     @TestMethod(order = 2)
     public Boolean writeToFile(Object arg)
             throws IOException
@@ -127,6 +158,12 @@ public class TestDataSet
         return true;
     }
 
+    /**
+     *
+     * @param arg
+     * @return
+     * @throws IOException
+     */
     @TestMethod(order = 3)
     public Boolean readFromFile(Object arg)
             throws IOException
