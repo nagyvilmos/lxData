@@ -9,7 +9,7 @@ import java.util.Objects;
 import lexa.core.data.DataSet;
 import lexa.core.data.SimpleDataSet;
 import lexa.core.data.object.DataObject;
-import lexa.test.TestMethod;
+import lexa.test.TestAnnotation;
 
 /**
  *
@@ -26,7 +26,7 @@ public class TestDataObject
      *
      * @return
      */
-    @TestMethod(order = 0)
+    @TestAnnotation(order = 0)
     public Boolean create()
     {
         this.testImpl = new TestImpl();
@@ -40,7 +40,7 @@ public class TestDataObject
      *
      * @return
      */
-    @TestMethod(order = 100)
+    @TestAnnotation(order = 100)
     public Boolean toData()
     {
         this.data = testImpl.toData();
@@ -52,7 +52,7 @@ public class TestDataObject
      *
      * @return
      */
-    @TestMethod(order = 200)
+    @TestAnnotation(order = 200)
     public Boolean fromData()
     {
         TestImpl reload = new TestImpl();

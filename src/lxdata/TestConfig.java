@@ -10,15 +10,14 @@ import lexa.core.data.SealedDataSet;
 import lexa.core.data.SimpleDataSet;
 import lexa.core.data.config.ConfigDataSet;
 import lexa.core.data.exception.DataException;
+import lexa.test.TestAnnotation;
 import lexa.test.TestClass;
-import lexa.test.TestClassMethod;
-import lexa.test.TestMethod;
 
 /**
  *
  * @author william
  */
-@TestClassMethod(setUp = "setUpClass",tearDown = "tearDownClass")
+@TestAnnotation(setUp = "setUpClass",tearDown = "tearDownClass")
 public class TestConfig
         extends TestClass
 {
@@ -55,7 +54,7 @@ public class TestConfig
      *
      * @return
      */
-    @TestMethod(order = 0)
+    @TestAnnotation(order = 0)
     public Boolean createConfig() 
     {
         this.config = new ConfigDataSet(this.data);
@@ -66,7 +65,7 @@ public class TestConfig
      *
      * @return
      */
-    @TestMethod(order = 100)
+    @TestAnnotation(order = 100)
     public Boolean configEqualsData() 
     {
         return this.config.equals(this.data);
@@ -76,7 +75,7 @@ public class TestConfig
      *
      * @return
      */
-    @TestMethod(order = 150)
+    @TestAnnotation(order = 150)
     public Boolean isRead() 
     {
         return this.config.isRead();
@@ -87,7 +86,7 @@ public class TestConfig
      * @return
      * @throws DataException
      */
-    @TestMethod(order = 200)
+    @TestAnnotation(order = 200)
     public Boolean closeConfig() throws DataException
     {
         this.config.close();
@@ -99,7 +98,7 @@ public class TestConfig
      * @return
      * @throws DataException
      */
-    @TestMethod(order = 300)
+    @TestAnnotation(order = 300)
     public Boolean resetConfig() throws DataException
     {
         this.config.reset();
@@ -110,7 +109,7 @@ public class TestConfig
      *
      * @return
      */
-    @TestMethod(order = 400)
+    @TestAnnotation(order = 400)
     public Boolean closeException()
     {
         try

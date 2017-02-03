@@ -15,14 +15,13 @@ import lexa.core.data.SimpleValueArray;
 import lexa.core.data.ValueType;
 import lexa.core.data.io.DataReader;
 import lexa.core.data.io.DataWriter;
-import lexa.test.TestClassMethod;
-import lexa.test.TestMethod;
+import lexa.test.TestAnnotation;
 
 /**
  *
  * @author william
  */
-@TestClassMethod(
+@TestAnnotation(
         arguments = "dataSetTypes", 
         setUp = "setUpDataSet", 
         tearDown = "tearDownClass")
@@ -116,7 +115,7 @@ public class TestDataSet
      * @return
      * @throws IOException
      */
-    @TestMethod(order = 0)
+    @TestAnnotation(order = 0)
     public Boolean populated(Object arg) throws IOException
     {
         return (this.data.size() == 8 &&
@@ -135,7 +134,7 @@ public class TestDataSet
      * @param arg
      * @return
      */
-    @TestMethod(order = 1)
+    @TestAnnotation(order = 1)
     public Boolean printFormatted(Object arg)
     {
         this.data.printFormatted(System.out);
@@ -148,7 +147,7 @@ public class TestDataSet
      * @return
      * @throws IOException
      */
-    @TestMethod(order = 2)
+    @TestAnnotation(order = 2)
     public Boolean writeToFile(Object arg)
             throws IOException
     {
@@ -164,7 +163,7 @@ public class TestDataSet
      * @return
      * @throws IOException
      */
-    @TestMethod(order = 3)
+    @TestAnnotation(order = 3)
     public Boolean readFromFile(Object arg)
             throws IOException
     {
