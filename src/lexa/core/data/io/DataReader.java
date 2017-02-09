@@ -57,6 +57,7 @@ public class DataReader
 	private final BufferedReader bufferedReader;
 	private final boolean fromFile;
 	private final CombinedFormat formatter;
+    private final String source;
 
 	/**
 	 * Create a new reader to input directly from a file.
@@ -73,7 +74,8 @@ public class DataReader
 				new InputStreamReader(
 				new DataInputStream(
 				new FileInputStream(file)))),
-				true);
+				true,
+                '[' + file.getPath() + ']');
 	}
 
 	/**
@@ -84,7 +86,7 @@ public class DataReader
 	 */
 	public DataReader(BufferedReader bufferedReader)
 	{
-		this(bufferedReader, false);
+		this(bufferedReader, false, "[buffer]");
 	}
 
 	/**
@@ -95,11 +97,12 @@ public class DataReader
 	 * @param   fromFile
 	 *      Indicates the reader is from a file.
 	 */
-	private DataReader(BufferedReader bufferedReader, boolean fromFile)
+	private DataReader(BufferedReader bufferedReader, boolean fromFile, String source)
 	{
 		this.bufferedReader = bufferedReader;
 		this.fromFile = fromFile;
 		this.formatter = new CombinedFormat();
+        this.source = source;
 	}
 
 	/**
@@ -186,7 +189,7 @@ public class DataReader
 			{
 				if (isNested)
 				{
-					throw new IOException("Expected '}' before EOF.");
+					throw new IOException("Expected '}' before EOF " + this.source);
 				}
 				return null;
 			}
@@ -202,7 +205,7 @@ public class DataReader
 				{
 					if (!isNested)
 					{
-						throw new IOException("Expected EOF.");
+						throw new IOException("Expected EOF " + this.source);
 					}
 					return null;
 				}
@@ -317,7 +320,7 @@ public class DataReader
 			String value = this.bufferedReader.readLine();
 			if (value == null)
 			{
-				throw new IOException("Missing end of array");
+				throw new IOException("Missing end of array " + this.source);
 			}
 			value = value.trim();
 			if ("]".equals(value))
@@ -357,7 +360,7 @@ public class DataReader
 			String line = this.bufferedReader.readLine();
 			if (line == null)
 			{
-				throw new IOException("Incomplete coded string.");
+				throw new IOException("Incomplete coded string " + this.source);
 			}
 			more = false;
 			for (int c = 0;
@@ -392,7 +395,7 @@ public class DataReader
 			String line = this.bufferedReader.readLine();
 			if (line == null)
 			{
-				throw new IOException("Expected close quote.");
+				throw new IOException("Expected close quote. " + this.source);
 			}
 			int quote = line.indexOf('"');
 			if (quote > -1)

@@ -19,11 +19,11 @@
 package lxdata;
 
 import java.io.IOException;
+
 import lexa.test.TestClass;
 import lexa.test.TestRun;
 
 /**
- *
  * @author william
  */
 public class DataTest
