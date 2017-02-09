@@ -58,7 +58,13 @@ public class SimpleValueArray extends BaseValueArray
 	public SimpleValueArray(ValueArray clone)
 	{
             this();
-            clone.forEach(value -> this.add(value));
+            clone.forEach(value -> this.add(
+                value.getType().equals(ValueType.ARRAY) ? 
+                    new SimpleValueArray(value.getArray()) :
+                value.getType().equals(ValueType.DATA_SET) ?
+                    new SimpleDataSet(value.getDataSet()) :
+                value
+            ));
 	}
 
         /**

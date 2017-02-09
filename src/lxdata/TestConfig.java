@@ -122,4 +122,12 @@ public class TestConfig
         }
         return false;
     }
+    @TestAnnotation(order = 500)
+    public Boolean copyToRead()
+    {
+            this.config.reset();
+            DataSet copy = new SimpleDataSet(this.config);
+            return this.config.isRead();
+    }
+
 }
