@@ -71,11 +71,6 @@
     nbproject/build-impl.xml file. 
 
 	-->
-    <target depends="javadoc" name="-post-compile">
-        <copy todir="${build.classes.dir}/javaDoc">
-            <fileset dir="${dist.javadoc.dir}"/>
-        </copy>
-    </target>
     <target name="-post-jar">
 		<mkdir dir="${lexa.core.bin.dir}"/>
 		<copy file="${dist.jar}" todir="${lexa.core.bin.dir}"/>
