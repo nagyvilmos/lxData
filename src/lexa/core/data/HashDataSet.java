@@ -20,7 +20,7 @@ import java.util.*;
  * A data set using hashed keys to access the content
  * A {@link DataSet} that utilises a {@link HashMap} for storing the items.
  * This class should be used in favour of the {@link SimpleDataSet} when there
- * are a large number of entries or the entries will be accessed randomly and by 
+ * are a large number of entries or the entries will be accessed randomly and by
  * key.
  * <em><b>NB</b>This performance of this class is poor when using iterators and
  * iterator based functions</em>
@@ -48,6 +48,9 @@ public class HashDataSet
 	public HashDataSet(DataSet clone)
 	{
 		this();
+        if (clone==null)
+            return; // nothing to copy
+        
         // assume we're receiving another Hash set so clone by key:
         String[] keys = clone.keys();
         for (String key : keys)

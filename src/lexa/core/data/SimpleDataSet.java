@@ -70,7 +70,7 @@ public class SimpleDataSet
             });
         }
 	}
-    
+
 	/**
 	 * Create a new {@link DataSet} containing a cloned list of entries.
 	 * @param clone The {@link DataSet} to clone.
@@ -78,6 +78,9 @@ public class SimpleDataSet
 	public SimpleDataSet(DataSet clone)
 	{
 		this();
+        if (clone==null)
+            return; // nothing to copy
+
 		for (DataItem item : clone)
 		{
 			this._put(new SimpleDataItem(item));
