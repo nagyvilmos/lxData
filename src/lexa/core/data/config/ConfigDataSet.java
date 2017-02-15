@@ -60,15 +60,22 @@ public class ConfigDataSet
 	{
 		this(null,data);
 	}
-	ConfigDataSet(String path, DataSet data)
+	
+    ConfigDataSet(String path, DataSet data)
 	{
-		this.path = path;
+        this.path = path;
+        this.invalidGets = new HashSet();
+        if (data == null)
+        {
+            this.read = true;
+            return;
+        }
+
         for (DataItem item : data)
         {
             super.put(new ConfigDataItem(path, item));
         }
         this.read = false;
-        this.invalidGets = new HashSet();
 	}
 
 	/**

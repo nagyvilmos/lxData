@@ -130,4 +130,10 @@ public class TestConfig
             return this.config.isRead();
     }
 
+    @TestAnnotation(order = 600)
+    public Boolean emptyConfig()
+    {
+            ConfigDataSet cfg = new ConfigDataSet(null);
+            return cfg.isRead();
+    }    
 }
