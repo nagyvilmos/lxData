@@ -27,7 +27,7 @@ import lexa.core.data.exception.DataException;
 /**
  * A {@link DataSet} for storing configuration data.
  * <br>
- * This is used for loading and parsing configuration items. Once read, the 
+ * This is used for loading and parsing configuration items. Once read, the
  * object should be closed to ensure that all items have been read.
  * <br>
  * A read only extension of a {@link SimpleDataSet}. This will behave in all
@@ -60,10 +60,11 @@ public class ConfigDataSet
 	{
 		this(null,data);
 	}
-	
+
     ConfigDataSet(ConfigObject parent, DataSet data)
 	{
-        this.path = parent.getPath();
+        this.path = parent == null ? null : parent.getPath();
+
         this.invalidGets = new HashSet();
         if (data == null)
         {
@@ -146,7 +147,7 @@ public class ConfigDataSet
         }
         this.read = false;
     }
-    
+
     @Override
     public String getPath()
     {
@@ -154,7 +155,7 @@ public class ConfigDataSet
         {
             return ConfigDataSet.ROOT_NAME;
         }
-        return this.path;                    
+        return this.path;
     }
     @Override
     public synchronized ConfigDataItem get(int index)
@@ -180,8 +181,8 @@ public class ConfigDataSet
     /**
      * Get a {@link ConfigDataItem} from the list for the supplied key.
      * Either get the configured setting or the default value if missing.
-     * 
-     * @param key The key for the SimpleDataItem. 
+     *
+     * @param key The key for the SimpleDataItem.
      * @param defaultValue the default value
      * @return The corresponding {@link ConfigDataItem} if it exists,
      * otherwise a new item containing with the given default.
