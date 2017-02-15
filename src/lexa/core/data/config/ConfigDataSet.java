@@ -61,9 +61,9 @@ public class ConfigDataSet
 		this(null,data);
 	}
 	
-    ConfigDataSet(String path, DataSet data)
+    ConfigDataSet(ConfigObject parent, DataSet data)
 	{
-        this.path = path;
+        this.path = parent.getPath();
         this.invalidGets = new HashSet();
         if (data == null)
         {

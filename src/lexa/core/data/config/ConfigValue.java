@@ -53,10 +53,11 @@ public class ConfigValue
                     type.equals(ValueType.ARRAY) ? 
                         new ConfigValueArray(path , value.getArray()) :
                     type.equals(ValueType.DATA_SET) ?
-                        new ConfigDataSet(path ,value.getDataSet()) :
+                        new ConfigDataSet(this ,value.getDataSet()) :
                     value.getObject();
     }
 
+    
     @Override
     public Object getObject()
     {
