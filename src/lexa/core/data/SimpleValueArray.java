@@ -71,7 +71,7 @@ public class SimpleValueArray extends BaseValueArray
                 ? new SimpleValueArray(value.getArray())
                 : value.getType().equals(ValueType.DATA_SET)
                 ? new SimpleDataSet(value.getDataSet())
-                : value
+                : value.getObject()
         ));
     }
 
@@ -106,6 +106,9 @@ public class SimpleValueArray extends BaseValueArray
      */
     public ValueArray add(int index, Object object)
     {
+        if ((object != null) && Value.class.isAssignableFrom(object.getClass()))
+            return this.add(index, (Value)object);
+
         return this.add(index, new SimpleValue(object));
     }
 
@@ -211,7 +214,7 @@ public class SimpleValueArray extends BaseValueArray
                 this.currentValue = this.currentValue.next;
             }
         }
-            
+
         return this.currentValue.value;
     }
 

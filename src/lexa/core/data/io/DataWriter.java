@@ -320,9 +320,8 @@ public class DataWriter
 			default:
 			{
 				// escape special characters such as - \" { } ? $ @ % \\ \n
-				String str = value.getObject()
-						.toString();
-				String out = this.formatter.stringFormat.toString(value.getString());
+				String str = value.getString();
+				String out = this.formatter.stringFormat.toString(str);
 				if (out.equals(str))
 				{
 					this.bufferedWriter.write("- ");

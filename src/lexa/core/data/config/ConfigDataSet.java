@@ -65,6 +65,7 @@ public class ConfigDataSet
 	{
         this.path = parent == null ? null : parent.getPath();
 
+        
         this.invalidGets = new HashSet();
         if (data == null)
         {

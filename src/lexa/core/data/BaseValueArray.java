@@ -24,7 +24,7 @@ import java.util.Iterator;
  */
 public abstract class BaseValueArray
         implements ValueArray {
-    
+
     /**
     Add an object to the array.
     <p>
@@ -38,6 +38,7 @@ public abstract class BaseValueArray
     @param object the object to add
     @return this {@link ValueArray}
      */
+    @Override
     public ValueArray add(Object object) {
         return this.add(this.size(), object);
     }
@@ -53,6 +54,7 @@ public abstract class BaseValueArray
     @param value the value to add
     @return this {@link ValueArray}
      */
+    @Override
     public ValueArray add(Value value) {
         return this.add(this.size(), value);
     }
@@ -119,5 +121,5 @@ public abstract class BaseValueArray
         }
         return sb.append(']').toString();
     }
-    
+
 }
