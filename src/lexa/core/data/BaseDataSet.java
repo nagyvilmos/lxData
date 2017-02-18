@@ -289,7 +289,7 @@ public abstract class BaseDataSet
     @Override
     public DataItem item(String key)
     {
-        int split = key.indexOf(' ');
+        int split = key.indexOf('.');
         if (split < 0)
         {
             return this.get(key);

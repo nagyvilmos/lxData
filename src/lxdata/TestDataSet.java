@@ -22,8 +22,8 @@ import lexa.test.TestAnnotation;
  * @author william
  */
 @TestAnnotation(
-        arguments = "dataSetTypes", 
-        setUp = "setUpDataSet", 
+        arguments = "dataSetTypes",
+        setUp = "setUpDataSet",
         tearDown = "tearDownClass")
 public class TestDataSet
         extends lexa.test.TestClass
@@ -79,7 +79,7 @@ public class TestDataSet
     {
         return new Object[]{"simple","hash"};
     }
-    
+
     /**
      *
      * @param arg
@@ -108,7 +108,7 @@ public class TestDataSet
         this.file = new File(type + ".test.lexa");
         return TestDataSet.populate(this.data);
     }
-    
+
     /**
      *
      * @param arg
@@ -126,7 +126,8 @@ public class TestDataSet
                 this.data.get("date").getType().equals(ValueType.DATE) &&
                 this.data.get("array").getType().equals(ValueType.ARRAY) &&
                 this.data.get("dataset").getType().equals(ValueType.DATA_SET) &&
-                this.data.get("string").getType().equals(ValueType.STRING));
+                this.data.get("string").getType().equals(ValueType.STRING) &&
+                this.data.item("dataset.farewell").getType().equals(ValueType.STRING));
     }
 
     /**
@@ -198,5 +199,5 @@ public class TestDataSet
 //            System.out.println("Exception occured");
 //        }
 //    }
-    
+
 }
