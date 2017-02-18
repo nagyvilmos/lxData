@@ -287,22 +287,61 @@ public abstract class BaseDataSet
 	}
 
     @Override
-    public DataItem item(String key)
+    public Value item(String key)
     {
         int split = key.indexOf('.');
         if (split < 0)
         {
-            return this.get(key);
+            return this.itemValue(key);
         }
         String parent = key.substring(0,split);
-        if (this.getType(parent).equals(ValueType.DATA_SET))
+        Value value = this.itemValue(parent);
+
+        if (value == null || !value.getType().equals(ValueType.DATA_SET))
         {
-            return this.getDataSet(parent)
-                    .item(key.substring(split+1));
+            return null;
         }
-        return null;
+        return value.getDataSet().getValue(key.substring(split+1));
     }
 
+    private Value itemValue(String key)
+    {
+        int array = key.indexOf(':');
+        if (array < 0)
+        {
+            return this.getValue(key);
+        }
+        String name = key.substring(0,array);
+        return BaseDataSet.itemArray(
+                this.getArray(name),
+                key.substring(array+1));
+    }
+
+    private static Value itemArray(ValueArray valueArray, String key)
+    {
+        if (valueArray == null)
+        {
+            return null;
+        }
+        int sub = key.indexOf(':');
+        if (sub > 0)
+        {
+            Value subValue = BaseDataSet.itemArray(
+                    valueArray, key.substring(0,sub));
+            if (!subValue.getType().equals(ValueType.ARRAY))
+            {
+                return null;
+            }
+            return BaseDataSet.itemArray(
+                    subValue.getArray(), key.substring(sub+1));
+        }
+        int index = Integer.parseInt(key);
+        if (index < 0 || index >= valueArray.size())
+        {
+            return null;
+        }
+        return valueArray.get(index);
+    }
 
     @Override
 	public Iterator<DataItem> iterator()

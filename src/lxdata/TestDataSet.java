@@ -127,6 +127,9 @@ public class TestDataSet
                 this.data.get("array").getType().equals(ValueType.ARRAY) &&
                 this.data.get("dataset").getType().equals(ValueType.DATA_SET) &&
                 this.data.get("string").getType().equals(ValueType.STRING) &&
+                this.data.item("array:4").getType().equals(ValueType.BOOLEAN) &&
+                this.data.item("array:5:1").getType().equals(ValueType.INTEGER) &&
+                this.data.item("array:6.key").getType().equals(ValueType.STRING) &&
                 this.data.item("dataset.farewell").getType().equals(ValueType.STRING));
     }
 

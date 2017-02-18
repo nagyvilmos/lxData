@@ -164,17 +164,19 @@ public interface DataSet
 
 
 	/**
-	 * Get an {@link DataItem} from anywhere in the hierarchical list.
+	 * Get a {@link Value} from anywhere in the hierarchical list.
      * <br>
-     * This allows save access to a child item without checking that the parent
+     * This allows safe access to a child item without checking that the parent
      * {@link DataSet} exists.  The syntax {@code ds.item("parent.child")} will
      * check for the dataset {@code parent} and if it exists return the item
-     * {@code child}.  If a parent does not exist it returns {@code null}.
+     * {@code child}.  If a parent does not exist it returns a {@code null} value.
+     * To access an item in an array use :n on the fields name to retrieve the
+     * nth item in the array.
      *
 	 * @param key The dot separated hierarchical key for the {@link DataItem}.
-	 * @return A {@link DataItem} if it exists, otherwise {@code null}.
+	 * @return The {@link Value} if it exists, otherwise {@code null}.
 	 */
-	public DataItem item(String key);
+	public Value item(String key);
 
     /**
 	 * Get the list of keys.
