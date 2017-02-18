@@ -162,7 +162,21 @@ public interface DataSet
 	 */
 	public boolean isEmpty();
 
+
 	/**
+	 * Get an {@link DataItem} from anywhere in the hierarchical list.
+     * <br>
+     * This allows save access to a child item without checking that the parent
+     * {@link DataSet} exists.  The syntax {@code ds.item("parent.child")} will
+     * check for the dataset {@code parent} and if it exists return the item
+     * {@code child}.  If a parent does not exist it returns {@code null}.
+     *
+	 * @param key The dot separated hierarchical key for the {@link DataItem}.
+	 * @return A {@link DataItem} if it exists, otherwise {@code null}.
+	 */
+	public DataItem item(String key);
+
+    /**
 	 * Get the list of keys.
 	 *
 	 * @return An array containing all the keys.
@@ -174,7 +188,7 @@ public interface DataSet
      * @param out the stream to output data to.
      */
     public void printFormatted(PrintStream out);
-    
+
 	/**
 	 * Put the supplied item into the {@link DataSet}.
 	 * <p>

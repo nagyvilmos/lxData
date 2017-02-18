@@ -230,7 +230,7 @@ public abstract class BaseDataSet
 		for (DataItem item
 				: this)
 		{
-			sb.append(item.toString()).append(" ");			
+			sb.append(item.toString()).append(" ");
 		}
         int length = sb.length();
         if (length > 1)
@@ -285,6 +285,24 @@ public abstract class BaseDataSet
 		}
 		return hash;
 	}
+
+    @Override
+    public DataItem item(String key)
+    {
+        int split = key.indexOf(' ');
+        if (split < 0)
+        {
+            return this.get(key);
+        }
+        String parent = key.substring(0,split);
+        if (this.getType(parent).equals(ValueType.DATA_SET))
+        {
+            return this.getDataSet(parent)
+                    .item(key.substring(split+1));
+        }
+        return null;
+    }
+
 
     @Override
 	public Iterator<DataItem> iterator()
