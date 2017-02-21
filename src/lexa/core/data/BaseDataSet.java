@@ -301,7 +301,7 @@ public abstract class BaseDataSet
         {
             return null;
         }
-        return value.getDataSet().getValue(key.substring(split+1));
+        return value.getDataSet().item(key.substring(split+1));
     }
 
     private Value itemValue(String key)

@@ -58,7 +58,7 @@ public class DataReader
 	private final boolean fromFile;
 	private final CombinedFormat formatter;
     private final String source;
-
+    private long lineNumber;
 	/**
 	 * Create a new reader to input directly from a file.
 	 *
@@ -103,6 +103,7 @@ public class DataReader
 		this.fromFile = fromFile;
 		this.formatter = new CombinedFormat();
         this.source = source;
+        this.lineNumber=0;
 	}
 
 	/**
@@ -184,7 +185,7 @@ public class DataReader
 		String line;
 		while (true)
 		{
-			line = this.bufferedReader.readLine();
+			line = this.readLine();
 			if (line == null)
 			{
 				if (isNested)
@@ -215,7 +216,7 @@ public class DataReader
 
 		// split the line at the first space
 		int split = line.indexOf(' ');
-		
+
 		String key;
 		String value;
 		if (split > -1)
@@ -276,7 +277,7 @@ public class DataReader
 			{
 				return this.readArray();
 			}
-			throw new IOException("Invalid value encountered at " + value);
+			throw new IOException("Invalid value encountered at " + value + " on line " + this.lineNumber);
 		}
 		if (' ' == value.charAt(1))
 		{
@@ -317,10 +318,10 @@ public class DataReader
 		ValueArray array = new SimpleValueArray();
 		while (true)
 		{
-			String value = this.bufferedReader.readLine();
+			String value = this.readLine();
 			if (value == null)
 			{
-				throw new IOException("Missing end of array " + this.source);
+				throw new IOException("Missing end of array " + this.source + " at line " + this.lineNumber);
 			}
 			value = value.trim();
 			if ("]".equals(value))
@@ -331,9 +332,9 @@ public class DataReader
 			{
 				continue;
 			}
-			array.add(this.decodeValue(value));				
+			array.add(this.decodeValue(value));
 		}
-		
+
 		return array;
 	}
 	/**
@@ -357,10 +358,10 @@ public class DataReader
 		boolean more = true;
 		while (more)
 		{
-			String line = this.bufferedReader.readLine();
+			String line = this.readLine();
 			if (line == null)
 			{
-				throw new IOException("Incomplete coded string " + this.source);
+				throw new IOException("Incomplete coded string " + this.source + " at line " + this.lineNumber);
 			}
 			more = false;
 			for (int c = 0;
@@ -377,6 +378,10 @@ public class DataReader
 						builder.append('\n');
 						break;
 					}
+                    switch (ch)
+                    {
+
+                    }
 					ch = line.charAt(c);
 				}
 				builder.append(ch);
@@ -385,6 +390,13 @@ public class DataReader
 		return builder.toString();
 	}
 
+    private String readLine()
+            throws IOException
+    {
+        this.lineNumber++;
+        return this.bufferedReader.readLine();
+    }
+
 	private String readQuotedString()
 			throws IOException
 	{
@@ -392,10 +404,10 @@ public class DataReader
 		boolean more = true;
 		while (more)
 		{
-			String line = this.bufferedReader.readLine();
+			String line = this.readLine();
 			if (line == null)
 			{
-				throw new IOException("Expected close quote. " + this.source);
+				throw new IOException("Expected close quote. " + this.source  + " at line " + this.lineNumber);
 			}
 			int quote = line.indexOf('"');
 			if (quote > -1)
