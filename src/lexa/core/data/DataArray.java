@@ -2,7 +2,7 @@
  * ================================================================================
  * Lexa - Property of William Norman-Walker
  * --------------------------------------------------------------------------------
- * ValueArray.java
+ * DataArray.java
  *--------------------------------------------------------------------------------
  * Author:  William Norman-Walker
  * Created: March 2015
@@ -29,7 +29,7 @@ import java.util.Iterator;
  * @author william
  * @since 2015-03
  */
-public interface ValueArray
+public interface DataArray
 		extends Iterable<DataValue>
 {
 	/**
@@ -43,9 +43,9 @@ public interface ValueArray
 	va.add(new SimpleValue(obj), va.size);
 	}</pre>
 	@param object the object to add
-	@return this {@link ValueArray}
+	@return this {@link DataArray}
 	*/
-	public ValueArray add(Object object);
+	public DataArray add(Object object);
         
 	/**
 	Add a value to the array.
@@ -56,9 +56,9 @@ public interface ValueArray
 	va.add(val, va.size);
 	}</pre>
 	@param value the value to add
-	@return this {@link ValueArray}
+	@return this {@link DataArray}
 	*/
-	public ValueArray add(DataValue value);
+	public DataArray add(DataValue value);
 
 	/**
 	Add an object to the array at a given position.
@@ -70,9 +70,9 @@ public interface ValueArray
 	}</pre>
 	@param index the position for the object
 	@param object the value to add
-	@return this {@link ValueArray}
+	@return this {@link DataArray}
 	*/
-	public ValueArray add(int index, Object object);
+	public DataArray add(int index, Object object);
 
 	/**
 	Add a value to the array at a given position.
@@ -82,27 +82,27 @@ public interface ValueArray
 	If the position is equal to the size, then the new item will be added to the end.
 	@param index the position for the object
 	@param value the value to add
-	@return this {@link ValueArray}
+	@return this {@link DataArray}
 	*/
-	public ValueArray add(int index, DataValue value);
+	public DataArray add(int index, DataValue value);
 
 	/**
 	Add all the values to the array.
 	<p>
 	The values are added to the array at the end.
-	@param array a {@link ValueArray} to add
-	@return this {@link ValueArray}
+	@param array a {@link DataArray} to add
+	@return this {@link DataArray}
 	*/
-	public ValueArray addAll(ValueArray array);
+	public DataArray addAll(DataArray array);
 
 	/**
 	Add all the values to the array.
 	<p>
 	The values are added to the array at the end.
 	@param array an array to add
-	@return this {@link ValueArray}
+	@return this {@link DataArray}
 	*/
-	public ValueArray addAll(Object[] array);
+	public DataArray addAll(Object[] array);
 
     /**
 	Get the value at a position.

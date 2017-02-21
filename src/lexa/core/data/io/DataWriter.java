@@ -29,9 +29,9 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import lexa.core.data.DataItem;
 import lexa.core.data.DataSet;
-import lexa.core.data.ValueArray;
 import lexa.core.data.formatting.CombinedFormat;
 import lexa.core.data.DataValue;
+import lexa.core.data.DataArray;
 
 /**
  * Write {@link lexa.core.data.DataItem} and {@link lexa.core.data.DataSet}
@@ -275,7 +275,7 @@ public class DataWriter
 			case ARRAY:
 				this.bufferedWriter.write('[');
 				this.bufferedWriter.newLine();
-				ValueArray arr = value.getArray();
+				DataArray arr = value.getArray();
 				int i;
 				Indent ai = indent.next();
 				for (i = 0; i < arr.size(); i++)

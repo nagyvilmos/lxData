@@ -74,7 +74,7 @@ public abstract class BaseDataItem
 	 * @return The value as an array.
 	 */
 	@Override
-	public ValueArray getArray()
+	public DataArray getArray()
 	{
 		return this.getValue().getArray();
 	}

@@ -81,7 +81,7 @@ public class DataInput
 		{
 			case ARRAY :
 			{
-				ValueArray va = new SimpleValueArray();
+				DataArray va = new SimpleValueArray();
 				long count = this.stream.readLong();
 				for (int i = 0; i < count; i++)
 				{

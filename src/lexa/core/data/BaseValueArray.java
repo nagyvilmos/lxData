@@ -18,12 +18,12 @@ package lexa.core.data;
 import java.util.Iterator;
 
 /**
- * Base implementation of a {@link ValueArray}
+ * Base implementation of a {@link DataArray}
  * @author william
  * @since 2016-02
  */
 public abstract class BaseValueArray
-        implements ValueArray {
+        implements DataArray {
 
     /**
     Add an object to the array.
@@ -36,10 +36,10 @@ public abstract class BaseValueArray
     va.add(new SimpleValue(obj), va.size);
     }</pre>
     @param object the object to add
-    @return this {@link ValueArray}
+    @return this {@link DataArray}
      */
     @Override
-    public ValueArray add(Object object) {
+    public DataArray add(Object object) {
         return this.add(this.size(), object);
     }
 
@@ -52,21 +52,21 @@ public abstract class BaseValueArray
     va.add(val, va.size);
     }</pre>
     @param value the value to add
-    @return this {@link ValueArray}
+    @return this {@link DataArray}
      */
     @Override
-    public ValueArray add(DataValue value) {
+    public DataArray add(DataValue value) {
         return this.add(this.size(), value);
     }
 
     @Override
-    public ValueArray addAll(ValueArray array) {
+    public DataArray addAll(DataArray array) {
         array.forEach((DataValue value) -> this.add(value));
         return this;
     }
 
     @Override
-    public ValueArray addAll(Object[] array) {
+    public DataArray addAll(Object[] array) {
         for (Object object : array) {
             this.add(object);
         }
@@ -84,11 +84,11 @@ public abstract class BaseValueArray
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == null || !ValueArray.class.isAssignableFrom(obj.getClass()))
+        if (obj == null || !DataArray.class.isAssignableFrom(obj.getClass()))
         {
             return false;
         }
-        final ValueArray other = (ValueArray) obj;
+        final DataArray other = (DataArray) obj;
         if (this.size() != other.size()) {
             return false;
         }

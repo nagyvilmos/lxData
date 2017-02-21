@@ -52,12 +52,12 @@ public abstract class BaseValue
 	}
 
     /**
-     * Gets the value as a {@link ValueArray}.
+     * Gets the value as a {@link DataArray}.
      * @return The value as am array.
      */
     @Override
-    public ValueArray getArray() {
-        return (ValueArray) ValueType.ARRAY.getValueIfType(this.getObject());
+    public DataArray getArray() {
+        return (DataArray) ValueType.ARRAY.getValueIfType(this.getObject());
     }
 
     /**

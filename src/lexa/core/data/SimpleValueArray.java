@@ -50,7 +50,7 @@ public class SimpleValueArray extends BaseValueArray
     private int size;
 
     /**
-     * Create a new {@link ValueArray} The initial array has no values
+     * Create a new {@link DataArray} The initial array has no values
      */
     public SimpleValueArray()
     {
@@ -58,12 +58,12 @@ public class SimpleValueArray extends BaseValueArray
     }
 
     /**
-     * Create a new {@link ValueArray} cloning the previous. The initial array
+     * Create a new {@link DataArray} cloning the previous. The initial array
      * has no values
      *
      * @param clone an array to clone.
      */
-    public SimpleValueArray(ValueArray clone)
+    public SimpleValueArray(DataArray clone)
     {
         this();
         clone.forEach(value -> this.add(
@@ -76,7 +76,7 @@ public class SimpleValueArray extends BaseValueArray
     }
 
     /**
-     * Create a new {@link ValueArray} from an array of objects The initial
+     * Create a new {@link DataArray} from an array of objects The initial
      * array has an entry for each object passed.
      *
      * @param objects an array of objects to populate the array.
@@ -102,9 +102,9 @@ public class SimpleValueArray extends BaseValueArray
      *
      * @param index the position for the object
      * @param object the value to add
-     * @return this {@link ValueArray}
+     * @return this {@link DataArray}
      */
-    public ValueArray add(int index, Object object)
+    public DataArray add(int index, Object object)
     {
         if ((object != null) && DataValue.class.isAssignableFrom(object.getClass()))
             return this.add(index, (DataValue)object);
@@ -121,9 +121,9 @@ public class SimpleValueArray extends BaseValueArray
      *
      * @param index the position for the object
      * @param value the value to add
-     * @return this {@link ValueArray}
+     * @return this {@link DataArray}
      */
-    public ValueArray add(int index, DataValue value)
+    public DataArray add(int index, DataValue value)
     {
         if (value.getType().equals(ValueType.NULL))
         {

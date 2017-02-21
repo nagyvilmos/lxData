@@ -34,9 +34,9 @@ import lexa.core.data.DataSet;
 import lexa.core.data.SimpleDataItem;
 import lexa.core.data.SimpleDataSet;
 import lexa.core.data.SimpleValueArray;
-import lexa.core.data.ValueArray;
 import lexa.core.data.ValueType;
 import lexa.core.data.formatting.CombinedFormat;
+import lexa.core.data.DataArray;
 
 /**
  * Read {@link lexa.core.data.DataItem} and {@link lexa.core.data.DataSet} objects
@@ -313,9 +313,9 @@ public class DataReader
 		return value;
 	}
 
-	private ValueArray readArray() throws IOException
+	private DataArray readArray() throws IOException
 	{
-		ValueArray array = new SimpleValueArray();
+		DataArray array = new SimpleValueArray();
 		while (true)
 		{
 			String value = this.readLine();

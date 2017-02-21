@@ -42,7 +42,7 @@ public enum ValueType
 	/** The value is null */
 	NULL(null,'~'),
 	/** The value is a boolean */
-	ARRAY(ValueArray.class,':'),
+	ARRAY(DataArray.class,':'),
 	/** The value is a boolean */
 	BOOLEAN(Boolean.class,'?'),
 	/** The value is a data set */

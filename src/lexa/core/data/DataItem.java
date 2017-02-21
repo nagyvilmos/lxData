@@ -32,7 +32,7 @@ public interface DataItem
 	 * Gets the value as an array.
 	 * @return The value as an array.
 	 */
-	ValueArray getArray();
+	DataArray getArray();
 
 	/**
 	 * Gets the value as a boolean.

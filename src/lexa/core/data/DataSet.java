@@ -67,12 +67,12 @@ public interface DataSet
 	public DataItem get(int index);
 
 	/**
-	 * Get a {@link ValueArray} from the list for the supplied key.
+	 * Get a {@link DataArray} from the list for the supplied key.
 	 * @param key The key for the {@link DataItem}.
-	 * @return If the item exists and is a {@link ValueArray} then the
+	 * @return If the item exists and is a {@link DataArray} then the
 	 * item's value, otherwise {@code null}.
 	 */
-	public ValueArray getArray(String key);
+	public DataArray getArray(String key);
 
 	/**
 	 * Get a {@link Boolean} from the list for the supplied key.

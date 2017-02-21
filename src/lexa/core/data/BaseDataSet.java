@@ -41,13 +41,13 @@ public abstract class BaseDataSet
 		implements DataSet
 {
     /**
-	 * Get a {@link ValueArray} from the list for the supplied key.
+	 * Get a {@link DataArray} from the list for the supplied key.
 	 * @param key The key for the {@link SimpleDataItem}.
-	 * @return If the item exists and is a {@link ValueArray} then the
+	 * @return If the item exists and is a {@link DataArray} then the
 	 * item's value, otherwise {@code null}.
 	 */
 	@Override
-	public synchronized ValueArray getArray(String key)
+	public synchronized DataArray getArray(String key)
 	{
 		DataItem item = this.get(key);
 		return (item == null) ?
@@ -317,7 +317,7 @@ public abstract class BaseDataSet
                 key.substring(array+1));
     }
 
-    private static DataValue itemArray(ValueArray valueArray, String key)
+    private static DataValue itemArray(DataArray valueArray, String key)
     {
         if (valueArray == null)
         {

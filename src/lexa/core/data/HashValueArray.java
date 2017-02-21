@@ -25,7 +25,7 @@ import java.util.Iterator;
 public class HashValueArray extends SimpleValueArray
 {
 	/**
-	Create a new {@link ValueArray}
+	Create a new {@link DataArray}
 	The initial array has no values
 	*/
 	public HashValueArray()
@@ -34,17 +34,17 @@ public class HashValueArray extends SimpleValueArray
 	}
 	
 	/**
-	Create a new {@link ValueArray} cloning the previous.
+	Create a new {@link DataArray} cloning the previous.
 	The initial array has no values
         @param clone an array to clone.
 	*/
-	public HashValueArray(ValueArray clone)
+	public HashValueArray(DataArray clone)
 	{
         super(clone);
 	}
 
         /**
-    Create a new {@link ValueArray} from an array of objects
+    Create a new {@link DataArray} from an array of objects
 	The initial array has an entry for each object passed.
 	@param objects an array of objects to populate the array.
 	*/

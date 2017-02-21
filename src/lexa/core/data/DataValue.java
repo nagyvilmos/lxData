@@ -23,7 +23,7 @@ import java.util.Date;
  * Interface for a value within a {@link DataSet}
  <p>
  This is a type safe representation of an object used by a {@link DataSet},
- {@link DataItem} or {@link ValueArray}.
+ {@link DataItem} or {@link DataArray}.
  Even if a {@code null} is added, internally it is represented by an object, this 
  makes certain operations easier internally.
  @author william
@@ -32,10 +32,10 @@ import java.util.Date;
 public interface DataValue
 {
 	/**
-	 * Gets the value as a {@link ValueArray}.
+	 * Gets the value as a {@link DataArray}.
 	 * @return The value as am array.
 	 */
-	ValueArray getArray();
+	DataArray getArray();
 
 	/**
 	 * Gets the value as a boolean.
