@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import lexa.core.data.BaseValueArray;
+import lexa.core.data.BaseDataArray;
 import lexa.core.data.exception.DataException;
 import lexa.core.data.DataValue;
 import lexa.core.data.DataArray;
@@ -30,7 +30,7 @@ import lexa.core.data.DataArray;
  * @author william
  */
 public class ConfigValueArray
-        extends BaseValueArray
+        extends BaseDataArray
         implements ConfigObject
 {
 

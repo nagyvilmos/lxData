@@ -2,7 +2,7 @@
  * ================================================================================
  * Lexa - Property of William Norman-Walker
  * --------------------------------------------------------------------------------
- * BaseValueArray.java
+ * BaseDataArray.java
  *--------------------------------------------------------------------------------
  * Author:  William Norman-Walker
  * Created: February 2016
@@ -22,7 +22,7 @@ import java.util.Iterator;
  * @author william
  * @since 2016-02
  */
-public abstract class BaseValueArray
+public abstract class BaseDataArray
         implements DataArray {
 
     /**

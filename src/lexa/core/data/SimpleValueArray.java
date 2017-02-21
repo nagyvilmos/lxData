@@ -27,7 +27,7 @@ package lexa.core.data;
  * @author william
  * @since 2016-01
  */
-public class SimpleValueArray extends BaseValueArray
+public class SimpleValueArray extends BaseDataArray
 {
 
     /**
