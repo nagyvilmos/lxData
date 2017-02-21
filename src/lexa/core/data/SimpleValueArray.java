@@ -70,7 +70,7 @@ public class SimpleValueArray extends BaseDataArray
                 value.getType().equals(DataType.ARRAY)
                 ? new SimpleValueArray(value.getArray())
                 : value.getType().equals(DataType.DATA_SET)
-                ? new SimpleDataSet(value.getDataSet())
+                ? new ArrayDataSet(value.getDataSet())
                 : value.getObject()
         ));
     }

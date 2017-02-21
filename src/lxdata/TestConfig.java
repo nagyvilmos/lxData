@@ -7,7 +7,7 @@ package lxdata;
 
 import lexa.core.data.DataSet;
 import lexa.core.data.SealedDataSet;
-import lexa.core.data.SimpleDataSet;
+import lexa.core.data.ArrayDataSet;
 import lexa.core.data.config.ConfigDataSet;
 import lexa.core.data.exception.DataException;
 import lexa.test.TestAnnotation;
@@ -30,7 +30,7 @@ public class TestConfig
      */
     public Boolean setUpClass()
     {
-        DataSet d = new SimpleDataSet();
+        DataSet d = new ArrayDataSet();
         if (!TestDataSet.populate(d))
         {
             return false;
@@ -126,7 +126,7 @@ public class TestConfig
     public Boolean copyToRead()
     {
             this.config.reset();
-            DataSet copy = new SimpleDataSet(this.config);
+            DataSet copy = new ArrayDataSet(this.config);
             return this.config.isRead();
     }
 

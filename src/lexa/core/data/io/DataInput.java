@@ -55,7 +55,7 @@ public class DataInput
 			throws IOException, DataException
 	{
 		int items = this.stream.readInt();
-		DataSet data = new SimpleDataSet();
+		DataSet data = new ArrayDataSet();
 		for (int i = 0;
 				i < items;
 				i++)

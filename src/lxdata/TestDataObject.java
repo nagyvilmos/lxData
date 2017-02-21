@@ -7,7 +7,7 @@ package lxdata;
 
 import java.util.Objects;
 import lexa.core.data.DataSet;
-import lexa.core.data.SimpleDataSet;
+import lexa.core.data.ArrayDataSet;
 import lexa.core.data.object.DataObject;
 import lexa.test.TestAnnotation;
 
@@ -69,7 +69,7 @@ public class TestDataObject
         @Override
         public DataSet toData()
         {
-            return new SimpleDataSet()
+            return new ArrayDataSet()
                     .put("string", this.str)
                     .put("long", this.lng);
         }

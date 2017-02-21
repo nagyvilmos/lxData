@@ -2,7 +2,7 @@
  * ================================================================================
  * Lexa - Property of William Norman-Walker
  * --------------------------------------------------------------------------------
- * SimpleDataSet.java
+ * ArrayDataSet.java
  *--------------------------------------------------------------------------------
  * Author:  William Norman-Walker
  * Created: March 2015
@@ -14,7 +14,7 @@
  * 2015-04-22	WNW             More refactoring
  * 2016-01-27	WNW	16-01       Remove the superfluose clone() method.
  * 2016-01-28   WNW 16-01       Update javadoc.
- * 2016-01-28   WNW 16-01       Move toString() from SimpleDataSet to DataSetGetter
+ * 2016-01-28   WNW 16-01       Move toString() from ArrayDataSet to DataSetGetter
  * 2016-09-09   WNW 16-09       Change base abstract classes from *Base to Base*
  * 2016-10-24   WNW 16-11       Add constructor for a map;
  * ================================================================================
@@ -31,7 +31,7 @@ import java.util.ArrayList;
  * @since 2009-07
  * @see DataItem
  */
-public class SimpleDataSet
+public class ArrayDataSet
 		extends BaseDataSet
 {
 
@@ -41,7 +41,7 @@ public class SimpleDataSet
 	/**
 	 * Create a new {@link DataSet} with no entries.
 	 */
-	public SimpleDataSet()
+	public ArrayDataSet()
 	{
 		this.items = new ArrayList();
 		this.last = 0;
@@ -51,7 +51,7 @@ public class SimpleDataSet
 	 * Create a new {@link DataSet} with entries from a map
      * @param map a map of objects to convert to a data set.
 	 */
-	public SimpleDataSet(java.util.Map<String, Object> map)
+	public ArrayDataSet(java.util.Map<String, Object> map)
 	{
 		this();
         if (map != null)
@@ -62,7 +62,7 @@ public class SimpleDataSet
                 if (object != null && map.getClass().isAssignableFrom(
                         object.getClass()))
                 {
-                    object = new SimpleDataSet(map.getClass().cast(object));
+                    object = new ArrayDataSet(map.getClass().cast(object));
                 }
                 this._put(new SimpleDataItem(
                         key, object
@@ -75,7 +75,7 @@ public class SimpleDataSet
 	 * Create a new {@link DataSet} containing a cloned list of entries.
 	 * @param clone The {@link DataSet} to clone.
 	 */
-	public SimpleDataSet(DataSet clone)
+	public ArrayDataSet(DataSet clone)
 	{
 		this();
         if (clone==null)
@@ -88,7 +88,7 @@ public class SimpleDataSet
 	}
 
 	/**
-	 * Checks if the {@link SimpleDataSet} contains a named key.
+	 * Checks if the {@link ArrayDataSet} contains a named key.
 	 * <p>
 	 * Checks each {@link SimpleDataItem} and sees if its key is the same as the named key.
 	 * @param key   A key for a {@link SimpleDataItem}.
@@ -207,7 +207,7 @@ public class SimpleDataSet
 	 * This is {@code private} to stop any overrides and is to be called only
 	 * from this {@link #put(lexa.core.data.DataItem) put(DataItem)} and the
      * clone constructor
-     * {@link #SimpleDataSet(lexa.core.data.DataSet) SimpleDataSet(DataSet)}.
+     * {@link #SimpleDataSet(lexa.core.data.DataSet) ArrayDataSet(DataSet)}.
 	 * @param item A {@link DataItem} to add.
 	 */
 	private synchronized void _put(DataItem item)
@@ -228,12 +228,12 @@ public class SimpleDataSet
 	}
 
 	/**
-	 * Put the supplied item into the {@link SimpleDataSet}.
+	 * Put the supplied item into the {@link ArrayDataSet}.
 	 * <p>
 	 * If the item already exists it is overwritten.
 	 *
 	 * @param item A {@link SimpleDataItem} to add.
-	 * @return  the {@link SimpleDataSet} the item was added to.
+	 * @return  the {@link ArrayDataSet} the item was added to.
 	 */
 	@Override
 	public synchronized DataSet put(DataItem item)
@@ -243,14 +243,14 @@ public class SimpleDataSet
 	}
 
 	/**
-	 * Put the supplied object into the {@link SimpleDataSet}
+	 * Put the supplied object into the {@link ArrayDataSet}
 	 * using the supplied key.
 	 * <p>
 	 * If the item already exists it is overwritten.
 	 *
 	 * @param key The key name for the item
 	 * @param value The object value to add.
-	 * @return  the {@link SimpleDataSet} the item was added to.
+	 * @return  the {@link ArrayDataSet} the item was added to.
 	 */
 	@Override
 	public synchronized DataSet put(String key, Object value)
@@ -259,13 +259,13 @@ public class SimpleDataSet
 	}
 
 	/**
-	 * Put the contents of another {@link SimpleDataSet} into this one.
+	 * Put the contents of another {@link ArrayDataSet} into this one.
 	 * <p>
 	 * Any items in the new data set that have a key that matches another item
 	 * will overwrite the existing item.
 	 *
 	 * @param data The data to be added.
-	 * @return  the {@link SimpleDataSet} the item was added to.
+	 * @return  the {@link ArrayDataSet} the item was added to.
 	 */
 	@Override
 	public synchronized DataSet put(DataSet data)
@@ -282,7 +282,7 @@ public class SimpleDataSet
 	}
 
 	/**
-	 * Removes the specified element from this {@link SimpleDataSet}.
+	 * Removes the specified element from this {@link ArrayDataSet}.
 	 * <p>
 	 * Shifts any subsequent elements to the left (subtracts one from their indices).
 	 *
@@ -302,9 +302,9 @@ public class SimpleDataSet
 	}
 
 	/**
-	 * Get the size of the {@link SimpleDataSet}.
+	 * Get the size of the {@link ArrayDataSet}.
 	 *
-	 * @return the number of {@link SimpleDataItem} objects in the {@link SimpleDataSet}
+	 * @return the number of {@link SimpleDataItem} objects in the {@link ArrayDataSet}
 	 */
 	@Override
 	public synchronized int size()

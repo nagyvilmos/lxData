@@ -32,7 +32,7 @@ import java.io.InputStreamReader;
 import lexa.core.data.DataItem;
 import lexa.core.data.DataSet;
 import lexa.core.data.SimpleDataItem;
-import lexa.core.data.SimpleDataSet;
+import lexa.core.data.ArrayDataSet;
 import lexa.core.data.SimpleValueArray;
 import lexa.core.data.DataType;
 import lexa.core.data.formatting.CombinedFormat;
@@ -121,10 +121,10 @@ public class DataReader
 	}
 
 	/**
-	 * Read the input into a {@link SimpleDataSet}.
+	 * Read the input into a {@link ArrayDataSet}.
 	 *
 	 * @return
-	 *       A {@link SimpleDataSet} read from the input, null if empty.
+	 *       A {@link ArrayDataSet} read from the input, null if empty.
 	 * @throws  IOException
 	 *       When an IO error occurs closing the input.
 	 */
@@ -135,13 +135,13 @@ public class DataReader
 	}
 
 	/**
-	 * Read a {@link SimpleDataSet} from the input.
+	 * Read a {@link ArrayDataSet} from the input.
 	 *
 	 * @param   isNested
-	 *       Indicate that the read is inside a {@link SimpleDataSet}
+	 *       Indicate that the read is inside a {@link ArrayDataSet}
 	 *       and so should not reach EOF.
 	 * @return
-	 *       A {@link SimpleDataSet} read from the input, null if empty
+	 *       A {@link ArrayDataSet} read from the input, null if empty
 	 *       and {@code isNested == true}.
 	 * @throws  IOException
 	 *       When an IO error occurs reading the input.
@@ -149,7 +149,7 @@ public class DataReader
 	private DataSet read(boolean isNested)
 			throws IOException
 	{
-		DataSet data = new SimpleDataSet();
+		DataSet data = new ArrayDataSet();
 
 		while (true)
 		{
@@ -171,11 +171,11 @@ public class DataReader
 	 * Read a {@link SimpleDataItem} from the input.
 	 *
 	 * @param   isNested
-	 *       Indicate that the read is inside a {@link SimpleDataSet}
+	 *       Indicate that the read is inside a {@link ArrayDataSet}
 	 *       and so should not reach EOF.
 	 * @return
 	 *       A {see SimpleDataItem} read from the input or {@code null} if
-	 *       The current {@link SimpleDataSet} has all been read.
+	 *       The current {@link ArrayDataSet} has all been read.
 	 * @throws  IOException
 	 *       When an IO error occurs reading the input.
 	 */

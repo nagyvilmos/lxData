@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.Date;
 import lexa.core.data.DataSet;
 import lexa.core.data.HashDataSet;
-import lexa.core.data.SimpleDataSet;
+import lexa.core.data.ArrayDataSet;
 import lexa.core.data.SimpleValueArray;
 import lexa.core.data.DataType;
 import lexa.core.data.io.DataReader;
@@ -44,10 +44,10 @@ public class TestDataSet
                         .add(3.4)
                         .add(false)
                         .add(new SimpleValueArray(1,2))
-                        .add(new SimpleDataSet().put("key","value"))
+                        .add(new ArrayDataSet().put("key","value"))
                         .add(new Date(6984564))
                 )
-                .put("dataset", new SimpleDataSet()
+                .put("dataset", new ArrayDataSet()
                         .put("null", null)
                         .put("extendedString", "1\\2#3-4\"5{6}7?8$9@a%b\nc")
                         .put("farewell", "So-long, farewell Adure!")
@@ -92,7 +92,7 @@ public class TestDataSet
         {
         case "simple" :
         {
-            this.data = new SimpleDataSet();
+            this.data = new ArrayDataSet();
             break;
         }
         case "hash" :
@@ -176,7 +176,7 @@ public class TestDataSet
         dr.close();
         return this.data.equals(read);
     }
-//        DataSet data = test(new SimpleDataSet());
+//        DataSet data = test(new ArrayDataSet());
 //        ConfigDataSet config = new ConfigDataSet(data);
 //        config.printFormatted(System.out);
 //        try
@@ -189,7 +189,7 @@ public class TestDataSet
 //            System.out.println("failed to read config");
 //            ex.printStackTrace(System.out);
 //        }
-//        new SimpleDataSet(config); // reads everything
+//        new ArrayDataSet(config); // reads everything
 //        try
 //        {
 //            System.out.println("Exception due");

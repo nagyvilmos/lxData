@@ -21,7 +21,7 @@ import java.util.Set;
 import lexa.core.data.DataItem;
 import lexa.core.data.DataSet;
 import lexa.core.data.SimpleDataItem;
-import lexa.core.data.SimpleDataSet;
+import lexa.core.data.ArrayDataSet;
 import lexa.core.data.exception.DataException;
 
 /**
@@ -30,7 +30,7 @@ import lexa.core.data.exception.DataException;
  * This is used for loading and parsing configuration items. Once read, the
  * object should be closed to ensure that all items have been read.
  * <br>
- * A read only extension of a {@link SimpleDataSet}. This will behave in all
+ * A read only extension of a {@link ArrayDataSet}. This will behave in all
  * respects like a data set with the added trace of path within the whole set
  * and checking that all the data has been read when closing.
  * <br>
@@ -40,7 +40,7 @@ import lexa.core.data.exception.DataException;
  * @since   2016-09
  */
 public class ConfigDataSet
-		extends SimpleDataSet
+		extends ArrayDataSet
         implements ConfigObject
 {
     private final static String ROOT_NAME = "[root]";
@@ -87,7 +87,7 @@ public class ConfigDataSet
 	 *
 	 * @param   item
 	 *          a {@link SimpleDataItem} to add.
-	 * @return  the {@link SimpleDataSet} the item was added to.
+	 * @return  the {@link ArrayDataSet} the item was added to.
 	 */
 	@Override
 	public synchronized DataSet put(DataItem item)
@@ -97,7 +97,7 @@ public class ConfigDataSet
 	}
 
 	/**
-	 * Removes the specified element from this {@link SimpleDataSet}.
+	 * Removes the specified element from this {@link ArrayDataSet}.
 	 *
 	 * <p>Throws an {@link UnsupportedOperationException} if called.
 	 *

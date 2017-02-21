@@ -20,7 +20,7 @@
 package lexa.core.data;
 
 /**
- Implementation of {@link DataValue} for use in a {@link SimpleDataSet}
+ Implementation of {@link DataValue} for use in a {@link ArrayDataSet}
  <p>
  This class manages the type conversion and keels it type safe.
  @author william
@@ -56,7 +56,7 @@ public class SimpleValue
                     type.equals(DataType.ARRAY) ? 
                         new SimpleValueArray(clone.getArray()) :
                     type.equals(DataType.DATA_SET) ?
-                        new SimpleDataSet(clone.getDataSet()) :
+                        new ArrayDataSet(clone.getDataSet()) :
                     clone.getObject();
 	}
 

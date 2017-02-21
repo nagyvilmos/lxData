@@ -19,13 +19,13 @@
 package lexa.core.data;
 
 /**
- * A read only {@link SimpleDataSet}.
+ * A read only {@link ArrayDataSet}.
  *
  * @author  William
  * @since   2009-08
  */
 public class SealedDataSet
-		extends SimpleDataSet
+		extends ArrayDataSet
 {
 
 	/**
@@ -35,7 +35,7 @@ public class SealedDataSet
 	 * <p>The cloned data set can be modified.
 	 *
 	 * @param   data
-	 *          a {@link SimpleDataSet} to be sealed.
+	 *          a {@link ArrayDataSet} to be sealed.
 	 */
 	public SealedDataSet(DataSet data)
 	{
@@ -46,7 +46,7 @@ public class SealedDataSet
 	/**
 	 * Get a SimpleDataItem from the list for the supplied key.
 	 *
-	 * <p>If the value is a {@link SimpleDataSet} it is wrapped in a {@link SealedDataSet}.
+	 * <p>If the value is a {@link ArrayDataSet} it is wrapped in a {@link SealedDataSet}.
 	 *
 	 * @param   key
 	 *          the key for the {@link SimpleDataItem}.
@@ -66,13 +66,13 @@ public class SealedDataSet
 	}
 
 	/**
-	 * Put the supplied item into the {@link SimpleDataSet}.
+	 * Put the supplied item into the {@link ArrayDataSet}.
 	 *
 	 * <p>Throws an {@link UnsupportedOperationException} if called.
 	 *
 	 * @param   item
 	 *          a {@link SimpleDataItem} to add.
-	 * @return  the {@link SimpleDataSet} the item was added to.
+	 * @return  the {@link ArrayDataSet} the item was added to.
 	 */
 	@Override
 	public synchronized DataSet put(DataItem item)
@@ -82,7 +82,7 @@ public class SealedDataSet
 	}
 
 	/**
-	 * Removes the specified element from this {@link SimpleDataSet}.
+	 * Removes the specified element from this {@link ArrayDataSet}.
 	 *
 	 * <p>Throws an {@link UnsupportedOperationException} if called.
 	 *
