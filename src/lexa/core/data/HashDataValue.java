@@ -50,7 +50,7 @@ public class HashDataValue
                     type.equals(DataType.NULL) ? 
                         null :
                     type.equals(DataType.ARRAY) ? 
-                        new HashValueArray(clone.getArray()) :
+                        new HashDataArray(clone.getArray()) :
                     type.equals(DataType.DATA_SET) ?
                         new HashDataSet(clone.getDataSet()) :
                     clone.getObject();
