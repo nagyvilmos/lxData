@@ -102,7 +102,7 @@ public abstract class BaseValueArray
 
     @Override
     public Iterator<DataValue> iterator() {
-        return new ValueArrayIterator(this);
+        return new DataArrayIterator(this);
     }
 
     @Override

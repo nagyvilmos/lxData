@@ -2,7 +2,7 @@
  * ================================================================================
  * Lexa - Property of William Norman-Walker
  * --------------------------------------------------------------------------------
- * ValueArrayIterator.java
+ * DataArrayIterator.java
  *--------------------------------------------------------------------------------
  * Author:  William Norman-Walker
  * Created: March 2015
@@ -10,7 +10,7 @@
  * Change Log
  * Date:        By: Ref:        Description:
  * ----------   --- ----------  --------------------------------------------------
- * 2016-02-09   WNW 16-01       Make ValueArrayIterator public
+ * 2016-02-09   WNW 16-01       Make DataArrayIterator public
  *================================================================================
  */
 package lexa.core.data;
@@ -25,7 +25,7 @@ import java.util.Iterator;
  * @author  William
  * @since   2015-03
  */
-public class ValueArrayIterator
+public class DataArrayIterator
 		implements Iterator<DataValue>
 {
 
@@ -40,7 +40,7 @@ public class ValueArrayIterator
 	 * @param   array
 	 *          the data to iterate.
 	 */
-	public ValueArrayIterator(DataArray array)
+	public DataArrayIterator(DataArray array)
 	{
 		this.array = array;
 		this.index = 0;
