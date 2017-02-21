@@ -2,7 +2,7 @@
  * ================================================================================
  * Lexa - Property of William Norman-Walker
  * --------------------------------------------------------------------------------
- * HashValue.java
+ * HashDataValue.java
  *--------------------------------------------------------------------------------
  * Author:  William Norman-Walker
  * Created: September 2016
@@ -22,7 +22,7 @@ package lexa.core.data;
  @author william
  @since 2016-09
  */
-public class HashValue
+public class HashDataValue
         extends BaseDataValue
 {
     /** the object being represented */
@@ -32,7 +32,7 @@ public class HashValue
 	Create a value to represent an object
 	@param object the contained value
 	*/
-	public HashValue(Object object)
+	public HashDataValue(Object object)
 	{
 		this.object = object;
 	}
@@ -41,7 +41,7 @@ public class HashValue
 	Create a value as a clone of another value
 	@param clone a DataValue to clone
 	*/
-	public HashValue(DataValue clone)
+	public HashDataValue(DataValue clone)
 	{
             DataType type = (clone != null) ?
                     clone.getType() :

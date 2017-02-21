@@ -34,7 +34,7 @@ public class HashDataItem
 	 */
 	public HashDataItem(String key, Object value)
 	{
-		this(key, new HashValue(value));
+		this(key, new HashDataValue(value));
 	}
 	/**
 	 * Create a new item
@@ -44,7 +44,7 @@ public class HashDataItem
 	public HashDataItem(String key, DataValue value)
 	{
 		super(key);
-		this.value = new HashValue(value);
+		this.value = new HashDataValue(value);
 	}
 
 	/**
