@@ -2,7 +2,7 @@
  * ================================================================================
  * Lexa - Property of William Norman-Walker
  * --------------------------------------------------------------------------------
- * SimpleValueArray.java
+ * ArrayDataArray.java
  *--------------------------------------------------------------------------------
  * Author:  William Norman-Walker
  * Created: January 2016
@@ -27,7 +27,7 @@ package lexa.core.data;
  * @author william
  * @since 2016-01
  */
-public class SimpleValueArray extends BaseDataArray
+public class ArrayDataArray extends BaseDataArray
 {
 
     /**
@@ -52,7 +52,7 @@ public class SimpleValueArray extends BaseDataArray
     /**
      * Create a new {@link DataArray} The initial array has no values
      */
-    public SimpleValueArray()
+    public ArrayDataArray()
     {
         this.size = 0;
     }
@@ -63,12 +63,11 @@ public class SimpleValueArray extends BaseDataArray
      *
      * @param clone an array to clone.
      */
-    public SimpleValueArray(DataArray clone)
+    public ArrayDataArray(DataArray clone)
     {
         this();
-        clone.forEach(value -> this.add(
-                value.getType().equals(DataType.ARRAY)
-                ? new SimpleValueArray(value.getArray())
+        clone.forEach(value -> this.add(value.getType().equals(DataType.ARRAY)
+                ? new ArrayDataArray(value.getArray())
                 : value.getType().equals(DataType.DATA_SET)
                 ? new ArrayDataSet(value.getDataSet())
                 : value.getObject()
@@ -81,7 +80,7 @@ public class SimpleValueArray extends BaseDataArray
      *
      * @param objects an array of objects to populate the array.
      */
-    public SimpleValueArray(Object... objects)
+    public ArrayDataArray(Object... objects)
     {
         this();
         for (Object o : objects)

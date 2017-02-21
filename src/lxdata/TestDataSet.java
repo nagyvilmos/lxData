@@ -11,7 +11,7 @@ import java.util.Date;
 import lexa.core.data.DataSet;
 import lexa.core.data.HashDataSet;
 import lexa.core.data.ArrayDataSet;
-import lexa.core.data.SimpleValueArray;
+import lexa.core.data.ArrayDataArray;
 import lexa.core.data.DataType;
 import lexa.core.data.io.DataReader;
 import lexa.core.data.io.DataWriter;
@@ -37,13 +37,13 @@ public class TestDataSet
                 .put("long", 2L)
                 .put("double",(Double)3.14)
                 .put("date",new Date(8945094))
-                .put("array", new SimpleValueArray()
+                .put("array", new ArrayDataArray()
                         .add("One")
                         .add(2)
                         .add(9876543210L)
                         .add(3.4)
                         .add(false)
-                        .add(new SimpleValueArray(1,2))
+                        .add(new ArrayDataArray(1,2))
                         .add(new ArrayDataSet().put("key","value"))
                         .add(new Date(6984564))
                 )

@@ -22,7 +22,7 @@ import java.util.Iterator;
  * @author william
  * @since 2016-09
  */
-public class HashDataArray extends SimpleValueArray
+public class HashDataArray extends ArrayDataArray
 {
 	/**
 	Create a new {@link DataArray}

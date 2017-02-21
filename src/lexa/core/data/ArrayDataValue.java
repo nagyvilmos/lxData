@@ -54,7 +54,7 @@ public class ArrayDataValue
                     type.equals(DataType.NULL) ? 
                         null :
                     type.equals(DataType.ARRAY) ? 
-                        new SimpleValueArray(clone.getArray()) :
+                        new ArrayDataArray(clone.getArray()) :
                     type.equals(DataType.DATA_SET) ?
                         new ArrayDataSet(clone.getDataSet()) :
                     clone.getObject();

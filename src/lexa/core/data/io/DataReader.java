@@ -33,7 +33,7 @@ import lexa.core.data.DataItem;
 import lexa.core.data.DataSet;
 import lexa.core.data.ArrayDataItem;
 import lexa.core.data.ArrayDataSet;
-import lexa.core.data.SimpleValueArray;
+import lexa.core.data.ArrayDataArray;
 import lexa.core.data.DataType;
 import lexa.core.data.formatting.CombinedFormat;
 import lexa.core.data.DataArray;
@@ -315,7 +315,7 @@ public class DataReader
 
 	private DataArray readArray() throws IOException
 	{
-		DataArray array = new SimpleValueArray();
+		DataArray array = new ArrayDataArray();
 		while (true)
 		{
 			String value = this.readLine();
