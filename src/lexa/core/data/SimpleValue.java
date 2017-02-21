@@ -27,7 +27,7 @@ package lexa.core.data;
  @since 2015-03
  */
 public class SimpleValue
-        extends BaseValue
+        extends BaseDataValue
 {
     /** the value being represented */
 	private final Object value;

@@ -2,7 +2,7 @@
  * ================================================================================
  * Lexa - Property of William Norman-Walker
  * --------------------------------------------------------------------------------
- * BaseValue.java
+ * BaseDataValue.java
  *--------------------------------------------------------------------------------
  * Author:  William Norman-Walker
  * Created: January 2016
@@ -28,7 +28,7 @@ import java.util.Date;
  * @author william
  * @since 2016-01
  */
-public abstract class BaseValue
+public abstract class BaseDataValue
         implements DataValue
 {
     

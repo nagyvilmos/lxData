@@ -16,7 +16,7 @@
  */
 package lexa.core.data.config;
 
-import lexa.core.data.BaseValue;
+import lexa.core.data.BaseDataValue;
 import lexa.core.data.DataType;
 import lexa.core.data.exception.DataException;
 import lexa.core.data.DataValue;
@@ -26,7 +26,7 @@ import lexa.core.data.DataValue;
  * @author william
  */
 public class ConfigValue
-        extends BaseValue
+        extends BaseDataValue
         implements ConfigObject
 {
     private final String path;

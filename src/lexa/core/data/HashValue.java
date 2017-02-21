@@ -23,7 +23,7 @@ package lexa.core.data;
  @since 2016-09
  */
 public class HashValue
-        extends BaseValue
+        extends BaseDataValue
 {
     /** the object being represented */
 	private final Object object;
