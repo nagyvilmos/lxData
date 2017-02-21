@@ -52,7 +52,7 @@ public class ArrayDataItem
 	 */
 	public ArrayDataItem(String key, Object value)
 	{
-		this(key, new SimpleValue(value));
+		this(key, new ArrayDataValue(value));
 	}
 	/**
 	 * Create a new {@link DataItem}.
@@ -62,7 +62,7 @@ public class ArrayDataItem
 	public ArrayDataItem(String key, DataValue value)
 	{
 		super(key);
-		this.value = new SimpleValue(value);
+		this.value = new ArrayDataValue(value);
 	}
 
 	/**

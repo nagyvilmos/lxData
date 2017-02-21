@@ -97,8 +97,8 @@ public class SimpleValueArray extends BaseDataArray
      * following are equivalent:
      * <pre>{@code
      * va.add(obj, pos);
-     * va.add(new SimpleValue(obj), pos);
-     * }</pre>
+ va.add(new ArrayDataValue(obj), pos);
+ }</pre>
      *
      * @param index the position for the object
      * @param object the value to add
@@ -109,7 +109,7 @@ public class SimpleValueArray extends BaseDataArray
         if ((object != null) && DataValue.class.isAssignableFrom(object.getClass()))
             return this.add(index, (DataValue)object);
 
-        return this.add(index, new SimpleValue(object));
+        return this.add(index, new ArrayDataValue(object));
     }
 
     /**

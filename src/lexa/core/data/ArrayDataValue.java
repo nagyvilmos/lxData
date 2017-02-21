@@ -2,7 +2,7 @@
  * ================================================================================
  * Lexa - Property of William Norman-Walker
  * --------------------------------------------------------------------------------
- * SimpleValue.java
+ * ArrayDataValue.java
  *--------------------------------------------------------------------------------
  * Author:  William Norman-Walker
  * Created: March 2015
@@ -26,7 +26,7 @@ package lexa.core.data;
  @author william
  @since 2015-03
  */
-public class SimpleValue
+public class ArrayDataValue
         extends BaseDataValue
 {
     /** the value being represented */
@@ -36,7 +36,7 @@ public class SimpleValue
 	Create a value to represent an object
 	@param value the contained value
 	*/
-	public SimpleValue(Object value)
+	public ArrayDataValue(Object value)
 	{
 		this.value = value;
 	}
@@ -45,7 +45,7 @@ public class SimpleValue
 	Create a value as a clone of another value
 	@param clone a DataValue to clone
 	*/
-	public SimpleValue(DataValue clone)
+	public ArrayDataValue(DataValue clone)
 	{
             DataType type = (clone != null) ?
                     clone.getType() :
