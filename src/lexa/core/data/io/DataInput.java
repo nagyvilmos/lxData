@@ -71,7 +71,7 @@ public class DataInput
 		String key = this.stream.readUTF();
 		Object value = this.readValue();
 		
-		return new SimpleDataItem(key, value);
+		return new ArrayDataItem(key, value);
 	}		
 	private Object readValue()
 			throws IOException, DataException

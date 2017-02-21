@@ -2,7 +2,7 @@
  * ================================================================================
  * Lexa - Property of William Norman-Walker
  * --------------------------------------------------------------------------------
- * SimpleDataItem.java
+ * ArrayDataItem.java
  *--------------------------------------------------------------------------------
  * Author:  William Norman-Walker
  * Created: July 2009
@@ -13,15 +13,15 @@
  * 13-MAR-13    WNW 2013-03-13  Fix bug in toString() when item name is null.
  * 2013-08-11   WNW -           Kill the integer type.
  *                              I hope that using the long instead will work.
- * 2014-10-10	WNW -           Redo the equals and hash code for SimpleDataItem
+ * 2014-10-10	WNW -           Redo the equals and hash code for ArrayDataItem
  * 2015-03-05	WNW 15-03       Refactor to move values into their own class and 
  *                              add the concept of an array.
  *                              Add ARRAY and LONG types.
  * 2015-03-19	WNW	15-03       Extract interfaces.
- *                              DataItem becomes and interface and SimpleDataItem 
+ *                              DataItem becomes and interface and ArrayDataItem 
  *                              the default implimentation.
  * 2016-01-27	WNW	16-01       Remove the superfluose clone() method.
- * 2016-01-28   WNW 16-01       Remove the generic getter methods from SimpleDataItem
+ * 2016-01-28   WNW 16-01       Remove the generic getter methods from ArrayDataItem
  *                              into DataItemGetter.
  * 2016-02-09   WNW             Change base abstract classes from *Getter to *Base
  * 2016-09-09   WNW 16-09       Change base abstract classes from *Base to Base*
@@ -33,13 +33,13 @@ package lexa.core.data;
 
 /**
  * A single item in a data set.
- * A single {@link SimpleDataItem} in a {@link SimpleDataSet} represented by a
+ * A single {@link ArrayDataItem} in a {@link SimpleDataSet} represented by a
  * {@link String} key and an {@link Object} value.
  * @author William
  * @since 2009-07
  * @see SimpleDataSet
  */
-public class SimpleDataItem
+public class ArrayDataItem
 		extends BaseDataItem
 {
 	/** The value for the item */
@@ -50,7 +50,7 @@ public class SimpleDataItem
 	 * @param key The key for the item
 	 * @param value The value
 	 */
-	public SimpleDataItem(String key, Object value)
+	public ArrayDataItem(String key, Object value)
 	{
 		this(key, new SimpleValue(value));
 	}
@@ -59,7 +59,7 @@ public class SimpleDataItem
 	 * @param key The key for the item
 	 * @param value The value
 	 */
-	public SimpleDataItem(String key, DataValue value)
+	public ArrayDataItem(String key, DataValue value)
 	{
 		super(key);
 		this.value = new SimpleValue(value);
@@ -73,7 +73,7 @@ public class SimpleDataItem
 	 * @param clone A {@link DataItem} to clone.
 	 * @see SimpleDataSet
 	 */
-	public SimpleDataItem(DataItem clone)
+	public ArrayDataItem(DataItem clone)
 	{
             this(clone.getKey(), clone.getValue());
 	}
@@ -89,7 +89,7 @@ public class SimpleDataItem
 	}
 
 	/**
-	 * Gets the value of a {@link SimpleDataItem}.
+	 * Gets the value of a {@link ArrayDataItem}.
 	 * @return The value of the item.
 	 */
 	@Override

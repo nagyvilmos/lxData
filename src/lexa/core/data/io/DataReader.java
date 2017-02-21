@@ -31,7 +31,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import lexa.core.data.DataItem;
 import lexa.core.data.DataSet;
-import lexa.core.data.SimpleDataItem;
+import lexa.core.data.ArrayDataItem;
 import lexa.core.data.ArrayDataSet;
 import lexa.core.data.SimpleValueArray;
 import lexa.core.data.DataType;
@@ -168,13 +168,13 @@ public class DataReader
 	}
 
 	/**
-	 * Read a {@link SimpleDataItem} from the input.
+	 * Read a {@link ArrayDataItem} from the input.
 	 *
 	 * @param   isNested
 	 *       Indicate that the read is inside a {@link ArrayDataSet}
 	 *       and so should not reach EOF.
 	 * @return
-	 *       A {see SimpleDataItem} read from the input or {@code null} if
+	 *       A {see ArrayDataItem} read from the input or {@code null} if
 	 *       The current {@link ArrayDataSet} has all been read.
 	 * @throws  IOException
 	 *       When an IO error occurs reading the input.
@@ -229,7 +229,7 @@ public class DataReader
 			key = line;
 			value = "";
 		}
-		return new SimpleDataItem(key, this.decodeValue(value));
+		return new ArrayDataItem(key, this.decodeValue(value));
 	}
 	private Object decodeValue(String value)
 			throws IOException

@@ -64,7 +64,7 @@ public class ArrayDataSet
                 {
                     object = new ArrayDataSet(map.getClass().cast(object));
                 }
-                this._put(new SimpleDataItem(
+                this._put(new ArrayDataItem(
                         key, object
                 ));
             });
@@ -83,16 +83,16 @@ public class ArrayDataSet
 
 		for (DataItem item : clone)
 		{
-			this._put(new SimpleDataItem(item));
+			this._put(new ArrayDataItem(item));
 		}
 	}
 
 	/**
 	 * Checks if the {@link ArrayDataSet} contains a named key.
 	 * <p>
-	 * Checks each {@link SimpleDataItem} and sees if its key is the same as the named key.
-	 * @param key   A key for a {@link SimpleDataItem}.
-	 * @return      {@code true} if a {@link SimpleDataItem} exists with the named key,
+	 * Checks each {@link ArrayDataItem} and sees if its key is the same as the named key.
+	 * @param key   A key for a {@link ArrayDataItem}.
+	 * @return      {@code true} if a {@link ArrayDataItem} exists with the named key,
 	 *              otherwise {@code false}.
 	 */
 	@Override
@@ -104,9 +104,9 @@ public class ArrayDataSet
 	/**
 	 * Find then position of an item in the data set.
 	 * <p>
-	 * Checks each {@link SimpleDataItem} and sees if its key is the same as the named key.
-	 * @param key   A key for a {@link SimpleDataItem}.
-	 * @return      The index if a {@link SimpleDataItem} exists with the named key,
+	 * Checks each {@link ArrayDataItem} and sees if its key is the same as the named key.
+	 * @param key   A key for a {@link ArrayDataItem}.
+	 * @return      The index if a {@link ArrayDataItem} exists with the named key,
 	 *              otherwise {@code -1}.
 	 */
 	private synchronized int find(String key)
@@ -139,9 +139,9 @@ public class ArrayDataSet
 	}
 
 	/**
-	 * Get a {@link SimpleDataItem} from the list for the supplied key.
-	 * @param key The key for the {@link SimpleDataItem}.
-	 * @return A {@link SimpleDataItem} if it exists, otherwise {@code null}.
+	 * Get a {@link ArrayDataItem} from the list for the supplied key.
+	 * @param key The key for the {@link ArrayDataItem}.
+	 * @return A {@link ArrayDataItem} if it exists, otherwise {@code null}.
 	 */
 	@Override
 	public synchronized DataItem get(String key)
@@ -155,11 +155,11 @@ public class ArrayDataSet
 	}
 
 	/**
-	 * Get a {@link SimpleDataItem} from the list for the supplied index.
+	 * Get a {@link ArrayDataItem} from the list for the supplied index.
 	 *
 	 * @param   index
-	 *          the index for the {@link SimpleDataItem}.
-	 * @return  A {@link SimpleDataItem} if it exists,
+	 *          the index for the {@link ArrayDataItem}.
+	 * @return  A {@link ArrayDataItem} if it exists,
 	 *          otherwise {@code null}.
 	 */
 	@Override
@@ -232,7 +232,7 @@ public class ArrayDataSet
 	 * <p>
 	 * If the item already exists it is overwritten.
 	 *
-	 * @param item A {@link SimpleDataItem} to add.
+	 * @param item A {@link ArrayDataItem} to add.
 	 * @return  the {@link ArrayDataSet} the item was added to.
 	 */
 	@Override
@@ -255,7 +255,7 @@ public class ArrayDataSet
 	@Override
 	public synchronized DataSet put(String key, Object value)
 	{
-		return this.put(new SimpleDataItem(key, value));
+		return this.put(new ArrayDataItem(key, value));
 	}
 
 	/**
@@ -304,7 +304,7 @@ public class ArrayDataSet
 	/**
 	 * Get the size of the {@link ArrayDataSet}.
 	 *
-	 * @return the number of {@link SimpleDataItem} objects in the {@link ArrayDataSet}
+	 * @return the number of {@link ArrayDataItem} objects in the {@link ArrayDataSet}
 	 */
 	@Override
 	public synchronized int size()

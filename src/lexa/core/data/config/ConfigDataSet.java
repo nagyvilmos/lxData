@@ -20,7 +20,7 @@ import java.util.HashSet;
 import java.util.Set;
 import lexa.core.data.DataItem;
 import lexa.core.data.DataSet;
-import lexa.core.data.SimpleDataItem;
+import lexa.core.data.ArrayDataItem;
 import lexa.core.data.ArrayDataSet;
 import lexa.core.data.exception.DataException;
 
@@ -86,7 +86,7 @@ public class ConfigDataSet
 	 * <p>Throws an {@link UnsupportedOperationException} if called.
 	 *
 	 * @param   item
-	 *          a {@link SimpleDataItem} to add.
+	 *          a {@link ArrayDataItem} to add.
 	 * @return  the {@link ArrayDataSet} the item was added to.
 	 */
 	@Override
@@ -183,7 +183,7 @@ public class ConfigDataSet
      * Get a {@link ConfigDataItem} from the list for the supplied key.
      * Either get the configured setting or the default value if missing.
      *
-     * @param key The key for the SimpleDataItem.
+     * @param key The key for the ArrayDataItem.
      * @param defaultValue the default value
      * @return The corresponding {@link ConfigDataItem} if it exists,
      * otherwise a new item containing with the given default.
@@ -193,7 +193,7 @@ public class ConfigDataSet
         // avoid the error later:
         if (this.contains(key))
             return this.get(key);
-        return new ConfigDataItem(this.path, new SimpleDataItem(key, defaultValue));
+        return new ConfigDataItem(this.path, new ArrayDataItem(key, defaultValue));
     }
 
     @Override

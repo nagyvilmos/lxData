@@ -44,12 +44,12 @@ public class SealedDataSet
 
 	
 	/**
-	 * Get a SimpleDataItem from the list for the supplied key.
+	 * Get a ArrayDataItem from the list for the supplied key.
 	 *
 	 * <p>If the value is a {@link ArrayDataSet} it is wrapped in a {@link SealedDataSet}.
 	 *
 	 * @param   key
-	 *          the key for the {@link SimpleDataItem}.
+	 *          the key for the {@link ArrayDataItem}.
 	 *
 	 * @return  the item represented by {@code key}.
 	 */
@@ -71,7 +71,7 @@ public class SealedDataSet
 	 * <p>Throws an {@link UnsupportedOperationException} if called.
 	 *
 	 * @param   item
-	 *          a {@link SimpleDataItem} to add.
+	 *          a {@link ArrayDataItem} to add.
 	 * @return  the {@link ArrayDataSet} the item was added to.
 	 */
 	@Override
@@ -108,7 +108,7 @@ public class SealedDataSet
 		if (item != null && item.getType()
 				.equals(DataType.DATA_SET))
 		{
-			return new SimpleDataItem(item.getKey(), new SealedDataSet(item.getDataSet()));
+			return new ArrayDataItem(item.getKey(), new SealedDataSet(item.getDataSet()));
 		}
 		return item;
 	}
