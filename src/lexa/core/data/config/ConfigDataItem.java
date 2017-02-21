@@ -31,7 +31,7 @@ public class ConfigDataItem
         implements ConfigObject
 {
     private final String path;
-    private final ConfigValue value;
+    private final ConfigDataValue value;
 
     /**
      * Create a configuration data item.
@@ -42,7 +42,7 @@ public class ConfigDataItem
     {
         super(item.getKey());
         this.path = path;
-        this.value = new ConfigValue(this.path, super.getKey(), item.getValue());
+        this.value = new ConfigDataValue(this.path, super.getKey(), item.getValue());
     }
 
     @Override
@@ -64,7 +64,7 @@ public class ConfigDataItem
     }
 
     @Override
-    public ConfigValue getValue()
+    public ConfigDataValue getValue()
     {
         return this.value;
     }

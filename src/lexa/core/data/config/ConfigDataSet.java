@@ -197,9 +197,9 @@ public class ConfigDataSet
     }
 
     @Override
-    public synchronized ConfigValue getValue(String key)
+    public synchronized ConfigDataValue getValue(String key)
     {
-        return (ConfigValue)super.getValue(key); //To change body of generated methods, choose Tools | Templates.
+        return (ConfigDataValue)super.getValue(key); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

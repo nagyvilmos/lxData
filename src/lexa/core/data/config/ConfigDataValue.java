@@ -2,7 +2,7 @@
  * ================================================================================
  * Lexa - Property of William Norman-Walker
  * --------------------------------------------------------------------------------
- * ConfigValue.java
+ * ConfigDataValue.java
  *--------------------------------------------------------------------------------
  * Author:  William Norman-Walker
  * Created: September 2016
@@ -25,7 +25,7 @@ import lexa.core.data.DataValue;
  *
  * @author william
  */
-public class ConfigValue
+public class ConfigDataValue
         extends BaseDataValue
         implements ConfigObject
 {
@@ -33,15 +33,15 @@ public class ConfigValue
     private final Object object;
     private boolean read;
 
-    ConfigValue(String path, String key, DataValue value)
+    ConfigDataValue(String path, String key, DataValue value)
     {
         this(path == null ? key : path + '.' + key, value);
     }
-    ConfigValue(String path, int index, DataValue value)
+    ConfigDataValue(String path, int index, DataValue value)
     {
         this(path + '_' + index, value);        
     }
-    private ConfigValue(String path, DataValue value)
+    private ConfigDataValue(String path, DataValue value)
     {
         this.path = path;
             DataType type = (value != null) ?

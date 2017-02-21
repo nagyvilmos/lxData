@@ -2,7 +2,7 @@
  * ================================================================================
  * Lexa - Property of William Norman-Walker
  * --------------------------------------------------------------------------------
- * ConfigValue.java
+ * ConfigDataValue.java
  *--------------------------------------------------------------------------------
  * Author:  William Norman-Walker
  * Created: September 2016
@@ -35,7 +35,7 @@ public class ConfigValueArray
 {
 
     private final String path;
-    private final List<ConfigValue> values;
+    private final List<ConfigDataValue> values;
     private final Set<Integer> invalidGets;
     private boolean read;
 
@@ -45,7 +45,7 @@ public class ConfigValueArray
         this.values = new ArrayList();
         for (DataValue value : array)
         {
-            this.values.add(new ConfigValue(this.path, this.values.size(), value));
+            this.values.add(new ConfigDataValue(this.path, this.values.size(), value));
         }
         this.invalidGets = new HashSet();
         this.read = false;
@@ -66,7 +66,7 @@ public class ConfigValueArray
     }
 
     @Override
-    public synchronized ConfigValue get(int index)
+    public synchronized ConfigDataValue get(int index)
     {
         if (index < 0 || index >= this.size())
         {
@@ -96,7 +96,7 @@ public class ConfigValueArray
         {
 			StringBuilder cannotClose = new StringBuilder("Cannot close config");
             int index = 0;
-			for (ConfigValue value : this.values)
+			for (ConfigDataValue value : this.values)
 			{
 				if (!value.isRead())
 				{
