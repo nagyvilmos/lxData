@@ -166,15 +166,15 @@ public abstract class BaseDataSet
 	 * Get the type of an item from the list for the supplied key.
 	 * @param key The key for the {@link Object}.
 	 * @return If the item exists then the
-	 * item's type, otherwise {@link ValueType#NULL}.
+	 * item's type, otherwise {@link DataType#NULL}.
 	 */
 	@Override
-	public synchronized ValueType getType(String key)
+	public synchronized DataType getType(String key)
 	{
 		DataItem item = this.get(key);
 		if (item == null)
 		{
-			return ValueType.NULL;
+			return DataType.NULL;
 		}
 		return item.getType();
 	}
@@ -297,7 +297,7 @@ public abstract class BaseDataSet
         String parent = key.substring(0,split);
         DataValue value = this.itemValue(parent);
 
-        if (value == null || !value.getType().equals(ValueType.DATA_SET))
+        if (value == null || !value.getType().equals(DataType.DATA_SET))
         {
             return null;
         }
@@ -328,7 +328,7 @@ public abstract class BaseDataSet
         {
             DataValue subValue = BaseDataSet.itemArray(
                     valueArray, key.substring(0,sub));
-            if (!subValue.getType().equals(ValueType.ARRAY))
+            if (!subValue.getType().equals(DataType.ARRAY))
             {
                 return null;
             }

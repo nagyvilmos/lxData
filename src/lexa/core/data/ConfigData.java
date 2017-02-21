@@ -222,7 +222,7 @@ public class ConfigData
 				: this.data)
 		{
 			if (item.getType()
-					.equals(ValueType.DATA_SET))
+					.equals(DataType.DATA_SET))
 			{
 				ConfigData subBlock = this.getConfigData(item.getKey());
 				out.put(item.getKey(), subBlock.getAll());

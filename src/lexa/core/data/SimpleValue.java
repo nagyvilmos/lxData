@@ -47,15 +47,15 @@ public class SimpleValue
 	*/
 	public SimpleValue(DataValue clone)
 	{
-            ValueType type = (clone != null) ?
+            DataType type = (clone != null) ?
                     clone.getType() :
-                    ValueType.NULL;
+                    DataType.NULL;
             this.value =
-                    type.equals(ValueType.NULL) ? 
+                    type.equals(DataType.NULL) ? 
                         null :
-                    type.equals(ValueType.ARRAY) ? 
+                    type.equals(DataType.ARRAY) ? 
                         new SimpleValueArray(clone.getArray()) :
-                    type.equals(ValueType.DATA_SET) ?
+                    type.equals(DataType.DATA_SET) ?
                         new SimpleDataSet(clone.getDataSet()) :
                     clone.getObject();
 	}

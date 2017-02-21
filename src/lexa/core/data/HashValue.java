@@ -43,15 +43,15 @@ public class HashValue
 	*/
 	public HashValue(DataValue clone)
 	{
-            ValueType type = (clone != null) ?
+            DataType type = (clone != null) ?
                     clone.getType() :
-                    ValueType.NULL;
+                    DataType.NULL;
             this.object =
-                    type.equals(ValueType.NULL) ? 
+                    type.equals(DataType.NULL) ? 
                         null :
-                    type.equals(ValueType.ARRAY) ? 
+                    type.equals(DataType.ARRAY) ? 
                         new HashValueArray(clone.getArray()) :
-                    type.equals(ValueType.DATA_SET) ?
+                    type.equals(DataType.DATA_SET) ?
                         new HashDataSet(clone.getDataSet()) :
                     clone.getObject();
 	}

@@ -67,9 +67,9 @@ public class SimpleValueArray extends BaseValueArray
     {
         this();
         clone.forEach(value -> this.add(
-                value.getType().equals(ValueType.ARRAY)
+                value.getType().equals(DataType.ARRAY)
                 ? new SimpleValueArray(value.getArray())
-                : value.getType().equals(ValueType.DATA_SET)
+                : value.getType().equals(DataType.DATA_SET)
                 ? new SimpleDataSet(value.getDataSet())
                 : value.getObject()
         ));
@@ -125,7 +125,7 @@ public class SimpleValueArray extends BaseValueArray
      */
     public DataArray add(int index, DataValue value)
     {
-        if (value.getType().equals(ValueType.NULL))
+        if (value.getType().equals(DataType.NULL))
         {
             throw new IllegalArgumentException("[null] cannot be added to an array");
         }

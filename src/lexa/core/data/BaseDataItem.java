@@ -160,7 +160,7 @@ public abstract class BaseDataItem
 	 * @return The type of the value.
 	 */
 	@Override
-	public ValueType getType()
+	public DataType getType()
 	{
 		return this.getValue().getType();
 	}

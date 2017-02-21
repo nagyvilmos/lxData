@@ -17,7 +17,7 @@
 package lexa.core.data.config;
 
 import lexa.core.data.BaseValue;
-import lexa.core.data.ValueType;
+import lexa.core.data.DataType;
 import lexa.core.data.exception.DataException;
 import lexa.core.data.DataValue;
 
@@ -44,15 +44,15 @@ public class ConfigValue
     private ConfigValue(String path, DataValue value)
     {
         this.path = path;
-            ValueType type = (value != null) ?
+            DataType type = (value != null) ?
                     value.getType() :
-                    ValueType.NULL;
+                    DataType.NULL;
             this.object =
-                    type.equals(ValueType.NULL) ? 
+                    type.equals(DataType.NULL) ? 
                         null :
-                    type.equals(ValueType.ARRAY) ? 
+                    type.equals(DataType.ARRAY) ? 
                         new ConfigValueArray(path , value.getArray()) :
-                    type.equals(ValueType.DATA_SET) ?
+                    type.equals(DataType.DATA_SET) ?
                         new ConfigDataSet(this ,value.getDataSet()) :
                     value.getObject();
     }

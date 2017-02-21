@@ -86,7 +86,7 @@ public interface DataItem
 	 * Gets the type of the value.
 	 * @return The type of the value.
 	 */
-	ValueType getType();
+	DataType getType();
 
 	/**
 	 * Gets the underlying object.

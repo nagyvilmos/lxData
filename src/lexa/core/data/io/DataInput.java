@@ -76,7 +76,7 @@ public class DataInput
 	private Object readValue()
 			throws IOException, DataException
 	{
-		ValueType vt = ValueType.toType(this.stream.readChar());
+		DataType vt = DataType.toType(this.stream.readChar());
 		switch (vt)
 		{
 			case ARRAY :

@@ -136,9 +136,9 @@ public interface DataSet
 	 * Get the type of an item from the list for the supplied key.
 	 * @param key The key for the {@link Object}.
 	 * @return If the item exists then the
-	 * item's type, otherwise {@link ValueType#NULL}.
+	 * item's type, otherwise {@link DataType#NULL}.
 	 */
-	public ValueType getType(String key);
+	public DataType getType(String key);
 
     /**
 	 * Get an {@link Object} from the list for the supplied key.

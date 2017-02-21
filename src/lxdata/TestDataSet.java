@@ -12,7 +12,7 @@ import lexa.core.data.DataSet;
 import lexa.core.data.HashDataSet;
 import lexa.core.data.SimpleDataSet;
 import lexa.core.data.SimpleValueArray;
-import lexa.core.data.ValueType;
+import lexa.core.data.DataType;
 import lexa.core.data.io.DataReader;
 import lexa.core.data.io.DataWriter;
 import lexa.test.TestAnnotation;
@@ -119,18 +119,18 @@ public class TestDataSet
     public Boolean populated(Object arg) throws IOException
     {
         return (this.data.size() == 8 &&
-                this.data.get("boolean").getType().equals(ValueType.BOOLEAN) &&
-                this.data.get("integer").getType().equals(ValueType.INTEGER) &&
-                this.data.get("long").getType().equals(ValueType.LONG) &&
-                this.data.get("double").getType().equals(ValueType.DOUBLE) &&
-                this.data.get("date").getType().equals(ValueType.DATE) &&
-                this.data.get("array").getType().equals(ValueType.ARRAY) &&
-                this.data.get("dataset").getType().equals(ValueType.DATA_SET) &&
-                this.data.get("string").getType().equals(ValueType.STRING) &&
-                this.data.item("array:4").getType().equals(ValueType.BOOLEAN) &&
-                this.data.item("array:5:1").getType().equals(ValueType.INTEGER) &&
-                this.data.item("array:6.key").getType().equals(ValueType.STRING) &&
-                this.data.item("dataset.farewell").getType().equals(ValueType.STRING));
+                this.data.get("boolean").getType().equals(DataType.BOOLEAN) &&
+                this.data.get("integer").getType().equals(DataType.INTEGER) &&
+                this.data.get("long").getType().equals(DataType.LONG) &&
+                this.data.get("double").getType().equals(DataType.DOUBLE) &&
+                this.data.get("date").getType().equals(DataType.DATE) &&
+                this.data.get("array").getType().equals(DataType.ARRAY) &&
+                this.data.get("dataset").getType().equals(DataType.DATA_SET) &&
+                this.data.get("string").getType().equals(DataType.STRING) &&
+                this.data.item("array:4").getType().equals(DataType.BOOLEAN) &&
+                this.data.item("array:5:1").getType().equals(DataType.INTEGER) &&
+                this.data.item("array:6.key").getType().equals(DataType.STRING) &&
+                this.data.item("dataset.farewell").getType().equals(DataType.STRING));
     }
 
     /**

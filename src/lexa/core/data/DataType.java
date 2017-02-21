@@ -36,10 +36,10 @@ import java.util.Date;
  * </ul>
  * @author William
  */
-public enum ValueType
+public enum DataType
 {
 
-	/** The value is null */
+	/** The value is null *//** The value is null */
 	NULL(null,'~'),
 	/** The value is a boolean */
 	ARRAY(DataArray.class,':'),
@@ -57,19 +57,19 @@ public enum ValueType
 	LONG(Long.class,'='),
 	/** The value is a string */
 	STRING(String.class,'-'),
-	/** The value is any undefined object. ValueType.OBJECT cannot be serialised. */
+	/** The value is any undefined object. DataType.OBJECT cannot be serialised. */
 	OBJECT(Object.class,' ');
 
 	/**
-	 * Get the corresponding {@link ValueType} of an {@link Object}.
+	 * Get the corresponding {@link DataType} of an {@link Object}.
 	 *
 	 * @param value An object to determine the type that it.
 	 * @return The type of the object or {@code null} if it cannot be determined.
 	 */
-	public static ValueType getType(Object value)
+	public static DataType getType(Object value)
 	{
-		for (ValueType type
-				: ValueType.values())
+		for (DataType type
+				: DataType.values())
 		{
 			if (type.isType(value))
 			{
@@ -79,7 +79,7 @@ public enum ValueType
 		// this should never occur, added to satisfy build warning.
 		return null;
 	}
-	/** The class that defines the {@link ValueType}. */
+	/** *  The class that defines the {@link DataType}. */
 	private Class<?> typeClass;
 	/** the character used for annotating the type */
 	private char typeChar;
@@ -89,16 +89,16 @@ public enum ValueType
 	 * @param typeClass The class that corresponds to the {@link ValueType}.
 	 * @param typeChar single char used to indicate type in config.
 	 */
-	private ValueType(Class<?> typeClass, char typeChar)
+	private DataType(Class<?> typeClass, char typeChar)
 	{
 		this.typeClass = typeClass;
 		this.typeChar = typeChar;
 	}
 
 	/**
-	 * Compare an {@link Object} to the {@link ValueType}.
+	 * Compare an {@link Object} to the {@link DataType}.
 	 * @param value An {@link Object} to be checked.
-	 * @return {@code true} if the {@link Object} is assignable from the {@link ValueType},
+	 * @return {@code true} if the {@link Object} is assignable from the {@link DataType},
 	 *      otherwise {@code false}.
 	 */
 	public boolean isType(Object value)
@@ -124,9 +124,9 @@ public enum ValueType
 	@param typeChar a character denoting a type.
 	@return the type corresponding to the character
 	*/
-	public static ValueType toType(char typeChar)
+	public static DataType toType(char typeChar)
 	{
-		for (ValueType vt : ValueType.values())
+		for (DataType vt : DataType.values())
 		{
 			if (vt.getTypeChar() == typeChar)
 			{
@@ -140,7 +140,7 @@ public enum ValueType
 	 * Filter an object to a specific type.
 	 * @param value An {@link Object} to be checked.
 	 * @return The object if it is of the type, otherwise null.
-	 * @see ValueType#isType(Object)
+	 * @see DataType#isType(Object)
 	 */
 	Object getValueIfType(Object value)
 	{

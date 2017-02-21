@@ -34,7 +34,7 @@ import lexa.core.data.DataSet;
 import lexa.core.data.SimpleDataItem;
 import lexa.core.data.SimpleDataSet;
 import lexa.core.data.SimpleValueArray;
-import lexa.core.data.ValueType;
+import lexa.core.data.DataType;
 import lexa.core.data.formatting.CombinedFormat;
 import lexa.core.data.DataArray;
 
@@ -281,7 +281,7 @@ public class DataReader
 		}
 		if (' ' == value.charAt(1))
 		{
-			switch (ValueType.toType(type))
+			switch (DataType.toType(type))
 			{
 				case BOOLEAN :
 				{

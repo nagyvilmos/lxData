@@ -57,7 +57,7 @@ public abstract class BaseValue
      */
     @Override
     public DataArray getArray() {
-        return (DataArray) ValueType.ARRAY.getValueIfType(this.getObject());
+        return (DataArray) DataType.ARRAY.getValueIfType(this.getObject());
     }
 
     /**
@@ -66,7 +66,7 @@ public abstract class BaseValue
      */
     @Override
     public Boolean getBoolean() {
-        return (Boolean) ValueType.BOOLEAN.getValueIfType(this.getObject());
+        return (Boolean) DataType.BOOLEAN.getValueIfType(this.getObject());
     }
 
     /**
@@ -75,7 +75,7 @@ public abstract class BaseValue
      */
     @Override
     public DataSet getDataSet() {
-        return (DataSet) ValueType.DATA_SET.getValueIfType(this.getObject());
+        return (DataSet) DataType.DATA_SET.getValueIfType(this.getObject());
     }
 
     /**
@@ -84,7 +84,7 @@ public abstract class BaseValue
      */
     @Override
     public Date getDate() {
-        return (Date) ValueType.DATE.getValueIfType(this.getObject());
+        return (Date) DataType.DATE.getValueIfType(this.getObject());
     }
 
     /**
@@ -93,7 +93,7 @@ public abstract class BaseValue
      */
     @Override
     public Double getDouble() {
-        return (Double) ValueType.DOUBLE.getValueIfType(this.getObject());
+        return (Double) DataType.DOUBLE.getValueIfType(this.getObject());
     }
 
     /**
@@ -102,7 +102,7 @@ public abstract class BaseValue
      */
     @Override
     public Integer getInteger() {
-        return (Integer) ValueType.INTEGER.getValueIfType(this.getObject());
+        return (Integer) DataType.INTEGER.getValueIfType(this.getObject());
     }
 
     /**
@@ -111,7 +111,7 @@ public abstract class BaseValue
      */
     @Override
     public Long getLong() {
-        return (Long) ValueType.LONG.getValueIfType(this.getObject());
+        return (Long) DataType.LONG.getValueIfType(this.getObject());
     }
 
     /**
@@ -120,7 +120,7 @@ public abstract class BaseValue
      */
     @Override
     public String getString() {
-        return (String) ValueType.STRING.getValueIfType(this.getObject());
+        return (String) DataType.STRING.getValueIfType(this.getObject());
     }
     
 	
@@ -130,9 +130,9 @@ public abstract class BaseValue
 	 * @return The type of the value.
 	 */
 	@Override
-	public ValueType getType()
+	public DataType getType()
 	{
-		return ValueType.getType(this.getObject());
+		return DataType.getType(this.getObject());
 	}
 
 	/**

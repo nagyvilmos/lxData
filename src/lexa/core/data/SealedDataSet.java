@@ -106,7 +106,7 @@ public class SealedDataSet
 	private DataItem sealed(DataItem item)
 	{
 		if (item != null && item.getType()
-				.equals(ValueType.DATA_SET))
+				.equals(DataType.DATA_SET))
 		{
 			return new SimpleDataItem(item.getKey(), new SealedDataSet(item.getDataSet()));
 		}

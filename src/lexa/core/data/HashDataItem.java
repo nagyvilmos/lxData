@@ -61,7 +61,7 @@ public class HashDataItem
 	}
 
 	@Override
-	public ValueType getType()
+	public DataType getType()
 	{
 		return this.value.getType();
 	}

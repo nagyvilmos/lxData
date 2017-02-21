@@ -83,7 +83,7 @@ public class SimpleDataItem
 	 * @return The type of the value.
 	 */
 	@Override
-	public ValueType getType()
+	public DataType getType()
 	{
 		return this.value.getType();
 	}
