@@ -24,13 +24,13 @@ import java.util.Iterator;
  * An array of values
  * The array is self sizing, as it is implemented as a 
  * linked list.  The values are polymorphic as they are always
- * held as {@link Value} objects.
+ * held as {@link DataValue} objects.
  *
  * @author william
  * @since 2015-03
  */
 public interface ValueArray
-		extends Iterable<Value>
+		extends Iterable<DataValue>
 {
 	/**
 	Add an object to the array.
@@ -58,7 +58,7 @@ public interface ValueArray
 	@param value the value to add
 	@return this {@link ValueArray}
 	*/
-	public ValueArray add(Value value);
+	public ValueArray add(DataValue value);
 
 	/**
 	Add an object to the array at a given position.
@@ -84,7 +84,7 @@ public interface ValueArray
 	@param value the value to add
 	@return this {@link ValueArray}
 	*/
-	public ValueArray add(int index, Value value);
+	public ValueArray add(int index, DataValue value);
 
 	/**
 	Add all the values to the array.
@@ -109,17 +109,17 @@ public interface ValueArray
 	@param index position of required value
 	@return the value corresponding to the position
 	*/
-	public Value get(int index);
+	public DataValue get(int index);
 
 	@Override
-	public Iterator<Value> iterator();
+	public Iterator<DataValue> iterator();
 
 	/**
 	Remove the value at a position.
 	@param index position of value to be removed
 	@return the value that has been removed
 	*/
-	public Value remove(int index);
+	public DataValue remove(int index);
 
 	/**
 	Get the size of the array.

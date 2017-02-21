@@ -29,9 +29,9 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import lexa.core.data.DataItem;
 import lexa.core.data.DataSet;
-import lexa.core.data.Value;
 import lexa.core.data.ValueArray;
 import lexa.core.data.formatting.CombinedFormat;
+import lexa.core.data.DataValue;
 
 /**
  * Write {@link lexa.core.data.DataItem} and {@link lexa.core.data.DataSet}
@@ -248,13 +248,13 @@ public class DataWriter
 	 * This private method includes the indentation.
 	 *
 	 * @param   value
-	 *       The {@link lexa.core.data.Value} to be written to the output.
+	 *       The {@link lexa.core.data.DataValue} to be written to the output.
 	 * @param   indent
 	 *       The {@link Indent} to prefix the output.
 	 * @throws  IOException
 	 *       When an IO error occurs writing to the output.
 	 */
-	private void write(Value value, Indent indent)
+	private void write(DataValue value, Indent indent)
 			throws IOException
 	{
 		switch (value.getType())

@@ -55,13 +55,13 @@ public abstract class BaseValueArray
     @return this {@link ValueArray}
      */
     @Override
-    public ValueArray add(Value value) {
+    public ValueArray add(DataValue value) {
         return this.add(this.size(), value);
     }
 
     @Override
     public ValueArray addAll(ValueArray array) {
-        array.forEach((Value value) -> this.add(value));
+        array.forEach((DataValue value) -> this.add(value));
         return this;
     }
 
@@ -76,7 +76,7 @@ public abstract class BaseValueArray
     @Override
     public int hashCode() {
         int hash = 7;
-        for (Value v : this) {
+        for (DataValue v : this) {
             hash = hash * 13 + v.hashCode();
         }
         return hash;
@@ -101,7 +101,7 @@ public abstract class BaseValueArray
     }
 
     @Override
-    public Iterator<Value> iterator() {
+    public Iterator<DataValue> iterator() {
         return new ValueArrayIterator(this);
     }
 
@@ -110,10 +110,10 @@ public abstract class BaseValueArray
         StringBuilder sb = new StringBuilder();
         sb.append('[');
 
-        Iterator<Value> it = this.iterator();
+        Iterator<DataValue> it = this.iterator();
         while (it.hasNext())
         {
-            Value v = it.next();
+            DataValue v = it.next();
             sb.append(v);
             if (it.hasNext()) {
                 sb.append(", ");

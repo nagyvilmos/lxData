@@ -95,9 +95,9 @@ public interface DataItem
 	Object getObject();
 
 	/**
-	 * Gets the {@link Value} of the item.
-	 * @return The {@link Value} of the item.
+	 * Gets the {@link DataValue} of the item.
+	 * @return The {@link DataValue} of the item.
 	 */
-	Value getValue();
+	DataValue getValue();
 	
 }

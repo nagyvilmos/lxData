@@ -18,7 +18,7 @@ package lexa.core.data;
 import java.util.Iterator;
 
 /**
- * Iterate over a {@link ValueArray} returning each {@link Value} in order.
+ * Iterate over a {@link ValueArray} returning each {@link DataValue} in order.
  * <p>This iterator is not thread safe.
  * It should not be used in cases where the data can be changed externally.  In those cases it is
  * better to retrieve the keys and then loop through them.
@@ -26,7 +26,7 @@ import java.util.Iterator;
  * @since   2015-03
  */
 public class ValueArrayIterator
-		implements Iterator<Value>
+		implements Iterator<DataValue>
 {
 
 	/** the data being iterated over. */
@@ -53,7 +53,7 @@ public class ValueArrayIterator
 	}
 
 	@Override
-	public Value next()
+	public DataValue next()
 	{
 		return this.array.get(this.index++);
 	}

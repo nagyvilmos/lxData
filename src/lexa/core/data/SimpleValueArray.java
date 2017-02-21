@@ -21,7 +21,7 @@ package lexa.core.data;
 
 /**
  * An array of values The array is self sizing, as it is implemented as a linked
- * list. The values are polymorphic as they are always held as {@link Value}
+ * list. The values are polymorphic as they are always held as {@link DataValue}
  * objects.
  *
  * @author william
@@ -106,8 +106,8 @@ public class SimpleValueArray extends BaseValueArray
      */
     public ValueArray add(int index, Object object)
     {
-        if ((object != null) && Value.class.isAssignableFrom(object.getClass()))
-            return this.add(index, (Value)object);
+        if ((object != null) && DataValue.class.isAssignableFrom(object.getClass()))
+            return this.add(index, (DataValue)object);
 
         return this.add(index, new SimpleValue(object));
     }
@@ -123,7 +123,7 @@ public class SimpleValueArray extends BaseValueArray
      * @param value the value to add
      * @return this {@link ValueArray}
      */
-    public ValueArray add(int index, Value value)
+    public ValueArray add(int index, DataValue value)
     {
         if (value.getType().equals(ValueType.NULL))
         {
@@ -165,7 +165,7 @@ public class SimpleValueArray extends BaseValueArray
      * @param index position of required value
      * @return the value corresponding to the position
      */
-    public Value get(int index)
+    public DataValue get(int index)
     {
 
         if (index < 0 || index >= size)
@@ -224,9 +224,9 @@ public class SimpleValueArray extends BaseValueArray
      * @param index position of value to be removed
      * @return the value that has been removed
      */
-    public Value remove(int index)
+    public DataValue remove(int index)
     {
-        Value remove = this.get(index);
+        DataValue remove = this.get(index);
 
         // remove item from list
         if (currentValue.previous != null)
@@ -283,6 +283,6 @@ public class SimpleValueArray extends BaseValueArray
         /**
          * the value
          */
-        Value value;
+        DataValue value;
     }
 }

@@ -21,9 +21,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import lexa.core.data.BaseValueArray;
-import lexa.core.data.Value;
 import lexa.core.data.ValueArray;
 import lexa.core.data.exception.DataException;
+import lexa.core.data.DataValue;
 
 /**
  *
@@ -43,7 +43,7 @@ public class ConfigValueArray
     {
         this.path = path;
         this.values = new ArrayList();
-        for (Value value : array)
+        for (DataValue value : array)
         {
             this.values.add(new ConfigValue(this.path, this.values.size(), value));
         }
@@ -59,7 +59,7 @@ public class ConfigValueArray
     }
 
     @Override
-    public ValueArray add(int index, Value value)
+    public ValueArray add(int index, DataValue value)
     {
 		throw new UnsupportedOperationException(
 				"Cannot change the content of a config data array");
@@ -76,7 +76,7 @@ public class ConfigValueArray
     }
 
     @Override
-    public Value remove(int index)
+    public DataValue remove(int index)
     {
 		throw new UnsupportedOperationException(
 				"Cannot change the content of a config data array");

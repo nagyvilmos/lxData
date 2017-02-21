@@ -197,13 +197,13 @@ public abstract class BaseDataSet
 	}
 
     /**
-	 * Get an {@link Value} from the list for the supplied key.
-	 * @param key The key for the {@link Value}.
+	 * Get an {@link DataValue} from the list for the supplied key.
+	 * @param key The key for the {@link DataValue}.
 	 * @return If the item exists then the
 	 * item's value, otherwise {@code null}.
 	 */
 	@Override
-	public synchronized Value getValue(String key)
+	public synchronized DataValue getValue(String key)
 	{
 		DataItem item = this.get(key);
 		if (item == null)
@@ -287,7 +287,7 @@ public abstract class BaseDataSet
 	}
 
     @Override
-    public Value item(String key)
+    public DataValue item(String key)
     {
         int split = key.indexOf('.');
         if (split < 0)
@@ -295,7 +295,7 @@ public abstract class BaseDataSet
             return this.itemValue(key);
         }
         String parent = key.substring(0,split);
-        Value value = this.itemValue(parent);
+        DataValue value = this.itemValue(parent);
 
         if (value == null || !value.getType().equals(ValueType.DATA_SET))
         {
@@ -304,7 +304,7 @@ public abstract class BaseDataSet
         return value.getDataSet().item(key.substring(split+1));
     }
 
-    private Value itemValue(String key)
+    private DataValue itemValue(String key)
     {
         int array = key.indexOf(':');
         if (array < 0)
@@ -317,7 +317,7 @@ public abstract class BaseDataSet
                 key.substring(array+1));
     }
 
-    private static Value itemArray(ValueArray valueArray, String key)
+    private static DataValue itemArray(ValueArray valueArray, String key)
     {
         if (valueArray == null)
         {
@@ -326,7 +326,7 @@ public abstract class BaseDataSet
         int sub = key.indexOf(':');
         if (sub > 0)
         {
-            Value subValue = BaseDataSet.itemArray(
+            DataValue subValue = BaseDataSet.itemArray(
                     valueArray, key.substring(0,sub));
             if (!subValue.getType().equals(ValueType.ARRAY))
             {

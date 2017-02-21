@@ -25,7 +25,7 @@ public class HashDataItem
 		extends BaseDataItem
 {
 	/** The value for the item */
-	private final Value value;
+	private final DataValue value;
 
 	/**
 	 * Create a new item
@@ -41,7 +41,7 @@ public class HashDataItem
 	 * @param key The key for the item
 	 * @param value The value
 	 */
-	public HashDataItem(String key, Value value)
+	public HashDataItem(String key, DataValue value)
 	{
 		super(key);
 		this.value = new HashValue(value);
@@ -67,7 +67,7 @@ public class HashDataItem
 	}
 
 	@Override
-	public Value getValue()
+	public DataValue getValue()
 	{
 		return this.value;
 	}

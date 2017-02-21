@@ -43,7 +43,7 @@ public class SimpleDataItem
 		extends BaseDataItem
 {
 	/** The value for the item */
-	private final Value value;
+	private final DataValue value;
 
 	/**
 	 * Create a new {@link DataItem}.
@@ -59,7 +59,7 @@ public class SimpleDataItem
 	 * @param key The key for the item
 	 * @param value The value
 	 */
-	public SimpleDataItem(String key, Value value)
+	public SimpleDataItem(String key, DataValue value)
 	{
 		super(key);
 		this.value = new SimpleValue(value);
@@ -93,7 +93,7 @@ public class SimpleDataItem
 	 * @return The value of the item.
 	 */
 	@Override
-	public Value getValue()
+	public DataValue getValue()
 	{
 		return this.value;
 	}

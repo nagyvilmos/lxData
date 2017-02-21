@@ -24,12 +24,12 @@ import java.util.Date;
  * Provide the type safe getters for a value.
  * <p>
  * This provides the getters for the specific types supported.
- * It does not implement the basic {@link Value#getObject() getValue} method
+ * It does not implement the basic {@link DataValue#getObject() getValue} method
  * @author william
  * @since 2016-01
  */
 public abstract class BaseValue
-        implements Value
+        implements DataValue
 {
     
 	/**
@@ -41,11 +41,11 @@ public abstract class BaseValue
 	@Override
 	public boolean equals(Object obj)
 	{
-		if (obj == null || !Value.class.isAssignableFrom(obj.getClass()))
+		if (obj == null || !DataValue.class.isAssignableFrom(obj.getClass()))
 		{
 			return false;
 		}
-		final Value other = (Value)obj;
+		final DataValue other = (DataValue)obj;
 		return (this.getObject() == null) ?
 				(other.getObject() == null) :
 				this.getObject().equals(other.getObject());

@@ -154,7 +154,7 @@ public interface DataSet
 	 * @return If the item exists then the
 	 * item's value, otherwise {@code null}.
 	 */
-	public Value getValue(String key);
+	public DataValue getValue(String key);
 
     /**
 	 * Returns true if this contains no elements.
@@ -164,7 +164,7 @@ public interface DataSet
 
 
 	/**
-	 * Get a {@link Value} from anywhere in the hierarchical list.
+	 * Get a {@link DataValue} from anywhere in the hierarchical list.
      * <br>
      * This allows safe access to a child item without checking that the parent
      * {@link DataSet} exists.  The syntax {@code ds.item("parent.child")} will
@@ -174,9 +174,9 @@ public interface DataSet
      * nth item in the array.
      *
 	 * @param key The dot separated hierarchical key for the {@link DataItem}.
-	 * @return The {@link Value} if it exists, otherwise {@code null}.
+	 * @return The {@link DataValue} if it exists, otherwise {@code null}.
 	 */
-	public Value item(String key);
+	public DataValue item(String key);
 
     /**
 	 * Get the list of keys.

@@ -2,7 +2,7 @@
  * ================================================================================
  * Lexa - Property of William Norman-Walker
  * --------------------------------------------------------------------------------
- * Value.java
+ * DataValue.java
  *--------------------------------------------------------------------------------
  * Author:  William Norman-Walker
  * Created: March 2015
@@ -29,7 +29,7 @@ import java.util.Date;
  @author william
  @since 2015-03
  */
-public interface Value
+public interface DataValue
 {
 	/**
 	 * Gets the value as a {@link ValueArray}.

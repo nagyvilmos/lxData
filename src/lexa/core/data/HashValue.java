@@ -16,7 +16,7 @@
 package lexa.core.data;
 
 /**
- Implementation of {@link Value} for use in a {@link HashDataSet}
+ Implementation of {@link DataValue} for use in a {@link HashDataSet}
  <p>
  This class manages the type conversion and keeps it type safe.
  @author william
@@ -39,9 +39,9 @@ public class HashValue
 	
 	/**
 	Create a value as a clone of another value
-	@param clone a Value to clone
+	@param clone a DataValue to clone
 	*/
-	public HashValue(Value clone)
+	public HashValue(DataValue clone)
 	{
             ValueType type = (clone != null) ?
                     clone.getType() :

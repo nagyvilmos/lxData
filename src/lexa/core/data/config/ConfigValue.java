@@ -17,9 +17,9 @@
 package lexa.core.data.config;
 
 import lexa.core.data.BaseValue;
-import lexa.core.data.Value;
 import lexa.core.data.ValueType;
 import lexa.core.data.exception.DataException;
+import lexa.core.data.DataValue;
 
 /**
  *
@@ -33,15 +33,15 @@ public class ConfigValue
     private final Object object;
     private boolean read;
 
-    ConfigValue(String path, String key, Value value)
+    ConfigValue(String path, String key, DataValue value)
     {
         this(path == null ? key : path + '.' + key, value);
     }
-    ConfigValue(String path, int index, Value value)
+    ConfigValue(String path, int index, DataValue value)
     {
         this(path + '_' + index, value);        
     }
-    private ConfigValue(String path, Value value)
+    private ConfigValue(String path, DataValue value)
     {
         this.path = path;
             ValueType type = (value != null) ?

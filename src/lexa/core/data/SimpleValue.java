@@ -20,7 +20,7 @@
 package lexa.core.data;
 
 /**
- Implementation of {@link Value} for use in a {@link SimpleDataSet}
+ Implementation of {@link DataValue} for use in a {@link SimpleDataSet}
  <p>
  This class manages the type conversion and keels it type safe.
  @author william
@@ -43,9 +43,9 @@ public class SimpleValue
 	
 	/**
 	Create a value as a clone of another value
-	@param clone a Value to clone
+	@param clone a DataValue to clone
 	*/
-	public SimpleValue(Value clone)
+	public SimpleValue(DataValue clone)
 	{
             ValueType type = (clone != null) ?
                     clone.getType() :
