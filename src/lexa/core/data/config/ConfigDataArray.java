@@ -29,7 +29,7 @@ import lexa.core.data.DataArray;
  *
  * @author william
  */
-public class ConfigValueArray
+public class ConfigDataArray
         extends BaseDataArray
         implements ConfigObject
 {
@@ -39,7 +39,7 @@ public class ConfigValueArray
     private final Set<Integer> invalidGets;
     private boolean read;
 
-    ConfigValueArray(String path, DataArray array)
+    ConfigDataArray(String path, DataArray array)
     {
         this.path = path;
         this.values = new ArrayList();

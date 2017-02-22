@@ -51,7 +51,7 @@ public class ConfigDataValue
                     type.equals(DataType.NULL) ? 
                         null :
                     type.equals(DataType.ARRAY) ? 
-                        new ConfigValueArray(path , value.getArray()) :
+                        new ConfigDataArray(path , value.getArray()) :
                     type.equals(DataType.DATA_SET) ?
                         new ConfigDataSet(this ,value.getDataSet()) :
                     value.getObject();
@@ -99,9 +99,9 @@ public class ConfigDataValue
     }
 
     @Override
-    public ConfigValueArray getArray()
+    public ConfigDataArray getArray()
     {
-        return (ConfigValueArray)super.getArray(); //To change body of generated methods, choose Tools | Templates.
+        return (ConfigDataArray)super.getArray(); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

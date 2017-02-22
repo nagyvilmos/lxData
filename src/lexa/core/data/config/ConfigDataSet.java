@@ -209,9 +209,9 @@ public class ConfigDataSet
     }
 
     @Override
-    public synchronized ConfigValueArray getArray(String key)
+    public synchronized ConfigDataArray getArray(String key)
     {
-        return (ConfigValueArray)super.getArray(key); //To change body of generated methods, choose Tools | Templates.
+        return (ConfigDataArray)super.getArray(key); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
