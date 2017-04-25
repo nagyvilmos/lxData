@@ -40,6 +40,12 @@ import lexa.core.data.io.DataWriter;
 public abstract class BaseDataSet
 		implements DataSet
 {
+    private final DataFactory factory;
+
+    protected BaseDataSet(DataFactory factory)
+    {
+        this.factory = factory;
+    }
     /**
 	 * Get a {@link DataArray} from the list for the supplied key.
 	 * @param key The key for the {@link SimpleDataItem}.
@@ -360,4 +366,43 @@ public abstract class BaseDataSet
             ex.printStackTrace(out);
         }
     }
+
+	/**
+	 * Put the supplied object into the {@link ArrayDataSet}
+	 * using the supplied key.
+	 * <p>
+ If the getDataItem already exists it is overwritten.
+	 *
+	 * @param key The key name for the getDataItem
+	 * @param value The object getDataValue to add.
+	 * @return  the {@link ArrayDataSet} the getDataItem was added to.
+	 */
+	@Override
+	public synchronized DataSet put(String key, Object value)
+	{
+		return this.put(this.factory.getDataItem(key, value));
+	}
+
+    /**
+	 * Put the contents of another {@link ArrayDataSet} into this one.
+	 * <p>
+ Any items in the new data getDataSet that have a key that matches another getDataItem
+ will overwrite the existing getDataItem.
+	 *
+	 * @param data The data to be added.
+	 * @return  the {@link ArrayDataSet} the getDataItem was added to.
+	 */
+	@Override
+	public synchronized DataSet put(DataSet data)
+	{
+		if (data != null)
+		{
+			for (DataItem item
+					: data)
+			{
+				this.put(item);
+			}
+		}
+		return this;
+	}
 }

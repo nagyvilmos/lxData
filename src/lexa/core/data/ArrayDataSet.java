@@ -34,7 +34,7 @@ import java.util.ArrayList;
 public class ArrayDataSet
 		extends BaseDataSet
 {
-
+    private static ArrayFactory ARRAY_FACTORY = new ArrayFactory();
 	private final ArrayList<DataItem> items;
 	private int last;
 
@@ -43,13 +43,14 @@ public class ArrayDataSet
 	 */
 	public ArrayDataSet()
 	{
+        super(ArrayDataSet.ARRAY_FACTORY);
 		this.items = new ArrayList();
 		this.last = 0;
 	}
 
 	/**
 	 * Create a new {@link DataSet} with entries from a map
-     * @param map a map of objects to convert to a data set.
+     * @param map a map of objects to convert to a data getDataSet.
 	 */
 	public ArrayDataSet(java.util.Map<String, Object> map)
 	{
@@ -102,7 +103,7 @@ public class ArrayDataSet
 	}
 
 	/**
-	 * Find then position of an item in the data set.
+	 * Find then position of an getDataItem in the data getDataSet.
 	 * <p>
 	 * Checks each {@link ArrayDataItem} and sees if its key is the same as the named key.
 	 * @param key   A key for a {@link ArrayDataItem}.
@@ -185,7 +186,7 @@ public class ArrayDataSet
 	/**
 	 * Get the list of keys.
 	 *
-	 * @return An array containing all the keys.
+	 * @return An getDataArray containing all the keys.
 	 */
 	@Override
 	public synchronized String[] keys()
@@ -228,56 +229,19 @@ public class ArrayDataSet
 	}
 
 	/**
-	 * Put the supplied item into the {@link ArrayDataSet}.
+	 * Put the supplied getDataItem into the {@link ArrayDataSet}.
 	 * <p>
-	 * If the item already exists it is overwritten.
+ If the getDataItem already exists it is overwritten.
 	 *
 	 * @param item A {@link ArrayDataItem} to add.
-	 * @return  the {@link ArrayDataSet} the item was added to.
+	 * @return  the {@link ArrayDataSet} the getDataItem was added to.
 	 */
 	@Override
 	public synchronized DataSet put(DataItem item)
 	{
-		this._put(item);
-		return this;
-	}
-
-	/**
-	 * Put the supplied object into the {@link ArrayDataSet}
-	 * using the supplied key.
-	 * <p>
-	 * If the item already exists it is overwritten.
-	 *
-	 * @param key The key name for the item
-	 * @param value The object value to add.
-	 * @return  the {@link ArrayDataSet} the item was added to.
-	 */
-	@Override
-	public synchronized DataSet put(String key, Object value)
-	{
-		return this.put(new ArrayDataItem(key, value));
-	}
-
-	/**
-	 * Put the contents of another {@link ArrayDataSet} into this one.
-	 * <p>
-	 * Any items in the new data set that have a key that matches another item
-	 * will overwrite the existing item.
-	 *
-	 * @param data The data to be added.
-	 * @return  the {@link ArrayDataSet} the item was added to.
-	 */
-	@Override
-	public synchronized DataSet put(DataSet data)
-	{
-		if (data != null)
-		{
-			for (DataItem item
-					: data)
-			{
-				this.put(item);
-			}
-		}
+		this._put(
+                ArrayDataSet.ARRAY_FACTORY.convert(item)
+        );
 		return this;
 	}
 
@@ -286,7 +250,7 @@ public class ArrayDataSet
 	 * <p>
 	 * Shifts any subsequent elements to the left (subtracts one from their indices).
 	 *
-	 * @param key   the key to the item to remove
+	 * @param key   the key to the getDataItem to remove
 	 *
 	 * @return the element that was removed
 	 */
