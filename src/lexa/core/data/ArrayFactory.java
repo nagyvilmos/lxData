@@ -29,7 +29,8 @@ package lexa.core.data;
 class ArrayFactory
         implements DataFactory
 {
-
+    public static ArrayFactory factory = new ArrayFactory();
+    private ArrayFactory() {} // keep in single, keep it simple
     @Override
     public DataArray clone(DataArray clone)
     {

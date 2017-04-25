@@ -34,7 +34,6 @@ import java.util.ArrayList;
 public class ArrayDataSet
 		extends BaseDataSet
 {
-    private static ArrayFactory ARRAY_FACTORY = new ArrayFactory();
 	private final ArrayList<DataItem> items;
 	private int last;
 
@@ -43,7 +42,7 @@ public class ArrayDataSet
 	 */
 	public ArrayDataSet()
 	{
-        super(ArrayDataSet.ARRAY_FACTORY);
+        super(ArrayFactory.factory);
 		this.items = new ArrayList();
 		this.last = 0;
 	}
@@ -240,7 +239,7 @@ public class ArrayDataSet
 	public synchronized DataSet put(DataItem item)
 	{
 		this._put(
-                ArrayDataSet.ARRAY_FACTORY.convert(item)
+                ArrayFactory.factory.convert(item)
         );
 		return this;
 	}
