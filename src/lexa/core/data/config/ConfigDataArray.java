@@ -24,6 +24,7 @@ import lexa.core.data.BaseDataArray;
 import lexa.core.data.exception.DataException;
 import lexa.core.data.DataValue;
 import lexa.core.data.DataArray;
+import lexa.core.data.DataFactory;
 
 /**
  *
@@ -41,6 +42,7 @@ public class ConfigDataArray
 
     ConfigDataArray(String path, DataArray array)
     {
+        super(null);
         this.path = path;
         this.values = new ArrayList();
         for (DataValue value : array)
@@ -63,6 +65,12 @@ public class ConfigDataArray
     {
 		throw new UnsupportedOperationException(
 				"Cannot change the content of a config data array");
+    }
+
+    @Override
+    public DataFactory factory()
+    {
+        throw new UnsupportedOperationException("ConfigDataArray.factory not supported yet.");
     }
 
     @Override

@@ -14,11 +14,11 @@
  * 2013-08-11   WNW -           Kill the integer type.
  *                              I hope that using the long instead will work.
  * 2014-10-10	WNW -           Redo the equals and hash code for ArrayDataItem
- * 2015-03-05	WNW 15-03       Refactor to move values into their own class and 
+ * 2015-03-05	WNW 15-03       Refactor to move values into their own class and
  *                              add the concept of an array.
  *                              Add ARRAY and LONG types.
  * 2015-03-19	WNW	15-03       Extract interfaces.
- *                              DataItem becomes and interface and ArrayDataItem 
+ *                              DataItem becomes and interface and ArrayDataItem
  *                              the default implimentation.
  * 2016-01-27	WNW	16-01       Remove the superfluose clone() method.
  * 2016-01-28   WNW 16-01       Remove the generic getter methods from ArrayDataItem
@@ -42,9 +42,6 @@ package lexa.core.data;
 public class ArrayDataItem
 		extends BaseDataItem
 {
-	/** The value for the item */
-	private final DataValue value;
-
 	/**
 	 * Create a new {@link DataItem}.
 	 * @param key The key for the item
@@ -61,8 +58,7 @@ public class ArrayDataItem
 	 */
 	public ArrayDataItem(String key, DataValue value)
 	{
-		super(key);
-		this.value = new ArrayDataValue(value);
+		super(ArrayFactory.factory, key, value);
 	}
 
 	/**
@@ -75,26 +71,12 @@ public class ArrayDataItem
 	 */
 	public ArrayDataItem(DataItem clone)
 	{
-            this(clone.getKey(), clone.getValue());
+        super(ArrayFactory.factory, clone.getKey(), clone.getValue());
 	}
 
-	/**
-	 * Gets the type of the value.
-	 * @return The type of the value.
-	 */
-	@Override
-	public DataType getType()
-	{
-		return this.value.getType();
-	}
-
-	/**
-	 * Gets the value of a {@link ArrayDataItem}.
-	 * @return The value of the item.
-	 */
-	@Override
-	public DataValue getValue()
-	{
-		return this.value;
-	}
+    @Override
+    public DataFactory factory()
+    {
+        return ArrayFactory.factory;
+    }
 }

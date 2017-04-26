@@ -24,13 +24,19 @@ import java.util.Date;
  <p>
  This is a type safe representation of an object used by a {@link DataSet},
  {@link DataItem} or {@link DataArray}.
- Even if a {@code null} is added, internally it is represented by an object, this 
+ Even if a {@code null} is added, internally it is represented by an object, this
  makes certain operations easier internally.
  @author william
  @since 2015-03
  */
 public interface DataValue
 {
+    /**
+     * Get the factory used to create this type of {@link DataSet} structure.
+     * @return
+     */
+    public DataFactory factory();
+
 	/**
 	 * Gets the value as a {@link DataArray}.
 	 * @return The value as am array.
@@ -90,5 +96,5 @@ public interface DataValue
 	 * @return The object of the value.
 	 */
 	Object getObject();
-	
+
 }

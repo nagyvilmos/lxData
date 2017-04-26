@@ -27,10 +27,12 @@ public interface DataFactory
     DataSet clone(DataSet clone);
     DataItem clone(DataItem clone);
     DataArray convert(DataArray convert);
-    DataSet convert(DataSet convert);
     DataItem convert(DataItem convert);
+    DataSet convert(DataSet convert);
     DataValue convert(DataValue convert);
+    Object convert(Object convert);
     DataArray getDataArray();
-    DataSet getDataSet();
     DataItem getDataItem(String key, Object value);
+    DataSet getDataSet();
+    DataValue getDataValue(Object object);
 }

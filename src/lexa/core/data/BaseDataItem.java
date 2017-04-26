@@ -31,21 +31,24 @@ import java.util.Date;
  */
 @SuppressWarnings("EqualsAndHashcode")
 public abstract class BaseDataItem
-        implements DataItem 
+        implements DataItem
 {
-
+    private final DataFactory factory;
 	/** The key for the item */
 	private final String key;
-
+	/** The value for the item */
+	private final DataValue value;
     /**
      * Base for new data item
      * <br>
      * This handles only the key, the concrete classes need to handle the value
      * @param key the key for the item
      */
-    protected BaseDataItem(String key)
+    protected BaseDataItem(DataFactory factory, String key, DataValue value)
     {
+        this.factory = factory;
         this.key = key;
+        this.value =  this.factory.convert(value);
     }
     /**
 	 * Compares this to another object.
@@ -68,7 +71,7 @@ public abstract class BaseDataItem
                         (other.getObject() == null) :
                         this.getObject().equals(other.getObject());
 	}
-    
+
 	/**
 	 * Gets the value as an array.
 	 * @return The value as an array.
@@ -134,7 +137,7 @@ public abstract class BaseDataItem
 	{
 		return this.key;
 	}
-    
+
     /**
 	 * Gets the value as a long.
 	 * @return The value as a long.
@@ -162,7 +165,17 @@ public abstract class BaseDataItem
 	@Override
 	public DataType getType()
 	{
-		return this.getValue().getType();
+		return this.value.getType();
+	}
+
+	/**
+	 * Gets the value of a {@link ArrayDataItem}.
+	 * @return The value of the item.
+	 */
+	@Override
+	public DataValue getValue()
+	{
+		return this.value;
 	}
 
 	/**

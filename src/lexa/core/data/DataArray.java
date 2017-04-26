@@ -22,7 +22,7 @@ import java.util.Iterator;
 
 /**
  * An array of values
- * The array is self sizing, as it is implemented as a 
+ * The array is self sizing, as it is implemented as a
  * linked list.  The values are polymorphic as they are always
  * held as {@link DataValue} objects.
  *
@@ -46,7 +46,7 @@ public interface DataArray
 	@return this {@link DataArray}
 	*/
 	public DataArray add(Object object);
-        
+
 	/**
 	Add a value to the array.
 	<p>
@@ -103,6 +103,12 @@ public interface DataArray
 	@return this {@link DataArray}
 	*/
 	public DataArray addAll(Object[] array);
+
+    /**
+     * Get the factory used to create this type of {@link DataSet} structure.
+     * @return
+     */
+    public DataFactory factory();
 
     /**
 	Get the value at a position.

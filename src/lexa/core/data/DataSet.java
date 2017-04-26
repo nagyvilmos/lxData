@@ -49,6 +49,12 @@ public interface DataSet
 	 */
 	public boolean contains(String key);
 
+    /**
+     * Get the factory used to create this type of {@link DataSet} structure.
+     * @return
+     */
+    public DataFactory factory();
+
 	/**
 	 * Get a {@link DataItem} from the list for the supplied key.
 	 * @param key The key for the {@link DataItem}.

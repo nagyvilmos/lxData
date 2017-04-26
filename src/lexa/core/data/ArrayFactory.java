@@ -27,10 +27,12 @@ package lexa.core.data;
  * @author william
  */
 class ArrayFactory
-        implements DataFactory
+        extends BaseFactory
 {
     public static ArrayFactory factory = new ArrayFactory();
+
     private ArrayFactory() {} // keep in single, keep it simple
+
     @Override
     public DataArray clone(DataArray clone)
     {
@@ -50,50 +52,6 @@ class ArrayFactory
     }
 
     @Override
-    public DataArray convert(DataArray convert)
-    {
-        if (convert != null &&
-                convert.getClass().equals(ArrayDataArray.class))
-        {
-            return new ArrayDataArray(convert);
-        }
-        return convert;
-    }
-
-    @Override
-    public DataSet convert(DataSet convert)
-    {
-        if (convert != null &&
-                convert.getClass().equals(ArrayDataSet.class))
-        {
-            return new ArrayDataSet(convert);
-        }
-        return convert;
-    }
-
-    @Override
-    public DataItem convert(DataItem convert)
-    {
-        if (convert != null &&
-                convert.getClass().equals(ArrayDataItem.class))
-        {
-            return new ArrayDataItem(convert);
-        }
-        return convert;
-    }
-
-    @Override
-    public DataValue convert(DataValue convert)
-    {
-        if (convert != null &&
-                convert.getClass().equals(ArrayDataValue.class))
-        {
-            return new ArrayDataValue(convert);
-        }
-        return convert;
-    }
-
-    @Override
     public DataArray getDataArray()
     {
         return new ArrayDataArray();
@@ -109,5 +67,11 @@ class ArrayFactory
     public DataSet getDataSet()
     {
         return new ArrayDataSet();
+    }
+
+    @Override
+    public DataValue getDataValue(Object object)
+    {
+        return new ArrayDataValue(object);
     }
 }

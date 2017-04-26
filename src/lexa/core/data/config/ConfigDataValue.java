@@ -17,6 +17,7 @@
 package lexa.core.data.config;
 
 import lexa.core.data.BaseDataValue;
+import lexa.core.data.DataFactory;
 import lexa.core.data.DataType;
 import lexa.core.data.exception.DataException;
 import lexa.core.data.DataValue;
@@ -39,25 +40,32 @@ public class ConfigDataValue
     }
     ConfigDataValue(String path, int index, DataValue value)
     {
-        this(path + '_' + index, value);        
+        this(path + '_' + index, value);
     }
     private ConfigDataValue(String path, DataValue value)
     {
+        super(null,null);
         this.path = path;
             DataType type = (value != null) ?
                     value.getType() :
                     DataType.NULL;
             this.object =
-                    type.equals(DataType.NULL) ? 
+                    type.equals(DataType.NULL) ?
                         null :
-                    type.equals(DataType.ARRAY) ? 
+                    type.equals(DataType.ARRAY) ?
                         new ConfigDataArray(path , value.getArray()) :
                     type.equals(DataType.DATA_SET) ?
                         new ConfigDataSet(this ,value.getDataSet()) :
                     value.getObject();
     }
 
-    
+    @Override
+    public DataFactory factory()
+    {
+        throw new UnsupportedOperationException("ConfigDataValue.factory not supported yet.");
+    }
+
+
     @Override
     public Object getObject()
     {
@@ -115,12 +123,12 @@ public class ConfigDataValue
         }
         return this.read;
     }
-    
-    
+
+
     @Override
     public String getPath()
     {
         return this.path;
     }
-    
+
 }

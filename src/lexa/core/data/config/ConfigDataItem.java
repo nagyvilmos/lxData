@@ -17,12 +17,13 @@
 package lexa.core.data.config;
 
 import lexa.core.data.BaseDataItem;
+import lexa.core.data.DataFactory;
 import lexa.core.data.DataItem;
 import lexa.core.data.exception.DataException;
 
 /**
  * A Data Item in a config data set.
- * 
+ *
  * @author william
  * @since 2016-09
  */
@@ -40,7 +41,7 @@ public class ConfigDataItem
      */
     ConfigDataItem(String path, DataItem item)
     {
-        super(item.getKey());
+        super(null,item.getKey(), null);
         this.path = path;
         this.value = new ConfigDataValue(this.path, super.getKey(), item.getValue());
     }
@@ -49,6 +50,12 @@ public class ConfigDataItem
     public void close() throws DataException
     {
         this.value.close();
+    }
+
+    @Override
+    public DataFactory factory()
+    {
+        throw new UnsupportedOperationException("ConfigDataItem.factory not supported yet.");
     }
 
     @Override
@@ -68,7 +75,7 @@ public class ConfigDataItem
     {
         return this.value;
     }
-    
+
     @Override
     public String getPath()
     {
@@ -78,5 +85,5 @@ public class ConfigDataItem
         }
         return this.path;
     }
-    
+
 }

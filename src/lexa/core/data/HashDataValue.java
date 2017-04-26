@@ -27,34 +27,42 @@ public class HashDataValue
 {
     /** the object being represented */
 	private final Object object;
-	
+
 	/**
 	Create a value to represent an object
 	@param object the contained value
 	*/
 	public HashDataValue(Object object)
 	{
+        super(null,null);
 		this.object = object;
 	}
-	
+
 	/**
 	Create a value as a clone of another value
 	@param clone a DataValue to clone
 	*/
 	public HashDataValue(DataValue clone)
 	{
+        super(null,null);
             DataType type = (clone != null) ?
                     clone.getType() :
                     DataType.NULL;
             this.object =
-                    type.equals(DataType.NULL) ? 
+                    type.equals(DataType.NULL) ?
                         null :
-                    type.equals(DataType.ARRAY) ? 
+                    type.equals(DataType.ARRAY) ?
                         new HashDataArray(clone.getArray()) :
                     type.equals(DataType.DATA_SET) ?
                         new HashDataSet(clone.getDataSet()) :
                     clone.getObject();
 	}
+
+    @Override
+    public DataFactory factory()
+    {
+        throw new UnsupportedOperationException("HashDataValue.factory not supported yet.");
+    }
 
 	@Override
 	public Object getObject()

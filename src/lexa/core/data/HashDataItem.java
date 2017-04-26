@@ -43,7 +43,7 @@ public class HashDataItem
 	 */
 	public HashDataItem(String key, DataValue value)
 	{
-		super(key);
+		super(null,key,null);
 		this.value = new HashDataValue(value);
 	}
 
@@ -59,6 +59,12 @@ public class HashDataItem
 	{
             this(clone.getKey(), clone.getValue());
 	}
+
+    @Override
+    public DataFactory factory()
+    {
+        throw new UnsupportedOperationException("HashDataItem.factory not supported yet.");
+    }
 
 	@Override
 	public DataType getType()

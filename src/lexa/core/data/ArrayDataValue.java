@@ -29,44 +29,27 @@ package lexa.core.data;
 public class ArrayDataValue
         extends BaseDataValue
 {
-    /** the value being represented */
-	private final Object value;
-	
 	/**
 	Create a value to represent an object
 	@param value the contained value
 	*/
 	public ArrayDataValue(Object value)
 	{
-		this.value = value;
+		super(ArrayFactory.factory, value);
 	}
-	
+
 	/**
 	Create a value as a clone of another value
 	@param clone a DataValue to clone
 	*/
 	public ArrayDataValue(DataValue clone)
 	{
-            DataType type = (clone != null) ?
-                    clone.getType() :
-                    DataType.NULL;
-            this.value =
-                    type.equals(DataType.NULL) ? 
-                        null :
-                    type.equals(DataType.ARRAY) ? 
-                        new ArrayDataArray(clone.getArray()) :
-                    type.equals(DataType.DATA_SET) ?
-                        new ArrayDataSet(clone.getDataSet()) :
-                    clone.getObject();
+        super(ArrayFactory.factory, clone);
 	}
 
-    /**
-	 * Gets the internal value.
-	 * @return The value of the item.
-	 */
-	@Override
-	public Object getObject()
-	{
-		return this.value;
-	}
+    @Override
+    public DataFactory factory()
+    {
+        return ArrayFactory.factory;
+    }
 }

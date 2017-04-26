@@ -11,7 +11,7 @@
  * Date:        By: Ref:        Description:
  * ---------    --- ----------  --------------------------------------------------
  * 2015-03-19	WNW	15-03		Extract interfaces.
- *								DataItem becomes and interface and SimpleDataItem 
+ *								DataItem becomes and interface and SimpleDataItem
  *								the default implimentation.
  * 2016-01-27	WNW	16-01       Remove the superfluose clone() method.
  *================================================================================
@@ -27,6 +27,11 @@ import java.util.Date;
  */
 public interface DataItem
 {
+    /**
+     * Get the factory used to create this type of {@link DataSet} structure.
+     * @return
+     */
+    public DataFactory factory();
 
 	/**
 	 * Gets the value as an array.
@@ -99,5 +104,5 @@ public interface DataItem
 	 * @return The {@link DataValue} of the item.
 	 */
 	DataValue getValue();
-	
+
 }

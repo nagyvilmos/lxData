@@ -38,6 +38,7 @@ public class HashDataSet
 	 */
 	public HashDataSet()
 	{
+        super(null);
 		this.items = new HashMap();
 	}
 
@@ -50,7 +51,7 @@ public class HashDataSet
 		this();
         if (clone==null)
             return; // nothing to copy
-        
+
         // assume we're receiving another Hash set so clone by key:
         String[] keys = clone.keys();
         for (String key : keys)
@@ -64,6 +65,12 @@ public class HashDataSet
 	{
 		return this.items.containsKey(key);
 	}
+
+    @Override
+    public DataFactory factory()
+    {
+        throw new UnsupportedOperationException("HashDataSet.factory not supported yet.");
+    }
 
 	@Override
 	public synchronized DataItem get(String key)

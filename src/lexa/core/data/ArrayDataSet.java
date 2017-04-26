@@ -274,4 +274,10 @@ public class ArrayDataSet
 	{
 		return this.items.size();
 	}
+
+    @Override
+    public DataFactory factory()
+    {
+        return ArrayFactory.factory;
+    }
 }

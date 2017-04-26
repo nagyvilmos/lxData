@@ -31,8 +31,32 @@ import java.util.Date;
 public abstract class BaseDataValue
         implements DataValue
 {
-    
+
+    private DataType type;
+    /** the value being represented */
+	private final Object value;
+
+    	/**
+	Create a value to represent an object
+	@param value the contained value
+	*/
+	public BaseDataValue(DataFactory factory, Object value)
+	{
+        this.value =
+                factory.convert(value);
+        this.type = DataType.getType(this.value);
+	}
+
 	/**
+	Create a value as a clone of another value
+	@param clone a DataValue to clone
+	*/
+	public BaseDataValue(DataFactory factory, DataValue clone)
+	{
+        this(factory, clone.getObject());
+	}
+
+    /**
 	 * Compares this to another object.
 	 * If the other object is a {@code DataItem}, compare the name and value for equality.
 	 * @param obj Another object to compare
@@ -122,8 +146,16 @@ public abstract class BaseDataValue
     public String getString() {
         return (String) DataType.STRING.getValueIfType(this.getObject());
     }
-    
-	
+
+    /**
+	 * Gets the internal value.
+	 * @return The value of the item.
+	 */
+	@Override
+	public Object getObject()
+	{
+		return this.value;
+	}
 
 	/**
 	 * Gets the type of the value.
@@ -132,7 +164,7 @@ public abstract class BaseDataValue
 	@Override
 	public DataType getType()
 	{
-		return DataType.getType(this.getObject());
+		return this.type;
 	}
 
 	/**
@@ -145,7 +177,7 @@ public abstract class BaseDataValue
 	{
 		return (this.getObject() == null ? 0 : this.getObject().hashCode());
 	}
-	
+
 	@Override
 	public String toString()
 	{
