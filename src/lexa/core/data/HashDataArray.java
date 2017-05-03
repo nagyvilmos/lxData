@@ -14,15 +14,13 @@
  */
 package lexa.core.data;
 
-import java.util.Iterator;
-
 /**
  * An array of values in a {@link HashValue}
  *
  * @author william
  * @since 2016-09
  */
-public class HashDataArray extends ArrayDataArray
+public class HashDataArray extends BaseDataArray
 {
 	/**
 	Create a new {@link DataArray}
@@ -30,9 +28,9 @@ public class HashDataArray extends ArrayDataArray
 	*/
 	public HashDataArray()
 	{
-		super();
+		super(HashFactory.factory);
 	}
-	
+
 	/**
 	Create a new {@link DataArray} cloning the previous.
 	The initial array has no values
@@ -40,7 +38,7 @@ public class HashDataArray extends ArrayDataArray
 	*/
 	public HashDataArray(DataArray clone)
 	{
-        super(clone);
+        super(HashFactory.factory, clone);
 	}
 
         /**
@@ -50,6 +48,12 @@ public class HashDataArray extends ArrayDataArray
 	*/
 	public HashDataArray(Object ... objects)
 	{
-		super(objects);
+		super(HashFactory.factory, objects);
 	}
+
+    @Override
+    public DataFactory factory()
+    {
+        return HashFactory.factory;
+    }
 }

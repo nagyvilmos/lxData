@@ -24,9 +24,6 @@ package lexa.core.data;
 public class HashDataItem
 		extends BaseDataItem
 {
-	/** The value for the item */
-	private final DataValue value;
-
 	/**
 	 * Create a new item
 	 * @param key The key for the item
@@ -34,7 +31,7 @@ public class HashDataItem
 	 */
 	public HashDataItem(String key, Object value)
 	{
-		this(key, new HashDataValue(value));
+		this(key,new HashDataValue(value));
 	}
 	/**
 	 * Create a new item
@@ -43,8 +40,8 @@ public class HashDataItem
 	 */
 	public HashDataItem(String key, DataValue value)
 	{
-		super(null,key,null);
-		this.value = new HashDataValue(value);
+		super(HashFactory.factory,key,value);
+
 	}
 
 	/**
@@ -63,18 +60,6 @@ public class HashDataItem
     @Override
     public DataFactory factory()
     {
-        throw new UnsupportedOperationException("HashDataItem.factory not supported yet.");
+        return HashFactory.factory;
     }
-
-	@Override
-	public DataType getType()
-	{
-		return this.value.getType();
-	}
-
-	@Override
-	public DataValue getValue()
-	{
-		return this.value;
-	}
 }

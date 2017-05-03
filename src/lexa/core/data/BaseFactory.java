@@ -35,7 +35,7 @@ public abstract class BaseFactory
         if (convert != null &&
                 convert.factory() != this)
         {
-            return this.getDataArray().add(convert);
+            return this.getDataArray().addAll(convert);
         }
         return convert;
     }
