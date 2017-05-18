@@ -43,8 +43,6 @@ public class ConfigDataSet
 		extends ArrayDataSet
         implements ConfigObject
 {
-    private final static String ROOT_NAME = "[root]";
-    private final String path;
     private final Set<String> invalidGets;
     private boolean read;
 	/**
@@ -58,14 +56,23 @@ public class ConfigDataSet
 	 */
 	public ConfigDataSet(DataSet data)
 	{
-		this(null,data);
+		this(ConfigFactory.factory,data);
 	}
 
     ConfigDataSet(ConfigObject parent, DataSet data)
 	{
-        this.path = parent == null ? null : parent.getPath();
+        this(
+            parent == null ?
+                    ConfigFactory.factory :
+                    parent.configFactory(),
+            data
+        );
+    }
 
-        
+    ConfigDataSet(ConfigFactory factory, DataSet data)
+    {
+        super(factory);
+
         this.invalidGets = new HashSet();
         if (data == null)
         {
@@ -75,25 +82,32 @@ public class ConfigDataSet
 
         for (DataItem item : data)
         {
-            super.put(new ConfigDataItem(path, item));
+            super.put(new ConfigDataItem(this, item));
         }
         this.read = false;
 	}
 
+    @Override
+    public ConfigFactory configFactory()
+    {
+        return (ConfigFactory)this.factory();
+    }
+
 	/**
 	 * Put the supplied item into the {@link ConfigDataSet}.
 	 *
-	 * <p>Throws an {@link UnsupportedOperationException} if called.
+	 * <p>Causes a reset of all reads.
 	 *
 	 * @param   item
 	 *          a {@link ArrayDataItem} to add.
 	 * @return  the {@link ArrayDataSet} the item was added to.
 	 */
 	@Override
-	public synchronized DataSet put(DataItem item)
+	public synchronized ConfigDataSet put(DataItem item)
 	{
-		throw new UnsupportedOperationException(
-				"Cannot change the content of a config data set");
+		super.put(item);
+        ((ConfigDataItem)super.get(item.getKey())).reset();
+        return this;
 	}
 
 	/**
@@ -109,9 +123,8 @@ public class ConfigDataSet
 	@Override
 	public synchronized DataItem remove(String key)
 	{
-		throw new UnsupportedOperationException(
-				"Cannot change the content of a config data set");
-
+        this.invalidGets.remove(key);
+        return super.remove(key);
 	}
 
     @Override
@@ -135,7 +148,7 @@ public class ConfigDataSet
                         .append(badGet)
                         .append(" not set");
             }
-			throw new DataException(cannotClose.toString(), this.path);
+			throw new DataException(cannotClose.toString(), this.getPath());
         }
     }
 
@@ -152,12 +165,9 @@ public class ConfigDataSet
     @Override
     public String getPath()
     {
-        if (this.path == null)
-        {
-            return ConfigDataSet.ROOT_NAME;
-        }
-        return this.path;
+        return this.configFactory().getPath();
     }
+
     @Override
     public synchronized ConfigDataItem get(int index)
     {
@@ -193,7 +203,7 @@ public class ConfigDataSet
         // avoid the error later:
         if (this.contains(key))
             return this.get(key);
-        return new ConfigDataItem(this.path, new ArrayDataItem(key, defaultValue));
+        return new ConfigDataItem(this, new ArrayDataItem(key, defaultValue));
     }
 
     @Override
@@ -230,6 +240,7 @@ public class ConfigDataSet
                 if (!((ConfigObject)item).isRead())
                 {
                     checkRead = false;
+                    break;
                 }
             }
             this.read = checkRead;

@@ -17,8 +17,8 @@
 package lexa.core.data.config;
 
 import lexa.core.data.BaseDataItem;
-import lexa.core.data.DataFactory;
 import lexa.core.data.DataItem;
+import lexa.core.data.DataValue;
 import lexa.core.data.exception.DataException;
 
 /**
@@ -31,59 +31,52 @@ public class ConfigDataItem
         extends BaseDataItem
         implements ConfigObject
 {
-    private final String path;
-    private final ConfigDataValue value;
 
     /**
      * Create a configuration data item.
      * @param path
      * @param item
      */
-    ConfigDataItem(String path, DataItem item)
+    ConfigDataItem(ConfigObject parent, DataItem item)
     {
-        super(null,item.getKey(), null);
-        this.path = path;
-        this.value = new ConfigDataValue(this.path, super.getKey(), item.getValue());
+        //super(parent.configFactory().getChild(item.getKey()),item.getKey(), null);
+        this(
+                parent.configFactory(),
+                item.getKey(),
+                item.getValue()
+        );
     }
-
+    ConfigDataItem(ConfigFactory factory, String key, DataValue value)
+    {
+        super(factory.getChild(key),key,value);
+    }
     @Override
     public void close() throws DataException
     {
-        this.value.close();
+        ((ConfigDataValue)super.getValue()).close();
     }
 
     @Override
-    public DataFactory factory()
+    public ConfigFactory configFactory()
     {
-        throw new UnsupportedOperationException("ConfigDataItem.factory not supported yet.");
+        return (ConfigFactory)this.factory();
     }
 
     @Override
     public boolean isRead()
     {
-        return this.value.isRead();
+        return ((ConfigDataValue)super.getValue()).isRead();
     }
 
     @Override
     public void reset()
     {
-        this.value.reset();
-    }
-
-    @Override
-    public ConfigDataValue getValue()
-    {
-        return this.value;
+        ((ConfigDataValue)super.getValue()).reset();
     }
 
     @Override
     public String getPath()
     {
-        if (this.path == null)
-        {
-            return this.getKey();
-        }
-        return this.path;
+        return this.configFactory().getPath();
     }
-
 }

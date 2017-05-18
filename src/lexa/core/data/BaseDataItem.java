@@ -72,6 +72,11 @@ public abstract class BaseDataItem
                         this.getObject().equals(other.getObject());
 	}
 
+    @Override
+    public DataFactory factory()
+    {
+        return this.factory;
+    }
 	/**
 	 * Gets the value as an array.
 	 * @return The value as an array.

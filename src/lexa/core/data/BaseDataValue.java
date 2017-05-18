@@ -32,6 +32,8 @@ public abstract class BaseDataValue
         implements DataValue
 {
 
+    private final DataFactory factory;
+
     private DataType type;
     /** the value being represented */
 	private final Object value;
@@ -42,6 +44,7 @@ public abstract class BaseDataValue
 	*/
 	public BaseDataValue(DataFactory factory, Object value)
 	{
+        this.factory = factory;
         this.value =
                 factory.convert(value);
         this.type = DataType.getType(this.value);
@@ -75,6 +78,11 @@ public abstract class BaseDataValue
 				this.getObject().equals(other.getObject());
 	}
 
+    @Override
+    public DataFactory factory()
+    {
+        return this.factory;
+    }
     /**
      * Gets the value as a {@link DataArray}.
      * @return The value as am array.

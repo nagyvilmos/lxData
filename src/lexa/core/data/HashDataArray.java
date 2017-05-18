@@ -50,10 +50,4 @@ public class HashDataArray extends BaseDataArray
 	{
 		super(HashFactory.factory, objects);
 	}
-
-    @Override
-    public DataFactory factory()
-    {
-        return HashFactory.factory;
-    }
 }

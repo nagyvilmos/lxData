@@ -56,10 +56,4 @@ public class HashDataItem
 	{
             this(clone.getKey(), clone.getValue());
 	}
-
-    @Override
-    public DataFactory factory()
-    {
-        return HashFactory.factory;
-    }
 }

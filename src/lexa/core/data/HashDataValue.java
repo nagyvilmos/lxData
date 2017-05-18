@@ -42,10 +42,4 @@ public class HashDataValue
 	{
         super(HashFactory.factory,clone);
 	}
-
-    @Override
-    public DataFactory factory()
-    {
-        return HashFactory.factory;
-    }
 }

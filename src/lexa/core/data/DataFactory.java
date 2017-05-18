@@ -23,6 +23,7 @@ package lexa.core.data;
  */
 public interface DataFactory
 {
+    boolean checkFactory(DataFactory factory);
     DataArray clone(DataArray clone);
     DataSet clone(DataSet clone);
     DataItem clone(DataItem clone);
@@ -35,4 +36,5 @@ public interface DataFactory
     DataItem getDataItem(String key, Object value);
     DataSet getDataSet();
     DataValue getDataValue(Object object);
+
 }

@@ -38,7 +38,7 @@ public class HashDataSet
 	 */
 	public HashDataSet()
 	{
-        super(null);
+        super(HashFactory.factory);
 		this.items = new HashMap();
 	}
 
@@ -65,12 +65,6 @@ public class HashDataSet
 	{
 		return this.items.containsKey(key);
 	}
-
-    @Override
-    public DataFactory factory()
-    {
-        throw new UnsupportedOperationException("HashDataSet.factory not supported yet.");
-    }
 
 	@Override
 	public synchronized DataItem get(String key)

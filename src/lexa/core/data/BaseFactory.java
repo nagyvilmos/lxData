@@ -30,12 +30,36 @@ public abstract class BaseFactory
         implements DataFactory
 {
     @Override
+    public boolean checkFactory(DataFactory factory)
+    {
+        return this == factory;
+    }
+
+    @Override
+    public DataArray clone(DataArray clone)
+    {
+        return this.getDataArray().addAll(clone);
+    }
+
+    @Override
+    public DataSet clone(DataSet clone)
+    {
+        return this.getDataSet().put(clone);
+    }
+
+    @Override
+    public DataItem clone(DataItem clone)
+    {
+        return this.getDataItem(clone.getKey(), clone.getObject());
+    }
+
+    @Override
     public DataArray convert(DataArray convert)
     {
         if (convert != null &&
-                convert.factory() != this)
+                !this.checkFactory(convert.factory()))
         {
-            return this.getDataArray().addAll(convert);
+            return this.clone(convert);
         }
         return convert;
     }
@@ -44,9 +68,9 @@ public abstract class BaseFactory
     public DataSet convert(DataSet convert)
     {
         if (convert != null &&
-                convert.factory() != this)
+                !this.checkFactory(convert.factory()))
         {
-            return this.getDataSet().put(convert);
+            return this.clone(convert);
         }
         return convert;
     }
@@ -55,9 +79,9 @@ public abstract class BaseFactory
     public DataItem convert(DataItem convert)
     {
         if (convert != null &&
-                convert.factory() != this)
+                !this.checkFactory(convert.factory()))
         {
-            return this.getDataItem(convert.getKey(), convert.getString());
+            return this.clone(convert);
         }
         return convert;
     }
@@ -66,7 +90,7 @@ public abstract class BaseFactory
     public DataValue convert(DataValue convert)
     {
         if (convert != null &&
-                convert.factory() != this)
+                !this.checkFactory(convert.factory()))
         {
             return this.getDataValue(convert.getObject());
         }

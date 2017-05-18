@@ -58,10 +58,4 @@ public class ArrayDataArray extends BaseDataArray
     {
         super(ArrayFactory.factory, objects);
     }
-
-    @Override
-    public DataFactory factory()
-    {
-        return ArrayFactory.factory;
-    }
 }

@@ -46,10 +46,4 @@ public class ArrayDataValue
 	{
         super(ArrayFactory.factory, clone);
 	}
-
-    @Override
-    public DataFactory factory()
-    {
-        return ArrayFactory.factory;
-    }
 }

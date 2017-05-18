@@ -9,6 +9,7 @@ import lexa.core.data.DataSet;
 import lexa.core.data.SealedDataSet;
 import lexa.core.data.ArrayDataSet;
 import lexa.core.data.config.ConfigDataSet;
+import lexa.core.data.config.ConfigDataValue;
 import lexa.core.data.exception.DataException;
 import lexa.test.TestAnnotation;
 import lexa.test.TestClass;
@@ -25,8 +26,8 @@ public class TestConfig
     private ConfigDataSet config;
 
     /**
-     *
-     * @return
+     * Set up test class
+     * @return {@code true} if successful, otherwise {@code false}
      */
     public Boolean setUpClass()
     {
@@ -40,25 +41,34 @@ public class TestConfig
     }
 
     /**
-     *
-     * @return
+     * Tear down the test class
+     * @return {@code true} if successful, otherwise {@code false}
      */
     public Boolean tearDownClass()
     {
         this.data = null;
-        this.config = null;
         return true;
     }
-    
-    /**
-     *
-     * @return
-     */
-    @TestAnnotation(order = 0)
-    public Boolean createConfig() 
+
+    public Boolean setUpTest()
     {
         this.config = new ConfigDataSet(this.data);
         return true;
+    }
+
+    public Boolean tearDownTest()
+    {
+        this.config = null;
+        return true;
+    }
+    /**
+     * Create configuration data set
+     * @return {@code true} if successful, otherwise {@code false}
+     */
+    @TestAnnotation(order = 0, setUp = "setUpTest")
+    public Boolean createConfig()
+    {
+        return (this.config != null);
     }
 
     /**
@@ -66,7 +76,7 @@ public class TestConfig
      * @return
      */
     @TestAnnotation(order = 100)
-    public Boolean configEqualsData() 
+    public Boolean configEqualsData()
     {
         return this.config.equals(this.data);
     }
@@ -76,7 +86,7 @@ public class TestConfig
      * @return
      */
     @TestAnnotation(order = 150)
-    public Boolean isRead() 
+    public Boolean isRead()
     {
         return this.config.isRead();
     }
@@ -84,12 +94,19 @@ public class TestConfig
     /**
      *
      * @return
-     * @throws DataException
      */
     @TestAnnotation(order = 200)
-    public Boolean closeConfig() throws DataException
+    public Boolean closeConfig()
     {
-        this.config.close();
+        try
+        {
+            this.config.close();
+        }
+        catch (DataException ex)
+        {
+            // if you can't close then an exception is thrown
+            return false;
+        }
         return true;
     }
 
@@ -98,7 +115,7 @@ public class TestConfig
      * @return
      * @throws DataException
      */
-    @TestAnnotation(order = 300)
+    @TestAnnotation(order = 300, tearDown = "tearDownTest")
     public Boolean resetConfig() throws DataException
     {
         this.config.reset();
@@ -109,7 +126,7 @@ public class TestConfig
      *
      * @return
      */
-    @TestAnnotation(order = 400)
+    @TestAnnotation(order = 400, setUp = "setUpTest", tearDown = "tearDownTest")
     public Boolean closeException()
     {
         try
@@ -122,18 +139,24 @@ public class TestConfig
         }
         return false;
     }
-    @TestAnnotation(order = 500)
+    @TestAnnotation(order = 500, setUp = "setUpTest", tearDown = "tearDownTest")
     public Boolean copyToRead()
     {
-            this.config.reset();
             DataSet copy = new ArrayDataSet(this.config);
             return this.config.isRead();
     }
-
-    @TestAnnotation(order = 600)
+    @TestAnnotation(order = 550, setUp = "setUpTest", tearDown = "tearDownTest")
+    public Boolean pathName()
+    {
+            String key = "array:6.key";
+            ConfigDataValue item = (ConfigDataValue)this.config.item(key);
+            String path = item.getPath();
+            return key.equals(path);
+    }
+    @TestAnnotation(order = 600, tearDown = "tearDownTest")
     public Boolean emptyConfig()
     {
-            ConfigDataSet cfg = new ConfigDataSet(null);
-            return cfg.isRead();
-    }    
+            this.config = new ConfigDataSet(null);
+            return this.config.isRead();
+    }
 }

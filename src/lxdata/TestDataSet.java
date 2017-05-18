@@ -6,7 +6,9 @@
 package lxdata;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.util.Date;
 import lexa.core.data.DataSet;
 import lexa.core.data.HashDataSet;
@@ -55,6 +57,7 @@ public class TestDataSet
                 .put("string","test string");
         return true;
     }
+
     private DataSet data;
     private File file;
 
@@ -137,14 +140,23 @@ public class TestDataSet
      *
      * @param arg
      * @return
+     * @throws java.io.FileNotFoundException
      */
-    @TestAnnotation(order = 1)
+    @TestAnnotation(order = 1, tearDown = "tearDownPrintFormatted")
     public Boolean printFormatted(Object arg)
+            throws FileNotFoundException
     {
-        this.data.printFormatted(System.out);
+        try (PrintStream ps = new PrintStream("printFormatted.txt"))
+        {
+            this.data.printFormatted(ps);
+        }
         return true;
     }
-
+    public Boolean tearDownPrintFormatted(Object arg)
+    {
+        File pf = new File("printFormatted.txt");
+        return pf.delete();
+    }
     /**
      *
      * @param arg

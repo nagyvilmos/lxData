@@ -46,6 +46,12 @@ public abstract class BaseDataSet
     {
         this.factory = factory;
     }
+    
+    @Override
+    public DataFactory factory()
+    {
+        return this.factory;
+    }
     /**
 	 * Get a {@link DataArray} from the list for the supplied key.
 	 * @param key The key for the {@link SimpleDataItem}.

@@ -37,14 +37,23 @@ public class ArrayDataSet
 	private final ArrayList<DataItem> items;
 	private int last;
 
+    /**
+     * protected constructor
+     * allows child classes to override the factory
+     * @param factory
+     */
+    protected ArrayDataSet(DataFactory factory)
+    {
+        super(factory);
+		this.items = new ArrayList();
+		this.last = 0;
+    }
 	/**
 	 * Create a new {@link DataSet} with no entries.
 	 */
 	public ArrayDataSet()
 	{
-        super(ArrayFactory.factory);
-		this.items = new ArrayList();
-		this.last = 0;
+        this(ArrayFactory.factory);
 	}
 
 	/**
@@ -239,7 +248,7 @@ public class ArrayDataSet
 	public synchronized DataSet put(DataItem item)
 	{
 		this._put(
-                ArrayFactory.factory.convert(item)
+                this.factory().convert(item)
         );
 		return this;
 	}
@@ -274,10 +283,4 @@ public class ArrayDataSet
 	{
 		return this.items.size();
 	}
-
-    @Override
-    public DataFactory factory()
-    {
-        return ArrayFactory.factory;
-    }
 }

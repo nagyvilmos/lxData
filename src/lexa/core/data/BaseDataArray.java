@@ -46,6 +46,10 @@ public abstract class BaseDataArray
     private int size;
 
 
+    /**
+     * Create a basic data array
+     * @param factory the factory to build components
+     */
     protected BaseDataArray(DataFactory factory)
     {
         this.factory = factory;
@@ -225,7 +229,7 @@ public abstract class BaseDataArray
         if (index == size)
         {
             this.currentValue = new Index();
-            this.currentValue.value = value;
+            this.currentValue.value = this.factory.convert(value);
             this.currentValue.previous = this.end;
             if (this.size > 0)
             {
@@ -252,6 +256,11 @@ public abstract class BaseDataArray
         return this;
     }
 
+    @Override
+    public DataFactory factory()
+    {
+        return this.factory;
+    }
     /**
      * Get the value at a position.
      *
@@ -362,7 +371,7 @@ public abstract class BaseDataArray
     /**
      * An index item
      */
-    private class Index
+    protected class Index
     {
 
         /**

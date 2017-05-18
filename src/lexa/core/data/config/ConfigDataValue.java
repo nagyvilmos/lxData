@@ -17,8 +17,6 @@
 package lexa.core.data.config;
 
 import lexa.core.data.BaseDataValue;
-import lexa.core.data.DataFactory;
-import lexa.core.data.DataType;
 import lexa.core.data.exception.DataException;
 import lexa.core.data.DataValue;
 
@@ -30,55 +28,42 @@ public class ConfigDataValue
         extends BaseDataValue
         implements ConfigObject
 {
-    private final String path;
-    private final Object object;
     private boolean read;
 
-    ConfigDataValue(String path, String key, DataValue value)
+    ConfigDataValue(ConfigFactory factory, Object  object)
     {
-        this(path == null ? key : path + '.' + key, value);
+        super(factory, object);
     }
-    ConfigDataValue(String path, int index, DataValue value)
+    ConfigDataValue(ConfigFactory factory, DataValue value)
     {
-        this(path + '_' + index, value);
-    }
-    private ConfigDataValue(String path, DataValue value)
-    {
-        super(null,null);
-        this.path = path;
-            DataType type = (value != null) ?
-                    value.getType() :
-                    DataType.NULL;
-            this.object =
-                    type.equals(DataType.NULL) ?
-                        null :
-                    type.equals(DataType.ARRAY) ?
-                        new ConfigDataArray(path , value.getArray()) :
-                    type.equals(DataType.DATA_SET) ?
-                        new ConfigDataSet(this ,value.getDataSet()) :
-                    value.getObject();
+        super(factory,value);
+//        this.path = path;
+//            DataType type = (value != null) ?
+//                    value.getType() :
+//                    DataType.NULL;
+//            this.object =
+//                    type.equals(DataType.NULL) ?
+//                        null :
+//                    type.equals(DataType.ARRAY) ?
+//                        new ConfigDataArray(path , value.getArray()) :
+//                    type.equals(DataType.DATA_SET) ?
+//                        new ConfigDataSet(this ,value.getDataSet()) :
+//                    value.getObject();
     }
 
     @Override
-    public DataFactory factory()
+    public ConfigFactory configFactory()
     {
-        throw new UnsupportedOperationException("ConfigDataValue.factory not supported yet.");
-    }
-
-
-    @Override
-    public Object getObject()
-    {
-        this.read=true;
-        return this.object;
+        return (ConfigFactory)this.factory();
     }
 
     @Override
     public void close() throws DataException
     {
-        if (ConfigObject.class.isAssignableFrom(this.object.getClass()))
+        Object object = this.getObject();
+        if (ConfigObject.class.isAssignableFrom(object.getClass()))
         {
-            ((ConfigObject)this.object).close();
+            ((ConfigObject)object).close();
         }
         else
         {
@@ -92,10 +77,11 @@ public class ConfigDataValue
     @Override
     public void reset()
     {
-        if (this.object != null &&
-                ConfigObject.class.isAssignableFrom(this.object.getClass()))
+        Object object = this.getObject();
+        if (object != null &&
+                ConfigObject.class.isAssignableFrom(object.getClass()))
         {
-            ((ConfigObject)this.object).reset();
+            ((ConfigObject)object).reset();
         }
         this.read = false;
     }
@@ -112,14 +98,26 @@ public class ConfigDataValue
         return (ConfigDataArray)super.getArray(); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+	 * Gets the internal value.
+	 * @return The value of the item.
+	 */
+	@Override
+	public Object getObject()
+	{
+        this.read = true;
+		return super.getObject();
+	}
+
     @Override
     public boolean isRead()
     {
+        Object object = super.getObject();
         if (this.read &&
-                this.object != null &&
-                ConfigObject.class.isAssignableFrom(this.object.getClass()))
+                object != null &&
+                ConfigObject.class.isAssignableFrom(object.getClass()))
         {
-            return ((ConfigObject)this.object).isRead();
+            return ((ConfigObject)object).isRead();
         }
         return this.read;
     }
@@ -128,7 +126,7 @@ public class ConfigDataValue
     @Override
     public String getPath()
     {
-        return this.path;
+        return this.configFactory().getPath();
     }
 
 }

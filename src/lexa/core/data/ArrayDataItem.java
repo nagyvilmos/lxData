@@ -73,10 +73,4 @@ public class ArrayDataItem
 	{
         super(ArrayFactory.factory, clone.getKey(), clone.getValue());
 	}
-
-    @Override
-    public DataFactory factory()
-    {
-        return ArrayFactory.factory;
-    }
 }

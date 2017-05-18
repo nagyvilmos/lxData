@@ -16,15 +16,12 @@
  */
 package lexa.core.data.config;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import lexa.core.data.BaseDataArray;
 import lexa.core.data.exception.DataException;
 import lexa.core.data.DataValue;
 import lexa.core.data.DataArray;
-import lexa.core.data.DataFactory;
 
 /**
  *
@@ -34,43 +31,20 @@ public class ConfigDataArray
         extends BaseDataArray
         implements ConfigObject
 {
-
-    private final String path;
-    private final List<ConfigDataValue> values;
     private final Set<Integer> invalidGets;
     private boolean read;
 
-    ConfigDataArray(String path, DataArray array)
+    ConfigDataArray(ConfigFactory factory)
     {
-        super(null);
-        this.path = path;
-        this.values = new ArrayList();
-        for (DataValue value : array)
-        {
-            this.values.add(new ConfigDataValue(this.path, this.values.size(), value));
-        }
+        super(factory);
         this.invalidGets = new HashSet();
         this.read = false;
     }
 
-    @Override
-    public DataArray add(int index, Object object)
+    ConfigDataArray(ConfigFactory factory, DataArray array)
     {
-		throw new UnsupportedOperationException(
-				"Cannot change the content of a config data array");
-    }
-
-    @Override
-    public DataArray add(int index, DataValue value)
-    {
-		throw new UnsupportedOperationException(
-				"Cannot change the content of a config data array");
-    }
-
-    @Override
-    public DataFactory factory()
-    {
-        throw new UnsupportedOperationException("ConfigDataArray.factory not supported yet.");
+        this(factory);
+        super.addAll(array);
     }
 
     @Override
@@ -80,20 +54,26 @@ public class ConfigDataArray
         {
             this.invalidGets.add(index);
         }
-        return this.values.get(index); //To change body of generated methods, choose Tools | Templates.
+        return (ConfigDataValue)super.get(index); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public DataValue remove(int index)
+    public ConfigFactory configFactory()
     {
-		throw new UnsupportedOperationException(
-				"Cannot change the content of a config data array");
+        return (ConfigFactory)this.factory();
     }
 
-    @Override
-    public int size()
+    public DataArray add(int index, DataValue value)
     {
-        return this.values.size();
+        super.add(index, this.configFactory().getChild(index).convert(value));
+        // move any subsequent indexes forward
+        for (int i = index+1;
+                i < this.size();
+                i++)
+        {
+            this.get(i).configFactory().setIndex(i);
+        }
+        return this;
     }
 
     @Override
@@ -104,9 +84,9 @@ public class ConfigDataArray
         {
 			StringBuilder cannotClose = new StringBuilder("Cannot close config");
             int index = 0;
-			for (ConfigDataValue value : this.values)
+			for (DataValue value : this)
 			{
-				if (!value.isRead())
+				if (!((ConfigDataValue)value).isRead())
 				{
 					cannotClose.append(", ")
 							.append(index)
@@ -120,7 +100,7 @@ public class ConfigDataArray
                         .append(badGet)
                         .append(" out of bounds");
             }
-			throw new DataException(cannotClose.toString(), this.path);
+			throw new DataException(cannotClose.toString(), this.getPath());
         }
     }
 
@@ -130,9 +110,16 @@ public class ConfigDataArray
         if (!this.read)
         {
             boolean checkRead = (this.invalidGets.isEmpty());
-            if (!this.values.stream().noneMatch((value) -> (!value.isRead())))
+            if (checkRead)
             {
-                checkRead = false;
+                for (DataValue value : this)
+                {
+                    if (!((ConfigDataValue)value).isRead())
+                    {
+                        checkRead = false;
+                        break;
+                    }
+                }
             }
             this.read=checkRead;
         }
@@ -142,16 +129,30 @@ public class ConfigDataArray
     @Override
     public void reset()
     {
-        this.invalidGets.clear();
-        this.values.stream().forEach((value) ->
+        for (DataValue value : this)
         {
-            value.reset();
-        });
+            ((ConfigDataValue)value).reset();
+        }
+        this.invalidGets.clear();
         this.read=false;
     }
+
+    public DataValue remove(int index)
+    {
+        DataValue removed = super.remove(index);
+        // update the indexes on the factories.
+        for (int i = index;
+                i < this.size();
+                i++)
+        {
+            this.get(i).configFactory().setIndex(i);
+        }
+        return removed;
+    }
+
     @Override
     public String getPath()
     {
-        return this.path;
+        return this.configFactory().getPath();
     }
 }

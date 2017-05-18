@@ -34,24 +34,6 @@ class ArrayFactory
     private ArrayFactory() {} // keep in single, keep it simple
 
     @Override
-    public DataArray clone(DataArray clone)
-    {
-        return new ArrayDataArray(clone);
-    }
-
-    @Override
-    public DataSet clone(DataSet clone)
-    {
-        return new ArrayDataSet(clone);
-    }
-
-    @Override
-    public DataItem clone(DataItem clone)
-    {
-        return new ArrayDataItem(clone);
-    }
-
-    @Override
     public DataArray getDataArray()
     {
         return new ArrayDataArray();
