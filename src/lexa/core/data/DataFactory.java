@@ -27,6 +27,7 @@ public interface DataFactory
     DataArray clone(DataArray clone);
     DataSet clone(DataSet clone);
     DataItem clone(DataItem clone);
+    DataValue clone(DataValue clone);
     DataArray convert(DataArray convert);
     DataItem convert(DataItem convert);
     DataSet convert(DataSet convert);

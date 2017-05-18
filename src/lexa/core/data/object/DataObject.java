@@ -21,9 +21,9 @@ import lexa.core.data.DataSet;
  */
 public interface DataObject
 {
-    
+
     /**
-     *
+     * Serialise a {@link DataObject} as a {@link DataSet}
      * @return
      */
     DataSet toData();
@@ -33,5 +33,5 @@ public interface DataObject
      * @param data
      */
     void fromData(DataSet data);
-    
+
 }

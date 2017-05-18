@@ -20,7 +20,7 @@ package lexa.core.data;
  *
  * @author william
  */
-class HashFactory
+public class HashFactory
         extends BaseFactory
 {
     public static HashFactory factory = new HashFactory();

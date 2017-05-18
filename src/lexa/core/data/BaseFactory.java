@@ -54,6 +54,12 @@ public abstract class BaseFactory
     }
 
     @Override
+    public DataValue clone(DataValue clone)
+    {
+        return this.getDataValue(clone.getObject());
+    }
+
+    @Override
     public DataArray convert(DataArray convert)
     {
         if (convert != null &&
@@ -92,7 +98,7 @@ public abstract class BaseFactory
         if (convert != null &&
                 !this.checkFactory(convert.factory()))
         {
-            return this.getDataValue(convert.getObject());
+            return this.clone(convert);
         }
         return convert;
     }

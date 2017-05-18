@@ -26,7 +26,7 @@ package lexa.core.data;
  *
  * @author william
  */
-class ArrayFactory
+public class ArrayFactory
         extends BaseFactory
 {
     public static ArrayFactory factory = new ArrayFactory();

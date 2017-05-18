@@ -1,7 +1,12 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * ================================================================================
+ * Lexa - Property of William Norman-Walker
+ * --------------------------------------------------------------------------------
+ * TestDataSet.java
+ *--------------------------------------------------------------------------------
+ * Author:  William Norman-Walker
+ * Created: May 2017
+ *================================================================================
  */
 package lxdata;
 
@@ -20,17 +25,23 @@ import lexa.core.data.io.DataWriter;
 import lexa.test.TestAnnotation;
 
 /**
- *
+ * Test handler for the {@link lexa.core.data} stack
  * @author william
+ * @since 2017-05
  */
 @TestAnnotation(
         arguments = "dataSetTypes",
         setUp = "setUpDataSet",
-        tearDown = "tearDownClass")
+        tearDown = "tearDownDataSet")
 public class TestDataSet
         extends lexa.test.TestClass
 {
 
+    /**
+     * Populate a data set with test data
+     * @param data the {@link DataSet to populate}
+     * @return {@code true} if successful, otherwise {@code false}
+     */
     static Boolean populate(DataSet data)
     {
         data
@@ -66,7 +77,7 @@ public class TestDataSet
      * @param arg
      * @return
      */
-    public Boolean tearDownClass(Object arg)
+    public Boolean tearDownDataSet(Object arg)
     {
         this.data = null;
         if (this.file == null || !this.file.exists())
@@ -75,25 +86,25 @@ public class TestDataSet
     }
 
     /**
-     *
-     * @return
+     * Get the types of dataset to be tested
+     * @return an array of names.
      */
     public Object[] dataSetTypes()
     {
-        return new Object[]{"simple","hash"};
+        return new Object[]{"array","hash"};
     }
 
     /**
-     *
-     * @param arg
-     * @return
+     * Set up test class
+     * @param arg the type of data set,
+     * @return {@code true} if successful, otherwise {@code false}
      */
     public Boolean setUpDataSet(Object arg)
     {
         String type = (String)arg;
         switch (type)
         {
-        case "simple" :
+        case "array" :
         {
             this.data = new ArrayDataSet();
             break;
@@ -113,13 +124,12 @@ public class TestDataSet
     }
 
     /**
-     *
-     * @param arg
-     * @return
-     * @throws IOException
+     * Check that the data set is populated.
+     * @param arg the type of data set
+     * @return {@code true} if successful, otherwise {@code false}
      */
     @TestAnnotation(order = 0)
-    public Boolean populated(Object arg) throws IOException
+    public Boolean populated(Object arg)
     {
         return (this.data.size() == 8 &&
                 this.data.get("boolean").getType().equals(DataType.BOOLEAN) &&
@@ -137,10 +147,10 @@ public class TestDataSet
     }
 
     /**
-     *
-     * @param arg
-     * @return
-     * @throws java.io.FileNotFoundException
+     * Check that the dataset can be printed out
+     * @param arg the type of data set
+     * @return {@code true} if successful, otherwise {@code false}
+     * @throws java.io.FileNotFoundException if the file for output cannot be found
      */
     @TestAnnotation(order = 1, tearDown = "tearDownPrintFormatted")
     public Boolean printFormatted(Object arg)
@@ -152,16 +162,23 @@ public class TestDataSet
         }
         return true;
     }
+
+    /**
+     * Delete the file created by printFormatted
+     * @param arg the type of data set
+     * @return {@code true} if successful, otherwise {@code false}
+     */
     public Boolean tearDownPrintFormatted(Object arg)
     {
         File pf = new File("printFormatted.txt");
         return pf.delete();
     }
+
     /**
-     *
-     * @param arg
-     * @return
-     * @throws IOException
+     * Check that the dataset can be written to a file
+     * @param arg the type of data set
+     * @return {@code true} if successful, otherwise {@code false}
+     * @throws IOException when an IO exception occurs
      */
     @TestAnnotation(order = 2)
     public Boolean writeToFile(Object arg)
@@ -183,7 +200,7 @@ public class TestDataSet
     public Boolean readFromFile(Object arg)
             throws IOException
     {
-        DataReader dr = new DataReader(this.file);
+        DataReader dr = new DataReader(this.file, this.data.factory());
         DataSet read = dr.read();
         dr.close();
         return this.data.equals(read);

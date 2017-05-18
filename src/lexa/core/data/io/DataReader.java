@@ -29,14 +29,13 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import lexa.core.data.ArrayFactory;
 import lexa.core.data.DataItem;
 import lexa.core.data.DataSet;
-import lexa.core.data.ArrayDataItem;
-import lexa.core.data.ArrayDataSet;
-import lexa.core.data.ArrayDataArray;
 import lexa.core.data.DataType;
 import lexa.core.data.formatting.CombinedFormat;
 import lexa.core.data.DataArray;
+import lexa.core.data.DataFactory;
 
 /**
  * Read {@link lexa.core.data.DataItem} and {@link lexa.core.data.DataSet} objects
@@ -52,16 +51,16 @@ import lexa.core.data.DataArray;
  */
 public class DataReader
 {
-
+    private final DataFactory factory;
 	/** The reader used to input the content */
 	private final BufferedReader bufferedReader;
 	private final boolean fromFile;
 	private final CombinedFormat formatter;
     private final String source;
     private long lineNumber;
-	/**
+    /**
 	 * Create a new reader to input directly from a file.
-	 *
+	 * loads into {@link ArrayFactory} instances.
 	 * @param   file
 	 *      The file for receiving the input.
 	 * @throws  FileNotFoundException
@@ -70,23 +69,52 @@ public class DataReader
 	public DataReader(File file)
 			throws FileNotFoundException
 	{
+        this(file, ArrayFactory.factory);
+    }
+
+    /**
+	 * Create a new reader to input directly from a file.
+	 * read into {@link ArrayFactory} instances.
+	 * @param   file
+	 *      The file for receiving the input.
+     * @param   factory
+     *      The type of factory to load the data into.
+	 * @throws  FileNotFoundException
+	 *      When the file to be opened cannot be accessed.
+	 */
+    public DataReader(File file, DataFactory factory)
+			throws FileNotFoundException
+    {
 		this(new BufferedReader(
 				new InputStreamReader(
 				new DataInputStream(
 				new FileInputStream(file)))),
+                factory,
 				true,
                 '[' + file.getPath() + ']');
 	}
 
 	/**
 	 * Create a new reader to input from a buffer.
-	 *
+	 * loads into {@link ArrayFactory} instances.
 	 * @param   bufferedReader
 	 *      The buffer for reading data from.
 	 */
 	public DataReader(BufferedReader bufferedReader)
+    {
+        this(bufferedReader, ArrayFactory.factory);
+    }
+
+	/**
+	 * Create a new reader to input from a buffer.
+	 * @param   bufferedReader
+	 *      The buffer for reading data from.
+     * @param   factory
+     *      The type of factory to load the data into.
+     */
+    public DataReader(BufferedReader bufferedReader, DataFactory factory)
 	{
-		this(bufferedReader, false, "[buffer]");
+		this(bufferedReader, factory, false, "[buffer]");
 	}
 
 	/**
@@ -94,11 +122,16 @@ public class DataReader
 	 *
 	 * @param   bufferedReader
 	 *      The buffer for reading data from.
-	 * @param   fromFile
+     * @param   factory
+     *      The type of factory to load the data into.
+     * @param   fromFile
 	 *      Indicates the reader is from a file.
+     * @param   source
+     *      The source name of the data.
 	 */
-	private DataReader(BufferedReader bufferedReader, boolean fromFile, String source)
+	private DataReader(BufferedReader bufferedReader, DataFactory factory, boolean fromFile, String source)
 	{
+        this.factory = factory;
 		this.bufferedReader = bufferedReader;
 		this.fromFile = fromFile;
 		this.formatter = new CombinedFormat();
@@ -149,7 +182,7 @@ public class DataReader
 	private DataSet read(boolean isNested)
 			throws IOException
 	{
-		DataSet data = new ArrayDataSet();
+		DataSet data = this.factory.getDataSet();
 
 		while (true)
 		{
@@ -229,7 +262,7 @@ public class DataReader
 			key = line;
 			value = "";
 		}
-		return new ArrayDataItem(key, this.decodeValue(value));
+		return this.factory.getDataItem(key, this.decodeValue(value));
 	}
 	private Object decodeValue(String value)
 			throws IOException
@@ -315,7 +348,7 @@ public class DataReader
 
 	private DataArray readArray() throws IOException
 	{
-		DataArray array = new ArrayDataArray();
+		DataArray array = this.factory.getDataArray();
 		while (true)
 		{
 			String value = this.readLine();

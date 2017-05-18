@@ -1,7 +1,12 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * ================================================================================
+ * Lexa - Property of William Norman-Walker
+ * --------------------------------------------------------------------------------
+ * TestDataObject.java
+ *--------------------------------------------------------------------------------
+ * Author:  William Norman-Walker
+ * Created: May 2017
+ *================================================================================
  */
 package lxdata;
 
@@ -12,19 +17,19 @@ import lexa.core.data.object.DataObject;
 import lexa.test.TestAnnotation;
 
 /**
- *
+ * Test handler for the {@link lexa.core.data.object} stack
  * @author william
+ * @since 2017-05
  */
 public class TestDataObject
         extends lexa.test.TestClass
 {
-
     private TestImpl testImpl;
     private DataSet data;
 
     /**
-     *
-     * @return
+     * Check that object can be created
+     * @return {@code true} if successful, otherwise {@code false}
      */
     @TestAnnotation(order = 0)
     public Boolean create()
@@ -32,25 +37,25 @@ public class TestDataObject
         this.testImpl = new TestImpl();
         this.testImpl.str = "first";
         this.testImpl.lng = 435L;
-        
+
         return true;
-    }   
+    }
 
     /**
-     *
-     * @return
+     * Check that an object can be converted to a data set
+     * @return {@code true} if successful, otherwise {@code false}
      */
     @TestAnnotation(order = 100)
     public Boolean toData()
     {
         this.data = testImpl.toData();
-        
+
         return true;
-    }   
+    }
 
     /**
-     *
-     * @return
+     * Check that an object can be created from a data set
+     * @return {@code true} if successful, otherwise {@code false}
      */
     @TestAnnotation(order = 200)
     public Boolean fromData()
@@ -58,14 +63,17 @@ public class TestDataObject
         TestImpl reload = new TestImpl();
         reload.fromData(this.data);
         return this.testImpl.equals(reload);
-    }   
+    }
 
+    /**
+     * Test class to use for testing {@link DataObject}
+     */
     class TestImpl
             implements DataObject
     {
         private String str;
         private Long lng;
-        
+
         @Override
         public DataSet toData()
         {
@@ -107,7 +115,7 @@ public class TestDataObject
             }
             return true;
         }
-        
-        
+
+
     }
 }

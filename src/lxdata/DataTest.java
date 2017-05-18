@@ -6,40 +6,32 @@
  *--------------------------------------------------------------------------------
  * Author:  William Norman-Walker
  * Created: April 2009
- *--------------------------------------------------------------------------------
- * Change Log
- * Date:        By: Ref:        Description:
- * ---------    --- ----------  --------------------------------------------------
- * 2016-01-28   WNW 16-01       Update javadoc.
- * 2016-08-20   WNW 16-08       add printFormatted method to DataSet
- * 2016-09-12   WNW 16-09       Update for new config package and HashDataSet
- * 2016-12-09   WNW 16-09       Use the test lib.
  *================================================================================
  */
 package lxdata;
-
-import java.io.IOException;
 
 import lexa.test.TestClass;
 import lexa.test.TestRun;
 
 /**
+ * Test app for the {@link lexa.core.data} stack
  * @author william
+ * @since 2009-04
  */
 public class DataTest
 {
 
 	/**
-	 * @param args the command line arguments
-	 * @throws java.io.IOException when an IO exception occurs
+     * Run the tests for the {@link lexa.core.data} stack
+	 * @param args the command line arguments; not used
 	 */
 	public static void main(String[] args)
-			throws IOException
 	{
         TestClass[] tests = new TestClass[]{
             new TestDataSet(),
             new TestConfig(),
-            new TestDataObject()
+            new TestDataObject(),
+            new TestFactory()
         };
         System.out.println(
                 new TestRun(tests)
