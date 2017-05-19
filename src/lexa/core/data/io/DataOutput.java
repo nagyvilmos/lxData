@@ -68,7 +68,7 @@ public class DataOutput
 	/**
      * Write a {@link DataItem} to the stream
      * This is the internal method that does not flash the stream
-     * @param data the {@link DataItem} to be written
+     * @param item the {@link DataItem} to be written
      * @throws IOException when a problem occurs writing
      * @throws DataException when a problem occurs serialising
      */

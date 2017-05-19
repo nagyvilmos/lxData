@@ -159,7 +159,7 @@ public class DataReader
 	 * Read a {@link DataSet} from the input.
 	 *
 	 * @param   isNested
-	 *       Indicate that the read is inside a {@link ArrayDataSet}
+	 *       Indicate that the read is inside a {@link DataSet}
 	 *       and so should not reach EOF.
 	 * @return
 	 *       A {@link DataSet} read from the input, null if empty
@@ -192,11 +192,11 @@ public class DataReader
 	 * Read a {@link DataItem} from the input.
 	 *
 	 * @param   isNested
-	 *       Indicate that the read is inside a {@link ArrayDataSet}
+	 *       Indicate that the read is inside a {@link DataSet}
 	 *       and so should not reach EOF.
 	 * @return
 	 *       A {see ArrayDataItem} read from the input or {@code null} if
-	 *       The current {@link ArrayDataSet} has all been read.
+	 *       The current {@link DataSet} has all been read.
 	 * @throws  IOException
 	 *       When an IO error occurs reading the input.
 	 */

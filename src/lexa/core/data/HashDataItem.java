@@ -43,7 +43,7 @@ public class HashDataItem
 	/**
 	 * Create a new item.
 	 * This clones an existing data item.
-	 * If the intrinsic object is a {@link DataSet} or {@link DataValueArray} then
+	 * If the intrinsic object is a {@link DataSet} or {@link DataArray} then
      * that is cloned as well.
 	 *
 	 * @param clone An item to clone.
