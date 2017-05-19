@@ -36,7 +36,12 @@ import lexa.core.data.DataValue;
 public class ConfigFactory
         extends BaseFactory
 {
+    /**
+     * Handle to the  instance of the {@link ConfigFactory} for the root
+     * of a configuration tree.
+     */
     public static ConfigFactory factory = new ConfigFactory(null);
+
     private final static String ROOT_NAME = "[root]";
 
     private final ConfigFactory parent;
@@ -94,6 +99,10 @@ public class ConfigFactory
         return new ConfigDataValue(this, object);
     }
 
+    /**
+     * get the path in the configuration to an object for this factory
+     * @return the object's path
+     */
     public String getPath()
     {
         if (this.parent == null ||
@@ -118,7 +127,7 @@ public class ConfigFactory
         return ConfigFactory.ROOT_NAME;
     }
 
-    public ConfigFactory getChild(String path)
+    ConfigFactory getChild(String path)
     {
         return new ConfigFactory(this,path,null);
     }

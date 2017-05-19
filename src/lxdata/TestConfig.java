@@ -185,6 +185,10 @@ public class TestConfig
 
     /**
      * Check that each item in a config contains the correct path.
+     * @param path
+     *          the path to the config
+     * @param config
+     *          the config to check
      * @return {@code true} if successful, otherwise {@code false}
      */
     private static boolean validateConfigPath(String path, ConfigDataSet config)
@@ -203,6 +207,10 @@ public class TestConfig
 
     /**
      * Check that an item and its value contain the correct path.
+     * @param path
+     *          the path to the config
+     * @param config
+     *          the config to check
      * @return {@code true} if successful, otherwise {@code false}
      */
     private static boolean validateConfigPath(String path, ConfigDataItem config)
@@ -214,6 +222,10 @@ public class TestConfig
 
     /**
      * Check that a value and its children contain the correct path.
+     * @param path
+     *          the path to the config
+     * @param config
+     *          the config to check
      * @return {@code true} if successful, otherwise {@code false}
      */
     private static boolean validateConfigPath(String path, ConfigDataValue config)
@@ -242,6 +254,10 @@ public class TestConfig
 
     /**
      * Check that each value in an array contains the correct path.
+     * @param path
+     *          the path to the config
+     * @param config
+     *          the config to check
      * @return {@code true} if successful, otherwise {@code false}
      */
     private static boolean validateConfigPath(String path, ConfigDataArray config)
@@ -259,6 +275,10 @@ public class TestConfig
 
     /**
      * Check that empty config is marked as read.
+     * @param path
+     *          the path to the config
+     * @param config
+     *          the config to check
      * @return {@code true} if successful, otherwise {@code false}
      */
     @TestAnnotation(order = 600, tearDown = "tearDownTest")

@@ -24,14 +24,14 @@ public interface DataObject
 
     /**
      * Serialise a {@link DataObject} as a {@link DataSet}
-     * @return
+     * @return a {@link DataSet} representing the {@link DataObject}
      */
     DataSet toData();
 
     /**
-     *
+     * Deserialise a {@link DataObject} from a {@link DataSet}
      * @param data
+     *          a {@link DataSet} representing the {@link DataObject}
      */
     void fromData(DataSet data);
-
 }

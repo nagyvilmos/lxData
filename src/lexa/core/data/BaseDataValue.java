@@ -38,9 +38,11 @@ public abstract class BaseDataValue
     /** the value being represented */
 	private final Object value;
 
-    	/**
-	Create a value to represent an object
-	@param value the contained value
+    /**
+	 * Create a value to represent an object
+     * @param factory
+     *          the factory for the item
+	 * @param value the contained value
 	*/
 	public BaseDataValue(DataFactory factory, Object value)
 	{
@@ -51,9 +53,12 @@ public abstract class BaseDataValue
 	}
 
 	/**
-	Create a value as a clone of another value
-	@param clone a DataValue to clone
-	*/
+	 * Create a value as a clone of another value
+     * @param factory
+     *          the factory for the item
+     * @param clone
+     *          a DataValue to clone
+	 */
 	public BaseDataValue(DataFactory factory, DataValue clone)
 	{
         this(factory, clone.getObject());

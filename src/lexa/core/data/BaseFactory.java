@@ -5,26 +5,15 @@
  * BaseFactory.java
  *------------------------------------------------------------------------------
  * Author:  William Norman-Walker
- * Created: Month YEAR
- *------------------------------------------------------------------------------
- * Change Log
- * Date:        By: Description:
- * ----------   --- ------------------------------------------------------------
- * -            -   -
+ * Created: May 2017
  *==============================================================================
  */
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package lexa.core.data;
 
 /**
  *
  * @author william
+ * @since 2017-05
  */
 public abstract class BaseFactory
         implements DataFactory

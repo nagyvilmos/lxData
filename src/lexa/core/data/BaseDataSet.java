@@ -42,11 +42,16 @@ public abstract class BaseDataSet
 {
     private final DataFactory factory;
 
+    /**
+     * Create a data set
+     * @param factory
+     *          the factory for the item
+     */
     protected BaseDataSet(DataFactory factory)
     {
         this.factory = factory;
     }
-    
+
     @Override
     public DataFactory factory()
     {

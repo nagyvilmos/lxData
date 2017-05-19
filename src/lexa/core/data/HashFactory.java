@@ -23,6 +23,7 @@ package lexa.core.data;
 public class HashFactory
         extends BaseFactory
 {
+    /** Handle to the  instance of the {@link HashFactory} */
     public static HashFactory factory = new HashFactory();
 
     private HashFactory() {} // keep in single, keep it simple

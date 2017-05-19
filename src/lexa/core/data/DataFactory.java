@@ -7,11 +7,6 @@ package lexa.core.data;
  *------------------------------------------------------------------------------
  * Author:  William Norman-Walker
  * Created: April 2017
- *------------------------------------------------------------------------------
- * Change Log
- * Date:        By: Description:
- * ----------   --- ------------------------------------------------------------
- * -            -   -
  *==============================================================================
  */
 
@@ -23,19 +18,153 @@ package lexa.core.data;
  */
 public interface DataFactory
 {
+    /**
+     * Compare two factories to check they produce the same type of data objects
+     * @param factory
+     *      the factory to compare against this.
+     * @return {@code true} if they are the same type of factory, otherwise {@code false}
+     */
     boolean checkFactory(DataFactory factory);
-    DataArray clone(DataArray clone);
-    DataSet clone(DataSet clone);
-    DataItem clone(DataItem clone);
-    DataValue clone(DataValue clone);
-    DataArray convert(DataArray convert);
-    DataItem convert(DataItem convert);
-    DataSet convert(DataSet convert);
-    DataValue convert(DataValue convert);
-    Object convert(Object convert);
-    DataArray getDataArray();
-    DataItem getDataItem(String key, Object value);
-    DataSet getDataSet();
-    DataValue getDataValue(Object object);
 
+    /**
+     * Clone a {@link DataArray}.
+     * Create a clone of the provided {@link DataArray} that is consistent with
+     * this {@link DataFactory}. This will always result in a deep copy.
+     *
+     * @param clone
+     *          the {@link DataArray} to be cloned.
+     * @return  a new {@link DataArray} of the type supported by this
+     *          {@link DataFactory} with the same content.
+     */
+    DataArray clone(DataArray clone);
+
+    /**
+     * Clone a {@link DataSet}.
+     * Create a clone of the provided {@link DataSet} that is consistent with
+     * this {@link DataFactory}. This will always result in a deep copy.
+     *
+     * @param clone
+     *          the {@link DataSet} to be cloned.
+     * @return  a new {@link DataSet} of the type supported by this
+     *          {@link DataFactory} with the same content.
+     */
+    DataSet clone(DataSet clone);
+
+    /**
+     * Clone a {@link DataItem}.
+     * Create a clone of the provided {@link DataItem} that is consistent with
+     * this {@link DataFactory}. This will always result in a deep copy.
+     *
+     * @param clone
+     *          the {@link DataItem} to be cloned.
+     * @return  a new {@link DataItem} of the type supported by this
+     *          {@link DataFactory} with the same content.
+     */
+    DataItem clone(DataItem clone);
+
+    /**
+     * Clone a {@link DataValue}.
+     * Create a clone of the provided {@link DataValue} that is consistent with
+     * this {@link DataFactory}. This will always result in a deep copy.
+     *
+     * @param clone
+     *          the {@link DataValue} to be cloned.
+     * @return  a new {@link DataValue} of the type supported by this
+     *          {@link DataFactory} with the same content.
+     */
+    DataValue clone(DataValue clone);
+
+    /**
+     * Convert a {@link DataArray}.
+     * Make sure that the {@link DataArray} is of the type supported by this
+     * {@link DataFactory} and if it is a different type then create a clone.
+     *
+     * @param convert
+     *          the {@link DataArray} to be converted.
+     * @return  a {@link DataArray} of the type supported by this
+     *          {@link DataFactory} with the same content.
+     */
+    DataArray convert(DataArray convert);
+
+    /**
+     * Convert a {@link DataItem}.
+     * Make sure that the {@link DataItem} is of the type supported by this
+     * {@link DataFactory} and if it is a different type then create a clone.
+     *
+     * @param convert
+     *          the {@link DataItem} to be converted.
+     * @return  a {@link DataItem} of the type supported by this
+     *          {@link DataFactory} with the same content.
+     */
+    DataItem convert(DataItem convert);
+
+    /**
+     * Convert a {@link DataSet}.
+     * Make sure that the {@link DataSet} is of the type supported by this
+     * {@link DataFactory} and if it is a different type then create a clone.
+     *
+     * @param convert
+     *          the {@link DataSet} to be converted.
+     * @return  a {@link DataSet} of the type supported by this
+     *          {@link DataFactory} with the same content.
+     */
+    DataSet convert(DataSet convert);
+
+    /**
+     * Convert a {@link DataValue}.
+     * Make sure that the {@link DataValue} is of the type supported by this
+     * {@link DataFactory} and if it is a different type then create a clone.
+     *
+     * @param convert
+     *          the {@link DataValue} to be converted.
+     * @return  a {@link DataValue} of the type supported by this
+     *          {@link DataFactory} with the same content.
+     */
+    DataValue convert(DataValue convert);
+
+    /**
+     * Convert an {@link Object}.
+     * Make sure that the {@link Object} is of the type supported by this
+     * {@link DataFactory} and if it is a different type then create a clone.
+     *
+     * @param convert
+     *          the {@link Object} to be converted.
+     * @return  a {@link Object} of the type supported by this
+     *          {@link DataFactory} with the same content.
+     */
+    Object convert(Object convert);
+
+    /**
+     * Create a new {@link DataArray}
+     * @return  an empty {@link DataArray} of the type supported by this
+     *          {@link DataFactory}.
+     */
+    DataArray getDataArray();
+
+    /**
+     * Create a new {@link DataItem}
+     * @param key
+     *          the key for the item
+     * @param value
+     *          the value for the item
+     * @return  a {@link DataItem} of the type supported by this
+     *          {@link DataFactory} with the {@code key} and {@code value}
+     */
+    DataItem getDataItem(String key, Object value);
+
+    /**
+     * Create a new {@link DataSet}
+     * @return  an empty {@link DataSet} of the type supported by this
+     *          {@link DataFactory}.
+     */
+    DataSet getDataSet();
+
+    /**
+     * Create a new {@link DataValue}
+     * @param object
+     *          the object for the item
+     * @return  a {@link DataValue} of the type supported by this
+     *          {@link DataFactory} with the {@code object}
+     */
+    DataValue getDataValue(Object object);
 }

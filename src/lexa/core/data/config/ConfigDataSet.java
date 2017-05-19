@@ -6,12 +6,6 @@
  *--------------------------------------------------------------------------------
  * Author:  William Norman-Walker
  * Created: September 2016
- *--------------------------------------------------------------------------------
- * Change Log
- * Date:        By: Ref:        Description:
- * ---------    --- ----------  --------------------------------------------------
- * 2016-09-01   WNW 16-01       Create seperate package and classes for config
- * 2016-09-14   WNW 16-09       Add path to all config objects
  *================================================================================
  */
 package lexa.core.data.config;
@@ -30,11 +24,9 @@ import lexa.core.data.exception.DataException;
  * This is used for loading and parsing configuration items. Once read, the
  * object should be closed to ensure that all items have been read.
  * <br>
- * A read only extension of a {@link ArrayDataSet}. This will behave in all
+ * An extension of a {@link ArrayDataSet}. This will behave in all
  * respects like a data set with the added trace of path within the whole set
  * and checking that all the data has been read when closing.
- * <br>
- * This class superceded the {@link Deprecated} class {@link lexa.core.data.ConfigData}.
  *
  * @author  William
  * @since   2016-09

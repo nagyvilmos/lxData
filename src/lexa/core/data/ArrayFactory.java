@@ -29,6 +29,7 @@ package lexa.core.data;
 public class ArrayFactory
         extends BaseFactory
 {
+    /** Handle to the  instance of the {@link ArrayFactory} */
     public static ArrayFactory factory = new ArrayFactory();
 
     private ArrayFactory() {} // keep in single, keep it simple

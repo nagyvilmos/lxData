@@ -42,7 +42,12 @@ public abstract class BaseDataItem
      * Base for new data item
      * <br>
      * This handles only the key, the concrete classes need to handle the value
-     * @param key the key for the item
+     * @param factory
+     *          the factory for the item
+     * @param key
+     *          the key for the item
+     * @param value
+     *          the value for the item
      */
     protected BaseDataItem(DataFactory factory, String key, DataValue value)
     {
