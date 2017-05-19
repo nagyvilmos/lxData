@@ -37,7 +37,7 @@ public class ConfigDataArray
     ConfigDataArray(ConfigFactory factory)
     {
         super(factory);
-        this.invalidGets = new HashSet();
+        this.invalidGets = new HashSet<>();
         this.read = false;
     }
 

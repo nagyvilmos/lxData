@@ -6,17 +6,6 @@
  *--------------------------------------------------------------------------------
  * Author:  William Norman-Walker
  * Created: March 2015
- *--------------------------------------------------------------------------------
- * Change Log
- * Date:        By: Ref:        Description:
- * ----------   --- ----------  --------------------------------------------------
- * 2015-03-25	WNW 15-03       The great refactoring.
- * 2015-04-22	WNW             More refactoring
- * 2016-01-27	WNW	16-01       Remove the superfluose clone() method.
- * 2016-01-28   WNW 16-01       Update javadoc.
- * 2016-01-28   WNW 16-01       Move toString() from ArrayDataSet to DataSetGetter
- * 2016-09-09   WNW 16-09       Change base abstract classes from *Base to Base*
- * 2016-10-24   WNW 16-11       Add constructor for a map;
  * ================================================================================
  */
 package lexa.core.data;
@@ -45,7 +34,7 @@ public class ArrayDataSet
     protected ArrayDataSet(DataFactory factory)
     {
         super(factory);
-		this.items = new ArrayList();
+		this.items = new ArrayList<>();
 		this.last = 0;
     }
 	/**
@@ -65,17 +54,10 @@ public class ArrayDataSet
 		this();
         if (map != null)
         {
-            map.keySet().stream().forEach((key) ->
+            map.keySet().stream().forEach((String key) ->
             {
                 Object object = map.get(key);
-                if (object != null && map.getClass().isAssignableFrom(
-                        object.getClass()))
-                {
-                    object = new ArrayDataSet(map.getClass().cast(object));
-                }
-                this._put(new ArrayDataItem(
-                        key, object
-                ));
+                this._put(this.factory().getDataItem(key, object));
             });
         }
 	}

@@ -39,7 +39,7 @@ public class HashDataSet
 	public HashDataSet()
 	{
         super(HashFactory.factory);
-		this.items = new HashMap();
+		this.items = new HashMap<>();
 	}
 
 	/**

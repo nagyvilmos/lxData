@@ -73,7 +73,7 @@ public class ConfigDataSet
     {
         super(factory);
 
-        this.invalidGets = new HashSet();
+        this.invalidGets = new HashSet<>();
         if (data == null)
         {
             this.read = true;

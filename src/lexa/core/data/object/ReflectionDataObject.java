@@ -18,7 +18,7 @@ public class ReflectionDataObject
         implements DataObject
 {
     private static final Map<String,DataObjectLoader> loaders =
-            new HashMap();
+            new HashMap<>();
 
     private static DataObjectLoader loader(String className)
     {

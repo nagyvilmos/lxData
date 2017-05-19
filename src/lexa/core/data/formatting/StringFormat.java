@@ -65,12 +65,12 @@ public class StringFormat
 	{
 		return string;
 	}
-	
+
 	/**
 	Perform a multiple search and replace on a string.
 	<p>The search and replace is done on paired values in an array, the search string
 	then the string to replace with.
-	The terms are located in order, so a substring will never be found if after the 
+	The terms are located in order, so a substring will never be found if after the
 	main string and vica-versa.
 	<pre>
 	String [][] terms = {
@@ -82,7 +82,7 @@ public class StringFormat
 	String replaced = StringFormat.multiReplace("The cat sat on the mat", terms);
 	// replaced = "The cart stood in thy mart"
 	</pre>
-    * 
+    *
 	@param input input string to be parsed
 	@param replacements two dimensional array of replacement terms.
 	@return the parsed string
@@ -94,7 +94,7 @@ public class StringFormat
 			return input;
 		}
 		StringBuilder regexBuilder = new StringBuilder();
-		Map<String,String> pairings = new HashMap();
+		Map<String,String> pairings = new HashMap<>();
 		for (String[] pair : replacements)
 		{
 			regexBuilder.append('|').append(Pattern.quote(pair[0]));
