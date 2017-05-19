@@ -56,7 +56,6 @@ public class ConfigFactory
         this.parent = parent;
         this.path = path;
         this.index = index;
-        System.out.println("lexa.core.data.config.ConfigFactory.<init>()" + this.getPath());
     } // keep it single, keep it simple
 
     @Override
