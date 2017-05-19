@@ -64,6 +64,54 @@ public abstract class BaseDataValue
         this(factory, clone.getObject());
 	}
 
+    @Override
+    public int compareTo(DataValue to)
+    {
+        int comp = this.getType().compareTo(to.getType());
+        if (comp != 0)
+        {
+            return comp;
+        }
+        switch(this.getType())
+        {
+            case BOOLEAN:
+            {
+                return this.getBoolean().compareTo(to.getBoolean());
+            }
+            case ARRAY :
+            {
+                return this.getArray().compareTo(to.getArray());
+            }
+            case DATA_SET :
+            {
+                return this.getDataSet().compareTo(to.getDataSet());
+            }
+            case DATE:
+            {
+                return this.getDate().compareTo(to.getDate());
+            }
+            case DOUBLE:
+            {
+                return this.getDouble().compareTo(to.getDouble());
+            }
+            case INTEGER:
+            {
+                return this.getDouble().compareTo(to.getDouble());
+            }
+            case LONG:
+            {
+                return this.getLong().compareTo(to.getLong());
+            }
+            case STRING:
+            {
+                return this.getString().compareTo(to.getString());
+            }
+        }
+        // at this point we can only compare the hash codes
+        return this.hashCode() - to.hashCode();
+    }
+
+
     /**
 	 * Compares this to another object.
 	 * If the other object is a {@code DataItem}, compare the name and value for equality.

@@ -19,7 +19,8 @@ import java.util.Date;
  * @author william
  */
 public interface DataSet
-		extends Iterable<DataItem>
+		extends Iterable<DataItem>,
+            Comparable<DataSet>
 {
 	/**
 	 * Checks if the {@link DataSet} contains a named key.

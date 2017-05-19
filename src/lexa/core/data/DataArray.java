@@ -22,7 +22,8 @@ import java.util.Iterator;
  * @since 2015-03
  */
 public interface DataArray
-		extends Iterable<DataValue>
+		extends Iterable<DataValue>,
+            Comparable<DataArray>
 {
 	/**
 	Add an object to the array.

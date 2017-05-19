@@ -72,6 +72,24 @@ public enum DataType
 		// this should never occur, added to satisfy build warning.
 		return null;
 	}
+
+	/**
+	Get the type corresponding to a character
+	@param typeChar a character denoting a type.
+	@return the type corresponding to the character
+	*/
+	public static DataType toType(char typeChar)
+	{
+		for (DataType vt : DataType.values())
+		{
+			if (vt.getTypeChar() == typeChar)
+			{
+				return vt;
+			}
+		}
+		return OBJECT;
+	}
+
 	/** *  The class that defines the {@link DataType}. */
 	private Class<?> typeClass;
 	/** the character used for annotating the type */
@@ -110,23 +128,6 @@ public enum DataType
 	public char getTypeChar()
 	{
 		return this.typeChar;
-	}
-
-	/**
-	Get the type corresponding to a character
-	@param typeChar a character denoting a type.
-	@return the type corresponding to the character
-	*/
-	public static DataType toType(char typeChar)
-	{
-		for (DataType vt : DataType.values())
-		{
-			if (vt.getTypeChar() == typeChar)
-			{
-				return vt;
-			}
-		}
-		return OBJECT;
 	}
 
 	/**

@@ -244,6 +244,25 @@ public abstract class BaseDataSet
 				.toString();
 	}
 
+    @Override
+    public int compareTo(DataSet to)
+    {
+        int compLen = this.size() - to.size();
+        int compSize =
+                compLen > 0 ?
+                to.size() :
+                this.size();
+        for (int i = 0; i < compSize; i++)
+        {
+            int comp = this.get(i).compareTo(to.get(i));
+            if (comp!=0)
+            {
+                return comp;
+            }
+        }
+        return compLen;
+    }
+
 	/**
 	 * Compares an object
 	 * @param obj object to compare to

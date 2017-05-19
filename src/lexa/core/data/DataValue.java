@@ -23,6 +23,7 @@ import java.util.Date;
  @since 2015-03
  */
 public interface DataValue
+        extends Comparable<DataValue>
 {
     /**
      * Get the factory used to create this type of {@link DataValue}

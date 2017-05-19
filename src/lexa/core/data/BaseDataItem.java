@@ -46,6 +46,18 @@ public abstract class BaseDataItem
         this.key = key;
         this.value =  this.factory.convert(value);
     }
+
+    @Override
+    public int compareTo(DataItem to)
+    {
+        int comp = this.getKey().compareTo(to.getKey());
+        if (comp!=0)
+        {
+            return comp;
+        }
+        return this.getValue().compareTo(to.getValue());
+    }    
+
     /**
 	 * Compares this to another object.
 	 * If the other object is a {@code DataItem}, compare the name and value for equality.

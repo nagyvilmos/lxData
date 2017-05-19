@@ -19,6 +19,7 @@ import java.util.Date;
  * @since 2015-03
  */
 public interface DataItem
+        extends Comparable<DataItem>
 {
     /**
      * Get the factory used to create this type of {@link DataItem}.

@@ -31,7 +31,8 @@ public class DataTest
             new TestDataSet(),
             new TestConfig(),
             new TestDataObject(),
-            new TestFactory()
+            new TestFactory(),
+            new TestCompare()
         };
         System.out.println(
                 new TestRun(tests)

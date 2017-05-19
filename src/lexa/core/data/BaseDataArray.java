@@ -143,6 +143,25 @@ public abstract class BaseDataArray
     }
 
     @Override
+    public int compareTo(DataArray to)
+    {
+        int compLen = this.size() - to.size();
+        int compSize =
+                compLen > 0 ?
+                to.size() :
+                this.size();
+        for (int i = 0; i < compSize; i++)
+        {
+            int comp = this.get(i).compareTo(to.get(i));
+            if (comp!=0)
+            {
+                return comp;
+            }
+        }
+        return compLen;
+    }
+
+    @Override
     public boolean equals(Object obj) {
         if (obj == null || !DataArray.class.isAssignableFrom(obj.getClass()))
         {
