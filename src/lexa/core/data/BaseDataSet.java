@@ -1,26 +1,12 @@
 /*
- * ================================================================================
+ * =============================================================================
  * Lexa - Property of William Norman-Walker
- * --------------------------------------------------------------------------------
+ * -----------------------------------------------------------------------------
  * BaseDataSet.java
- *--------------------------------------------------------------------------------
+ *------------------------------------------------------------------------------
  * Author:  William Norman-Walker
  * Created: April 2015
- *--------------------------------------------------------------------------------
- * Change Log
- * Date:        By: Ref:        Description:
- * ----------   --- ----------  --------------------------------------------------
- * 2015-04-22	WNW				More refactoring
- * 2016-01-27	WNW	16-01       Remove the superfluose clone() method.
- * 2016-01-28   WNW 16-01       Add method getType(String)
- * 2016-01-28   WNW 16-01       Move toString() from SimpleDataSet to DataSetGetter
- *                              Fix a bug in toString() for 0 item set
- * 2016-02-09   WNW             Change base abstract classes from *Getter to *Base
- * 2016-08-15   WNW 16-08       Change getObject to getObject
- *                              and getValueObject to getObject
- * 2016-08-20   WNW 16-08       add printFormatted method to DataSet
- * 2016-09-09   WNW 16-09       Change base abstract classes from *Base to Base*
- *================================================================================
+ *==============================================================================
  */
 package lexa.core.data;
 
@@ -59,7 +45,7 @@ public abstract class BaseDataSet
     }
     /**
 	 * Get a {@link DataArray} from the list for the supplied key.
-	 * @param key The key for the {@link SimpleDataItem}.
+	 * @param key The key for the {@link DataItem}.
 	 * @return If the item exists and is a {@link DataArray} then the
 	 * item's value, otherwise {@code null}.
 	 */
@@ -74,8 +60,8 @@ public abstract class BaseDataSet
 
     /**
 	 * Get a {@link Boolean} from the list for the supplied key.
-	 * @param key The key for the {@link SimpleDataItem}.
-	 * @return If the item exists and is a {@link String} then the
+	 * @param key The key for the {@link DataItem}.
+	 * @return If the item exists and is a {@link Boolean} then the
 	 * item's value, otherwise {@code null}.
 	 */
 	@Override
@@ -88,9 +74,9 @@ public abstract class BaseDataSet
 	}
 
 	/**
-	 * Get a {@link SimpleDataSet} from the list for the supplied key.
-	 * @param key The key for the {@link SimpleDataItem}.
-	 * @return If the item exists and is a {@link SimpleDataSet} then the
+	 * Get a {@link DataSet} from the list for the supplied key.
+	 * @param key The key for the {@link DataItem}.
+	 * @return If the item exists and is a {@link DataSet} then the
 	 * item's value, otherwise {@code null}.
 	 */
 	@Override
@@ -136,7 +122,7 @@ public abstract class BaseDataSet
 
 	/**
 	 * Get an {@link Integer} from the list for the supplied key.
-	 * @param key The key for the {@link SimpleDataItem}.
+	 * @param key The key for the {@link DataItem}.
 	 * @return If the item exists and is an {@link Integer} then the
 	 * item's value, otherwise {@code null}.
 	 */
@@ -151,7 +137,7 @@ public abstract class BaseDataSet
 
 	/**
 	 * Get a {@link Long} from the list for the supplied key.
-	 * @param key The key for the {@link SimpleDataItem}.
+	 * @param key The key for the {@link DataItem}.
 	 * @return If the item exists and is a {@link Long} then the
 	 * item's value, otherwise {@code null}.
 	 */
@@ -166,7 +152,7 @@ public abstract class BaseDataSet
 
 	/**
 	 * Get a {@link String} from the list for the supplied key.
-	 * @param key The key for the {@link SimpleDataItem}.
+	 * @param key The key for the {@link DataItem}.
 	 * @return If the item exists and is a {@link String} then the
 	 * item's value, otherwise {@code null}.
 	 */
@@ -231,8 +217,8 @@ public abstract class BaseDataSet
 	}
 
     /**
-	 * Return a string representation of a {@link SimpleDataSet}.
-	 * Formatted as a list of all the {@link SimpleDataItem}'s:
+	 * Return a string representation of a {@link DataSet}.
+	 * Formatted as a list of all the {@link DataItem} objects:
 	 * <blockquote>
 	 * <pre>
 	 * {{key}{value} {key}{{key}{value} {key}{value}}}

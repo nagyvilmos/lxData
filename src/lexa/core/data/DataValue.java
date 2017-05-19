@@ -1,19 +1,12 @@
 /*
- * ================================================================================
+ * =============================================================================
  * Lexa - Property of William Norman-Walker
- * --------------------------------------------------------------------------------
+ * -----------------------------------------------------------------------------
  * DataValue.java
- *--------------------------------------------------------------------------------
+ *------------------------------------------------------------------------------
  * Author:  William Norman-Walker
  * Created: March 2015
- *--------------------------------------------------------------------------------
- * Change Log
- * Date:        By: Ref:        Description:
- * ---------    --- ----------  --------------------------------------------------
- * 2016-01-27	WNW	16-01       Remove the superfluose clone() method.
- *                              Add in a cloning constructor.
- * 2016-01-28   WNW 16-01       Update javadoc.
- *================================================================================
+ *==============================================================================
  */
 package lexa.core.data;
 
@@ -32,8 +25,8 @@ import java.util.Date;
 public interface DataValue
 {
     /**
-     * Get the factory used to create this type of {@link DataSet} structure.
-     * @return
+     * Get the factory used to create this type of {@link DataValue}
+     * @return the factory used to create this type of {@link DataValue}
      */
     public DataFactory factory();
 

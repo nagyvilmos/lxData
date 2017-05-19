@@ -1,19 +1,12 @@
 /*
- * ================================================================================
+ * =============================================================================
  * Lexa - Property of William Norman-Walker
- * --------------------------------------------------------------------------------
+ * -----------------------------------------------------------------------------
  * ValeType - Known types for a DataItem
- *--------------------------------------------------------------------------------
+ *------------------------------------------------------------------------------
  * Author:  William Norman-Walker
  * Created: July 2012
- *--------------------------------------------------------------------------------
- * Change Log
- * Date:        By: Ref:        Description:
- * ---------    --- ----------  --------------------------------------------------
- * 02 Jul 14	WNW	LexaDialog	Make isType() public for external use.
- * 2015.03.06	WNW	2015.03		Add ARRAY and LONG types.
- * 2016.02.05   WNW 2016.08     Change DATA_SET class from SimpleDataSet to DataSet.
- *================================================================================
+ *==============================================================================
  */
 package lexa.core.data;
 
@@ -85,8 +78,8 @@ public enum DataType
 	private char typeChar;
 
 	/**
-	 * Private constructor for {@link ValueType}.
-	 * @param typeClass The class that corresponds to the {@link ValueType}.
+	 * Private constructor for {@link DataType}.
+	 * @param typeClass The class that corresponds to the {@link DataType}.
 	 * @param typeChar single char used to indicate type in config.
 	 */
 	private DataType(Class<?> typeClass, char typeChar)
@@ -118,7 +111,7 @@ public enum DataType
 	{
 		return this.typeChar;
 	}
-	
+
 	/**
 	Get the type corresponding to a character
 	@param typeChar a character denoting a type.

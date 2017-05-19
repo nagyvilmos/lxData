@@ -29,7 +29,7 @@ public class ArrayDataSet
     /**
      * protected constructor
      * allows child classes to override the factory
-     * @param factory
+     * @param factory the factory to use for the data set
      */
     protected ArrayDataSet(DataFactory factory)
     {
@@ -198,7 +198,7 @@ public class ArrayDataSet
 	 * This is {@code private} to stop any overrides and is to be called only
 	 * from this {@link #put(lexa.core.data.DataItem) put(DataItem)} and the
      * clone constructor
-     * {@link #SimpleDataSet(lexa.core.data.DataSet) ArrayDataSet(DataSet)}.
+     * {@link #ArrayDataSet(lexa.core.data.DataSet) ArrayDataSet(DataSet)}.
 	 * @param item A {@link DataItem} to add.
 	 */
 	private synchronized void _put(DataItem item)

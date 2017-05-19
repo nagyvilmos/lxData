@@ -1,24 +1,12 @@
 /*
- * ================================================================================
+ *==============================================================================
  * Lexa - Property of William Norman-Walker
- * --------------------------------------------------------------------------------
+ *------------------------------------------------------------------------------
  * DataReader.java
- *--------------------------------------------------------------------------------
+ *------------------------------------------------------------------------------
  * Author:  William Norman-Walker
  * Created: February 2013
- *--------------------------------------------------------------------------------
- * Change Log
- * Date:        By: Ref:        Description:
- * ---------    --- ----------  --------------------------------------------------
- * 2013-08-10   WNW             Add support for quoted strings, these are never
- *                              written but can be read to make hand build files
- *                              easier to produce.
- * 2015-03-05	WNW 2015-03		Add the concept of an array.
- *								Add ARRAY and LONG types.
- * 2016-01-27	WNW	16-01       Remove the superfluose clone() method.
- * 2016-01-28   WNW 16-01       Update javadoc.
- * 2016-08-13   WNW 2016-08     Fix use of DatatException path and key.
- *================================================================================
+ *==============================================================================
  */
 package lexa.core.data.io;
 
@@ -154,10 +142,10 @@ public class DataReader
 	}
 
 	/**
-	 * Read the input into a {@link ArrayDataSet}.
+	 * Read the input into a {@link DataSet}.
 	 *
 	 * @return
-	 *       A {@link ArrayDataSet} read from the input, null if empty.
+	 *       A {@link DataSet} read from the input, null if empty.
 	 * @throws  IOException
 	 *       When an IO error occurs closing the input.
 	 */
@@ -168,13 +156,13 @@ public class DataReader
 	}
 
 	/**
-	 * Read a {@link ArrayDataSet} from the input.
+	 * Read a {@link DataSet} from the input.
 	 *
 	 * @param   isNested
 	 *       Indicate that the read is inside a {@link ArrayDataSet}
 	 *       and so should not reach EOF.
 	 * @return
-	 *       A {@link ArrayDataSet} read from the input, null if empty
+	 *       A {@link DataSet} read from the input, null if empty
 	 *       and {@code isNested == true}.
 	 * @throws  IOException
 	 *       When an IO error occurs reading the input.
@@ -201,7 +189,7 @@ public class DataReader
 	}
 
 	/**
-	 * Read a {@link ArrayDataItem} from the input.
+	 * Read a {@link DataItem} from the input.
 	 *
 	 * @param   isNested
 	 *       Indicate that the read is inside a {@link ArrayDataSet}

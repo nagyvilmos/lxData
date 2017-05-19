@@ -1,16 +1,12 @@
 /*
- * ================================================================================
+ * =============================================================================
  * Lexa - Property of William Norman-Walker
- * --------------------------------------------------------------------------------
+ * -----------------------------------------------------------------------------
  * HashDataSet.java
- *--------------------------------------------------------------------------------
+ *------------------------------------------------------------------------------
  * Author:  William Norman-Walker
  * Created: September 2016
- *--------------------------------------------------------------------------------
- * Change Log
- * Date:        By: Ref:        Description:
- * ----------   --- ----------  --------------------------------------------------
- *================================================================================
+ *==============================================================================
  */
 package lexa.core.data;
 
@@ -19,7 +15,7 @@ import java.util.*;
 /**
  * A data set using hashed keys to access the content
  * A {@link DataSet} that utilises a {@link HashMap} for storing the items.
- * This class should be used in favour of the {@link SimpleDataSet} when there
+ * This class should be used in favour of the {@link DataSet} when there
  * are a large number of entries or the entries will be accessed randomly and by
  * key.
  * <em><b>NB</b>This performance of this class is poor when using iterators and

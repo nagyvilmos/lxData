@@ -1,17 +1,12 @@
 /*
- * ================================================================================
+ * =============================================================================
  * Lexa - Property of William Norman-Walker
- * --------------------------------------------------------------------------------
+ * -----------------------------------------------------------------------------
  * DataOutput.java
- *--------------------------------------------------------------------------------
+ *------------------------------------------------------------------------------
  * Author:  William Norman-Walker
  * Created: February 2013
- *--------------------------------------------------------------------------------
- * Change Log
- * Date:        By: Ref:        Description:
- * ---------    --- ----------  --------------------------------------------------
- * 2016-08-13   WNW 2016-08     Fix use of DatatException path and key.
- *================================================================================
+ *==============================================================================
  */
 package lexa.core.data.io;
 
@@ -31,19 +26,20 @@ public class DataOutput
 	private final DataOutputStream stream;
 
     /**
-     *
-     * @param stream
+     * Create a binary writer for datasets
+     * @param stream the binary stream for the data.
      */
     public DataOutput(DataOutputStream stream)
 	{
 		this.stream = stream;
 	}
-	
+
     /**
-     *
-     * @param data
-     * @throws IOException
-     * @throws DataException
+     * Write a {@link DataSet} to the stream
+     * When completed the stream is flushed to ensure all data is written.
+     * @param data the {@link DataSet} to be written
+     * @throws IOException when a problem occurs writing
+     * @throws DataException when a problem occurs serialising
      */
     public void write(DataSet data)
 			throws IOException, DataException
@@ -51,7 +47,15 @@ public class DataOutput
 		this.writeSet(data);
 		this.flush();
 	}
-	private void writeSet(DataSet data)
+
+	/**
+     * Write a {@link DataSet} to the stream
+     * This is the internal method that does not flash the stream
+     * @param data the {@link DataSet} to be written
+     * @throws IOException when a problem occurs writing
+     * @throws DataException when a problem occurs serialising
+     */
+    private void writeSet(DataSet data)
 			throws IOException, DataException
 	{
 		this.stream.writeInt(data.size());
@@ -60,8 +64,15 @@ public class DataOutput
 			this.writeItem(item);
 		}
 	}
-	
-	private void writeItem(DataItem item)
+
+	/**
+     * Write a {@link DataItem} to the stream
+     * This is the internal method that does not flash the stream
+     * @param data the {@link DataItem} to be written
+     * @throws IOException when a problem occurs writing
+     * @throws DataException when a problem occurs serialising
+     */
+    private void writeItem(DataItem item)
 			throws IOException, DataException
 	{
 		this.stream.writeUTF(item.getKey());
@@ -112,8 +123,8 @@ public class DataOutput
 	}
 
     /**
-     *
-     * @throws IOException
+     * Flush the stream
+     * @throws IOException when a problem occurs flushing
      */
     public void flush() throws IOException
 	{
@@ -121,8 +132,8 @@ public class DataOutput
 	}
 
     /**
-     *
-     * @throws IOException
+     * Close the stream
+     * @throws IOException when a problem occurs closing
      */
     public void close() throws IOException
 	{

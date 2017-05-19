@@ -1,17 +1,12 @@
 /*
- * ================================================================================
+ *==============================================================================
  * Lexa - Property of William Norman-Walker
- * --------------------------------------------------------------------------------
+ *------------------------------------------------------------------------------
  * BaseDataArray.java
- *--------------------------------------------------------------------------------
+ *------------------------------------------------------------------------------
  * Author:  William Norman-Walker
  * Created: February 2016
- *--------------------------------------------------------------------------------
- * Change Log
- * Date:        By: Ref:        Description:
- * ---------    --- ----------  --------------------------------------------------
- * 2016-09-09   WNW 16-09       Change base abstract classes from *Base to Base*
- *================================================================================
+ *==============================================================================
  */
 package lexa.core.data;
 
@@ -60,7 +55,7 @@ public abstract class BaseDataArray
      * Create a new {@link DataArray} cloning the previous. The initial array
      * has no values
      *
-     * @param factory
+     * @param factory the factory to use
      * @param clone an array to clone.
      */
     protected BaseDataArray(DataFactory factory, DataArray clone)
@@ -78,7 +73,7 @@ public abstract class BaseDataArray
      * Create a new {@link DataArray} from an array of objects The initial
      * array has an entry for each object passed.
      *
-     * @param factory
+     * @param factory the factory to use
      * @param objects an array of objects to populate the array.
      */
     protected BaseDataArray(DataFactory factory,  Object... objects)
