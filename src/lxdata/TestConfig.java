@@ -172,13 +172,14 @@ public class TestConfig
             DataSet copy = new ArrayDataSet(this.config);
             return this.config.isRead();
     }
+
+    /**
+     * Check that the config contains the correct paths.
+     * @return {@code true} if successful, otherwise {@code false}
+     */
     @TestAnnotation(order = 550, setUp = "setUpTest", tearDown = "tearDownTest")
     public Boolean pathName()
     {
-//            String key = "array:6.key";
-//            ConfigDataValue item = (ConfigDataValue)this.config.item(key);
-//            String path = item.getPath();
-//            return key.equals(path);
         return TestConfig.validateConfigPath(null, config);
     }
 
