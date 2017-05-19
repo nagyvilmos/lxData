@@ -275,10 +275,6 @@ public class TestConfig
 
     /**
      * Check that empty config is marked as read.
-     * @param path
-     *          the path to the config
-     * @param config
-     *          the config to check
      * @return {@code true} if successful, otherwise {@code false}
      */
     @TestAnnotation(order = 600, tearDown = "tearDownTest")

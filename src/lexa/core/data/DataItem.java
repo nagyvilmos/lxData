@@ -28,8 +28,8 @@ import java.util.Date;
 public interface DataItem
 {
     /**
-     * Get the factory used to create this type of {@link DataSet} structure.
-     * @return
+     * Get the factory used to create this type of {@link DataItem}.
+     * @return the factory used to create this type of {@link DataItem}
      */
     public DataFactory factory();
 

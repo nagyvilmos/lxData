@@ -211,7 +211,7 @@ public abstract class BaseDataItem
 	}
 
 	/***
-	 * Get the {@link SimpleDataItem} as a string description.
+	 * Get the {@link DataItem} as a string description.
 	 * {@link toString} is in the format of:
 	 * <pre>key {value}</pre>
 	 * @return The item's string representation.

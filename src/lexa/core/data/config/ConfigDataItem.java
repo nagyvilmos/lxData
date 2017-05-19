@@ -6,12 +6,6 @@
  *--------------------------------------------------------------------------------
  * Author:  William Norman-Walker
  * Created: September 2016
- *--------------------------------------------------------------------------------
- * Change Log
- * Date:        By: Ref:        Description:
- * ---------    --- ----------  --------------------------------------------------
- * 2016-09-01   WNW 16-01       Create seperate package and classes for config
- * 2016-09-14   WNW 16-09       Add path to all config objects
  *================================================================================
  */
 package lexa.core.data.config;
@@ -34,8 +28,10 @@ public class ConfigDataItem
 
     /**
      * Create a configuration data item.
-     * @param path
+     * @param parent
+     *          the parent to this item
      * @param item
+     *          the content for this item
      */
     ConfigDataItem(ConfigObject parent, DataItem item)
     {

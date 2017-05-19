@@ -73,9 +73,9 @@ public class TestDataSet
     private File file;
 
     /**
-     *
-     * @param arg
-     * @return
+     * tear down test class
+     * @param arg the type of data set
+     * @return {@code true} if successful, otherwise {@code false}
      */
     public Boolean tearDownDataSet(Object arg)
     {
@@ -96,7 +96,7 @@ public class TestDataSet
 
     /**
      * Set up test class
-     * @param arg the type of data set,
+     * @param arg the type of data set
      * @return {@code true} if successful, otherwise {@code false}
      */
     public Boolean setUpDataSet(Object arg)
@@ -191,10 +191,10 @@ public class TestDataSet
     }
 
     /**
-     *
-     * @param arg
-     * @return
-     * @throws IOException
+     * Check that the dataset can be read from a file
+     * @param arg the type of data set
+     * @return {@code true} if successful, otherwise {@code false}
+     * @throws IOException when an IO exception occurs
      */
     @TestAnnotation(order = 3)
     public Boolean readFromFile(Object arg)
@@ -205,31 +205,4 @@ public class TestDataSet
         dr.close();
         return this.data.equals(read);
     }
-//        DataSet data = test(new ArrayDataSet());
-//        ConfigDataSet config = new ConfigDataSet(data);
-//        config.printFormatted(System.out);
-//        try
-//        {
-//            config.close(); // should be okay
-//            config.reset();
-//        }
-//        catch (DataException ex)
-//        {
-//            System.out.println("failed to read config");
-//            ex.printStackTrace(System.out);
-//        }
-//        new ArrayDataSet(config); // reads everything
-//        try
-//        {
-//            System.out.println("Exception due");
-//            config.get("MISSING KEY"); // should cause an error too
-//            System.out.println("missing exception");
-//            config.close(); // should be okay
-//        }
-//        catch (DataException ex)
-//        {
-//            System.out.println("Exception occured");
-//        }
-//    }
-
 }

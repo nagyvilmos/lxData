@@ -105,8 +105,8 @@ public interface DataArray
 	public DataArray addAll(Object[] array);
 
     /**
-     * Get the factory used to create this type of {@link DataSet} structure.
-     * @return
+     * Get the factory used to create this type of {@link DataArray}
+     * @return the factory for this type of {@link DataArray}
      */
     public DataFactory factory();
 

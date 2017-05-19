@@ -8,7 +8,6 @@
  * Created: May 2017
  *==============================================================================
  */
-
 package lxdata;
 
 import lexa.core.data.ArrayFactory;
@@ -35,7 +34,7 @@ public class TestFactory
 {
     /**
      * Get a factory by it's name.
-     * Supports array, hash & config.
+     * Supports array, hash and config.
      * @param type the type of factory
      * @return an instance of a factory
      */

@@ -1,7 +1,12 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * =============================================================================
+ * Lexa - Property of William Norman-Walker
+ * -----------------------------------------------------------------------------
+ * ReflectionDataObject.java
+ *------------------------------------------------------------------------------
+ * Author:  William Norman-Walker
+ * Created: December 2016
+ *==============================================================================
  */
 package lexa.core.data.object;
 
@@ -10,9 +15,10 @@ import java.util.Map;
 import lexa.core.data.DataSet;
 
 /**
- *
- * use the DataObjectField to annotate fields for data
+ * Support for {@link DataObject} via reflection.
+ * Use {@link DataObjectField} to annotate fields for serialisation
  * @author william
+ * @since 2016-12
  */
 public class ReflectionDataObject
         implements DataObject
@@ -34,25 +40,17 @@ public class ReflectionDataObject
     /**
      * ReflectionDataObject
      */
-    public ReflectionDataObject()
+    protected ReflectionDataObject()
     {
         this.loader = ReflectionDataObject.loader(this.getClass().getCanonicalName());
     }
 
-    /**
-     *
-     * @return
-     */
     @Override
     public DataSet toData()
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    /**
-     *
-     * @param data
-     */
     @Override
     public void fromData(DataSet data)
     {
