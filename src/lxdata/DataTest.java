@@ -37,7 +37,7 @@ public class DataTest
         System.out.println(
                 new TestRun(tests)
                         .execute()
-                        .getReport()
+                        .getReport(false, true)
         );
 	}
 }

@@ -23,7 +23,8 @@ import java.util.Iterator;
  */
 public interface DataArray
 		extends Iterable<DataValue>,
-            Comparable<DataArray>
+            Comparable<DataArray>,
+            DataFactoryItem
 {
 	/**
 	Add an object to the array.
@@ -96,12 +97,6 @@ public interface DataArray
 	@return this {@link DataArray}
 	*/
 	public DataArray addAll(Object[] array);
-
-    /**
-     * Get the factory used to create this type of {@link DataArray}
-     * @return the factory for this type of {@link DataArray}
-     */
-    public DataFactory factory();
 
     /**
 	Get the value at a position.

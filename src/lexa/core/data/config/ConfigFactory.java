@@ -5,7 +5,7 @@
  * ConfigFactory.java
  *------------------------------------------------------------------------------
  * Author:  William Norman-Walker
- * Created: Month YEAR
+ * Created: may 2016
  *==============================================================================
  */
 package lexa.core.data.config;
@@ -18,8 +18,9 @@ import lexa.core.data.DataSet;
 import lexa.core.data.DataValue;
 
 /**
- *
+ * Factory for the config data sets
  * @author william
+ * @since 2017-05
  */
 public class ConfigFactory
         extends BaseFactory

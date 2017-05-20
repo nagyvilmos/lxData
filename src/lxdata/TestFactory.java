@@ -13,12 +13,14 @@ package lxdata;
 import lexa.core.data.ArrayFactory;
 import lexa.core.data.DataArray;
 import lexa.core.data.DataFactory;
+import lexa.core.data.DataFactoryItem;
 import lexa.core.data.DataItem;
 import lexa.core.data.DataSet;
 import lexa.core.data.DataValue;
 import lexa.core.data.HashFactory;
 import lexa.core.data.config.ConfigFactory;
 import lexa.test.TestAnnotation;
+import lexa.test.TestResult;
 
 /**
  * Test handler for the {@link lexa.core.data.DataFactory}
@@ -87,174 +89,211 @@ public class TestFactory
     /**
      * Set up test class
      * @param arg the type of factory being tested
-     * @return {@code true} if successful, otherwise {@code false}
+     * @return a {@link TestResult} with the results
      */
-    public Boolean setUpFactory(Object arg)
+    public TestResult setUpFactory(Object arg)
     {
         this.factory = TestFactory.factory((String)arg);
-        return true;
+        return TestResult.notNull(this.factory);
     }
 
     /**
      * Tear down the test class
      * @param arg the type of factory being tested
-     * @return {@code true} if successful, otherwise {@code false}
+     * @return a {@link TestResult} with the results
      */
-    public Boolean tearDownFactory(Object arg)
+    public TestResult tearDownFactory(Object arg)
     {
         this.factory = null;
-        return true;
+        return TestResult.isNull(this.factory);
     }
 
     /**
      * Check that a data set can be created
      * @param arg the type of factory being tested
-     * @return {@code true} if successful, otherwise {@code false}
+     * @return a {@link TestResult} with the results
      */
     @TestAnnotation()
-    public Boolean getDataSet(Object arg)
+    public TestResult getDataSet(Object arg)
     {
-        DataSet test = this.factory.getDataSet();
-        return (test != null && this.factory.checkFactory(test.factory()));
+        return this.checkCreated(
+                this.factory.getDataSet());
     }
 
     /**
      * Check that a data item can be created
      * @param arg the type of factory being tested
-     * @return {@code true} if successful, otherwise {@code false}
+     * @return a {@link TestResult} with the results
      */
     @TestAnnotation()
-    public Boolean getDataItem(Object arg)
+    public TestResult getDataItem(Object arg)
     {
-        DataItem test = this.factory.getDataItem("k", arg);
-        return (test != null && this.factory.checkFactory(test.factory()));
+        return this.checkCreated(
+                this.factory.getDataItem("k", arg));
     }
 
     /**
      * Check that a data array can be created
      * @param arg the type of factory being tested
-     * @return {@code true} if successful, otherwise {@code false}
+     * @return a {@link TestResult} with the results
      */
     @TestAnnotation()
-    public Boolean getDataArray(Object arg)
+    public TestResult getDataArray(Object arg)
     {
-        DataArray test = this.factory.getDataArray();
-        return (test != null && this.factory.checkFactory(test.factory()));
+        return this.checkCreated(
+                this.factory.getDataArray());
     }
 
     /**
      * Check that a data value can be created
      * @param arg the type of factory being tested
-     * @return {@code true} if successful, otherwise {@code false}
+     * @return a {@link TestResult} with the results
      */
     @TestAnnotation()
-    public Boolean getDataValue(Object arg)
+    public TestResult getDataValue(Object arg)
     {
-        DataValue test = this.factory.getDataValue(arg);
-        return (test != null && this.factory.checkFactory(test.factory()));
+        return this.checkCreated(
+                this.factory.getDataValue(arg));
     }
 
     /**
      * Check that a data set can be cloned
      * @param arg the type of factory being cloned
-     * @return {@code true} if successful, otherwise {@code false}
+     * @return a {@link TestResult} with the results
      */
     @TestAnnotation(arguments = "copyFactoryTypes")
-    public Boolean cloneDataSet(Object arg)
+    public TestResult cloneDataSet(Object arg)
     {
-        DataSet test = TestFactory.factory((String)arg).getDataSet();
-        test = this.factory.clone(test);
-        return (test != null && this.factory.checkFactory(test.factory()));
+        DataSet test = this.factory.getDataSet();
+        DataSet clone = this.factory.clone(test);
+        return TestResult.all(
+                TestResult.result(test, clone),
+                TestResult.result(false, test == clone),
+                this.checkCreated(clone)
+        );
     }
 
     /**
      * Check that a data item can be cloned
      * @param arg the type of factory being cloned
-     * @return {@code true} if successful, otherwise {@code false}
+     * @return a {@link TestResult} with the results
      */
     @TestAnnotation(arguments = "copyFactoryTypes")
-    public Boolean cloneDataItem(Object arg)
+    public TestResult cloneDataItem(Object arg)
     {
-        DataItem test = TestFactory.factory((String)arg).getDataItem("k", arg);
-        test = this.factory.clone(test);
-        return (test != null && this.factory.checkFactory(test.factory()));
+        DataItem test = this.factory.getDataItem("k", arg);
+        DataItem clone = this.factory.clone(test);
+        return TestResult.all(
+                TestResult.result(test, clone),
+                TestResult.result(false, test == clone),
+                this.checkCreated(clone)
+        );
     }
 
     /**
      * Check that a data value can be cloned
      * @param arg the type of factory being cloned
-     * @return {@code true} if successful, otherwise {@code false}
+     * @return a {@link TestResult} with the results
      */
     @TestAnnotation(arguments = "copyFactoryTypes")
-    public Boolean cloneDataValue(Object arg)
+    public TestResult cloneDataValue(Object arg)
     {
-        DataValue test = TestFactory.factory((String)arg).getDataValue(arg);
-        test = this.factory.clone(test);
-        return (test != null && this.factory.checkFactory(test.factory()));
+        DataValue test = this.factory.getDataValue(arg);
+        DataValue clone = this.factory.clone(test);
+        return TestResult.all(
+                TestResult.result(test, clone),
+                TestResult.result(false, test == clone),
+                this.checkCreated(clone)
+        );
     }
 
     /**
      * Check that a data array can be cloned
      * @param arg the type of factory being cloned
-     * @return {@code true} if successful, otherwise {@code false}
+     * @return a {@link TestResult} with the results
      */
     @TestAnnotation(arguments = "copyFactoryTypes")
-    public Boolean cloneDataArray(Object arg)
+    public TestResult cloneDataArray(Object arg)
     {
-        DataArray test = TestFactory.factory((String)arg).getDataArray();
-        test = this.factory.clone(test);
-        return (test != null && this.factory.checkFactory(test.factory()));
+        DataArray test = this.factory.getDataArray();
+        DataArray clone = this.factory.clone(test);
+        return TestResult.all(
+                TestResult.result(test, clone),
+                TestResult.result(false, test == clone),
+                this.checkCreated(clone)
+        );
     }
 
     /**
      * Check that a data set can be converted
      * @param arg the type of factory being converted
-     * @return {@code true} if successful, otherwise {@code false}
+     * @return a {@link TestResult} with the results
      */
     @TestAnnotation(arguments = "copyFactoryTypes")
-    public Boolean convertDataSet(Object arg)
+    public TestResult convertDataSet(Object arg)
     {
         DataSet test = TestFactory.factory((String)arg).getDataSet();
-        test = this.factory.convert(test);
-        return (test != null && this.factory.checkFactory(test.factory()));
+        DataSet convert = this.factory.convert(test);
+        return TestResult.all(
+                TestResult.result(test, convert),
+                this.checkCreated(convert)
+        );
     }
 
     /**
      * Check that a data item can be converted
      * @param arg the type of factory being converted
-     * @return {@code true} if successful, otherwise {@code false}
+     * @return a {@link TestResult} with the results
      */
     @TestAnnotation(arguments = "copyFactoryTypes")
-    public Boolean convertDataItem(Object arg)
+    public TestResult convertDataItem(Object arg)
     {
         DataItem test = TestFactory.factory((String)arg).getDataItem("k", arg);
-        test = this.factory.convert(test);
-        return (test != null && this.factory.checkFactory(test.factory()));
+        DataItem convert = this.factory.convert(test);
+        return TestResult.all(
+                TestResult.result(test, convert),
+                this.checkCreated(convert)
+        );
     }
 
     /**
      * Check that a data value can be converted
      * @param arg the type of factory being converted
-     * @return {@code true} if successful, otherwise {@code false}
+     * @return a {@link TestResult} with the results
      */
     @TestAnnotation(arguments = "copyFactoryTypes")
-    public Boolean convertDataValue(Object arg)
+    public TestResult convertDataValue(Object arg)
     {
         DataValue test = TestFactory.factory((String)arg).getDataValue(arg);
-        test = this.factory.convert(test);
-        return (test != null && this.factory.checkFactory(test.factory()));
+        DataValue convert = this.factory.convert(test);
+        return TestResult.all(
+                TestResult.result(test, convert),
+                this.checkCreated(convert)
+        );
     }
 
     /**
      * Check that a data array can be converted
      * @param arg the type of factory being converted
-     * @return {@code true} if successful, otherwise {@code false}
+     * @return a {@link TestResult} with the results
      */
     @TestAnnotation(arguments = "copyFactoryTypes")
-    public Boolean convertDataArray(Object arg)
+    public TestResult convertDataArray(Object arg)
     {
         DataArray test = TestFactory.factory((String)arg).getDataArray();
-        test = this.factory.convert(test);
-        return (test != null && this.factory.checkFactory(test.factory()));
+        DataArray convert = this.factory.convert(test);
+        return TestResult.all(
+                TestResult.result(test, convert),
+                this.checkCreated(convert)
+        );
+    }
+
+    private TestResult checkCreated(DataFactoryItem test)
+    {
+        return TestResult.all(
+                TestResult.notNull(test),
+                TestResult.result(
+                    this.factory.checkFactory(test.factory()))
+        );
     }
 }

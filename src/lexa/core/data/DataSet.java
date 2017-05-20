@@ -19,7 +19,8 @@ import java.util.Date;
  */
 public interface DataSet
 		extends Iterable<DataItem>,
-            Comparable<DataSet>
+            Comparable<DataSet>,
+            DataFactoryItem
 {
 	/**
 	 * Checks if the {@link DataSet} contains a named key.
@@ -30,12 +31,6 @@ public interface DataSet
 	 *              otherwise {@code false}.
 	 */
 	public boolean contains(String key);
-
-    /**
-     * Get the factory used to create this type of {@link DataSet}
-     * @return the factory used to create this type of {@link DataSet}
-     */
-    public DataFactory factory();
 
 	/**
 	 * Get a {@link DataItem} from the list for the supplied key.

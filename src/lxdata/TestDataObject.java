@@ -15,6 +15,7 @@ import lexa.core.data.DataSet;
 import lexa.core.data.ArrayDataSet;
 import lexa.core.data.object.DataObject;
 import lexa.test.TestAnnotation;
+import lexa.test.TestResult;
 
 /**
  * Test handler for the {@link lexa.core.data.object} stack
@@ -29,40 +30,40 @@ public class TestDataObject
 
     /**
      * Check that object can be created
-     * @return {@code true} if successful, otherwise {@code false}
+     * @return a {@link TestResult} with the results
      */
     @TestAnnotation(order = 0)
-    public Boolean create()
+    public TestResult create()
     {
         this.testImpl = new TestImpl();
         this.testImpl.str = "first";
         this.testImpl.lng = 435L;
 
-        return true;
+        return TestResult.notNull(this.testImpl);
     }
 
     /**
      * Check that an object can be converted to a data set
-     * @return {@code true} if successful, otherwise {@code false}
+     * @return a {@link TestResult} with the results
      */
     @TestAnnotation(order = 100)
-    public Boolean toData()
+    public TestResult toData()
     {
         this.data = testImpl.toData();
 
-        return true;
+        return TestResult.notNull(this.data);
     }
 
     /**
      * Check that an object can be created from a data set
-     * @return {@code true} if successful, otherwise {@code false}
+     * @return a {@link TestResult} with the results
      */
     @TestAnnotation(order = 200)
-    public Boolean fromData()
+    public TestResult fromData()
     {
         TestImpl reload = new TestImpl();
         reload.fromData(this.data);
-        return this.testImpl.equals(reload);
+        return TestResult.result(this.testImpl, reload);
     }
 
     /**

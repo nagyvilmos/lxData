@@ -23,14 +23,9 @@ import java.util.Date;
  @since 2015-03
  */
 public interface DataValue
-        extends Comparable<DataValue>
+        extends Comparable<DataValue>,
+                DataFactoryItem
 {
-    /**
-     * Get the factory used to create this type of {@link DataValue}
-     * @return the factory used to create this type of {@link DataValue}
-     */
-    public DataFactory factory();
-
 	/**
 	 * Gets the value as a {@link DataArray}.
 	 * @return The value as am array.

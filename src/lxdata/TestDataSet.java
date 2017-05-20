@@ -1,7 +1,7 @@
 /*
- * ================================================================================
+ *=================================================================================
  * Lexa - Property of William Norman-Walker
- * --------------------------------------------------------------------------------
+ *---------------------------------------------------------------------------------
  * TestDataSet.java
  *--------------------------------------------------------------------------------
  * Author:  William Norman-Walker
@@ -23,6 +23,7 @@ import lexa.core.data.DataType;
 import lexa.core.data.io.DataReader;
 import lexa.core.data.io.DataWriter;
 import lexa.test.TestAnnotation;
+import lexa.test.TestResult;
 
 /**
  * Test handler for the {@link lexa.core.data} stack
@@ -40,9 +41,9 @@ public class TestDataSet
     /**
      * Populate a data set with test data
      * @param data the {@link DataSet to populate}
-     * @return {@code true} if successful, otherwise {@code false}
+     * @return a {@link TestResult} with the results
      */
-    static Boolean populate(DataSet data)
+    static TestResult populate(DataSet data)
     {
         data
                 .put("boolean", true)
@@ -66,7 +67,7 @@ public class TestDataSet
                         .put("farewell", "So-long, farewell Adure!")
                 )
                 .put("string","test string");
-        return true;
+        return TestResult.notNull(data);
     }
 
     private DataSet data;
@@ -75,14 +76,15 @@ public class TestDataSet
     /**
      * tear down test class
      * @param arg the type of data set
-     * @return {@code true} if successful, otherwise {@code false}
+     * @return a {@link TestResult} with the results
      */
-    public Boolean tearDownDataSet(Object arg)
+    public TestResult tearDownDataSet(Object arg)
     {
         this.data = null;
         if (this.file == null || !this.file.exists())
-            return true;
-        return this.file.delete();
+            return TestResult.result(true);
+        return TestResult.result(true, this.file.delete(),
+                "Cannot delete the result file " + this.file);
     }
 
     /**
@@ -97,9 +99,9 @@ public class TestDataSet
     /**
      * Set up test class
      * @param arg the type of data set
-     * @return {@code true} if successful, otherwise {@code false}
+     * @return a {@link TestResult} with the results
      */
-    public Boolean setUpDataSet(Object arg)
+    public TestResult setUpDataSet(Object arg)
     {
         String type = (String)arg;
         switch (type)
@@ -116,7 +118,7 @@ public class TestDataSet
         }
         default :
         {
-            return false;
+            return TestResult.result(true, false, "Invalid type");
         }
         }
         this.file = new File(type + ".test.lexa");
@@ -126,83 +128,98 @@ public class TestDataSet
     /**
      * Check that the data set is populated.
      * @param arg the type of data set
-     * @return {@code true} if successful, otherwise {@code false}
+     * @return a {@link TestResult} with the results
      */
     @TestAnnotation(order = 0)
-    public Boolean populated(Object arg)
+    public TestResult populated(Object arg)
     {
-        return (this.data.size() == 8 &&
-                this.data.get("boolean").getType().equals(DataType.BOOLEAN) &&
-                this.data.get("integer").getType().equals(DataType.INTEGER) &&
-                this.data.get("long").getType().equals(DataType.LONG) &&
-                this.data.get("double").getType().equals(DataType.DOUBLE) &&
-                this.data.get("date").getType().equals(DataType.DATE) &&
-                this.data.get("array").getType().equals(DataType.ARRAY) &&
-                this.data.get("dataset").getType().equals(DataType.DATA_SET) &&
-                this.data.get("string").getType().equals(DataType.STRING) &&
-                this.data.item("array:4").getType().equals(DataType.BOOLEAN) &&
-                this.data.item("array:5:1").getType().equals(DataType.INTEGER) &&
-                this.data.item("array:6.key").getType().equals(DataType.STRING) &&
-                this.data.item("dataset.farewell").getType().equals(DataType.STRING));
+        return TestResult.all(
+                TestResult.result(8, this.data.size()),
+                TestResult.result(DataType.BOOLEAN,
+                        this.data.get("boolean").getType()),
+                TestResult.result(DataType.INTEGER,
+                        this.data.get("integer").getType()),
+                TestResult.result(DataType.LONG,
+                        this.data.get("long").getType()),
+                TestResult.result(DataType.DOUBLE,
+                        this.data.get("double").getType()),
+                TestResult.result(DataType.DATE,
+                        this.data.get("date").getType()),
+                TestResult.result(DataType.ARRAY,
+                        this.data.get("array").getType()),
+                TestResult.result(DataType.DATA_SET,
+                        this.data.get("dataset").getType()),
+                TestResult.result(DataType.STRING,
+                        this.data.get("string").getType()),
+                TestResult.result(DataType.BOOLEAN,
+                        this.data.item("array:4").getType()),
+                TestResult.result(DataType.INTEGER,
+                        this.data.item("array:5:1").getType()),
+                TestResult.result(DataType.STRING,
+                        this.data.item("array:6.key").getType()),
+                TestResult.result(DataType.STRING,
+                        this.data.item("dataset.farewell").getType())
+        );
     }
 
     /**
      * Check that the dataset can be printed out
      * @param arg the type of data set
-     * @return {@code true} if successful, otherwise {@code false}
+     * @return a {@link TestResult} with the results
      * @throws java.io.FileNotFoundException if the file for output cannot be found
      */
     @TestAnnotation(order = 1, tearDown = "tearDownPrintFormatted")
-    public Boolean printFormatted(Object arg)
+    public TestResult printFormatted(Object arg)
             throws FileNotFoundException
     {
         try (PrintStream ps = new PrintStream("printFormatted.txt"))
         {
             this.data.printFormatted(ps);
         }
-        return true;
+        return TestResult.result(true);
     }
 
     /**
      * Delete the file created by printFormatted
      * @param arg the type of data set
-     * @return {@code true} if successful, otherwise {@code false}
+     * @return a {@link TestResult} with the results
      */
-    public Boolean tearDownPrintFormatted(Object arg)
+    public TestResult tearDownPrintFormatted(Object arg)
     {
         File pf = new File("printFormatted.txt");
-        return pf.delete();
+        return TestResult.result(true, pf.delete(),
+                "No file to delete");
     }
 
     /**
      * Check that the dataset can be written to a file
      * @param arg the type of data set
-     * @return {@code true} if successful, otherwise {@code false}
+     * @return a {@link TestResult} with the results
      * @throws IOException when an IO exception occurs
      */
     @TestAnnotation(order = 2)
-    public Boolean writeToFile(Object arg)
+    public TestResult writeToFile(Object arg)
             throws IOException
     {
         DataWriter dw = new DataWriter(this.file);
         dw.write(this.data);
         dw.close();
-        return true;
+        return TestResult.result(true);
     }
 
     /**
      * Check that the dataset can be read from a file
      * @param arg the type of data set
-     * @return {@code true} if successful, otherwise {@code false}
+     * @return a {@link TestResult} with the results
      * @throws IOException when an IO exception occurs
      */
     @TestAnnotation(order = 3)
-    public Boolean readFromFile(Object arg)
+    public TestResult readFromFile(Object arg)
             throws IOException
     {
         DataReader dr = new DataReader(this.file, this.data.factory());
         DataSet read = dr.read();
         dr.close();
-        return this.data.equals(read);
+        return TestResult.result(this.data, read);
     }
 }
