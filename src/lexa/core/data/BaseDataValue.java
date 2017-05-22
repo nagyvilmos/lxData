@@ -88,7 +88,7 @@ public abstract class BaseDataValue
             }
             case INTEGER:
             {
-                return this.getDouble().compareTo(to.getDouble());
+                return this.getInteger().compareTo(to.getInteger());
             }
             case LONG:
             {
