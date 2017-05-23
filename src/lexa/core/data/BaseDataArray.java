@@ -121,14 +121,21 @@ public abstract class BaseDataArray
 
     @Override
     public DataArray addAll(DataArray array) {
-        array.forEach((DataValue value) -> this.add(value));
+        if (array != null)
+        {
+            array.forEach((DataValue value) -> this.add(value));
+        }
         return this;
     }
 
     @Override
     public DataArray addAll(Object[] array) {
-        for (Object object : array) {
-            this.add(object);
+        if (array != null)
+        {
+            for (Object object : array)
+            {
+                this.add(object);
+            }
         }
         return this;
     }
