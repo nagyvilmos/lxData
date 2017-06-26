@@ -222,4 +222,98 @@ public class TestDataSet
         dr.close();
         return TestResult.result(this.data, read);
     }
+
+    /**
+     * Add an item to a clone and check the two are now different
+     * @param arg the type of data set
+     * @return a {@link TestResult} with the results
+     * @throws IOException when an IO exception occurs
+     */
+    @TestAnnotation(order = 4)
+    public TestResult addToClone(Object arg)
+            throws IOException
+    {
+        DataSet clone = this.data.factory().clone(this.data);
+        clone.put("new", 7403);
+        return new TestResult (!clone.equals(this.data),
+                "Clone is the same as data after add");
+    }
+
+    /**
+     * Remove an item from a clone and check the two are now different
+     * @param arg the type of data set
+     * @return a {@link TestResult} with the results
+     * @throws IOException when an IO exception occurs
+     */
+    @TestAnnotation(order = 5)
+    public TestResult removeFromClone(Object arg)
+            throws IOException
+    {
+        DataSet clone = this.data.factory().clone(this.data);
+        clone.remove("integer");
+        return new TestResult (!clone.equals(this.data),
+                "Clone is the same as data after removal");
+    }
+    /**
+     * Add an item to a clone and check the two are now different
+     * @param arg the type of data set
+     * @return a {@link TestResult} with the results
+     * @throws IOException when an IO exception occurs
+     */
+    @TestAnnotation(order = 6)
+    public TestResult addToCloneArray(Object arg)
+            throws IOException
+    {
+        DataSet clone = this.data.factory().clone(this.data);
+        clone.getArray("array").add(2);
+        return new TestResult (!clone.equals(this.data),
+                "Clone is the same as data after add");
+    }
+
+    /**
+     * Remove an item from a clone and check the two are now different
+     * @param arg the type of data set
+     * @return a {@link TestResult} with the results
+     * @throws IOException when an IO exception occurs
+     */
+    @TestAnnotation(order = 7)
+    public TestResult removeFromCloneArray(Object arg)
+            throws IOException
+    {
+        DataSet clone = this.data.factory().clone(this.data);
+        clone.getArray("array").remove(2);
+        return new TestResult (!clone.equals(this.data),
+                "Clone is the same as data after removal");
+    }
+    /**
+     * Add an item to a clone and check the two are now different
+     * @param arg the type of data set
+     * @return a {@link TestResult} with the results
+     * @throws IOException when an IO exception occurs
+     */
+    @TestAnnotation(order = 8)
+    public TestResult addToCloneDataSet(Object arg)
+            throws IOException
+    {
+        DataSet clone = this.data.factory().clone(this.data);
+        clone.getDataSet("dataset").put("x", 2);
+        return new TestResult (!clone.equals(this.data),
+                "Clone is the same as data after add");
+    }
+
+    /**
+     * Remove an item from a clone and check the two are now different
+     * @param arg the type of data set
+     * @return a {@link TestResult} with the results
+     * @throws IOException when an IO exception occurs
+     */
+    @TestAnnotation(order = 9)
+    public TestResult removeFromCloneDataSet(Object arg)
+            throws IOException
+    {
+        DataSet clone = this.data.factory().clone(this.data);
+        clone.getDataSet("dataset").remove("farewell");
+        return new TestResult (!clone.equals(this.data),
+                "Clone is the same as data after removal");
+    }
 }

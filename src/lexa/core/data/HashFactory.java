@@ -29,24 +29,6 @@ public class HashFactory
     private HashFactory() {} // keep in single, keep it simple
 
     @Override
-    public DataArray clone(DataArray clone)
-    {
-        return new HashDataArray(clone);
-    }
-
-    @Override
-    public DataSet clone(DataSet clone)
-    {
-        return new HashDataSet(clone);
-    }
-
-    @Override
-    public DataItem clone(DataItem clone)
-    {
-        return new HashDataItem(clone);
-    }
-
-    @Override
     public DataArray getDataArray()
     {
         return new HashDataArray();

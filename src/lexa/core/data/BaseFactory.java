@@ -25,92 +25,142 @@ public abstract class BaseFactory
     }
 
     @Override
-    public DataArray clone(DataArray clone)
-    {
-        return this.getDataArray().addAll(clone);
-    }
+    public DataArray clone(DataArray array)
 
-    @Override
-    public DataSet clone(DataSet clone)
     {
-        return this.getDataSet().put(clone);
-    }
-
-    @Override
-    public DataItem clone(DataItem clone)
-    {
-        return this.getDataItem(clone.getKey(), clone.getObject());
-    }
-
-    @Override
-    public DataValue clone(DataValue clone)
-    {
-        return this.getDataValue(clone.getObject());
-    }
-
-    @Override
-    public DataArray convert(DataArray convert)
-    {
-        if (convert != null &&
-                !this.checkFactory(convert.factory()))
+        DataArray clone = this.getDataArray();
+        for (DataValue value : array)
         {
-            return this.clone(convert);
+            clone.add(this.clone(value));
         }
-        return convert;
+        return  clone;
     }
 
     @Override
-    public DataSet convert(DataSet convert)
+    public DataSet clone(DataSet data)
     {
-        if (convert != null &&
-                !this.checkFactory(convert.factory()))
+        DataSet clone = this.getDataSet();
+        for (DataItem item : data)
         {
-            return this.clone(convert);
+            clone.put(this.clone(item));
         }
-        return convert;
+        return clone;
     }
 
     @Override
-    public DataItem convert(DataItem convert)
+    public DataItem clone(DataItem item)
     {
-        if (convert != null &&
-                !this.checkFactory(convert.factory()))
-        {
-            return this.clone(convert);
-        }
-        return convert;
+        return this.getDataItem(item.getKey(),
+                this.clone(item.getObject()));
     }
 
     @Override
-    public DataValue convert(DataValue convert)
+    public DataValue clone(DataValue value)
     {
-        if (convert != null &&
-                !this.checkFactory(convert.factory()))
-        {
-            return this.clone(convert);
-        }
-        return convert;
+        return this.getDataValue(
+                this.clone(value.getObject()));
     }
 
     @Override
-    public Object convert(Object convert)
+    public Object clone(Object object)
     {
-        if (convert == null)
-        {}
-        else if (DataSet.class.isAssignableFrom(convert.getClass()))
+        if (object == null)
         {
-            return this.convert((DataSet)convert);
+            return null;
         }
-        else if (DataArray.class.isAssignableFrom(convert.getClass()))
+        Class cl = object.getClass();
+
+        if (DataSet.class.isAssignableFrom(cl))
         {
-            return this.convert((DataArray)convert);
+            return this.clone((DataSet)object);
         }
-        else if (DataValue.class.isAssignableFrom(convert.getClass()))
+        else if (DataArray.class.isAssignableFrom(cl))
         {
-            return this.convert(((DataValue)convert).getObject());
+            return this.clone((DataArray)object);
+        }
+        else if (DataItem.class.isAssignableFrom(cl))
+        {
+            return this.clone(((DataItem)object).getObject());
+        }
+        else if (DataValue.class.isAssignableFrom(cl))
+        {
+            return this.clone(((DataValue)object).getObject());
         }
         // nothing:
-        return convert;
+        return object;
+    }
+
+    @Override
+    public DataArray convert(DataArray array)
+    {
+        if (array != null &&
+                !this.checkFactory(array.factory()))
+        {
+            return this.clone(array);
+        }
+        return array;
+    }
+
+    @Override
+    public DataSet convert(DataSet data)
+    {
+        if (data != null &&
+                !this.checkFactory(data.factory()))
+        {
+            return this.clone(data);
+        }
+        return data;
+    }
+
+    @Override
+    public DataItem convert(DataItem item)
+    {
+        if (item != null &&
+                !this.checkFactory(item.factory()))
+        {
+            return this.clone(item);
+        }
+        return item;
+    }
+
+    @Override
+    public DataValue convert(DataValue value)
+    {
+        if (value != null &&
+                !this.checkFactory(value.factory()))
+        {
+            return this.clone(value);
+        }
+        return value;
+    }
+
+    @Override
+    public Object convert(Object object)
+    {
+        if (object == null)
+        {
+            return null;
+        }
+        Class cl = object.getClass();
+
+        if (DataSet.class.isAssignableFrom(cl))
+        {
+            return this.convert((DataSet)object);
+        }
+        else if (DataArray.class.isAssignableFrom(cl))
+        {
+            return this.convert((DataArray)object);
+        }
+        else if (DataItem.class.isAssignableFrom(cl))
+        {
+            return this.convert(((DataItem)object).getObject());
+        }
+        else if (DataValue.class.isAssignableFrom(cl))
+        {
+            return this.convert(((DataValue)object).getObject());
+        }
+        // nothing:
+        return object;
     }
 
 }

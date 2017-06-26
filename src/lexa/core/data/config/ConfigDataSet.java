@@ -74,7 +74,7 @@ public class ConfigDataSet
 
         for (DataItem item : data)
         {
-            super.put(new ConfigDataItem(this, item));
+            super.put(this.factory().convert(item));
         }
         this.read = false;
 	}
@@ -167,7 +167,7 @@ public class ConfigDataSet
         {
             this.invalidGets.add("#" + index);
         }
-        return (ConfigDataItem)super.get(index); //To change body of generated methods, choose Tools | Templates.
+        return (ConfigDataItem)super.get(index);
     }
 
     @Override

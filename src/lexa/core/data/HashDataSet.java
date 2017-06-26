@@ -49,10 +49,9 @@ public class HashDataSet
             return; // nothing to copy
 
         // assume we're receiving another Hash set so clone by key:
-        String[] keys = clone.keys();
-        for (String key : keys)
+        for (DataItem item: clone)
         {
-            this._put(new HashDataItem(clone.get(key)));
+            this._put(this.factory().clone(item));
         }
 	}
 

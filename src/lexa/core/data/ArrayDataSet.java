@@ -74,7 +74,7 @@ public class ArrayDataSet
 
 		for (DataItem item : clone)
 		{
-			this._put(new ArrayDataItem(item));
+			this._put(this.factory().clone(item));
 		}
 	}
 

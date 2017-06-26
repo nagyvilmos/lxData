@@ -31,108 +31,121 @@ public interface DataFactory
      * Create a clone of the provided {@link DataArray} that is consistent with
      * this {@link DataFactory}. This will always result in a deep copy.
      *
-     * @param clone
+     * @param array
      *          the {@link DataArray} to be cloned.
      * @return  a new {@link DataArray} of the type supported by this
      *          {@link DataFactory} with the same content.
      */
-    DataArray clone(DataArray clone);
+    DataArray clone(DataArray array);
 
     /**
      * Clone a {@link DataSet}.
      * Create a clone of the provided {@link DataSet} that is consistent with
      * this {@link DataFactory}. This will always result in a deep copy.
      *
-     * @param clone
+     * @param data
      *          the {@link DataSet} to be cloned.
      * @return  a new {@link DataSet} of the type supported by this
      *          {@link DataFactory} with the same content.
      */
-    DataSet clone(DataSet clone);
+    DataSet clone(DataSet data);
 
     /**
      * Clone a {@link DataItem}.
      * Create a clone of the provided {@link DataItem} that is consistent with
      * this {@link DataFactory}. This will always result in a deep copy.
      *
-     * @param clone
+     * @param item
      *          the {@link DataItem} to be cloned.
      * @return  a new {@link DataItem} of the type supported by this
      *          {@link DataFactory} with the same content.
      */
-    DataItem clone(DataItem clone);
+    DataItem clone(DataItem item);
 
     /**
      * Clone a {@link DataValue}.
      * Create a clone of the provided {@link DataValue} that is consistent with
      * this {@link DataFactory}. This will always result in a deep copy.
      *
-     * @param clone
+     * @param value
      *          the {@link DataValue} to be cloned.
      * @return  a new {@link DataValue} of the type supported by this
      *          {@link DataFactory} with the same content.
      */
-    DataValue clone(DataValue clone);
+    DataValue clone(DataValue value);
+
+    /**
+     * Clone an {@link Object}.
+     * Create a clone of the provided {@link Object} that is consistent with
+     * this {@link DataFactory}. This will always result in a deep copy of any
+     * components
+     * 
+     * @param object
+     *          the {@link Object} to be converted.
+     * @return  a {@link Object} of the type supported by this
+     *          {@link DataFactory} with the same content.
+     */
+    Object clone(Object object);
 
     /**
      * Convert a {@link DataArray}.
      * Make sure that the {@link DataArray} is of the type supported by this
      * {@link DataFactory} and if it is a different type then create a clone.
      *
-     * @param convert
+     * @param array
      *          the {@link DataArray} to be converted.
      * @return  a {@link DataArray} of the type supported by this
      *          {@link DataFactory} with the same content.
      */
-    DataArray convert(DataArray convert);
+    DataArray convert(DataArray array);
 
     /**
      * Convert a {@link DataItem}.
      * Make sure that the {@link DataItem} is of the type supported by this
      * {@link DataFactory} and if it is a different type then create a clone.
      *
-     * @param convert
+     * @param item
      *          the {@link DataItem} to be converted.
      * @return  a {@link DataItem} of the type supported by this
      *          {@link DataFactory} with the same content.
      */
-    DataItem convert(DataItem convert);
+    DataItem convert(DataItem item);
 
     /**
      * Convert a {@link DataSet}.
      * Make sure that the {@link DataSet} is of the type supported by this
      * {@link DataFactory} and if it is a different type then create a clone.
      *
-     * @param convert
+     * @param data
      *          the {@link DataSet} to be converted.
      * @return  a {@link DataSet} of the type supported by this
      *          {@link DataFactory} with the same content.
      */
-    DataSet convert(DataSet convert);
+    DataSet convert(DataSet data);
 
     /**
      * Convert a {@link DataValue}.
      * Make sure that the {@link DataValue} is of the type supported by this
      * {@link DataFactory} and if it is a different type then create a clone.
      *
-     * @param convert
+     * @param value
      *          the {@link DataValue} to be converted.
      * @return  a {@link DataValue} of the type supported by this
      *          {@link DataFactory} with the same content.
      */
-    DataValue convert(DataValue convert);
+    DataValue convert(DataValue value);
 
     /**
      * Convert an {@link Object}.
      * Make sure that the {@link Object} is of the type supported by this
      * {@link DataFactory} and if it is a different type then create a clone.
      *
-     * @param convert
+     * @param object
      *          the {@link Object} to be converted.
      * @return  a {@link Object} of the type supported by this
      *          {@link DataFactory} with the same content.
      */
-    Object convert(Object convert);
+    Object convert(Object object);
 
     /**
      * Create a new {@link DataArray}
