@@ -11,7 +11,7 @@
 package lexa.core.data;
 
 /**
- * Interface for any item that uses a {@link DataFactory);
+ * Interface for any item that uses a {@link DataFactory};
  * @author william
  */
 public interface DataFactoryItem
