@@ -1,5 +1,4 @@
-/*
- *==============================================================================
+/*==============================================================================
  * Lexa - Property of William Norman-Walker
  *------------------------------------------------------------------------------
  * DataReader.java
@@ -282,23 +281,15 @@ public class DataReader
 		char type = value.charAt(0);
 		if (value.length() == 1)
 		{
-			if ('{' == type)
-			{
-				return this.read(true);
+            switch (String.valueOf(type))
+            {
+                case "{"    : return this.read(true);
+                case "\\"   : return this.readCodedString();
+			    case "\""   : return this.readQuotedString();
+			    case "["    : return this.readArray();
+			    case "-"    : return "";    // handle an empty string elegently
 			}
-			if ('\\' == type)
-			{
-				return this.readCodedString();
-			}
-			if ('"' == type)
-			{
-				return this.readQuotedString();
-			}
-			if ('[' == type)
-			{
-				return this.readArray();
-			}
-			throw new IOException("Invalid value encountered at " + value + " on line " + this.lineNumber);
+            throw new IOException("Invalid value encountered at " + value + " on line " + this.lineNumber);
 		}
 		if (' ' == value.charAt(1))
 		{
