@@ -66,7 +66,9 @@ public class TestDataSet
                         .put("extendedString", "1\\2#3-4\"5{6}7?8$9@a%b\nc")
                         .put("farewell", "So-long, farewell Adure!")
                 )
-                .put("string","test string");
+                .put("string","test string")
+                .put("NaN", Double.NaN)
+                .put("emptyString", "");
         return TestResult.notNull(data);
     }
 
@@ -134,7 +136,7 @@ public class TestDataSet
     public TestResult populated(Object arg)
     {
         return TestResult.all(
-                TestResult.result(8, this.data.size()),
+                TestResult.result(10, this.data.size()),
                 TestResult.result(DataType.BOOLEAN,
                         this.data.get("boolean").getType()),
                 TestResult.result(DataType.INTEGER,
@@ -158,7 +160,11 @@ public class TestDataSet
                 TestResult.result(DataType.STRING,
                         this.data.item("array:6.key").getType()),
                 TestResult.result(DataType.STRING,
-                        this.data.item("dataset.farewell").getType())
+                        this.data.item("dataset.farewell").getType()),
+                TestResult.result(DataType.DOUBLE,
+                        this.data.item("NaN").getType()),
+                TestResult.result(DataType.STRING,
+                        this.data.item("emptyString").getType())
         );
     }
 
