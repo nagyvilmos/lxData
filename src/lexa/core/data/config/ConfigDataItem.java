@@ -1,12 +1,11 @@
-/*
- * ================================================================================
+/*==============================================================================
  * Lexa - Property of William Norman-Walker
- * --------------------------------------------------------------------------------
+ *------------------------------------------------------------------------------
  * ConfigDataItem.java
- *--------------------------------------------------------------------------------
+ *------------------------------------------------------------------------------
  * Author:  William Norman-Walker
  * Created: September 2016
- *================================================================================
+ *==============================================================================
  */
 package lexa.core.data.config;
 
@@ -71,8 +70,26 @@ public class ConfigDataItem
     }
 
     @Override
+    public ConfigDataArray getArray()
+    {
+        return (ConfigDataArray)super.getArray();
+    }
+
+    @Override
+    public ConfigDataSet getDataSet()
+    {
+        return (ConfigDataSet)super.getDataSet();
+    }
+
+    @Override
     public String getPath()
     {
         return this.configFactory().getPath();
+    }
+
+    @Override
+    public ConfigDataValue getValue()
+    {
+        return (ConfigDataValue)super.getValue();
     }
 }

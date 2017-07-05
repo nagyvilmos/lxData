@@ -1,18 +1,11 @@
-/*
- * ================================================================================
+/*==============================================================================
  * Lexa - Property of William Norman-Walker
- * --------------------------------------------------------------------------------
+ *------------------------------------------------------------------------------
  * ConfigDataValue.java
- *--------------------------------------------------------------------------------
+ *------------------------------------------------------------------------------
  * Author:  William Norman-Walker
  * Created: September 2016
- *--------------------------------------------------------------------------------
- * Change Log
- * Date:        By: Ref:        Description:
- * ---------    --- ----------  --------------------------------------------------
- * 2016-09-01   WNW 16-01       Create seperate package and classes for config
- * 2016-09-14   WNW 16-09       Add path to all config objects
- *================================================================================
+ *==============================================================================
  */
 package lexa.core.data.config;
 
@@ -63,6 +56,7 @@ public class ConfigDataArray
         return (ConfigFactory)this.factory();
     }
 
+    @Override
     public DataArray add(int index, DataValue value)
     {
         super.add(index, this.configFactory().getChild(index).convert(value));
@@ -80,28 +74,29 @@ public class ConfigDataArray
     public void close()
             throws DataException
     {
-        if (!this.isRead())
+        if (this.isRead())
         {
-			StringBuilder cannotClose = new StringBuilder("Cannot close config");
-            int index = 0;
-			for (DataValue value : this)
-			{
-				if (!((ConfigDataValue)value).isRead())
-				{
-					cannotClose.append(", ")
-							.append(index)
-                            .append(" unread");
-				}
-                index++;
-			}
-            for (Integer badGet : this.invalidGets)
+            return;
+        }
+        StringBuilder cannotClose = new StringBuilder("Cannot close config");
+        int index = 0;
+        for (DataValue value : this)
+        {
+            if (!((ConfigDataValue)value).isRead())
             {
                 cannotClose.append(", ")
-                        .append(badGet)
-                        .append(" out of bounds");
+                        .append(index)
+                        .append(" unread");
             }
-			throw new DataException(cannotClose.toString(), this.getPath());
+            index++;
         }
+        for (Integer badGet : this.invalidGets)
+        {
+            cannotClose.append(", ")
+                    .append(badGet)
+                    .append(" out of bounds");
+        }
+        throw new DataException(cannotClose.toString(), this.getPath());
     }
 
     @Override
