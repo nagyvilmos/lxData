@@ -186,17 +186,25 @@ public class ConfigDataSet
      * Get a {@link ConfigDataItem} from the list for the supplied key.
      * Either get the configured setting or the default value if missing.
      *
-     * @param key The key for the ArrayDataItem.
-     * @param defaultValue the default value
-     * @return The corresponding {@link ConfigDataItem} if it exists,
-     * otherwise a new item containing with the given default.
+     * @param   key
+     *          The key for the ArrayDataItem.
+     * @param   defaultValue
+     *          the default value
+     * @return  The corresponding {@link ConfigDataItem} if it exists,
+     *          otherwise a new item containing with the given default.
+     * @throws  DataException
+     *          when the stored value is not the same as the default value
      */
     public synchronized ConfigDataItem get(String key, Object defaultValue)
+            throws DataException
     {
         // avoid the error later:
         if (this.contains(key))
+        {
+            this.validateType(key, DataType.getType(defaultValue));
             return this.get(key);
-        return new ConfigDataItem(this, new ArrayDataItem(key, defaultValue));
+        }
+        return (ConfigDataItem)this.configFactory().getDataItem(key, defaultValue);
     }
 
     @Override

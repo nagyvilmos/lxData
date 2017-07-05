@@ -290,18 +290,12 @@ public class TestConfig
     /**
      * Check that the config contains the correct types.
      * @return a {@link TestResult} with the results
+     * @throws lexa.core.data.exception.DataException when it fails
      */
     @TestAnnotation(order = 650, setUp = "setUpTest", tearDown = "tearDownTest")
-    public TestResult validateTypeSinglePass()
+    public TestResult validateTypeSinglePass() throws DataException
     {
-        try
-        {
-            this.config.validateType("boolean", DataType.BOOLEAN);
-        }
-        catch (DataException ex)
-        {
-            return new TestResult(false, false, ex);
-        }
+        this.config.validateType("boolean", DataType.BOOLEAN);
         return TestResult.result(true);
     }
 
@@ -326,21 +320,17 @@ public class TestConfig
     /**
      * Check that the config contains the correct types.
      * @return a {@link TestResult} with the results
+     * @throws lexa.core.data.exception.DataException when it fails
      */
     @TestAnnotation(order = 750, setUp = "setUpTest", tearDown = "tearDownTest")
     public TestResult validateTypeMulti()
+            throws DataException
     {
-        try
-        {
-            this.config.validateType(
-                    "boolean", DataType.BOOLEAN,
-                    "NaN", DataType.DOUBLE
-            );
-        }
-        catch (DataException ex)
-        {
-            return new TestResult(false, false, ex);
-        }
+        this.config.validateType(
+                "boolean", DataType.BOOLEAN,
+                "NaN", DataType.DOUBLE
+        );
+
         return TestResult.result(true);
     }
 
@@ -420,4 +410,44 @@ public class TestConfig
         }
         return TestResult.result(false,true, "No exception");
     }
-}
+
+   /**
+     * Check that the config does not throw an exception for value the same as default
+     * @return a {@link TestResult} with the results
+     * @throws lexa.core.data.exception.DataException when it fails
+     */
+    @TestAnnotation(order = 1000, setUp = "setUpTest", tearDown = "tearDownTest")
+    public TestResult valueMatchesDefault()
+            throws DataException
+    {
+        return TestResult.result(true,this.config.get("boolean", false).getBoolean());
+    }
+
+   /**
+     * Check that the config does throw an exception for value the different to default
+     * @return a {@link TestResult} with the results
+     */
+    @TestAnnotation(order = 1050, setUp = "setUpTest", tearDown = "tearDownTest")
+    public TestResult valueMisatchesDefault()
+    {
+        try
+        {
+            this.config.get("boolean", 7);
+        }
+        catch (DataException ex)
+        {
+            return TestResult.result(true);
+        }
+        return TestResult.result(false,true, "No exception");
+    }
+   /**
+     * Check that the config returns default when no value
+     * @return a {@link TestResult} with the results
+     * @throws lexa.core.data.exception.DataException when it fails
+     */
+    @TestAnnotation(order = 1100, setUp = "setUpTest", tearDown = "tearDownTest")
+    public TestResult valueGetDefault()
+            throws DataException
+    {
+        return TestResult.result(76,this.config.get("xxx", 76).getInteger());
+    }}
