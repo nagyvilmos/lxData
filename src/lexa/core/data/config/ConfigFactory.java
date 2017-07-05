@@ -11,11 +11,7 @@
 package lexa.core.data.config;
 
 import lexa.core.data.BaseFactory;
-import lexa.core.data.DataArray;
 import lexa.core.data.DataFactory;
-import lexa.core.data.DataItem;
-import lexa.core.data.DataSet;
-import lexa.core.data.DataValue;
 
 /**
  * Factory for the config data sets
@@ -63,26 +59,26 @@ public class ConfigFactory
         return ((ConfigFactory)factory).parent == this;
     }
     @Override
-    public DataArray getDataArray()
+    public ConfigDataArray getDataArray()
     {
         return new ConfigDataArray(this);
     }
 
     @Override
-    public DataItem getDataItem(String key, Object value)
+    public ConfigDataItem getDataItem(String key, Object value)
     {
         return new ConfigDataItem(this, key, this.getDataValue(value));
     }
 
     @Override
-    public DataSet getDataSet()
+    public ConfigDataSet getDataSet()
     {
         // just an empty data set
         return new ConfigDataSet(this, null);
     }
 
     @Override
-    public DataValue getDataValue(Object object)
+    public ConfigDataValue getDataValue(Object object)
     {
         return new ConfigDataValue(this, object);
     }
