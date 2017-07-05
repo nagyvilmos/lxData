@@ -1,16 +1,11 @@
-/*
- * ================================================================================
+/*==============================================================================
  * Lexa - Property of William Norman-Walker
- * --------------------------------------------------------------------------------
+ *------------------------------------------------------------------------------
  * DoubleFormat.java
- *--------------------------------------------------------------------------------
+ *------------------------------------------------------------------------------
  * Author:  William Norman-Walker
  * Created: August 2013
- *--------------------------------------------------------------------------------
- * Change Log
- * Date:        By: Ref:        Description:
- * ---------    --- ----------  --------------------------------------------------
- *================================================================================
+ *==============================================================================
  */
 package lexa.core.data.formatting;
 
@@ -49,13 +44,35 @@ public class DoubleFormat
 	@Override
 	public String toString(Double value)
 	{
-		return this.numberFormat.format(value);
+        if (Double.isFinite(value))
+        {
+            return this.numberFormat.format(value);
+        }
+        if (Double.isNaN(value))
+        {
+            return "NaN";
+        }
+        if (Double.POSITIVE_INFINITY == value)
+        {
+            return "+Inf";
+        }
+        if (Double.NEGATIVE_INFINITY == value)
+        {
+            return "-Inf";
+        }
+        // should never reach here
+        return "";
 	}
 
 	@Override
 	public Double fromString(String string)
 	{
-
+        switch (string)
+        {
+            case "NaN" : return Double.NaN;
+            case "+Inf" : return Double.POSITIVE_INFINITY;
+            case "-Inf" : return Double.NEGATIVE_INFINITY;
+        }
 		try
 		{
 			return this.numberFormat.parse(string)

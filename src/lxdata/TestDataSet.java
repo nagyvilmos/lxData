@@ -68,6 +68,8 @@ public class TestDataSet
                 )
                 .put("string","test string")
                 .put("NaN", Double.NaN)
+                .put("Inf", Double.POSITIVE_INFINITY)
+                .put("NegInf", Double.NEGATIVE_INFINITY)
                 .put("emptyString", "");
         return TestResult.notNull(data);
     }
@@ -136,7 +138,7 @@ public class TestDataSet
     public TestResult populated(Object arg)
     {
         return TestResult.all(
-                TestResult.result(10, this.data.size()),
+                TestResult.result(12, this.data.size()),
                 TestResult.result(DataType.BOOLEAN,
                         this.data.get("boolean").getType()),
                 TestResult.result(DataType.INTEGER,
@@ -163,6 +165,10 @@ public class TestDataSet
                         this.data.item("dataset.farewell").getType()),
                 TestResult.result(DataType.DOUBLE,
                         this.data.item("NaN").getType()),
+                TestResult.result(DataType.DOUBLE,
+                        this.data.item("Inf").getType()),
+                TestResult.result(DataType.DOUBLE,
+                        this.data.item("NegInf").getType()),
                 TestResult.result(DataType.STRING,
                         this.data.item("emptyString").getType())
         );

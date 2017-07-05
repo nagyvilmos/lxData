@@ -1,21 +1,11 @@
-/*
- * ================================================================================
+/*==============================================================================
  * Lexa - Property of William Norman-Walker
- * --------------------------------------------------------------------------------
+ *------------------------------------------------------------------------------
  * DataWriter.java
- *--------------------------------------------------------------------------------
+ *------------------------------------------------------------------------------
  * Author:  William Norman-Walker
  * Created: March 2013
- *--------------------------------------------------------------------------------
- * Change Log
- * Date:        By: Ref:        Description:
- * ---------    --- ----------  --------------------------------------------------
- * 2015-03-05	WNW 2015-03		Add the concept of an array.
- *								Add ARRAY and LONG types.
- * 2016-01-28   WNW 16-01       Update javadoc.
- * 2016-08-13   WNW 2016-08     Fix use of DatatException path and key.
- * 2016-08-20   WNW 16-08       add printFormatted method to DataSet via DataWriter
- *================================================================================
+ *==============================================================================
  */
 package lexa.core.data.io;
 
@@ -38,7 +28,7 @@ import lexa.core.data.DataArray;
  * objects to an output stream.
  * <p>A {@code lexa.core.data.DataSet} is written as a series of
  * {@code lexa.core.data.DataItem} objects.
- * <p>A {@code lexa.core.data.DataItem} is written as the name followed by the 
+ * <p>A {@code lexa.core.data.DataItem} is written as the name followed by the
  * formatted value; with the toString depends on the data type.
  * <p>The toString of the output is:
  * <pre>
@@ -170,7 +160,7 @@ public class DataWriter
 	/**
 	 * Write a {@link lexa.core.data.DataSet} to the file.
 	 * <p>
-	 * Each {@link lexa.core.data.DataSet} is written to the output 
+	 * Each {@link lexa.core.data.DataSet} is written to the output
      * using {@link #write(lexa.core.data.DataItem)}.
 	 *
 	 * @param   data
@@ -242,7 +232,7 @@ public class DataWriter
 		this.write(item.getValue(), indent);
 		this.bufferedWriter.newLine();
 	}
-	
+
 	/**
 	 * Performs the actual writing.
 	 * This private method includes the indentation.
@@ -296,8 +286,10 @@ public class DataWriter
 			case DOUBLE:
 			{
 				this.bufferedWriter.write("$ ");
-				this.bufferedWriter.write(this.formatter.doubleFormat.toString(value.getDouble()));
-				break;
+                this.bufferedWriter.write(
+                        this.formatter.doubleFormat.toString(value.getDouble())
+                );
+                break;
 			}
 			case DATE:
 			{
