@@ -17,6 +17,7 @@
 package lexa.core.data.config;
 
 import lexa.core.data.BaseDataValue;
+import lexa.core.data.DataType;
 import lexa.core.data.exception.DataException;
 import lexa.core.data.DataValue;
 
@@ -37,24 +38,6 @@ public class ConfigDataValue
     ConfigDataValue(ConfigFactory factory, DataValue value)
     {
         super(factory,value);
-//        this.path = path;
-//            DataType type = (value != null) ?
-//                    value.getType() :
-//                    DataType.NULL;
-//            this.object =
-//                    type.equals(DataType.NULL) ?
-//                        null :
-//                    type.equals(DataType.ARRAY) ?
-//                        new ConfigDataArray(path , value.getArray()) :
-//                    type.equals(DataType.DATA_SET) ?
-//                        new ConfigDataSet(this ,value.getDataSet()) :
-//                    value.getObject();
-    }
-
-    @Override
-    public ConfigFactory configFactory()
-    {
-        return (ConfigFactory)this.factory();
     }
 
     @Override
@@ -69,45 +52,47 @@ public class ConfigDataValue
         {
             if (!this.read)
             {
-                throw new DataException("cannot close",null);
+                throw new DataException("cannot close", this.getPath());
             }
         }
     }
 
     @Override
-    public void reset()
+    public ConfigFactory configFactory()
     {
-        Object object = this.getObject();
-        if (object != null &&
-                ConfigObject.class.isAssignableFrom(object.getClass()))
-        {
-            ((ConfigObject)object).reset();
-        }
-        this.read = false;
-    }
-
-    @Override
-    public ConfigDataSet getDataSet()
-    {
-        return (ConfigDataSet)super.getDataSet(); //To change body of generated methods, choose Tools | Templates.
+        return (ConfigFactory)this.factory();
     }
 
     @Override
     public ConfigDataArray getArray()
     {
-        return (ConfigDataArray)super.getArray(); //To change body of generated methods, choose Tools | Templates.
+        return (ConfigDataArray)super.getArray();
     }
 
-    /**
-	 * Gets the internal value.
-	 * @return The value of the item.
-	 */
+    @Override
+    public Boolean getBoolean()
+    {
+        return super.getBoolean();
+    }
+
+    @Override
+    public ConfigDataSet getDataSet()
+    {
+        return (ConfigDataSet)super.getDataSet();
+    }
+
 	@Override
 	public Object getObject()
 	{
         this.read = true;
 		return super.getObject();
 	}
+
+    @Override
+    public String getPath()
+    {
+        return this.configFactory().getPath();
+    }
 
     @Override
     public boolean isRead()
@@ -124,9 +109,33 @@ public class ConfigDataValue
 
 
     @Override
-    public String getPath()
+    public void reset()
     {
-        return this.configFactory().getPath();
+        Object object = this.getObject();
+        if (object != null &&
+                ConfigObject.class.isAssignableFrom(object.getClass()))
+        {
+            ((ConfigObject)object).reset();
+        }
+        this.read = false;
     }
 
+    /**
+     * Validate the data type for the item
+     * @param   type
+     *          the type of object expected
+     * @throws  DataException
+     *          when the type does not match
+     */
+    public void validateType(DataType type)
+            throws DataException
+    {
+        if (!this.getType().equals(type))
+        {
+            throw new DataException(
+                    "Config item not expected type : " + type.toString(),
+                    this.getPath()
+            );
+        }
+    }
 }

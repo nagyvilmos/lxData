@@ -10,14 +10,8 @@
  */
 package lxdata;
 
-import lexa.core.data.DataSet;
-import lexa.core.data.SealedDataSet;
-import lexa.core.data.ArrayDataSet;
-import lexa.core.data.DataItem;
-import lexa.core.data.config.ConfigDataArray;
-import lexa.core.data.config.ConfigDataItem;
-import lexa.core.data.config.ConfigDataSet;
-import lexa.core.data.config.ConfigDataValue;
+import lexa.core.data.*;
+import lexa.core.data.config.*;
 import lexa.core.data.exception.DataException;
 import lexa.test.TestAnnotation;
 import lexa.test.TestClass;
@@ -291,5 +285,139 @@ public class TestConfig
     {
             this.config = new ConfigDataSet(null);
             return TestResult.result(this.config.isRead());
+    }
+
+    /**
+     * Check that the config contains the correct types.
+     * @return a {@link TestResult} with the results
+     */
+    @TestAnnotation(order = 650, setUp = "setUpTest", tearDown = "tearDownTest")
+    public TestResult validateTypeSinglePass()
+    {
+        try
+        {
+            this.config.validateType("boolean", DataType.BOOLEAN);
+        }
+        catch (DataException ex)
+        {
+            return new TestResult(false, false, ex);
+        }
+        return TestResult.result(true);
+    }
+
+    /**
+     * Check that the config throws an exception for incorrect types.
+     * @return a {@link TestResult} with the results
+     */
+    @TestAnnotation(order = 700, setUp = "setUpTest", tearDown = "tearDownTest")
+    public TestResult validateTypeSingleFail()
+    {
+        try
+        {
+            this.config.validateType("boolean", DataType.DOUBLE);
+        }
+        catch (DataException ex)
+        {
+            return TestResult.result(true);
+        }
+        return TestResult.result(false,true, "No exception");
+    }
+
+    /**
+     * Check that the config contains the correct types.
+     * @return a {@link TestResult} with the results
+     */
+    @TestAnnotation(order = 750, setUp = "setUpTest", tearDown = "tearDownTest")
+    public TestResult validateTypeMulti()
+    {
+        try
+        {
+            this.config.validateType(
+                    "boolean", DataType.BOOLEAN,
+                    "NaN", DataType.DOUBLE
+            );
+        }
+        catch (DataException ex)
+        {
+            return new TestResult(false, false, ex);
+        }
+        return TestResult.result(true);
+    }
+
+    /**
+     * Check that the config throws an exception for missing items
+     * @return a {@link TestResult} with the results
+     */
+    @TestAnnotation(order = 800, setUp = "setUpTest", tearDown = "tearDownTest")
+    public TestResult validateTypeMissingItem()
+    {
+        try
+        {
+            // let the first pass
+            this.config.validateType("xxx", DataType.BOOLEAN);
+
+        }
+        catch (DataException ex)
+        {
+            return TestResult.result(true);
+        }
+        return TestResult.result(false,true, "No exception");
+    }
+
+    /**
+     * Check that the config throws an exception for incorrect number of arguments.
+     * @return a {@link TestResult} with the results
+     */
+    @TestAnnotation(order = 850, setUp = "setUpTest", tearDown = "tearDownTest")
+    public TestResult validateTypeOddArguments()
+    {
+        try
+        {
+            // let the first pass
+            this.config.validateType("Boolean");
+
+        }
+        catch (DataException ex)
+        {
+            return TestResult.result(true);
+        }
+        return TestResult.result(false,true, "No exception");
+    }
+
+   /**
+     * Check that the config throws an exception for name not a string
+     * @return a {@link TestResult} with the results
+     */
+    @TestAnnotation(order = 900, setUp = "setUpTest", tearDown = "tearDownTest")
+    public TestResult validateTypeNameNotString()
+    {
+        try
+        {
+            // let the first pass
+            this.config.validateType(7, DataType.ARRAY);
+        }
+        catch (DataException ex)
+        {
+            return TestResult.result(true);
+        }
+        return TestResult.result(false,true, "No exception");
+    }
+   /**
+     * Check that the config throws an exception for type not a DataType.
+     * @return a {@link TestResult} with the results
+     */
+    @TestAnnotation(order = 950, setUp = "setUpTest", tearDown = "tearDownTest")
+    public TestResult validateTypeNameTypeNotDataType()
+    {
+        try
+        {
+            // let the first pass
+            this.config.validateType("Key");
+        }
+        catch (DataException ex)
+        {
+            return TestResult.result(true);
+        }
+        return TestResult.result(false,true, "No exception");
     }
 }

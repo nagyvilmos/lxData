@@ -16,6 +16,7 @@ import lexa.core.data.DataItem;
 import lexa.core.data.DataSet;
 import lexa.core.data.ArrayDataItem;
 import lexa.core.data.ArrayDataSet;
+import lexa.core.data.DataType;
 import lexa.core.data.exception.DataException;
 
 /**
@@ -201,19 +202,19 @@ public class ConfigDataSet
     @Override
     public synchronized ConfigDataValue getValue(String key)
     {
-        return (ConfigDataValue)super.getValue(key); //To change body of generated methods, choose Tools | Templates.
+        return (ConfigDataValue)super.getValue(key);
     }
 
     @Override
     public synchronized ConfigDataSet getDataSet(String key)
     {
-        return (ConfigDataSet)super.getDataSet(key); //To change body of generated methods, choose Tools | Templates.
+        return (ConfigDataSet)super.getDataSet(key);
     }
 
     @Override
     public synchronized ConfigDataArray getArray(String key)
     {
-        return (ConfigDataArray)super.getArray(key); //To change body of generated methods, choose Tools | Templates.
+        return (ConfigDataArray)super.getArray(key);
     }
 
     @Override
@@ -238,5 +239,47 @@ public class ConfigDataSet
             this.read = checkRead;
         }
         return this.read;
+    }
+
+    /**
+     * Validate the data types for listed items in the data set.
+     * @param   args
+     *          a list of items in pairs, String then DataTtype
+     * @throws  DataException
+     *          when the type does not match
+     */
+    public void validateType(Object ... args)
+            throws DataException
+    {
+        if (args.length % 2 > 0)
+        {
+            throw new DataException(
+                    "Arguments not a list of pairs",
+                    this.getPath()
+            );
+        }
+        for (int a = 0;
+             a < args.length;
+             a = a + 2)
+        {
+            if (!String.class.isAssignableFrom(args[a].getClass()) ||
+                    !DataType.class.isAssignableFrom(args[a+1].getClass()))
+            {
+                throw new DataException(
+                        "Parameters are not String,DataType",
+                        this.getPath()
+                );
+            }
+            String name = (String)args[a];
+            DataType type = (DataType)args[a+1];
+            ConfigDataValue value =  this.getValue(name);
+            if (value == null)
+            {
+                throw new DataException(
+                        "Item doesn not exist in the data set",
+                        this.getPath(), name);
+            }
+            value.validateType(type);
+        }
     }
 }
