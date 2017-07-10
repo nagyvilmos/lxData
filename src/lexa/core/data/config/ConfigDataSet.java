@@ -201,7 +201,10 @@ public class ConfigDataSet
         // avoid the error later:
         if (this.contains(key))
         {
-            this.validateType(key, DataType.getType(defaultValue));
+            if (defaultValue != null)
+            {
+                this.validateType(key, DataType.getType(defaultValue));
+            }
             return this.get(key);
         }
         return (ConfigDataItem)this.configFactory().getDataItem(key, defaultValue);
