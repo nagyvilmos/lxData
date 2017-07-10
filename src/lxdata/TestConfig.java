@@ -424,6 +424,17 @@ public class TestConfig
     }
 
    /**
+     * Check that the config does not throw an exception for value with null default
+     * @return a {@link TestResult} with the results
+     * @throws lexa.core.data.exception.DataException when it fails
+     */
+    @TestAnnotation(order = 1025, setUp = "setUpTest", tearDown = "tearDownTest")
+    public TestResult valueMatchesNull()
+            throws DataException
+    {
+        return TestResult.result(true,this.config.get("boolean", null).getBoolean());
+    }    
+   /**
      * Check that the config does throw an exception for value the different to default
      * @return a {@link TestResult} with the results
      */
