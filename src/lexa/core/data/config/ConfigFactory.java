@@ -15,6 +15,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import lexa.core.data.BaseFactory;
 import lexa.core.data.DataFactory;
+import lexa.core.data.DataSet;
 import lexa.core.data.io.DataReader;
 
 /**
@@ -151,8 +152,9 @@ public class ConfigFactory
         ConfigFactory configFactory = new ConfigFactory(
                 '[' + file.getName() + ']'
         );
-        return (ConfigDataSet)configFactory.convert(
-                new DataReader(file).read()
-        );
+        DataReader reader = new DataReader(file);
+        DataSet data = reader.read();
+        reader.close();
+        return (ConfigDataSet)configFactory.convert(data);
     }
 }
