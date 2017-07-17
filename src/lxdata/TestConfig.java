@@ -488,6 +488,12 @@ public class TestConfig
         );
     }
 
+     /**
+     * Set up for load from file
+     * @return a {@link TestResult} with the results
+     * @throws java.io.FileNotFoundException when it fails
+     * @throws java.io.IOException when it fails
+     */
     public TestResult setUpLoadFromFile()
             throws FileNotFoundException,
             IOException
@@ -500,6 +506,10 @@ public class TestConfig
                 f.exists(), "File not created");
     }
 
+     /**
+     * Tear down load from file
+     * @return a {@link TestResult} with the results
+     */
     public TestResult tearDownLoadFromFile()
     {
         // delete the file

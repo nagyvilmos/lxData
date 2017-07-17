@@ -137,6 +137,17 @@ public class ConfigFactory
         return this.getClass().getSimpleName() + '.' + this.getPath();
     }
 
+    /**
+     * Load a {@link ConfigDataSet} from a file
+     * Equivalent to calling {@code ConfigFactory.loadFromFile(new File(fileName));
+     * @param   fileName
+     *          the name of the file to load
+     * @return  The loaded configuration.
+     * @throws  FileNotFoundException
+     *          when the file could not be located
+     * @throws  IOException
+     *          when a problem occurred reading from the file.
+     */
     public static ConfigDataSet loadFromFile(String fileName)
             throws FileNotFoundException,
                 IOException
@@ -145,6 +156,17 @@ public class ConfigFactory
                 new File(fileName)
         );
     }
+
+    /**
+     * Load a {@link ConfigDataSet} from a file
+     * @param   file
+     *          the file to load
+     * @return  The loaded configuration.
+     * @throws  FileNotFoundException
+     *          when the file could not be located
+     * @throws  IOException
+     *          when a problem occurred reading from the file.
+     */
     public static ConfigDataSet loadFromFile(File file)
             throws FileNotFoundException,
                 IOException
