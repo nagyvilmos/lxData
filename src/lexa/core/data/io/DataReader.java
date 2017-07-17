@@ -37,6 +37,7 @@ import lexa.core.data.DataFactory;
  * @since 2013-02
  */
 public class DataReader
+        implements AutoCloseable
 {
     private final DataFactory factory;
 	/** The reader used to input the content */
@@ -439,4 +440,28 @@ public class DataReader
 		}
 		return builder.toString();
 	}
+
+    /**
+     * Read an entire data file into a {@link DataSet}.
+     * <br>
+     * This provides a single line method call to open a data file, read all its
+     * content and close it cleanly.
+     *
+     * @param   file
+     *          the file to be read
+     * @return  the content of the file
+     * @throws  FileNotFoundException
+     *          when the file cannot be found
+     * @throws  IOException
+     *          when a problem is encountered reading from the file.
+     */
+    public static DataSet readDataFile(File file)
+            throws FileNotFoundException,
+            IOException
+    {
+        try (DataReader reader = new DataReader(file))
+        {
+            return reader.read();
+        }
+    }
 }

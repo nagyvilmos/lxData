@@ -74,6 +74,7 @@ import lexa.core.data.DataArray;
  * @since 2013-02
  */
 public class DataWriter
+        implements AutoCloseable
 {
 
 	/** The writer used to output the content */
@@ -328,5 +329,29 @@ public class DataWriter
 			}
 		}
 	}
+    /**
+     * Write an entire {@link DataSet} into a file.
+     * <br>
+     * This provides a single line method call to open a data file, write all
+     * of a data set and close it cleanly.
+     *
+     * @param   file
+     *          the file to be written
+     * @param   data
+     *          the data to be written
+     * @throws  FileNotFoundException
+     *          when the file cannot be found
+     * @throws  IOException
+     *          when a problem is encountered writing to the file.
+     */
+    public static void writeDataFile(File file, DataSet data)
+            throws FileNotFoundException,
+            IOException
+    {
+        try (DataWriter writer  = new DataWriter(file))
+        {
+            writer.write(data);
+        }
+    }
 
 }
