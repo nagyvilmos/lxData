@@ -10,8 +10,12 @@
  */
 package lexa.core.data.config;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import lexa.core.data.BaseFactory;
 import lexa.core.data.DataFactory;
+import lexa.core.data.io.DataReader;
 
 /**
  * Factory for the config data sets
@@ -130,5 +134,25 @@ public class ConfigFactory
     public String toString()
     {
         return this.getClass().getSimpleName() + '.' + this.getPath();
+    }
+
+    public static ConfigDataSet loadFromFile(String fileName)
+            throws FileNotFoundException,
+                IOException
+    {
+        return ConfigFactory.loadFromFile(
+                new File(fileName)
+        );
+    }
+    public static ConfigDataSet loadFromFile(File file)
+            throws FileNotFoundException,
+                IOException
+    {
+        ConfigFactory configFactory = new ConfigFactory(
+                '[' + file.getName() + ']'
+        );
+        return (ConfigDataSet)configFactory.convert(
+                new DataReader(file).read()
+        );
     }
 }
