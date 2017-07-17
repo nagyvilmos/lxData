@@ -20,8 +20,6 @@ import lexa.core.data.HashDataSet;
 import lexa.core.data.ArrayDataSet;
 import lexa.core.data.ArrayDataArray;
 import lexa.core.data.DataType;
-import lexa.core.data.io.DataReader;
-import lexa.core.data.io.DataWriter;
 import lexa.test.TestAnnotation;
 import lexa.test.TestResult;
 
@@ -75,7 +73,6 @@ public class TestDataSet
     }
 
     private DataSet data;
-    private File file;
 
     /**
      * tear down test class
@@ -85,10 +82,7 @@ public class TestDataSet
     public TestResult tearDownDataSet(Object arg)
     {
         this.data = null;
-        if (this.file == null || !this.file.exists())
-            return TestResult.result(true);
-        return TestResult.result(true, this.file.delete(),
-                "Cannot delete the result file " + this.file);
+        return TestResult.isNull(this.data);
     }
 
     /**
@@ -125,7 +119,6 @@ public class TestDataSet
             return TestResult.result(true, false, "Invalid type");
         }
         }
-        this.file = new File(type + ".test.lexa");
         return TestDataSet.populate(this.data);
     }
 
@@ -201,38 +194,6 @@ public class TestDataSet
         File pf = new File("printFormatted.txt");
         return TestResult.result(true, pf.delete(),
                 "No file to delete");
-    }
-
-    /**
-     * Check that the dataset can be written to a file
-     * @param arg the type of data set
-     * @return a {@link TestResult} with the results
-     * @throws IOException when an IO exception occurs
-     */
-    @TestAnnotation(order = 2)
-    public TestResult writeToFile(Object arg)
-            throws IOException
-    {
-        DataWriter dw = new DataWriter(this.file);
-        dw.write(this.data);
-        dw.close();
-        return TestResult.result(true);
-    }
-
-    /**
-     * Check that the dataset can be read from a file
-     * @param arg the type of data set
-     * @return a {@link TestResult} with the results
-     * @throws IOException when an IO exception occurs
-     */
-    @TestAnnotation(order = 3)
-    public TestResult readFromFile(Object arg)
-            throws IOException
-    {
-        DataReader dr = new DataReader(this.file, this.data.factory());
-        DataSet read = dr.read();
-        dr.close();
-        return TestResult.result(this.data, read);
     }
 
     /**

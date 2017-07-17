@@ -28,10 +28,11 @@ public class DataTest
 	public static void main(String[] args)
 	{
         TestClass[] tests = new TestClass[]{
+            new TestFactory(),
             new TestDataSet(),
+            new TestDataIO(),
             new TestConfig(),
             new TestDataObject(),
-            new TestFactory(),
             new TestCompare()
         };
         System.out.println(
