@@ -10,9 +10,13 @@
  */
 package lxdata;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import lexa.core.data.*;
 import lexa.core.data.config.*;
 import lexa.core.data.exception.DataException;
+import lexa.core.data.io.DataWriter;
 import lexa.test.TestAnnotation;
 import lexa.test.TestClass;
 import lexa.test.TestResult;
@@ -433,7 +437,7 @@ public class TestConfig
             throws DataException
     {
         return TestResult.result(true,this.config.get("boolean", null).getBoolean());
-    }    
+    }
    /**
      * Check that the config does throw an exception for value the different to default
      * @return a {@link TestResult} with the results
@@ -461,4 +465,49 @@ public class TestConfig
             throws DataException
     {
         return TestResult.result(76,this.config.get("xxx", 76).getInteger());
-    }}
+    }
+
+   /**
+     * Check that the config returns default when no value
+     * @return a {@link TestResult} with the results
+     * @throws java.io.IOException when it fails
+     */
+    @TestAnnotation(order = 1150,
+            setUp = "setUpLoadFromFile",
+            tearDown = "tearDownLoadFromFile")
+    public TestResult loadFromFile() throws IOException
+
+    {
+        this.config = ConfigFactory.loadFromFile(
+                new File("loadFromFile.test.lexa")
+        );
+        return TestResult.all(
+                TestResult.result(this.data, this.config),
+                TestResult.result("[loadFromFile.test.lexa]",
+                        this.config.getPath())
+        );
+    }
+
+    public TestResult setUpLoadFromFile()
+            throws FileNotFoundException,
+            IOException
+    {
+        File f = new File("loadFromFile.test.lexa");
+        DataWriter dw  = new DataWriter(f);
+        dw.write(this.data);
+        dw.close();
+        return TestResult.result(true,
+                f.exists(), "File not created");
+    }
+
+    public TestResult tearDownLoadFromFile()
+    {
+        // delete the file
+        File f = new File("loadFromFile.test.lexa");
+
+        return TestResult.all(
+                TestResult.result(true,f.delete(),"Failed to delete file"),
+                this.tearDownTest()
+        );
+    }
+}
