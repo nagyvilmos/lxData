@@ -11,7 +11,6 @@
 package lexa.core.data.io;
 
 import java.io.IOException;
-import lexa.core.data.DataItem;
 import lexa.core.data.DataSet;
 import lexa.core.data.exception.DataException;
 
@@ -36,20 +35,6 @@ public interface WriteDataSet extends AutoCloseable
      *          When a data exception occurs
      */
     void write(DataSet data)
-        throws IOException,
-            DataException;
-
-    /**
-     * Write a {@link DataItem} to the output.
-     *
-     * @param   item
-     *          The {@link DataItem} to be written to the output.
-     * @throws  IOException
-     *          When an IO error occurs writing to the output.
-     * @throws  DataException
-     *          When a data exception occurs
-     */
-    void write(DataItem item)
         throws IOException,
             DataException;
 }

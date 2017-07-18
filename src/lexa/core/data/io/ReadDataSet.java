@@ -19,7 +19,8 @@ import lexa.core.data.exception.DataException;
  * @author  willaimnw
  * @since   2017-07
  */
-public interface ReadDataSet extends AutoCloseable
+public interface ReadDataSet
+        extends AutoCloseable
 {
     /**
      * Read the input into a {@link DataSet}.

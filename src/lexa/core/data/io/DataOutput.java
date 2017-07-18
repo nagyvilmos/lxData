@@ -11,6 +11,9 @@
 package lexa.core.data.io;
 
 import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import lexa.core.data.DataItem;
 import lexa.core.data.DataSet;
@@ -34,7 +37,22 @@ public class DataOutput
 	{
 		this.stream = stream;
 	}
-
+    /**
+     * Create a binary writer for datasets
+     * @param   file
+     *          the file for the data.
+     * @throws  FileNotFoundException
+     *          when the file cannot be found
+     */
+    public DataOutput(File file)
+            throws FileNotFoundException
+	{
+		this(
+                new DataOutputStream(
+                        new FileOutputStream(file)
+                )
+        );
+	}
     /**
      * Write a {@link DataSet} to the stream
      * When completed the stream is flushed to ensure all data is written.
@@ -42,18 +60,13 @@ public class DataOutput
      * @throws IOException when a problem occurs writing
      * @throws DataException when a problem occurs serialising
      */
+    @Override
     public void write(DataSet data)
 			throws IOException, DataException
 	{
 		this.writeSet(data);
 		this.flush();
 	}
-
-    @Override
-    public void write(DataItem item) throws IOException
-    {
-        throw new UnsupportedOperationException("DataOutput.write not supported yet.");
-    }
 
 	/**
      * Write a {@link DataSet} to the stream
