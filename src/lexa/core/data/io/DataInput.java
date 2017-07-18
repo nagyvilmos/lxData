@@ -82,6 +82,18 @@ public class DataInput
 		return data;
 	}
 
+    private DataArray readArray() throws IOException,
+            DataException
+    {
+        DataArray va = new ArrayDataArray();
+        long count = this.stream.readInt();
+        for (int i = 0; i < count; i++)
+        {
+            va.add(this.readValue());
+        }
+        return va;
+    }
+
 	private DataItem readItem()
 			throws IOException, DataException
 	{
@@ -98,13 +110,7 @@ public class DataInput
 		{
 			case ARRAY :
 			{
-				DataArray va = new ArrayDataArray();
-				long count = this.stream.readLong();
-				for (int i = 0; i < count; i++)
-				{
-					va.add(this.readValue());
-				}
-				return va;
+                return this.readArray();
 			}
 			case BOOLEAN :
 			{
@@ -126,7 +132,11 @@ public class DataInput
 			{
 				return this.stream.readInt();
 			}
-			case NULL :
+			case LONG :
+			{
+				return this.stream.readLong();
+			}
+            case NULL :
 			{
 				return null;
 			}
@@ -134,11 +144,8 @@ public class DataInput
 			{
 				return this.stream.readUTF();
 			}
-			default :
-			{
-				throw new DataException ("Cannot decode object " + vt.getTypeChar());
-			}
 		}
+        throw new DataException ("Cannot decode object " + vt.getTypeChar());
 	}
 	/**
 	Close the stream

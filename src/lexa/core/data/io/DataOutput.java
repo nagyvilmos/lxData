@@ -74,6 +74,7 @@ public class DataOutput
         throws IOException,
             DataException
     {
+        this.stream.writeInt(array.size());
         for (DataValue value : array)
         {
             this.writeValue(value);
