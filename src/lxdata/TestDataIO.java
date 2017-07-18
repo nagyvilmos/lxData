@@ -10,12 +10,13 @@
 
 package lxdata;
 
-import java.io.DataInput;
+
 import java.io.File;
 import java.io.IOException;
 import lexa.core.data.ArrayDataSet;
 import lexa.core.data.DataSet;
 import lexa.core.data.exception.DataException;
+import lexa.core.data.io.DataInput;
 import lexa.core.data.io.DataOutput;
 import lexa.core.data.io.DataReader;
 import lexa.core.data.io.DataWriter;
@@ -145,11 +146,11 @@ public class TestDataIO
      */
     @TestAnnotation(order = 60, tearDown = "tearDownDataIO")
     public TestResult readFromBinary()
-            throws IOException
+            throws IOException, DataException
     {
         try (DataInput in = new DataInput(this.file))
         {
-
-            return TestResult.result(this, this.file.exists(), "File not created");
-        }    }
+            return TestResult.result(this.data, in.read(), "Cannot read data");
+        }
+    }
 }

@@ -15,8 +15,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import lexa.core.data.DataArray;
 import lexa.core.data.DataItem;
 import lexa.core.data.DataSet;
+import lexa.core.data.DataValue;
 import lexa.core.data.exception.DataException;
 
 /**
@@ -68,6 +70,16 @@ public class DataOutput
 		this.flush();
 	}
 
+    private void writeArray(DataArray array)
+        throws IOException,
+            DataException
+    {
+        for (DataValue value : array)
+        {
+            this.writeValue(value);
+        }
+    }
+
 	/**
      * Write a {@link DataSet} to the stream
      * This is the internal method that does not flash the stream
@@ -96,50 +108,62 @@ public class DataOutput
 			throws IOException, DataException
 	{
 		this.stream.writeUTF(item.getKey());
-		this.stream.writeChar(item.getType().getTypeChar());
-		switch (item.getType())
+        this.writeValue(item.getValue());
+    }
+
+    private void writeValue(DataValue value)
+			throws IOException, DataException
+	{
+		this.stream.writeChar(value.getType().getTypeChar());
+		switch (value.getType())
 		{
+            case ARRAY :
+            {
+                this.writeArray(value.getArray());
+                return;
+            }
 			case BOOLEAN :
 			{
-				this.stream.writeBoolean(item.getBoolean());
-				break;
+				this.stream.writeBoolean(value.getBoolean());
+				return;
 			}
 			case DATA_SET :
 			{
-				this.writeSet(item.getDataSet());
-				break;
+				this.writeSet(value.getDataSet());
+				return;
 			}
 			case DATE :
 			{
-				this.stream.writeLong(item.getDate().getTime());
-				break;
+				this.stream.writeLong(value.getDate().getTime());
+				return;
 			}
 			case DOUBLE :
 			{
-				this.stream.writeDouble(item.getDouble());
-				break;
+				this.stream.writeDouble(value.getDouble());
+				return;
 			}
 			case INTEGER :
 			{
-				this.stream.writeInt(item.getInteger());
-				break;
+				this.stream.writeInt(value.getInteger());
+				return;
+			}
+			case LONG :
+			{
+				this.stream.writeLong(value.getLong());
+				return;
 			}
 			case NULL :
 			{
 				// nothing doing
-				break;
+				return;
 			}
 			case STRING :
 			{
-				this.stream.writeUTF(item.getString());
-				break;
-			}
-
-			default :
-			{
-				throw new DataException ("Cannot encode object " + item.toString(), null, item.getKey());
+				this.stream.writeUTF(value.getString());
+				return;
 			}
 		}
+        throw new DataException ("Cannot encode object " + value.toString(), null, null);
 	}
 
     /**

@@ -47,11 +47,27 @@ public class DataInput
 	}
 
 	/**
+	 * Create an input reader
+	 * @param   file
+     *          the file to read the data from
+     * @throws  FileNotFoundException
+     *          when the file cannot be found
+     */
+	public DataInput(File file) throws FileNotFoundException
+	{
+		this(
+                new DataInputStream(
+                        new FileInputStream(file)
+                )
+        );
+	}
+	/**
 	Read a data set from the input stream
 	@return a data set
 	@throws IOException  when an IO problem occurs
 	@throws DataException when the data cannot be decoded.
 	*/
+    @Override
 	public DataSet read()
 			throws IOException, DataException
 	{
@@ -128,6 +144,7 @@ public class DataInput
 	Close the stream
 	@throws IOException when unable to close the stream
 	*/
+    @Override
 	public void close() throws IOException
 	{
 		this.stream.close();
