@@ -51,7 +51,6 @@ public class TestDataIO
     }
     /**
      * tear down test class
-     * @param arg the type of data set
      * @return a {@link TestResult} with the results
      */
     public TestResult tearDownDataIO()
@@ -124,9 +123,11 @@ public class TestDataIO
     }
     /**
      * Check that the dataset can be written to a file
-     * @return a {@link TestResult} with the results
-     * @throws IOException when an IO exception occurs
-     * @throws lexa.core.data.exception.DataException
+     * @return  a {@link TestResult} with the results
+     * @throws  IOException
+     *          when an IO exception occurs
+     * @throws  DataException
+     *          when a data exception occurs
      */
     @TestAnnotation(order = 50, setUp = "setUpDataIO")
     public TestResult writeToBinary()
@@ -141,8 +142,11 @@ public class TestDataIO
 
     /**
      * Check that the dataset can be read from a file
-     * @return a {@link TestResult} with the results
-     * @throws IOException when an IO exception occurs
+     * @return  a {@link TestResult} with the results
+     * @throws  IOException
+     *          when an IO exception occurs
+     * @throws  DataException
+     *          when a data exception occurs
      */
     @TestAnnotation(order = 60, tearDown = "tearDownDataIO")
     public TestResult readFromBinary()

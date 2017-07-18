@@ -22,13 +22,10 @@ import lexa.core.data.exception.DataException;
 public interface WriteDataSet extends AutoCloseable
 {
     /**
-     * Write a {@link lexa.core.data.DataSet} to the file.
-     * <p>
-     * Each {@link lexa.core.data.DataSet} is written to the output
-     * using {@link #write(lexa.core.data.DataItem)}.
+     * Write a {@link DataSet} to the file.
      *
      * @param   data
-     *          The {@link lexa.core.data.DataSet} to be written to the output.
+     *          The {@link DataSet} to be written to the output.
      * @throws  IOException
      *          When an IO error occurs writing to the output.
      * @throws  DataException

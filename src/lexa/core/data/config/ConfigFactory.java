@@ -139,7 +139,7 @@ public class ConfigFactory
 
     /**
      * Load a {@link ConfigDataSet} from a file
-     * Equivalent to calling {@code ConfigFactory.loadFromFile(new File(fileName));
+     * Equivalent to calling {@code ConfigFactory.loadFromFile(new File(fileName));}
      * @param   fileName
      *          the name of the file to load
      * @return  The loaded configuration.
