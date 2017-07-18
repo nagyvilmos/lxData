@@ -32,10 +32,11 @@ import lexa.core.data.exception.DataException;
  * #todo Check this still works!
  */
 public class DataInput
+        implements ReadDataSet
 {
 	/** an input stream to read the data from */
 	private final DataInputStream stream;
-	
+
 	/**
 	Create an input reader
 	@param stream the stream to read the data from
@@ -44,7 +45,7 @@ public class DataInput
 	{
 		this.stream = stream;
 	}
-	
+
 	/**
 	Read a data set from the input stream
 	@return a data set
@@ -70,9 +71,9 @@ public class DataInput
 	{
 		String key = this.stream.readUTF();
 		Object value = this.readValue();
-		
+
 		return new ArrayDataItem(key, value);
-	}		
+	}
 	private Object readValue()
 			throws IOException, DataException
 	{

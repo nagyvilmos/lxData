@@ -37,7 +37,7 @@ import lexa.core.data.DataFactory;
  * @since 2013-02
  */
 public class DataReader
-        implements AutoCloseable
+        implements ReadDataSet
 {
     private final DataFactory factory;
 	/** The reader used to input the content */
@@ -135,6 +135,7 @@ public class DataReader
 	 * @throws  IOException
 	 *       When an IO error occurs closing the input.
 	 */
+    @Override
 	public void close()
 			throws IOException
 	{
@@ -149,6 +150,7 @@ public class DataReader
 	 * @throws  IOException
 	 *       When an IO error occurs closing the input.
 	 */
+    @Override
 	public DataSet read()
 			throws IOException
 	{

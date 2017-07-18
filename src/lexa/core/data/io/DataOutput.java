@@ -22,6 +22,7 @@ import lexa.core.data.exception.DataException;
  * #TODO Check this still works!
  */
 public class DataOutput
+        implements WriteDataSet
 {
 	private final DataOutputStream stream;
 
@@ -47,6 +48,12 @@ public class DataOutput
 		this.writeSet(data);
 		this.flush();
 	}
+
+    @Override
+    public void write(DataItem item) throws IOException
+    {
+        throw new UnsupportedOperationException("DataOutput.write not supported yet.");
+    }
 
 	/**
      * Write a {@link DataSet} to the stream

@@ -74,7 +74,7 @@ import lexa.core.data.DataArray;
  * @since 2013-02
  */
 public class DataWriter
-        implements AutoCloseable
+        implements WriteDataSet
 {
 
 	/** The writer used to output the content */
@@ -132,6 +132,7 @@ public class DataWriter
 	 * @throws  IOException
 	 *       When an IO error occurs closing the output.
 	 */
+    @Override
 	public void close()
 			throws IOException
 	{
@@ -169,6 +170,7 @@ public class DataWriter
 	 * @throws  IOException
 	 *       When an IO error occurs writing to the output.
 	 */
+    @Override
 	public void write(DataSet data)
 			throws IOException
 	{
@@ -207,6 +209,7 @@ public class DataWriter
 	 * @throws  IOException
 	 *       When an IO error occurs writing to the output.
 	 */
+    @Override
 	public void write(DataItem item)
 			throws IOException
 	{
