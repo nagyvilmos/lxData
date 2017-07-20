@@ -468,11 +468,35 @@ public class DataReader
         }
     }
 
-    public static DataSet parseString(String[] string)
+    /**
+     * Create a {@link DataSet} from a string array
+     * <br>
+     * The array is concatenated so that each entry is separated by a new line,
+     * this makes it easier for defining default data sets in code.
+     * 
+     * @param   stringArray
+     *          an array lines to be parsed into a data set
+     * @return  the input parsed as a data set.
+     * @throws  IOException
+     *          when an I/O exception occurs.
+     */
+    public static DataSet parseString(String[] stringArray)
             throws IOException
     {
-        return DataReader.parseString(String.join("\n", string));
+        return DataReader.parseString(String.join("\n", stringArray));
     }
+
+    /**
+     * Create a {@link DataSet} from a string
+     * <br>
+     * The needs to be in the format of a file as saved by {@link DataWriter}
+     *
+     * @param   string
+     *          a string to be parsed into a data set
+     * @return  the input parsed as a data set.
+     * @throws  IOException
+     *          when an I/O exception occurs.
+     */
     public static DataSet parseString(String string)
             throws IOException
     {

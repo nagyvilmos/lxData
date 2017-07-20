@@ -173,8 +173,8 @@ public class TestDataIO
             "string a string",
             "int % 7",
             "sub {",
-            "  a % 1",
-            "  b $ 2.7",
+                "a % 1",
+                "b $ 2.7",
             "}"
         };
         DataSet dataSet = new ArrayDataSet()
