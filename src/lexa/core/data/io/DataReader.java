@@ -468,6 +468,11 @@ public class DataReader
         }
     }
 
+    public static DataSet parseString(String[] string)
+            throws IOException
+    {
+        return DataReader.parseString(String.join("\n", string));
+    }
     public static DataSet parseString(String string)
             throws IOException
     {

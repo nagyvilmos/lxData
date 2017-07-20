@@ -157,4 +157,33 @@ public class TestDataIO
             return TestResult.result(this.data, in.read(), "Cannot read data");
         }
     }
+    /**
+     * Check that the dataset can be parsed from a string
+     * @return  a {@link TestResult} with the results
+     * @throws  IOException
+     *          when an IO exception occurs
+     * @throws  DataException
+     *          when a data exception occurs
+     */
+    @TestAnnotation(order = 70)
+    public TestResult parseString()
+            throws IOException, DataException
+    {
+        String[] string = {
+            "string a string",
+            "int % 7",
+            "sub {",
+            "  a % 1",
+            "  b $ 2.7",
+            "}"
+        };
+        DataSet dataSet = new ArrayDataSet()
+                  .put("string", "a string")
+                  .put("int", 7)
+                  .put("sub", new ArrayDataSet()
+                        .put("a", 1)
+                        .put("b", 2.7)
+                  );
+        return TestResult.result(dataSet, DataReader.parseString(string));
+    }
 }
