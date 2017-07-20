@@ -16,6 +16,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.StringReader;
 import lexa.core.data.ArrayFactory;
 import lexa.core.data.DataItem;
 import lexa.core.data.DataSet;
@@ -462,6 +463,18 @@ public class DataReader
             IOException
     {
         try (DataReader reader = new DataReader(file))
+        {
+            return reader.read();
+        }
+    }
+
+    public static DataSet parseString(String string)
+            throws IOException
+    {
+        try (DataReader reader =
+                new DataReader(
+                    new BufferedReader(
+                        new StringReader(string))))
         {
             return reader.read();
         }
