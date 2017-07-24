@@ -137,7 +137,16 @@ public class HashDataSet
 	{
 		return this.items.remove(key);
 	}
-
+	@Override
+	public synchronized DataItem remove(int index)
+	{
+        if (index < 0 ||
+                index >= this.size())
+        {
+            return null;
+        }
+        return this.remove(this.keys()[index]);
+	}
 	@Override
 	public synchronized int size()
 	{

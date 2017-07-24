@@ -219,6 +219,18 @@ public interface DataSet
 	public DataItem remove(String key);
 
 	/**
+	 * Removes the specified element from this {@link DataSet}.
+	 * <p>
+	 * Shifts any subsequent elements to the left (subtracts one from their indices).
+	 *
+	 * @param   index
+     *          the index to the item to remove
+	 *
+	 * @return  the element that was removed
+	 */
+	public DataItem remove(int index);
+
+	/**
 	 * Get the size of the {@link DataSet}.
 	 *
 	 * @return the number of {@link DataItem} objects in the {@link DataSet}

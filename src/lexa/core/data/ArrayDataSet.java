@@ -247,8 +247,13 @@ public class ArrayDataSet
 	@Override
 	public synchronized DataItem remove(String key)
 	{
-		int index = this.find(key);
-		if (index == -1)
+		return this.remove(this.find(key));
+	}
+
+	@Override
+	public synchronized DataItem remove(int index)
+	{
+		if (index < 0 || index >= this.size())
 		{
 			return null;
 		}

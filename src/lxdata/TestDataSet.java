@@ -15,11 +15,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Date;
-import lexa.core.data.DataSet;
-import lexa.core.data.HashDataSet;
-import lexa.core.data.ArrayDataSet;
-import lexa.core.data.ArrayDataArray;
-import lexa.core.data.DataType;
+import lexa.core.data.*;
 import lexa.test.TestAnnotation;
 import lexa.test.TestResult;
 
@@ -173,7 +169,7 @@ public class TestDataSet
      * @return a {@link TestResult} with the results
      * @throws java.io.FileNotFoundException if the file for output cannot be found
      */
-    @TestAnnotation(order = 1, tearDown = "tearDownPrintFormatted")
+    @TestAnnotation(order = 10, tearDown = "tearDownPrintFormatted")
     public TestResult printFormatted(Object arg)
             throws FileNotFoundException
     {
@@ -202,7 +198,7 @@ public class TestDataSet
      * @return a {@link TestResult} with the results
      * @throws IOException when an IO exception occurs
      */
-    @TestAnnotation(order = 4)
+    @TestAnnotation(order = 30)
     public TestResult addToClone(Object arg)
             throws IOException
     {
@@ -213,27 +209,55 @@ public class TestDataSet
     }
 
     /**
-     * Remove an item from a clone and check the two are now different
+     * Remove an item from a data set
      * @param arg the type of data set
      * @return a {@link TestResult} with the results
      * @throws IOException when an IO exception occurs
      */
-    @TestAnnotation(order = 5)
-    public TestResult removeFromClone(Object arg)
+    @TestAnnotation(order = 40)
+    public TestResult removeByKey(Object arg)
             throws IOException
     {
         DataSet clone = this.data.factory().clone(this.data);
-        clone.remove("integer");
-        return new TestResult (!clone.equals(this.data),
-                "Clone is the same as data after removal");
+        DataItem removed = clone.remove("integer");
+
+        return TestResult.all(
+                TestResult.notNull(removed),
+                TestResult.result(this.data.getObject("integer"),
+                        removed.getObject()),
+                TestResult.result(this.data.size() -1,
+                        clone.size())
+        );
     }
+
+    /**
+     * Remove an item from a data set
+     * @param arg the type of data set
+     * @return a {@link TestResult} with the results
+     * @throws IOException when an IO exception occurs
+     */
+    @TestAnnotation(order = 50)
+    public TestResult removeByIndex(Object arg)
+            throws IOException
+    {
+        DataSet clone = this.data.factory().clone(this.data);
+        DataItem removed = clone.remove(7);
+
+        return TestResult.all(
+                TestResult.notNull(removed),
+                TestResult.result(this.data.get(7).getObject(), removed.getObject()),
+                TestResult.result(this.data.size() -1,
+                        clone.size())
+        );
+    }
+
     /**
      * Add an item to a clone and check the two are now different
      * @param arg the type of data set
      * @return a {@link TestResult} with the results
      * @throws IOException when an IO exception occurs
      */
-    @TestAnnotation(order = 6)
+    @TestAnnotation(order = 60)
     public TestResult addToCloneArray(Object arg)
             throws IOException
     {
@@ -249,14 +273,20 @@ public class TestDataSet
      * @return a {@link TestResult} with the results
      * @throws IOException when an IO exception occurs
      */
-    @TestAnnotation(order = 7)
-    public TestResult removeFromCloneArray(Object arg)
+    @TestAnnotation(order = 70)
+    public TestResult removeFromArray(Object arg)
             throws IOException
     {
-        DataSet clone = this.data.factory().clone(this.data);
-        clone.getArray("array").remove(2);
-        return new TestResult (!clone.equals(this.data),
-                "Clone is the same as data after removal");
+        DataArray clone = this.data.factory().clone(this.data.getArray("array"));
+        DataValue removed = clone.remove(2);
+
+        return TestResult.all(
+                TestResult.notNull(removed),
+                TestResult.result(this.data.getArray("array").get(2).getObject(),
+                        removed.getObject()),
+                TestResult.result(this.data.getArray("array").size() -1,
+                        clone.size())
+        );
     }
     /**
      * Add an item to a clone and check the two are now different
@@ -264,7 +294,7 @@ public class TestDataSet
      * @return a {@link TestResult} with the results
      * @throws IOException when an IO exception occurs
      */
-    @TestAnnotation(order = 8)
+    @TestAnnotation(order = 80)
     public TestResult addToCloneDataSet(Object arg)
             throws IOException
     {
@@ -272,21 +302,5 @@ public class TestDataSet
         clone.getDataSet("dataset").put("x", 2);
         return new TestResult (!clone.equals(this.data),
                 "Clone is the same as data after add");
-    }
-
-    /**
-     * Remove an item from a clone and check the two are now different
-     * @param arg the type of data set
-     * @return a {@link TestResult} with the results
-     * @throws IOException when an IO exception occurs
-     */
-    @TestAnnotation(order = 9)
-    public TestResult removeFromCloneDataSet(Object arg)
-            throws IOException
-    {
-        DataSet clone = this.data.factory().clone(this.data);
-        clone.getDataSet("dataset").remove("farewell");
-        return new TestResult (!clone.equals(this.data),
-                "Clone is the same as data after removal");
     }
 }
